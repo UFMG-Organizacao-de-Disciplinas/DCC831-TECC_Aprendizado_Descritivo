@@ -363,3 +363,147 @@ Então temos dois problemas principais: reduzir o espaço de busca e reduzir a c
 
 ## 25/03/2025 - Aula 3 - Faltei
 
+## 27/03/2025 - Aula 4
+
+### Aula passada
+
+- Algoritmo apriori
+- Frequente, infrequente.
+- Como calcula o suporte
+  - A partir dos itens frequentes: tabelas de 0 e 1.
+  - Pra isso usaca árvore de ???
+  - Para cada transação gerava os itemsets de tamanho k, ia na árvore ???
+  - E incrementava o suporte daquela chave
+
+[JV: escrevi o que ele tá falando, mas não tô entendendo]
+
+- Duas coisas influenciam o desempenho do algoritmo
+  1. Ele falou algo
+  2. Se o BD é denso, as transações são mais largas.
+- $\binom{|t|}{k}$
+- Quando é esparso, funciona bem. Quando é denso que começa a dar problema.
+
+Eu tô achando que se eu compro $J = {A, B, C}$, Então o conjunto potência dele é $P(J) = {\emptyset, A, B, C, AB, AC, BC, ABC}$, e então, incrementaria 1 para um desses grupos
+
+- Cálculo de suporte:
+  - Para cada um dos itemsets tem que verificar se ele tá na árvore K(?)
+
+- Se os itemsets estão em memória...
+- Se quero gerar o itemset XY partindo de $X \cup Y$, posso dizer que o suporte será $|c(X) \cap c(Y)|$
+
+### Slide - ??
+
+#### Eclat (Equivalence Class Transformation)
+
+Dada a representação vertical dos dados, consigo calcular o suporte por essa intercessão.
+
+- ...
+
+Problema: como mantenho todos os itemsets gerados em memória?
+
+---
+
+Tenta manter tudo na memória principal
+
+A ideia é partir o problema em subproblemas e trazer esses subproblemas pra memória.
+
+Surgiu através da criação de uma relação de equivalência entre os itemsets
+
+---
+
+Cria-se uma relação de equivalência pelos prefixos.
+
+Diz-se que dois itemsets são equivalentes se o prefixos dos dois são iguais.
+
+Consideremos que temos o seguinte conjunto potência: $P(I) = {\emptyset, A, B, C, AB, AC, BC, ABC}$. Na forma de representação, seria como se agrupássemos os dados em grupos de prefixos:
+
+- A: {A, AB, AC, ABC}
+- B: {B, BC}
+- C: {C}
+
+E então seriam varridos de C para A.
+
+Poderia-se também fazer subgrupos de subgrupos, dependendo do tamanho do conjunto de prefixos.
+
+---
+
+Ele faz uma busca em profundidade (DFS)
+
+Ele faz subpartições até que o número de transações seja pequeno o suficiente para caber na memória.
+
+---
+
+- Algoritmo 8.3 - Algoritmo ECLAT
+- // Initial Call: $F \leftarrow 0, P \leftarrow {}$
+- ECLAT (P, minsup, F):
+- foreach
+  - F
+  - P0
+  - foreach
+    - X
+    - ?
+    - if sup()
+      - po
+  - if p neq 0 then ...
+
+[JV: Droga, foquei em transcrever brevemente e esqueci de prestar atenção na explicação do professor]
+
+P guarda todos os frequentes da chamada anterior. porque ele filtro toudos que são infrequentes pelo minsup
+
+para cada um dos frequentes dos candidatos, armazena no ocnjunto de itens frequentes globais
+
+e a partir dele gera em profundidade a combinação dele com todos os outros que vêm pra frente.
+
+Evitam redundância: 1. partições; 2. Ordem sistemática de combinação dos itens.
+
+1. A B C
+2. A com B e C: AB AC
+3. AB com AC: ABC
+4. B com C: BC
+
+##### Representações de conjuntos de dados - Aula 4
+
+Pelo que eu tô entendendo:
+
+1. Começa pegando todos os itens que tenham uma quantidade de transações maior que o minsup (o valor mínimo aceitável para que consideremos relevante)
+2. Depois disso, começamos fazendo a intercessão das transações entre o primeiro conjunto de itens que passou pela comparação com o segundo conjunto.
+3. Depois disso, vê se o resultado dessas intercessões é grande o bastante.
+
+Se $A \subseteq B$, então $c(B) \subseteq c(A)$ (Cobertura)
+
+---
+
+##### Diffsets e dEclat
+
+Em bases de dados densos, varia bem pouco o suporte entre os itens. Então, faria mais sentido guardar só a diferença ao invés de guardar o todo.
+
+Ao invés de chamar de tidset, passaram a chamar de diffset.
+
+...
+
+Pode-se armazenar em vetores de bits ao invés de vetores de inteiros.
+
+Usando o vetor de bits, é como se fosse:
+
+A = [00110, 01001, 01100, 00011]
+
+E para calcular o suporte (?) cobetura(?)
+
+basta fazer um cálculo rápido de 0 a 255 para dizer quantos bits estão ativos, e então fazer a contagem de bits ativos somando esses valores.
+
+0 -> 1
+1 -> 1
+2 -> 1
+...
+255 -> ...
+
+Outra forma de condensar é: Se sei que um determinado conjunto é grande o bastante, posso inferir que todos os que são menores que eles também são grandes o bastante.
+
+Se só é guardado o valor das diferenças, acaba sendo um problema fazer as intercessões.
+
+---
+
+- $C(PX) - C(PY)$
+- $C(PX) - C(PY) \cup C(P) - C(P)$
+- $C(PX) \cap \overline{C(PY)} \cup C(P) \cap \overline{C(P)}$
+- $C(PX) \cup \overline{C(P)} \cap C(P) \cup \overline{C(P)}$
