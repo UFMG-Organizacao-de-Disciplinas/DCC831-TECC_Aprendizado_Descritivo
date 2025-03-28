@@ -507,3 +507,5 @@ Se só é guardado o valor das diferenças, acaba sendo um problema fazer as int
 - $C(PX) - C(PY) \cup C(P) - C(P)$
 - $C(PX) \cap \overline{C(PY)} \cup C(P) \cap \overline{C(P)}$
 - $C(PX) \cup \overline{C(P)} \cap C(P) \cup \overline{C(P)}$
+
+## 01/04/2025 - Aula 5
