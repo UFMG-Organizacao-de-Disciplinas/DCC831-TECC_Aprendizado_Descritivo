@@ -360,3 +360,6 @@ Então temos dois problemas principais: reduzir o espaço de busca e reduzir a c
 
 - Seções 8.1 e 8.2 Zaki e Meira
 - Seções 6.1 e 5.2 (Introduction to Data Mining)
+
+## 25/03/2025 - Aula 3 - Faltei
+
