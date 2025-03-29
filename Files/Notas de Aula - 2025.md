@@ -1,6 +1,6 @@
 # Aprendizado Descritivo - Renato Vimieiro - 2025
 
-## Aula 1 - 18/03/2025 - [JV: Cheguei atrasado]
+## 18/03/2025 - Aula 1 - [JV: Cheguei atrasado]
 
 ### Slide 1
 
@@ -146,7 +146,7 @@ Na parte de ... será o ... que foi quem inventou.
 
 Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Dong and James Bailey 2012;
 
-## Aula 2 - 20/03/2025
+## 20/03/2025 - Aula 2
 
 ### Slide - Aprendizado Descritivo
 
