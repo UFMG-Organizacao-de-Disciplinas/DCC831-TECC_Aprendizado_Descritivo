@@ -669,6 +669,67 @@ Se só é guardado o valor das diferenças, acaba sendo um problema fazer as int
 
 #### Diffsets e dEclat [Aula 05]
 
+- Percebendo o problema de se manter os tidsets em memória, Zaki e Gouda propuseram em 2001 (o artigo só foi publicado em 2003) uma solução alternativa
+- Eles propuseram armazenar as diferenças entre os tidsets dos membros de uma classe e dos prefixos que a definem
+- Eles chamaram esse conjunto de **diffset**
+- Formalmente, para um prefixo $P$ e um itemset $PX$, o diffset de $X$, $d(PX) = c(P) - c(PX)$
+- Seriam armazenados, portanto, o suporte do itemset e seu diffset
+
+---
+
+- O fato é que, se somente os diffsets são armazenados, o suporte não é mais obtido como a cardinalidade desse conjunto
+- Dessa forma, como calcular o suporte de um itemset $PXY$ obtido a partir de outros dois $PX$ e $PY$, usando somente seus diffsets?
+- O suporte de $PX$ é calculado pela diferença entre o suporte de $P$ e o diffset de $PX$, $sup(PX) = sup(PX) - |d(PXY)|$
+  - Portanto, $sup(PXY) = sup(PX) - |d(PXY)|$
+- A solução passa por computar o diffset de $PXY$. Porém, temos somente os diffsets de $PX$ e $PY$
+
+---
+
+- Por definição, 𝑑 𝑃𝑋𝑌 = 𝑐 𝑃𝑋 − 𝑐 𝑃𝑋𝑌 = 𝑐 𝑃𝑋 − 𝑐 𝑃𝑌
+- Podemos adicionar, ao conjunto acima, o conjunto vazio (𝑐 𝑃 − 𝑐 𝑃 ) sem alterá-lo
+- Logo, 𝑑 𝑃𝑋𝑌 = 𝑐 𝑃𝑋 − 𝑐 𝑃𝑌 + 𝑐 𝑃 − 𝑐 𝑃 = 3 4 𝑐 𝑃 − 𝑐 𝑃𝑌 − 𝑐 𝑃 − 𝑐 𝑃𝑋 = 𝑑 𝑃𝑌 − 𝑑(𝑃𝑋)
+- Em outras palavras, podemos usar os diffsets dos conjuntos base para calcular o diffset do novo candidato
+- A variante do Eclat que usa diffsets ficou conhecida como dEclat
+
+---
+---
+
+- $d(PXY) = c(PX) - c(PY) = c(PX) - c(PXY)$
+- $c(PXY) = c(PX) \cap c(PY)$
+
+"Diferença é a mesma coisa que interseção com complemento"
+
+- $d(PXY) = ...$
+
+Ele fez um monte de igualdades com operações de conjuntos.
+
+- $d(PXY) =$
+- $c(PX) - c(PY) =$
+- $c(PX) - c(PXY) =$
+- $[c(PX) - c(PXY)] \cup [c(P) - c(P)] =$
+- $[c(PX) \cap \overline{c(PXY)}] \cup [c(P) \cap \overline{c(P)}]$
+- $[c(PX) \cup c(P)] \cap [\overline{c(PY)} \cup \overline{c(P)}] \cap \overline{d(PX)}$
+- $(c(PX) \cap \overline{c(PY)}) \cup (c(P) \cap \overline{c(P)}) \cup (c(P) \cap \overline{c(PY)}) \cup (c(P) \cap \overline{c(P)} \cap \overline{d(PX)})$
+- $(Q \subseteq d(PY)) \cup (\emptyset) \cup (d(PY)) \cup (\emptyset) \cap (\overline{d(PX)})$
+- $d(PY) \cap \overline{d(PX)} =$
+- $d(PY) - d(PX)$
+
+---
+
+- $d(PX) = ...$
+
+---
+
+- $P = \{1, 2, 3, 4, 5\}$
+- $X = \{1, 3, 5\}$
+- $Y = \{2, 3, 4\}$
+- $PX = \{1, 3, 5\}$
+- $PY = \{2, 3, 4\}$
+- $\overline{PY} = \{1, 5\}$
+- $PX \cap \overline{PY} = \{1, 5\}$
+
+---
+
 - ALGORITHM 8.4. Algorithm dEclat
   - ...
 
@@ -676,6 +737,8 @@ Se só é guardado o valor das diferenças, acaba sendo um problema fazer as int
 
 - Essa abordagem se mostrou muito eficiente para conjuntos densos
 - Porém, em conjuntos esparsos, o algoritmo original é a melhor opção
+
+Para bases esparsas: eClat; para bases densas: dEclat
 
 #### Leitura (Aula 05)
 
@@ -685,7 +748,14 @@ Se só é guardado o valor das diferenças, acaba sendo um problema fazer as int
 - Zaki, M.J., Gouda, K.: Fast vertical mining using diffsets. Technical Report 01-1, Computer Science Dept., Rensselaer Polytechnic Institute (March 2001) 10
 - Christian Borgelt. Efficient Implementations of Apriori and Eclat. Workshop of Frequent Item Set Mining Implementations (FIMI 2003, Melbourne, FL, USA).
 
+Boa parte da explicação estão nos artigos. A implementação tá no Borgelt.
+
 ### Slide: aula04-FPGrowth (Aula 05)
+
+#### Recapitulando
+
+- Apriori: reduzir o número de passsadas em disco
+- Eclat: trazer pra memória e assim reduzir o número de passadas em disco, tendendo a zero.
 
 #### Introdução (Aula 05)
 
@@ -695,17 +765,19 @@ Se só é guardado o valor das diferenças, acaba sendo um problema fazer as int
 - Os padrões são construídos ao longo do processamento em profundidade
 - Esse algoritmo é, talvez, o algoritmo sequencial mais eficiente para busca de conjuntos de itens frequentes
 
+A ideia é evitar ter que computar os candidatos.
+
 #### FP-Growth
 
 - O FP-Growth foi proposto em 2000 por Jiawei Han, Jian Pei e Yiwen Yin
 - O algoritmo atacou dois problemas presentes nas abordagens iniciais:
   1. Repetidas passadas sobre a base de dados; e
-  2. Geração de candidatos
+  2. Geração de candidatos [Mais crítico]
 - O primeiro problema, como já discutimos, é crítico pelo custo computacional inerente à leitura em memória secundária
 - O segundo problema está relacionado à geração de candidatos desnecessários
   - Muitos são descartados pela propriedade do Apriori
 
-##### FP-Tree
+##### FP-Tree [Árvore de Prefixos]
 
 - O FP-Growth possui algumas similaridades ao Eclat:
   - Ambos adotam a estratégia de busca em profundidade
@@ -714,6 +786,8 @@ Se só é guardado o valor das diferenças, acaba sendo um problema fazer as int
   - Uma árvore de prefixos chamada FP-Tree
 - A busca pelos padrões se dá inteiramente através da árvore sem a necessidade de se voltar à base de dados
 - Dessa forma, a primeira tarefa do algoritmo é construir essa estrutura
+
+"A partir da Base de Dados, como fazer a árvore de prefixos?"
 
 ---
 
@@ -725,6 +799,8 @@ Se só é guardado o valor das diferenças, acaba sendo um problema fazer as int
 - As transações são então inseridas na árvore enquanto processadas
   - Itens são nós da árvore
   - Cada nó armazena um item e sua frequência (número de transações que o contém)
+
+Basicamente, ele limpa os infrequentes, e depois disso, vai inserindo as transações em uma árvore.
 
 ---
 
@@ -743,6 +819,19 @@ $$
 \end{bmatrix}
 $$
 
+minsup = 2
+
+Em ordem de maior suporte pra menor suporte: cfabd
+
+1. cfad
+2. cb
+3. cf
+4. ad
+5. cfb
+6. cfa
+
+Obs.: Ignoram-se os itens infrequentes.
+
 #### Mineração dos padrões [Aula 05]
 
 - A mineração dos padrões se inicia uma vez que a FP-Tree tenha sido construída
@@ -752,6 +841,16 @@ $$
 - Os padrões encontrados nessa nova árvore devem incluir o prefixo que a gerou
 - O algoritmo segue com as extensões recursivamente até que um único ramo seja obtido
   - Se a árvore possui um único ramo, os padrões obteníveis são todas as combinações dos nós
+
+Para se minerar as transações de volta, percorremos a lista de itens e então subimos dele até a raiz.
+
+Partindo do item menos frequente e indo pro item mais frequente, fazemos projeções da árvore.
+
+Essas projeções são sub-árvores da árvore original.
+
+No caso do d, percorrerei todos os nós da lista encadeada de de d's, indo dele até a raiz. A junção de todos os nós que eu passar, formará uma nova árvore. E essa será a projeção do item d.
+
+Mas ainda não entendi o que precisa ser feito após essa primeira projeção.
 
 ---
 
@@ -767,6 +866,22 @@ $$
   d & 2 & \\
 \end{bmatrix}
 $$
+
+```mermaid
+flowchart LR
+  Vazio(("`$\emptyset$`")) --> C((c:5))
+  C --> F((f:4))
+  F --> A2((a:2))
+  A2 --> D1((d:1))
+  F --> B1((b:1))
+  C --> B2((b:1))
+  Vazio --> A1((a:1))
+  A1 --> D2((d:1))
+```
+
+Há também uma lista encadeada para todos os nós com ocorrências de um mesmo item.
+
+A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e calcularmos sua frequência.
 
 ...
 
