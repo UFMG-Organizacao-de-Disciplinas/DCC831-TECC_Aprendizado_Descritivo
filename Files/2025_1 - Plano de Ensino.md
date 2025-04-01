@@ -13,15 +13,15 @@ Diferenças entre aprendizado descritivo e preditivo. Aprendizado descritivo nã
 
 | Aula | Data       | Tópico                                                                                             |
 | ---: | :--------- | :------------------------------------------------------------------------------------------------- |
-|    1 | 18/03/2025 | Apresentação do curso.                                                                             |
-|    2 | 20/03/2025 | Aprendizado descritivo x preditivo                                                                 |
-|    3 | 25/03/2025 | Mineração de conjuntos de itens                                                                    |
-|    4 | 27/03/2025 | Mineração de conjuntos de itens                                                                    |
-|    5 | 01/04/2025 | Mineração de conjuntos de itens                                                                    |
-|    6 | 03/04/2025 | Mineração de conjuntos de itens                                                                    |
-|    7 | 08/04/2025 | Mineração de sequências                                                                            |
-|    8 | 10/04/2025 | Mineração de sequências                                                                            |
-|    9 | 15/04/2025 | Mineração de grafos                                                                                |
+|   01 | 18/03/2025 | Apresentação do curso.                                                                             |
+|   02 | 20/03/2025 | Aprendizado descritivo x preditivo                                                                 |
+|   03 | 25/03/2025 | Mineração de conjuntos de itens                                                                    |
+|   04 | 27/03/2025 | Mineração de conjuntos de itens                                                                    |
+|   05 | 01/04/2025 | Mineração de conjuntos de itens                                                                    |
+|   06 | 03/04/2025 | Mineração de conjuntos de itens                                                                    |
+|   07 | 08/04/2025 | Mineração de sequências                                                                            |
+|   08 | 10/04/2025 | Mineração de sequências                                                                            |
+|   09 | 15/04/2025 | Mineração de grafos                                                                                |
 |   10 | 17/04/2025 | Mineração de grafos                                                                                |
 |   11 | 22/04/2025 | Regras de associação e métricas de qualidade                                                       |
 |   12 | 24/04/2025 | Aprendizado descritivo supervisionado: padrões emergentes, contrastantes e descoberta de subgrupos |
