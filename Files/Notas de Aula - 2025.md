@@ -361,7 +361,156 @@ Então temos dois problemas principais: reduzir o espaço de busca e reduzir a c
 - Seções 8.1 e 8.2 Zaki e Meira
 - Seções 6.1 e 5.2 (Introduction to Data Mining)
 
-## Aula 03 | 25/03/2025 | Mineração de conjuntos de itens - Faltei
+## Aula 03 | 25/03/2025 | Mineração de conjuntos de itens - Faltei - Mineração de itens frequentes: Apriori e Eclat
+
+### Slide: aula03-apriori_eclat (Aula 03)
+
+#### Introdução (Aula 03)
+
+- Como vimos na aula anterior, o principal problema do algoritmo ingênuo para mineração de conjuntos de itens frequentes era a replicação de esforços para avaliar o suporte dos candidatos
+- As múltiplas passadas no conjunto de dados (armazenado em memória secundária) torna o algoritmo impraticável até mesmo para pequenos volumes
+- Os algoritmos que veremos hoje exploram propriedades do problema para amortizar o custo da computação de suporte, e evitar retrabalho na avaliação dos candidatos
+
+---
+---
+
+O que é mesmo o suporte? 🤔
+
+- Recapitulando da aula anterior, o Suporte aparantemente é um encurtamento para o "Suporte Mínimo" (minsup) que é o limiar que define se determinado item é frequente o bastante ou não.
+  - Esse valor é dado pela seguinte fórmula:
+    - $sup(X) = |c(X)|$, onde $c(X)$ é a cobertura do itemset X.
+
+Mas o que é mesmo a cobertura?
+
+- A cobertura é o conjunto de transações que contém um itemset X. Ou seja, é o conjunto de transações que contém todos os itens do itemset X.
+
+#### Apriori [1]
+
+- O Apriori foi proposto por Rakesh Agrawal e Ramakrishnan Srikant em 1994
+  - O artigo possui mais de 30K citações
+- Os autores à época trabalhavam no projeto da IBM para o Wal-Mart
+- A ideia central é evitar computações desnecessárias para candidatos infrequentes
+- Isso é viabilizado pela propriedade de **anti-monotonicidade** da função suporte
+- Essa é uma das propriedades mais importantes para a área
+
+##### Anti-monotonicidade do suporte
+
+- Considere dois itemsets $A$ e $B$ quaisquer. Se $A \subseteq B$, então $sup(A) \geq sup(B)$.
+- Essa observação nos diz que a cobertura de conjuntos de itens é, no máximo, tão grande quanto a de seus subconjuntos
+  - No caso mais simples, um conjunto de dois itens não pode ocorrer em mais transações que cada um dos itens individualmente
+- Consequentemente, se o itemset A é infrequente, B também será.
+- Isso define a propriedade de anti-monotonicidade da função suporte, também conhecida como a propriedade do Apriori
+  - **Todo superconjunto de um conjunto infrequente é infrequente**
+  - **Todo subconjunto de um conjunto frequente é frequente**
+
+---
+---
+
+Muito interessante isso daí de cima.
+
+Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, se X é frequente, nada garante que Y também seja. Porém, se Y é frequente, isso garante que todos os possíveis subconjuntos de Y também serão frequentes.
+
+#### Apriori [2]
+
+- O Apriori utiliza uma busca em largura no espaço de busca para minerar os padrões
+  - Frequentemente, o termo usado na literatura é abordagem por níveis (level-wise approach)
+- A busca inicia com a identificação dos itens frequentes
+- Depois, os conjuntos de tamanho k são explorados antes dos de tamanho k+1
+- Assim como o algoritmo ingênuo, ele também opera em duas etapas:
+  - Geração de candidatos
+  - Cômputo do suporte e eliminação dos infrequentes
+
+---
+
+- A geração dos candidatos é feita a partir dos conjuntos frequentes encontrados na fase anterior
+- Conjuntos compartilhando um prefixo de k-1 itens são combinados para gerar candidatos de tamanho k+1
+  - Novamente, assume-se que eles são ordenados pela ordem lexicográfica
+- Candidatos que possuam algum subconjunto infrequente são descartados imediatamente
+  - A propriedade do Apriori é empregada
+- Os suportes dos candidatos são atualizados com uma única passada no conjunto de dados
+  - Subconjuntos de tamanho k de cada transação são usados para atualizar o suporte dos candidatos
+
+---
+
+- **APRIORI** $(D, \mathcal{I}, minsup)$:
+  - $\mathcal{F} \leftarrow \emptyset$
+  - $\mathcal{C}^{(1)} \leftarrow \{\emptyset\}$ // Initial prefix tree with single items
+  - **foreach** $i \in \mathcal{I}$ **do** Add $i$ as child of $\emptyset$ in $\mathcal{C}^{(1)}$ with $sup(i) \leftarrow 0$
+  - $k \leftarrow 1$ // $k$ denotes the level
+  - **while** $\mathcal{C}^{(k)} \neq \emptyset$ **do**
+    - ComputeSupport $(\mathcal{C}^{(k)}, D)$
+    - **foreach** _leaf_ $X \in \mathcal{C}^{(k)}$ **do**
+      - **if** $sup(X) \geq minsup$ **then** $\mathcal{F} \leftarrow \mathcal{F} \cup \{(X, sup(X))\}$
+      - **else** remove $X$ from $\mathcal{C}^{(k)}$
+    - $\mathcal{C}^{(k+1)} \leftarrow$ ExtendPRefixTree($\mathcal{C}^{(k)}$)
+    - $k \leftarrow k+1$
+  - **return** $\mathcal{F}^{(k)}$
+
+---
+
+- ComputeSupport $(C^{(k)}, D)$:
+  - ...
+
+- ExtendPrefixTree $()$:
+  - ...
+  - **return** $C^{(k)}$
+
+---
+
+Exemplo (minsup=3):
+
+$$
+\begin{bmatrix}
+  TID & Muesli & Oats & Milk & Yoghurt & Biscuits & Tea \\
+  1 & 1 & 0 & 1 & 1 & 0 & 1 \\
+  2 & 0 & 1 & 1 & 0 & 0 & 0 \\
+  3 & 0 & 0 & 1 & 0 & 1 & 1 \\
+  4 & 1 & 0 & 0 & 1 & 0 & 0 \\
+  5 & 0 & 1 & 1 & 0 & 0 & 1 \\
+  6 & 1 & 0 & 1 & 0 & 0 & 1 \\
+\end{bmatrix}
+\Rightarrow
+\begin{bmatrix}
+  TID & Muesli & Milk & Tea \\
+  1 & 1 & 1 & 1 \\
+  2 & 0 & 1 & 0 \\
+  3 & 0 & 1 & 1 \\
+  4 & 1 & 0 & 0 \\
+  5 & 0 & 1 & 1 \\
+  6 & 1 & 1 & 1 \\
+\end{bmatrix}
+$$
+
+---
+
+- O número de passadas é drasticamente reduzido em relação ao algoritmo ingênuo
+  - $O(2^I) \rightarrow O(I)$
+- As podas baseadas na anti-monotonicidade do suporte também são bastante efetivas na prática
+- O algoritmo também apresenta alguns problemas:
+  - Busca em largura requer que todos os candidatos de um nível sejam mantidos em memória. Esse custo é proibitivo em alguns (muitos) casos
+  - Tanto a contagem do suporte quanto a poda do Apriori podem ser consideravelmente caras, dependendo da implementação
+
+---
+
+- O custo de memória é inerente à abordagem, e não podemos fazer muita coisa para melhorá-lo
+- O custo da contagem e verificação pode ser atenuado, usando estruturas de dados mais ‘sofisticadas’
+- Existem duas abordagens mais comuns:
+  - Usar uma árvore hash
+  - Usar uma árvore de prefixos (Trie)
+- Na primeira abordagem, cada nó folha armazena um conjunto de candidatos/conjuntos frequentes
+  - O número de comparações é reduzido
+- Na segunda abordagem, os nós da Trie armazenam os candidatos/conjuntos frequentes. Os subconjuntos das transações são usadas para indexá-la e atualizar o suporte
+
+---
+
+- A redução do suporte mínimo tem um impacto muito grande no custo computacional do algoritmo
+  - O tamanho dos candidatos aumenta -> Mais candidatos são avaliados em cada nível -> o tamanho dos conjuntos frequentes aumenta -> mais níveis são explorados
+
+---
+
+- A densidade da base de dados também tem muito impacto no custo
+  - Transações passam a ter mais itens
+  - Isso tem duas implicações: tamanho médio dos itemsets aumentam; mais subconjuntos são gerados durante a contagem do suporte $\binom{|t|}{k}$
 
 ## Aula 04 | 27/03/2025 | Mineração de conjuntos de itens
 
@@ -391,17 +540,23 @@ Eu tô achando que se eu compro $J = {A, B, C}$, Então o conjunto potência del
 - Se os itemsets estão em memória...
 - Se quero gerar o itemset XY partindo de $X \cup Y$, posso dizer que o suporte será $|c(X) \cap c(Y)|$
 
-### Slide - ??
+### Slide: aula03-apriori_eclat (Aula 04)
 
 #### Eclat (Equivalence Class Transformation)
 
 Dada a representação vertical dos dados, consigo calcular o suporte por essa intercessão.
 
-- ...
+- Dadas as deficiências do Apriori, M. Zaki propôs, em 2000, o algoritmo Equivalence Class Transformation (Eclat)
+- A proposta do algoritmo é ‘eliminar’ a necessidade de passadas no conjunto de dados para computar o suporte
+- Para isso, ele parte de uma representação vertical dos dados, e se baseia no fato de que a cobertura da união de dois itemsets é a interseção de suas coberturas
 
 Problema: como mantenho todos os itemsets gerados em memória?
 
 ---
+
+- Ou seja, a ideia central do algoritmo tentar manter os tidsets em memória principal para computar o suporte dos itemsets através de interseções desses conjuntos
+- Contudo, todos os tidsets podem não caber na memória principal. Assim, é necessário algum mecanismo que possibilite a divisão do espaço de busca em subproblemas independentes que caibam na memória
+- A divisão é feita conforme uma relação de equivalência estabelecida sobre os candidatos
 
 Tenta manter tudo na memória principal
 
@@ -509,6 +664,159 @@ Se só é guardado o valor das diferenças, acaba sendo um problema fazer as int
 - $C(PX) \cup \overline{C(P)} \cap C(P) \cup \overline{C(P)}$
 
 ## Aula 05 | 01/04/2025 | Mineração de conjuntos de itens
+
+### Slide: aula03-apriori_eclat (Aula 05)
+
+#### Diffsets e dEclat [Aula 05]
+
+- ALGORITHM 8.4. Algorithm dEclat
+  - ...
+
+---
+
+- Essa abordagem se mostrou muito eficiente para conjuntos densos
+- Porém, em conjuntos esparsos, o algoritmo original é a melhor opção
+
+#### Leitura (Aula 05)
+
+- Seções 8.1, 8.2 (Zaki e Meira)
+- Seções 6.1, 6.2 (Introduction to Data Mining)
+- Mohammed Javeed Zaki: Scalable Algorithms for Association Mining. IEEE Trans. Knowl. Data Eng. 12(3): 372-390 (2000)
+- Zaki, M.J., Gouda, K.: Fast vertical mining using diffsets. Technical Report 01-1, Computer Science Dept., Rensselaer Polytechnic Institute (March 2001) 10
+- Christian Borgelt. Efficient Implementations of Apriori and Eclat. Workshop of Frequent Item Set Mining Implementations (FIMI 2003, Melbourne, FL, USA).
+
+### Slide: aula04-FPGrowth (Aula 05)
+
+#### Introdução (Aula 05)
+
+- Nessa aula, veremos outro algoritmo que usa projeções para reduzir o número de passadas para computação dos conjuntos de itens frequentes
+- O algoritmo FP-Growth (Frequent Pattern Growth) adota uma estratégia dividir-e-conquistar para reduzir o custo computacional
+- Ele, ao contrário do Apriori, não se baseia na geração de candidatos
+- Os padrões são construídos ao longo do processamento em profundidade
+- Esse algoritmo é, talvez, o algoritmo sequencial mais eficiente para busca de conjuntos de itens frequentes
+
+#### FP-Growth
+
+- O FP-Growth foi proposto em 2000 por Jiawei Han, Jian Pei e Yiwen Yin
+- O algoritmo atacou dois problemas presentes nas abordagens iniciais:
+  1. Repetidas passadas sobre a base de dados; e
+  2. Geração de candidatos
+- O primeiro problema, como já discutimos, é crítico pelo custo computacional inerente à leitura em memória secundária
+- O segundo problema está relacionado à geração de candidatos desnecessários
+  - Muitos são descartados pela propriedade do Apriori
+
+##### FP-Tree
+
+- O FP-Growth possui algumas similaridades ao Eclat:
+  - Ambos adotam a estratégia de busca em profundidade
+  - Ambos adotam projeções dos dados com o intuito de trazê-los para memória principal e reduzir o custo computacional
+- O FP-Growth, no entanto, usa uma estrutura de dados diferente para suportar a busca pelos padrões
+  - Uma árvore de prefixos chamada FP-Tree
+- A busca pelos padrões se dá inteiramente através da árvore sem a necessidade de se voltar à base de dados
+- Dessa forma, a primeira tarefa do algoritmo é construir essa estrutura
+
+---
+
+- A construção da FP-Tree ocorre em duas fases
+- Primeiro, o algoritmo varre a base de dados para computar a frequência individual de cada item
+  - Itens infrequentes são descartados, uma vez que não podem formar padrões frequentes
+- Segundo, o algoritmo percorre novamente a base processando as transações ordenadas pela frequência dos itens
+  - Os itens nas transações são ordenados em ordem decrescente de frequência e os infrequentes são filtrados
+- As transações são então inseridas na árvore enquanto processadas
+  - Itens são nós da árvore
+  - Cada nó armazena um item e sua frequência (número de transações que o contém)
+
+---
+
+- Para facilitar a busca pelos padrões, a árvore é equipada com uma estrutura adicional para localizar a ocorrência dos itens e sua frequência
+- Exemplo
+
+$$
+\begin{bmatrix}
+  TID & Muesli (a) & Oats (b) & Milk (c) & Yoghurt (d) & Biscuits (e) & Tea (f) \\
+  1 & 1 & 0 & 1 & 1 & 0 & 1\\
+  2 & 0 & 1 & 1 & 0 & 0 & 0\\
+  3 & 0 & 0 & 1 & 0 & 1 & 1\\
+  4 & 1 & 0 & 0 & 1 & 0 & 0\\
+  5 & 0 & 1 & 1 & 0 & 0 & 1\\
+  6 & 1 & 0 & 1 & 0 & 0 & 1\\
+\end{bmatrix}
+$$
+
+#### Mineração dos padrões [Aula 05]
+
+- A mineração dos padrões se inicia uma vez que a FP-Tree tenha sido construída
+- A construção agora ocorre aumentando-se prefixos dos padrões em ordem crescente de suporte
+- As transações que satisfaçam (contém) o padrão sendo construído são projetadas em uma nova árvore
+- Itens podem se tornar infrequentes nessa nova base e são descartados
+- Os padrões encontrados nessa nova árvore devem incluir o prefixo que a gerou
+- O algoritmo segue com as extensões recursivamente até que um único ramo seja obtido
+  - Se a árvore possui um único ramo, os padrões obteníveis são todas as combinações dos nós
+
+---
+
+- Exemplo
+
+$$
+\begin{bmatrix}
+  Item & Freq & Link
+  c & 5 & \\
+  f & 4 & \\
+  a & 3 & \\
+  b & 2 & \\
+  d & 2 & \\
+\end{bmatrix}
+$$
+
+...
+
+#### Questões de implementação
+
+- E se a FP-tree não couber na memória?
+  - A solução é particionar/projetar a base de dados em memória secundária antes de iniciar a construção da árvore
+- Como construir a FP-tree de forma eficiente?
+  - Solução proposta por Christian Borgelt otimiza memória e tempo
+  - Representação básica dos dados: lista de vetores de inteiros
+  - Dados (projeções) são carregados inteiramente para memória
+  - Lista é seccionada com base no k-ésimo item; um nó é criado para cada seção
+  - Nós têm tamanho fixo (20 bytes em 32bits; 40 em 64bits)
+    - 1x identificador de item
+    - 1x contador de frequência
+    - 1x ponteiro para nó pai
+    - 1x ponteiro para próxima ocorrência do item
+    - 1x ponteiro para nó auxiliar
+
+---
+
+- Implementação tradicional, conforme descrição do algoritmo, evita carregar dados para memória
+  - Porém, nós terão tamanho variável ou desperdiçam memória (ponteiros para filhos que nunca ocorrem)
+  - Melhora gerenciamento de memória; grandes blocos podem ser alocados de uma vez e gerenciados internamente
+  - Além disso, ponteiros para pais são mais úteis que ponteiros para filhos durante execução
+
+---
+
+- Projeções são executadas com dois laços
+  - Um laço externo percorre o nível mais baixo (elemento condicionante da projeção)
+  - Laço interno percorre a os ramos originários do nó folha
+- A nova árvore é construída como uma ‘sombra’ da original
+  - Nós são duplicados conforme são visitados (ponteiro auxiliar mantém elo de ligação entre original e cópia para atualizações necessárias durante construção)
+  - Frequência do nó folha é propagada para cima
+- A sombra é destacada da árvore original em uma segunda passada pelos nós
+- Nós infrequentes podem ser removidos e nós com mesmo rótulo mesclados
+
+---
+
+...
+
+---
+
+#### Leitura [Aula 05]
+
+- Seção 6.6 Intro to Data Mining
+- Seção 8.2.3 Zaki e Meira
+- [Borgelt, C. (2005) An Implementation of the FP-growth Algorithm][LinkFPGrowth]
+
+[LinkFPGrowth]: <https://borgelt.net/papers/fpgrowth.pdf>
 
 ## Aula 06 | 03/04/2025 | Mineração de conjuntos de itens
 
