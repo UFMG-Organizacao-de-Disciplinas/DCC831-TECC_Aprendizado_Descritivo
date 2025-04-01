@@ -1,6 +1,6 @@
 # Aprendizado Descritivo - Renato Vimieiro - 2025
 
-## 18/03/2025 - Aula 1 - [JV: Cheguei atrasado]
+## Aula 01 | 18/03/2025 | Apresentação do curso - [JV: Cheguei atrasado]
 
 ### Slide 1
 
@@ -146,7 +146,7 @@ Na parte de ... será o ... que foi quem inventou.
 
 Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Dong and James Bailey 2012;
 
-## 20/03/2025 - Aula 2
+## Aula 02 | 20/03/2025 | Aprendizado descritivo x preditivo
 
 ### Slide - Aprendizado Descritivo
 
@@ -361,9 +361,9 @@ Então temos dois problemas principais: reduzir o espaço de busca e reduzir a c
 - Seções 8.1 e 8.2 Zaki e Meira
 - Seções 6.1 e 5.2 (Introduction to Data Mining)
 
-## 25/03/2025 - Aula 3 - Faltei
+## Aula 03 | 25/03/2025 | Mineração de conjuntos de itens - Faltei
 
-## 27/03/2025 - Aula 4
+## Aula 04 | 27/03/2025 | Mineração de conjuntos de itens
 
 ### Aula passada
 
@@ -508,4 +508,54 @@ Se só é guardado o valor das diferenças, acaba sendo um problema fazer as int
 - $C(PX) \cap \overline{C(PY)} \cup C(P) \cap \overline{C(P)}$
 - $C(PX) \cup \overline{C(P)} \cap C(P) \cup \overline{C(P)}$
 
-## 01/04/2025 - Aula 5
+## Aula 05 | 01/04/2025 | Mineração de conjuntos de itens
+
+## Aula 06 | 03/04/2025 | Mineração de conjuntos de itens
+
+## Aula 07 | 08/04/2025 | Mineração de sequências
+
+## Aula 08 | 10/04/2025 | Mineração de sequências
+
+## Aula 09 | 15/04/2025 | Mineração de grafos
+
+## Aula 10 | 17/04/2025 | Mineração de grafos
+
+## Aula 11 | 22/04/2025 | Regras de associação e métricas de qualidade
+
+## Aula 12 | 24/04/2025 | Aprendizado descritivo supervisionado: padrões emergentes, contrastantes e descoberta de subgrupos
+
+## Aula 13 | 29/04/2025 | Descoberta de subgrupos
+
+## Aula 14 | 06/05/2025 | Descoberta de subgrupos
+
+## Aula 15 | 08/05/2025 | Descoberta de subgrupos
+
+## Aula 16 | 13/05/2025 | Mineração de modelos excepcionais
+
+## Aula 17 | 15/05/2025 | Mineração de modelos excepcionais
+
+## Aula 18 | 20/05/2025 | Mineração de modelos excepcionais
+
+## Aula 19 | 22/05/2025 | Seminários (Padrões Frequentes)
+
+## Aula 20 | 27/05/2025 | Seminários (Padrões Frequentes)
+
+## Aula 21 | 29/05/2025 | Seminários (Padrões Frequentes)
+
+## Aula 22 | 03/06/2025 | Seminários (SD)
+
+## Aula 23 | 05/06/2025 | Seminários (SD)
+
+## Aula 24 | 10/06/2025 | Seminários (SD)
+
+## Aula 25 | 12/06/2025 | Seminários (aplicações)
+
+## Aula 26 | 17/06/2025 | Seminários (aplicações)
+
+## Aula 27 | 24/06/2025 | Seminários (aplicações)
+
+## Aula 28 | 26/06/2025 | Projeto
+
+## Aula 29 | 01/07/2025 | Projeto
+
+## Aula 30 | 03/07/2025 | Projeto
