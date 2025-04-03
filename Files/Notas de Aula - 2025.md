@@ -858,7 +858,7 @@ Mas ainda não entendi o que precisa ser feito após essa primeira projeção.
 
 $$
 \begin{bmatrix}
-  Item & Freq & Link
+  Item & Freq & Link \\
   c & 5 & \\
   f & 4 & \\
   a & 3 & \\
@@ -869,21 +869,20 @@ $$
 
 ```mermaid
 flowchart LR
-  Vazio(("`$\emptyset$`")) --> C((c:5))
-  C --> F((f:4))
-  F --> A2((a:2))
-  A2 --> D1((d:1))
-  F --> B1((b:1))
-  C --> B2((b:1))
-  Vazio --> A1((a:1))
-  A1 --> D2((d:1))
+  Vazio(("$$\emptyset$$")) --> C(("$$c:5$$"))
+  C --> F(("$$f:4$$"))
+  F --> A2(("$$a:2$$"))
+  A2 --> D1(("$$d:1$$"))
+  F --> B1(("$$b:1$$"))
+  C --> B2(("$$b:1$$"))
+  Vazio --> A1(("$$a:1$$"))
+  A1 --> D2(("$$d:1$$"))
 ```
 
 Há também uma lista encadeada para todos os nós com ocorrências de um mesmo item.
 
 A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e calcularmos sua frequência.
 
-...
 
 #### Questões de implementação
 
