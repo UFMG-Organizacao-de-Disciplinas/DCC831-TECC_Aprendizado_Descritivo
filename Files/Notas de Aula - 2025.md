@@ -328,25 +328,28 @@ Aquele diagrama explica bastante o que que isso quis dizer. Basicamente, no conj
 
 Complexidade do algoritmo: $O(2^I \cdot T \cdot I)$
 
-- // ALGORITHM 8.1. Algoritm BruteForce
-- int BruteForce(D, I, minsup):
-  - F \leftarrow // set of frequent itemsets
-    - for each X \subseteq I do
-      - sup(X) \leftarrow ComputeSupport (X, D)
-      - if sup(X) \leq minsup then
-        - F \leftarrow F \cup {(X, sup(X))}
-    - return F
+- **// ALGORITHM 8.1. Algoritm BruteForce**
+  - **BruteForce** $(D, \mathcal{I}, minsup)$:
+    - $\mathcal{F} \leftarrow \emptyset$ // set of frequent itemsets
+      - **foreach** $X \subseteq \mathcal{I}$ **do**
+        - $sup(X) \leftarrow ComputeSupport (X, D)$
+        - **if** $sup(X) \leq minsup$ **then**
+          - $\mathcal{F} \leftarrow \mathcal{F} \cup {(X, sup(X))}$
+      - **return** $\mathcal{F}$
 
-- ComputeSupport(X, D):
-  - sup(X) \leftarrow 0
-  - for each (t, i(t)) \in D do
-    - if X \subseteq i(t) then
-      - sup(X) \leftarrow sup(X) + 1
-- return sup(X)
+  - **ComputeSupport** $(X, D)$:
+    - $sup(X) \leftarrow 0$
+    - **foreach** $\langle t, i(t) \rangle \in D$ **do**
+      - **if** $X \subseteq i(t)$ **then**
+        - $sup(X) \leftarrow sup(X) + 1$
+  - **return** $sup(X)$
 
 ---
 
-...
+- A computação do suporte de um itemset requer uma passada sobre o conjunto de dados, ou seja, requer tempo $O(|T|)$
+- Verificar se uma dada transação contém um itemset requer tempo $O(|I|)$
+- Portanto, o custo total de computação do suporte é $O(IT)$
+- O espaço de busca, por sua vez, é o conjunto potência de $I$. Logo, a complexidade do algoritmo ingênuo é $O(2^I I T)$
 
 ---
 
@@ -378,13 +381,13 @@ O que é mesmo o suporte? 🤔
 
 - Recapitulando da aula anterior, o Suporte aparantemente é um encurtamento para o "Suporte Mínimo" (minsup) que é o limiar que define se determinado item é frequente o bastante ou não.
   - Esse valor é dado pela seguinte fórmula:
-    - $sup(X) = |c(X)|$, onde $c(X)$ é a cobertura do itemset X.
+    - $sup(X) = |c(X)|$, onde $c(X)$ é a cobertura do itemset $X$.
 
 Mas o que é mesmo a cobertura?
 
-- A cobertura é o conjunto de transações que contém um itemset X. Ou seja, é o conjunto de transações que contém todos os itens do itemset X.
+- A cobertura é o conjunto de transações que contém um itemset $X$. Ou seja, é o conjunto de transações que contém todos os itens do itemset $X$.
 
-#### Apriori [1]
+#### Apriori
 
 - O Apriori foi proposto por Rakesh Agrawal e Ramakrishnan Srikant em 1994
   - O artigo possui mais de 30K citações
@@ -415,7 +418,7 @@ Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, s
 - O Apriori utiliza uma busca em largura no espaço de busca para minerar os padrões
   - Frequentemente, o termo usado na literatura é abordagem por níveis (level-wise approach)
 - A busca inicia com a identificação dos itens frequentes
-- Depois, os conjuntos de tamanho k são explorados antes dos de tamanho k+1
+- Depois, os conjuntos de tamanho $k$ são explorados antes dos de tamanho $k+1$
 - Assim como o algoritmo ingênuo, ele também opera em duas etapas:
   - Geração de candidatos
   - Cômputo do suporte e eliminação dos infrequentes
@@ -423,41 +426,49 @@ Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, s
 ---
 
 - A geração dos candidatos é feita a partir dos conjuntos frequentes encontrados na fase anterior
-- Conjuntos compartilhando um prefixo de k-1 itens são combinados para gerar candidatos de tamanho k+1
+- Conjuntos compartilhando um prefixo de $k-1$ itens são combinados para gerar candidatos de tamanho $k+1$
   - Novamente, assume-se que eles são ordenados pela ordem lexicográfica
 - Candidatos que possuam algum subconjunto infrequente são descartados imediatamente
   - A propriedade do Apriori é empregada
 - Os suportes dos candidatos são atualizados com uma única passada no conjunto de dados
-  - Subconjuntos de tamanho k de cada transação são usados para atualizar o suporte dos candidatos
+  - Subconjuntos de tamanho $k$ de cada transação são usados para atualizar o suporte dos candidatos
 
 ---
 
 - **APRIORI** $(D, \mathcal{I}, minsup)$:
   - $\mathcal{F} \leftarrow \emptyset$
-  - $\mathcal{C}^{(1)} \leftarrow \{\emptyset\}$ // Initial prefix tree with single items
+  - $\mathcal{C}^{(1)} \leftarrow \{\emptyset\}$ `// Initial prefix tree with single items`
   - **foreach** $i \in \mathcal{I}$ **do** Add $i$ as child of $\emptyset$ in $\mathcal{C}^{(1)}$ with $sup(i) \leftarrow 0$
-  - $k \leftarrow 1$ // $k$ denotes the level
+  - $k \leftarrow 1$ `// k denotes the level`
   - **while** $\mathcal{C}^{(k)} \neq \emptyset$ **do**
     - ComputeSupport $(\mathcal{C}^{(k)}, D)$
     - **foreach** _leaf_ $X \in \mathcal{C}^{(k)}$ **do**
       - **if** $sup(X) \geq minsup$ **then** $\mathcal{F} \leftarrow \mathcal{F} \cup \{(X, sup(X))\}$
       - **else** remove $X$ from $\mathcal{C}^{(k)}$
-    - $\mathcal{C}^{(k+1)} \leftarrow$ ExtendPRefixTree($\mathcal{C}^{(k)}$)
+    - $\mathcal{C}^{(k+1)} \leftarrow$ ExtendPrefixTree($\mathcal{C}^{(k)}$)
     - $k \leftarrow k+1$
   - **return** $\mathcal{F}^{(k)}$
 
 ---
 
-- ComputeSupport $(C^{(k)}, D)$:
-  - ...
+- ComputeSupport $(\mathcal{C}^{(k)}, D)$:
+  - **foreach** $\langle t, i(t) \rangle \in D$ **do**
+    - **foreach** k-subset $X \subseteq i(t)$ **do**
+      - **if** $X \in \mathcal{C}^{(k)}$ **then** $sup(X) \leftarrow sup(X) + 1$
 
-- ExtendPrefixTree $()$:
-  - ...
-  - **return** $C^{(k)}$
+- ExtendPrefixTree $(\mathcal{C}^{(k)})$:
+  - **foreach** leaf $X_a \in \mathcal{C}^{(k)}$ **do**
+    - **foreach** leaf $X_b \in SIBLING(X_a)$, such that $b > a$ **do**
+      - $X_{ab} \leftarrow X_a \cup X_b$ `// prune candidate if there are any infrequent subsets`
+      - **if** $X_j \in \mathcal{C}^{(k)}$, **for all** $X_j \subset X_{ab}$, such that $|X_j| = |X_{ab}|-1$ **then**
+        - Add $X_{ab}$ as child of $X_a$ with $sup(X_{ab}) \leftarrow 0$
+    - **if** _no extensions from_ $X_a$ **then**
+      - Remove $X_a$, and all ancestors of $X_a with no extensions, from $\mathcal{C}^{(k)}$
+  - **return** $\mathcal{C}^{(k)}$
 
 ---
 
-Exemplo (minsup=3):
+- Exemplo (minsup=3):
 
 $$
 \begin{bmatrix}
@@ -493,7 +504,7 @@ $$
 ---
 
 - O custo de memória é inerente à abordagem, e não podemos fazer muita coisa para melhorá-lo
-- O custo da contagem e verificação pode ser atenuado, usando estruturas de dados mais ‘sofisticadas’
+- O custo da contagem e verificação pode ser atenuado, usando estruturas de dados mais 'sofisticadas'
 - Existem duas abordagens mais comuns:
   - Usar uma árvore hash
   - Usar uma árvore de prefixos (Trie)
@@ -506,11 +517,19 @@ $$
 - A redução do suporte mínimo tem um impacto muito grande no custo computacional do algoritmo
   - O tamanho dos candidatos aumenta -> Mais candidatos são avaliados em cada nível -> o tamanho dos conjuntos frequentes aumenta -> mais níveis são explorados
 
+[Imagem(a): Number of candidate itemsets]
+
+[Imagem(b): Number of frequent itemsets]
+
 ---
 
 - A densidade da base de dados também tem muito impacto no custo
   - Transações passam a ter mais itens
   - Isso tem duas implicações: tamanho médio dos itemsets aumentam; mais subconjuntos são gerados durante a contagem do suporte $\binom{|t|}{k}$
+
+[Imagem(a): Number of candidate itemsets]
+
+[Imagem(b): Number of frequent itemsets]
 
 ## Aula 04 | 27/03/2025 | Mineração de conjuntos de itens
 
@@ -532,13 +551,13 @@ $$
 - $\binom{|t|}{k}$
 - Quando é esparso, funciona bem. Quando é denso que começa a dar problema.
 
-Eu tô achando que se eu compro $J = {A, B, C}$, Então o conjunto potência dele é $P(J) = {\emptyset, A, B, C, AB, AC, BC, ABC}$, e então, incrementaria 1 para um desses grupos
+Eu tô achando que se eu compro $J = \{A, B, C\}$, Então o conjunto potência dele é $P(J) = \{\emptyset, A, B, C, AB, AC, BC, ABC\}$, e então, incrementaria 1 para um desses grupos
 
 - Cálculo de suporte:
   - Para cada um dos itemsets tem que verificar se ele tá na árvore K(?)
 
 - Se os itemsets estão em memória...
-- Se quero gerar o itemset XY partindo de $X \cup Y$, posso dizer que o suporte será $|c(X) \cap c(Y)|$
+- Se quero gerar o itemset $XY$ partindo de $X \cup Y$, posso dizer que o suporte será $|c(X) \cap c(Y)|$
 
 ### Slide: aula03-apriori_eclat (Aula 04)
 
@@ -547,7 +566,7 @@ Eu tô achando que se eu compro $J = {A, B, C}$, Então o conjunto potência del
 Dada a representação vertical dos dados, consigo calcular o suporte por essa intercessão.
 
 - Dadas as deficiências do Apriori, M. Zaki propôs, em 2000, o algoritmo Equivalence Class Transformation (Eclat)
-- A proposta do algoritmo é ‘eliminar’ a necessidade de passadas no conjunto de dados para computar o suporte
+- A proposta do algoritmo é 'eliminar' a necessidade de passadas no conjunto de dados para computar o suporte
 - Para isso, ele parte de uma representação vertical dos dados, e se baseia no fato de que a cobertura da união de dois itemsets é a interseção de suas coberturas
 
 Problema: como mantenho todos os itemsets gerados em memória?
@@ -566,15 +585,21 @@ Surgiu através da criação de uma relação de equivalência entre os itemsets
 
 ---
 
+- Seja $p: P(I) \times \mathbb{N} \rightarrow P(I)$ uma função prefixo. $p(X, k) = X[1:k]$.
+- A relação $\theta_k \subseteq P(I) \times P(I), A \theta_k B \equiv p(A, k) = p(B, k)$, é uma relação de equivalência
+- Dessa forma, ela induz uma partição dos conjuntos de itens em classes de equivalência, onde todos os elementos compartilham um certo prefixo
+- Por exemplo, todos os conjuntos que contêm o item Muesli pertencem à classe de equivalência $[Muesli]_{\theta_1}$
+- Intuitivamente, essas classes servem como projeções do conjunto de dados, em que somente as transações contendo aquele prefixo são consideradas
+
 Cria-se uma relação de equivalência pelos prefixos.
 
 Diz-se que dois itemsets são equivalentes se o prefixos dos dois são iguais.
 
-Consideremos que temos o seguinte conjunto potência: $P(I) = {\emptyset, A, B, C, AB, AC, BC, ABC}$. Na forma de representação, seria como se agrupássemos os dados em grupos de prefixos:
+Consideremos que temos o seguinte conjunto potência: $P(I) = \{\emptyset, A, B, C, AB, AC, BC, ABC\}$. Na forma de representação, seria como se agrupássemos os dados em grupos de prefixos:
 
-- A: {A, AB, AC, ABC}
-- B: {B, BC}
-- C: {C}
+- $A: \{A, AB, AC, ABC\}$
+- $B: \{B, BC\}$
+- $C: \{C\}$
 
 E então seriam varridos de C para A.
 
@@ -588,18 +613,18 @@ Ele faz subpartições até que o número de transações seja pequeno o suficie
 
 ---
 
-- Algoritmo 8.3 - Algoritmo ECLAT
-- // Initial Call: $F \leftarrow 0, P \leftarrow {}$
-- ECLAT (P, minsup, F):
-- foreach
-  - F
-  - P0
-  - foreach
-    - X
-    - ?
-    - if sup()
-      - po
-  - if p neq 0 then ...
+- **Algoritmo 8.3 - Algoritmo ECLAT**
+- // Initial Call: $\mathcal{F} \leftarrow \emptyset, P \leftarrow \{ \langle i, t(i) \rangle | i \in \mathcal{I}, |t(i)| \geq minsup \} $
+- ECLAT $(P, minsup, \mathcal{F})$:
+  - **foreach** $\langle X_a, t(X_a) \rangle \in P$ **do**
+    - $\mathcal{F} \leftarrow \mathcal{F} \cup \{(X_a, sup(X_a))\}$
+    - $P_a \leftarrow \emptyset$
+    - **foreach** $\langle X_b, t(X_b) \rangle \in P$, with $X_b > X_a$ **do**
+      - $X_{ab} = X_a \cup X_b$
+      - $t(X_{ab}) = t(X_a) \cap t(X_b)$
+      - **if** $sup(X_{ab}) \geq minsup$ **then**
+        - $P_a \leftarrow P_a \cup \{ \langle X_{ab}, t(X_{ab}) \rangle \}$
+    - **if** $P_a \neq \emptyset$ **then** ECLAT $(P_a, minsup, \mathcal{F})$
 
 [JV: Droga, foquei em transcrever brevemente e esqueci de prestar atenção na explicação do professor]
 
@@ -616,7 +641,27 @@ Evitam redundância: 1. partições; 2. Ordem sistemática de combinação dos i
 3. AB com AC: ABC
 4. B com C: BC
 
-##### Representações de conjuntos de dados - Aula 4
+##### Representações de conjuntos de dados (Aula 4)
+
+$$
+\begin{bmatrix}
+  TID & Muesli & Oats & Milk & Yoghurt & Biscuits & Tea \\
+  1 & 1 & 0 & 1 & 1 & 0 & 1\\
+  2 & 0 & 1 & 1 & 0 & 0 & 0\\
+  3 & 0 & 0 & 1 & 0 & 1 & 1\\
+  4 & 1 & 0 & 0 & 1 & 0 & 0\\
+  5 & 0 & 1 & 1 & 0 & 0 & 1\\
+  6 & 1 & 0 & 1 & 0 & 0 & 1\\
+\end{bmatrix}
+\Rightarrow
+[\emptyset]_{\theta_0}
+\begin{bmatrix}
+  X      & c(x)  \\
+  Muesli & 146   \\
+  Milk   & 12356 \\
+  Tea    & 1356  \\
+\end{bmatrix}
+$$
 
 Pelo que eu tô entendendo:
 
@@ -627,6 +672,19 @@ Pelo que eu tô entendendo:
 Se $A \subseteq B$, então $c(B) \subseteq c(A)$ (Cobertura)
 
 ---
+
+#### Eclat (Equivalence Class Transformation) [2]
+
+- O custo computacional do algoritmo está diretamente relacionado ao tamanho dos tidsets
+  - O tempo de execução depende do cálculo da interseção dos tidsets
+- O custo de espaço também é dependente do tamanho. Quanto mais denso o conjunto de dados, mais largos serão os tidsets
+- Há duas formas de se implementar o algoritmo:
+  - Usando vetores de bits
+  - Usando vetores de Ids
+- Os vetores de bits são interessantes para o cálculo do suporte
+  - Eles facilitam a computação da interseção e o cálculo do tamanho do tidset pode ser feito usando uma tabela auxiliar (palavras de 16bits mapeadas para valores)
+- Contudo, se o conjunto for esparso, isso representará um desperdício muito grande de espaço. Então vetores de Ids se tornam mais interessantes.
+  - As computações de interseção são feitas como na função merge do mergesort
 
 ##### Diffsets e dEclat
 
@@ -685,9 +743,9 @@ Se só é guardado o valor das diferenças, acaba sendo um problema fazer as int
 
 ---
 
-- Por definição, 𝑑 𝑃𝑋𝑌 = 𝑐 𝑃𝑋 − 𝑐 𝑃𝑋𝑌 = 𝑐 𝑃𝑋 − 𝑐 𝑃𝑌
-- Podemos adicionar, ao conjunto acima, o conjunto vazio (𝑐 𝑃 − 𝑐 𝑃 ) sem alterá-lo
-- Logo, 𝑑 𝑃𝑋𝑌 = 𝑐 𝑃𝑋 − 𝑐 𝑃𝑌 + 𝑐 𝑃 − 𝑐 𝑃 = 3 4 𝑐 𝑃 − 𝑐 𝑃𝑌 − 𝑐 𝑃 − 𝑐 𝑃𝑋 = 𝑑 𝑃𝑌 − 𝑑(𝑃𝑋)
+- Por definição, $d(PXY) = c(PX) - c(PXY) = c(PX) - c(PY)$
+- Podemos adicionar, ao conjunto acima, o conjunto vazio $(c(P) - c(P))$ sem alterá-lo
+- Logo, $d(PXY) = c(PX) - c(PY) + c(P) - c(P) - c(P) = (c(P)-c(PY)) - (c(P) - c(PX)) = d(PY) - d(PX)$
 - Em outras palavras, podemos usar os diffsets dos conjuntos base para calcular o diffset do novo candidato
 - A variante do Eclat que usa diffsets ficou conhecida como dEclat
 
@@ -729,8 +787,9 @@ Ele fez um monte de igualdades com operações de conjuntos.
 - $PX \cap \overline{PY} = \{1, 5\}$
 
 ---
+---
 
-- ALGORITHM 8.4. Algorithm dEclat
+- **ALGORITHM 8.4. Algorithm dEclat**
   - ...
 
 ---
@@ -982,7 +1041,6 @@ Há também uma lista encadeada para todos os nós com ocorrências de um mesmo 
 
 A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e calcularmos sua frequência.
 
-
 - [JV] Explicação do Algoritmo
   - Para se minerar as transações de volta, percorremos a lista de itens e então subimos dele até a raiz.
   - Partindo do item menos frequente e indo pro item mais frequente, fazemos projeções da árvore.
@@ -1049,7 +1107,7 @@ A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e
 - Projeções são executadas com dois laços
   - Um laço externo percorre o nível mais baixo (elemento condicionante da projeção)
   - Laço interno percorre a os ramos originários do nó folha
-- A nova árvore é construída como uma ‘sombra’ da original
+- A nova árvore é construída como uma 'sombra da original
   - Nós são duplicados conforme são visitados (ponteiro auxiliar mantém elo de ligação entre original e cópia para atualizações necessárias durante construção)
   - Frequência do nó folha é propagada para cima
 - A sombra é destacada da árvore original em uma segunda passada pelos nós
@@ -1097,8 +1155,8 @@ A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e
 
 ---
 
-- Os que ocorrem em ambas as transações, possuem cobertura $c(X)=01$, e, portanto, são equivalentes a $a_{1}a_{2}\dotsa_{50}$
-- Os que ocorrem somente na segunda transação, possuem cobertura $c(X)=1$, e, portanto, são equivalentes a $a_{1}a_{2}\dotsa_{100}$
+- Os que ocorrem em ambas as transações, possuem cobertura $c(X)=01$, e, portanto, são equivalentes a $a_{1}a_{2}\dots a_{50}$
+- Os que ocorrem somente na segunda transação, possuem cobertura $c(X)=1$, e, portanto, são equivalentes a $a_{1}a_{2}\dots a_{100}$
   - Além disso, se estivéssemos somente interessados nos itemsets frequentes sem a informação da frequência, todos seriam equivalentes a esse itemset
 - Em outras palavras, os mais de $10^{30}$ itemsets que seriam retornados por qualquer dos algoritmos vistos poderiam ser representados somente por esses dois conjuntos
 - Esses conjuntos formam, dessa forma, uma representação compacta de todo o conjunto de itemsets frequentes
@@ -1121,44 +1179,137 @@ A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e
 ---
 
 - Os conjuntos máximos são os maiores itemsets frequentes
-- Eles definem a ‘borda’ entre o que é frequente e infrequente
+- Eles definem a 'borda entre o que é frequente e infrequente
 - Como, por definição, não existem conjuntos frequentes maiores que eles, **todos os conjuntos frequentes podem ser derivados a partir dos conjuntos máximos**
 - No entanto, o cálculo do suporte não pode ser obtido diretamente desses itemsets, sendo necessária uma nova passada na base de dados para computá-lo
-- O itemset a1a2...a100 no nosso exemplo inicial é um conjunto frequente máximo
+- O itemset $a_{1}a_{2} \dots a_{100}$ no nosso exemplo inicial é um conjunto frequente máximo
 
 ---
 
 - Essa necessidade de novas passadas na base de dados para computar o suporte dos itemsets frequentes a partir dos máximos torna a representação incompleta
 - Os conjuntos fechados, por outro lado, são uma representação completa, já que tanto os itemsets quanto seu suporte podem ser derivados desses conjuntos
 - Como dito, todo conjunto fechado dá origem a uma classe de equivalência
-  - [X] = {Y ⊆ I | c(Y) = c(X)} = {Y ⊆ I | i(c(Y)) = X}
+  - $[X] = \{Y \subseteq I | c(Y) = c(X)\} = \{Y \subseteq I | i(c(Y)) = X\}$
 - Assim, podemos verificar o suporte de um itemset frequente a partir dos conjuntos fechados da seguinte forma
-  - sup 𝑋 = max sup 𝑌 𝑌 ∈ 𝒞 ∧ }X ⊆ Y
+  - $sup(𝑋) = max \{sup(Y) | Y \in \mathcal{C} \wedge X \subseteq Y\}$
   - Em outras palavras, basta encontrarmos a classe de equivalência à qual o itemset pertence; todo itemset frequente ou é fechado ou pertence à classe de equivalência de algum conjunto fechado, como o suporte é anti-monotônico, se ele não for fechado, ele pertence à classe do de maior suporte.
 
 ---
 
 - Exemplo: minsup=1
 
-$$
-\begin{bmatrix}
-  TID & Muesli (m) & Oats (o) & Milk (m) & Yoghurt (y) \\
-  1 & 1 & 0 & 1 & 1 \\
-  2 & 0 & 1 & 1 & 0 \\
-  3 & 0 & 0 & 1 & 0 \\
-  4 & 1 & 0 & 0 & 1 \\
-  5 & 0 & 1 & 1 & 0 \\
-  6 & 1 & 0 & 1 & 0 \\
-\end{bmatrix}
-$$
+|  TID | Muesli (m) | Oats (o) | Milk (m) | Yoghurt (y) |
+| ---: | ---------: | -------: | -------: | ----------: |
+|    1 |          1 |        0 |        1 |           1 |
+|    2 |          0 |        1 |        1 |           0 |
+|    3 |          0 |        0 |        1 |           0 |
+|    4 |          1 |        0 |        0 |           1 |
+|    5 |          0 |        1 |        1 |           0 |
+|    6 |          1 |        0 |        1 |           0 |
 
 ---
 
-[Grafo]
+```mermaid
+flowchart LR
+  
+  %% Styles
+  classDef Infrequent fill:#ffffff, color:#000000;
+  classDef Frequent fill:#fffba6, color:#000000;
+  classDef Maximal fill:#fffba6, color:#000000, stroke-width:5px, stroke:#000000;
+
+  %% Vértices
+  MOKY(("MOKY $$\{\}$$")):::Infrequent
+  MOK(("MOK $$\{\}$$")):::Infrequent
+  MOY(("MOY $$\{\}$$")):::Infrequent
+  MKY(("MKY $$1$$")):::Maximal
+  OKY(("OKY $$\{\}$$")):::Infrequent
+  MO(("MO $$\{\}$$")):::Infrequent
+  MK(("MK $$16$$")):::Frequent
+  MY(("MY $$14$$")):::Frequent
+  OK(("OK $$25$$")):::Maximal
+  OY(("OY $$\{\}$$")):::Infrequent
+  KY(("KY $$\{\}$$")):::Infrequent
+  M(("M $$146$$")):::Frequent
+  O(("O $$25$$")):::Frequent
+  K(("K $$12356$$")):::Frequent
+  Y(("Y $$14$$")):::Frequent
+  Vazio(("$$\emptyset$$")):::Frequent
+
+  %% Label
+  Freq[Frequent Itemsets]:::Infrequent
+  Infreq[Infrequent Itemsets]:::Frequent
+  Max[Maximal Itemsets]:::Maximal
+
+  %% Arestas
+  MOKY --- MOK & MOY & MKY & OKY
+  MOK --- MO & MK & OK
+  MOY --- MO & MY & OY
+  MKY --- MK & MY & KY
+  OKY --- OK & OY & KY
+  MO --- M & O
+  MK --- M & K
+  MY --- M & Y
+  OK --- O & K
+  OY --- O & Y
+  KY --- K & Y
+  M --- Vazio
+  O --- Vazio
+  K --- Vazio
+  Y --- Vazio
+```
 
 ---
 
-[Grafo]
+```mermaid
+flowchart LR
+  
+  %% Styles
+  classDef Infrequent fill:#ffffff, color:#000000;
+  classDef Frequent1 fill:#fffba6, color:#000000;
+  classDef Frequent2 fill:#fffba6, color:#000000;
+  classDef Frequent3 fill:#fffba6, color:#000000;
+  classDef Maximal fill:#fffba6, color:#000000, stroke-width:5px, stroke:#000000;
+
+  %% Vértices
+  MOKY(("MOKY $$\{\}$$")):::Infrequent
+  MOK(("MOK $$\{\}$$")):::Infrequent
+  MOY(("MOY $$\{\}$$")):::Infrequent
+  MKY(("MKY $$1$$")):::Maximal
+  OKY(("OKY $$\{\}$$")):::Infrequent
+  MO(("MO $$\{\}$$")):::Infrequent
+  MK(("MK $$16$$")):::Frequent
+  MY(("MY $$14$$")):::Frequent
+  OK(("OK $$25$$")):::Maximal
+  OY(("OY $$\{\}$$")):::Infrequent
+  KY(("KY $$\{\}$$")):::Infrequent
+  M(("M $$146$$")):::Frequent
+  O(("O $$25$$")):::Frequent
+  K(("K $$12356$$")):::Frequent
+  Y(("Y $$14$$")):::Frequent
+  Vazio(("$$\emptyset$$")):::Frequent
+
+  %% Label
+  Freq[Frequent Itemsets]:::Infrequent
+  Infreq[Infrequent Itemsets]:::Frequent
+  Max[Maximal Itemsets]:::Maximal
+
+  %% Arestas
+  MOKY --- MOK & MOY & MKY & OKY
+  MOK --- MO & MK & OK
+  MOY --- MO & MY & OY
+  MKY --- MK & MY & KY
+  OKY --- OK & OY & KY
+  MO --- M & O
+  MK --- M & K
+  MY --- M & Y
+  OK --- O & K
+  OY --- O & Y
+  KY --- K & Y
+  M --- Vazio
+  O --- Vazio
+  K --- Vazio
+  Y --- Vazio
+```
 
 Os azuis e verdes são classes de equivalência.
 
@@ -1181,38 +1332,70 @@ Os azuis e verdes são classes de equivalência.
 
 ---
 
-- A ideia central do algoritmo é ‘escalar’ o reticulado de itemsets, percorrendo cada classe de equivalência uma única vez
+- A ideia central do algoritmo é 'escalar' o reticulado de itemsets, percorrendo cada classe de equivalência uma única vez
 - Somente um candidato de cada classe é avaliado para computar o seu conjunto fechado
 - Novamente, assume-se uma ordem lexicográfica sobre os itens da base, e sua extensão sobre os itemsets
   - Qualquer ordem serve, inclusive a ordem sobre os rótulos dos itens
-  - Essa ordem será representado por ≺
+  - Essa ordem será representado por $\prec$
 - Novos candidatos são gerados a partir dos conjuntos fechados obtidos, estendendo-os com itens ainda não investigados
   - Esses candidatos são chamados de **geradores**
-  - Formalmente, um gerador é um conjunto X = Yi, para um conjunto fechado Y e um item i
+  - Formalmente, um gerador é um conjunto $X = Y_i$, para um conjunto fechado $Y$ e um item $i$
 
 ---
 
-- Um gerador X = Yi é dito ordem-conservante sse i ≺ (i(c(X)) - X)
-  - Em palavras, X é ordem-conservante se todo item que tiver que ser adicionado a X para obter o conjunto fechado for maior que i
-- Teorema 1: Para todo conjunto fechado Y ≠ i(c(∅)), existe uma sequência de n ≥ 1 extensões (items) i0 ≺ i1 ≺ ... ≺ in-1 tais que gen0 = Y0i0, gen1 = Y1i1, genn-1 = Yn-1in-1, em que todos os genk são ordem- conservantes, Y0 = i(c(∅)), Yj+1 = i(c(Yjij)) e Yn=Y.
+- Um gerador $X = Y_i$ é dito ordem-conservante sse $i \prec (i(c(X)) - X)$
+  - Em palavras, $X$ é ordem-conservante se todo item que tiver que ser adicionado a X para obter o conjunto fechado for maior que $i$
+- Teorema 1: Para todo conjunto fechado $Y \neq i(c(\emptyset))$, existe uma sequência de $n \geq 1$ extensões (items) $i_0 \prec i_1 \prec \dots \prec i_{n-1}$ tais que $gen_0 = Y_0i_0$, $gen_1 = Y_1i_1$, $gen_{n-1} = Y_{n-1}i_{n-1}$, em que todos os $gen_k$ são ordem- conservantes, $Y_0 = i(c(\emptyset))$, $Y_{j+1} = i(c(Y_ji_j))$ e $Y_n=Y$.
 - Corolário: Essa sequência é única.
 
 ---
 
 - O problema agora é verificar se um gerador é ordem-conservante
-- Lema 1: Seja gen = Yi, para um conjunto fechado Y e item i. Se ∃j ≺ i [j ∉ gen ∧ c(gen) ⊆ c(j)], então gen não é ordem-conservante.
-  - Intuitivamente, c(gen) ⊆ c(j) implica em j ∈ i(c(gen)), e como j ∉ gen, j ∈ i(c(gen)) - gen; ou seja, i ⊀ i(c(gen)) – gen
-- Sendo assim, basta mantermos uma lista de elementos menores que i não pertencentes a gen para verificarmos se ele é ordem-conservante durante a execução do algoritmo
-  - Essa lista é chamada de pre-set
+- Lema 1: Seja $gen = Y_i$, para um conjunto fechado $Y$ e item $i$. Se $\exists j $\prec$ i [j \notin gen \wedge c(gen) \subseteq c(j)]$, então $gen$ não é ordem-conservante.
+  - Intuitivamente, $c(gen) \subseteq c(j)$ implica em $j \in i(c(gen))$, e como $j \notin gen$, $j \in i(c(gen)) - gen$; ou seja, $i \nprec i(c(gen)) - gen$
+- Sendo assim, basta mantermos uma lista de elementos menores que $i$ não pertencentes a $gen$ para verificarmos se ele é ordem-conservante durante a execução do algoritmo
+  - Essa lista é chamada de **pre-set**
   - Não há necessidade de manter os conjuntos fechados em memória!
-- O espaço de busca pode ser percorrido a partir de i(c(∅)) e todos os itens frequentes como possíveis extensões
+- O espaço de busca pode ser percorrido a partir de $i(c(\emptyset))$ e todos os itens frequentes como possíveis extensões
   - Os geradores são avaliados conforme a ordem lexicográfica
   - Se encontrarmos um gerador não ordem-conservante, podamos o ramo
-  - Após explorar o ramo com um item i, ele é colocado no pre-set
+  - Após explorar o ramo com um item $i$, ele é colocado no **pre-set**
 
 ---
 
-[CÓDIGO]
+- **procedure** $DCI\_Closed_d$ (CLOSED_SET, PRE_SET, POST_SET)
+  - **while** POST_SET $neq \emptyset$ **do**
+    - $i \leftarrow min_{\prec}$ (POST_SET)
+    - POST_SET $leftarrow$ POST_SET \ $i$
+    - $new\_gen \leftarrow$ CLOSED_SET $\cup i$ \\\\ Build a new generator
+    - **if** $supp(new\_gen) \geq minsupp$ **then**
+      - $\neg$ is_dup (new_gen, PRE_SET) **then** \\\\ if $new\_gen$ is both frequent and order preserving
+      - CLOSED_SET $_{New} \leftarrow new\_gen$
+      - POST_SET $_{New} \leftarrow \emptyset$
+      - **for all** $j \in$ POST_SET **do** \\\\ Compute closure of $new\_gen$
+        - **if** $g(new\_gen) \subseteq g(j)$ **then**
+          - CLOSED_SET $_{New} \leftarrow$ CLOSED_SET $_{New} \cup j$
+        - **else**
+          - POST_SET $_{New} \leftarrow$ POST_SET$_{New} \cup j$
+        - **end if**
+      - **end for**
+      - **Write Out** CLOSED_SET $_{New}$ _and its support_
+      - DCI_Closed $_d$ CLOSED_SET $_{New}$, PRE_SET, POST_SET $_{New}$
+      - PRE_SET $leftarrow$ PRE_SET $\cup i$
+    - **end if**
+  - **end while**
+- **end procedure**
+
+---
+
+- **function** $is\_dup$ ($new\_gen$, PRE_SET) \\ Duplicate check
+  - **for all** $j \in$ PRE_SET **do**
+    - **if** $g(new\_gen) \subseteq g(j)$ **then**
+      - **return** TRUE \\ $new\_gen$ is not order preserving
+    - **end if**
+  - **end for**
+  - **return** FALSE
+- **end function**
 
 ---
 
@@ -1242,7 +1425,7 @@ $$
 - Durante a exploração do espaço de busca, o algoritmo divide os itens em dois grupos
   - **Head**: contendo o rótulo do nó corrente (itemset) na exploração
   - **Tail**: os itens que são maiores que o maior elemento do Head (possíveis extensões para o itemset)
-- O conjunto de todos os itens que podem aparecer numa dada subárvore é a união entre o head e o tail (chamado de **HUT** – head union tail – pelos autores)
+- O conjunto de todos os itens que podem aparecer numa dada subárvore é a união entre o head e o tail (chamado de **HUT** - head union tail - pelos autores)
 - Ao invés de adotar uma exploração puramente em profundidade, em cada nó, o algoritmo avalia os filhos imediatos para remover possíveis extensões do tail
   - Eles chamam essa estratégia de **reordenamento dinâmico (dynamic reordering)**
 
@@ -1261,9 +1444,9 @@ $$
 - Note que, sempre que uma folha é visitada, um candidato a itemset máximo é encontrado
   - Ele será incluído na solução final somente se não possuir um superconjunto já incluído
   - A visitação em ordem lexicográfica em profundidade garante que conjuntos não tenham que ser removidos da solução final
-- Outra poda vem do fato de que itemsets máximos são também fechados e que, portanto, para um itemset X (head) e y ∈ X.tail:
-  - Se c(X) ⊆ c(y) , então Xy ⊆ i(c(X)) (isto é, y pertence ao conjunto fechado da classe à qual X pertence)
-  - Nesse caso, y pode ser incorporado ao head e removido do tail
+- Outra poda vem do fato de que itemsets máximos são também fechados e que, portanto, para um itemset $X$ (head) e $y \in X.tail$:
+  - Se $c(X) \subseteq c(y)$, então $X_y \subseteq i(c(X))$ (isto é, $y$ pertence ao conjunto fechado da classe à qual $X$ pertence)
+  - Nesse caso, $y$ pode ser incorporado ao head e removido do tail
 - Essa poda é chamada de Parent Equivalence Pruning (PEP)
 
 ---
@@ -1274,23 +1457,32 @@ $$
 
 ---
 
-[Código]
+- Pseudocode: _MAFIA_ (**C**, **MFI**, Boolean **IsHUT**)
+  - name **HUT** = **C**.head $\cup$ **C**.tail
+  - if **HUT** is in **MFI**
+    - Stop generation of children and return
+  - Count all children, use PEP to trim the tail, and reorder by increasing support
+    - For each item **i** in **C**.trimmed_tail
+      - **IsHUT** = whether **i** is in the first item in the trail
+      - **newNode** = **C** $\cup$ **I**
+      - _MAFIA_ (**newNode, MFI, IsHUT**)
+    - if (**IsHUT** and all extensions are frequent)
+      - Stop search and go back up subtree
+    - if (**C** is a leaf and **C**.head is not in **MFI**)
+      - Add **C**.head to **MFI**
 
 ---
 
 - Exemplo: minsup = 2
 
-$$
-\begin{bmatrix}
-  TID & Muesli (a) & Oats (b) & Milk (c) & Yoghurt (d) & Biscuits (e) & Tea (f) \\
-  1 & 1 & 0 & 1 & 1 & 0 & 1\\
-  2 & 0 & 1 & 1 & 0 & 0 & 0\\
-  3 & 0 & 0 & 1 & 0 & 1 & 1\\
-  4 & 1 & 0 & 0 & 1 & 0 & 0\\
-  5 & 0 & 1 & 1 & 0 & 0 & 1\\
-  6 & 1 & 0 & 1 & 0 & 0 & 1\\
-\end{bmatrix}
-$$
+| **TID** | **Muesli (a)** | **Oats (b)** | **Milk (c)** | **Yoghurt (d)** | **Biscuits (e)** | **Tea (f)** |
+| ------: | -------------: | -----------: | -----------: | --------------: | ---------------: | ----------: |
+|       1 |              1 |            0 |            1 |               1 |                0 |           1 |
+|       2 |              0 |            1 |            1 |               0 |                0 |           0 |
+|       3 |              0 |            0 |            1 |               0 |                1 |           1 |
+|       4 |              1 |            0 |            0 |               1 |                0 |           0 |
+|       5 |              0 |            1 |            1 |               0 |                0 |           1 |
+|       6 |              1 |            0 |            1 |               0 |                0 |           1 |
 
 ##### Leitura (Aula 06)
 
