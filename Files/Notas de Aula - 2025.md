@@ -305,7 +305,7 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 ---
 
 - O Conjunto $Y \subseteq T$ é chamado de **Tidset**
-- É válido assumir que _itemsets_ e _tidsets_ são ordenados por ordem lexicográfica dos itens e transações. (Não importa qual ordem, mas estão de algum modo ordenados)
+- É válido assumir que *itemsets* e *tidsets* são ordenados por ordem lexicográfica dos itens e transações. (Não importa qual ordem, mas estão de algum modo ordenados)
 - Cada transação consiste de um identificador (TID) e um conjunto de itens
   - Então, cada transação é um par $(t, X)$ em que $t \in T$ e $X \subseteq I$
 - Formalmente, um conjunto de dados será uma tripla $(T, I, D)$
@@ -556,7 +556,7 @@ Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, s
   - $k \leftarrow 1$ `// k denotes the level`
   - **while** $\mathcal{C}^{(k)} \neq \emptyset$ **do**
     - ComputeSupport $(\mathcal{C}^{(k)}, D)$
-    - **foreach** _leaf_ $X \in \mathcal{C}^{(k)}$ **do**
+    - **foreach** *leaf* $X \in \mathcal{C}^{(k)}$ **do**
       - **if** $sup(X) \geq minsup$ **then** $\mathcal{F} \leftarrow \mathcal{F} \cup \{(X, sup(X))\}$
       - **else** remove $X$ from $\mathcal{C}^{(k)}$
     - $\mathcal{C}^{(k+1)} \leftarrow$ ExtendPrefixTree($\mathcal{C}^{(k)}$)
@@ -576,7 +576,7 @@ Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, s
       - $X_{ab} \leftarrow X_a \cup X_b$ `// prune candidate if there are any infrequent subsets`
       - **if** $X_j \in \mathcal{C}^{(k)}$, **for all** $X_j \subset X_{ab}$, such that $|X_j| = |X_{ab}|-1$ **then**
         - Add $X_{ab}$ as child of $X_a$ with $sup(X_{ab}) \leftarrow 0$
-    - **if** _no extensions from_ $X_a$ **then**
+    - **if** *no extensions from* $X_a$ **then**
       - Remove $X_a$, and all ancestors of $X_a with no extensions, from $\mathcal{C}^{(k)}$
   - **return** $\mathcal{C}^{(k)}$
 
@@ -1250,7 +1250,7 @@ A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e
 - Para motivar a necessidade dessas representações, considere uma base de dados com somente duas transações e 100 itens:
   - $D = \{(0, a_{1}, a_{2}, \dots, a_{50}), (1, a_{1}, a_{2}, \dots, a_{100})\}$
 - Se considerarmos um minsup=1, essa base terá
-  - $\binom{100}{1} + \binom{100}{2} + \dots + \binom{100}{100} = 2^{100} - 1 \equiv 1.27E^{30}$
+  - $\binom{100}{1} + \binom{100}{2} + \dots + \binom{100}{100} = 2^{100} - 1 \approx 1.27E^{30}$
 
 - [JV]
   - Podemos considerar que:
@@ -1493,7 +1493,7 @@ Os azuis e verdes são classes de equivalência.
           - POST_SET $_{New} \leftarrow$ POST_SET$_{New} \cup j$
         - **end if**
       - **end for**
-      - **Write Out** CLOSED_SET $_{New}$ _and its support_
+      - **Write Out** CLOSED_SET $_{New}$ *and its support*
       - DCI_Closed $_d$ CLOSED_SET $_{New}$, PRE_SET, POST_SET $_{New}$
       - PRE_SET $leftarrow$ PRE_SET $\cup i$
     - **end if**
@@ -1571,7 +1571,7 @@ $$
 
 ---
 
-- Pseudocode: _MAFIA_ (**C**, **MFI**, Boolean **IsHUT**)
+- Pseudocode: *MAFIA* (**C**, **MFI**, Boolean **IsHUT**)
   - name **HUT** = **C**.head $\cup$ **C**.tail
   - if **HUT** is in **MFI**
     - Stop generation of children and return
@@ -1579,7 +1579,7 @@ $$
     - For each item **i** in **C**.trimmed_tail
       - **IsHUT** = whether **i** is in the first item in the trail
       - **newNode** = **C** $\cup$ **I**
-      - _MAFIA_ (**newNode, MFI, IsHUT**)
+      - *MAFIA* (**newNode, MFI, IsHUT**)
     - if (**IsHUT** and all extensions are frequent)
       - Stop search and go back up subtree
     - if (**C** is a leaf and **C**.head is not in **MFI**)
