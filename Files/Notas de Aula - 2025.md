@@ -1770,71 +1770,73 @@ Os azuis e verdes são classes de equivalência.
   - Determinados itens são comprados em sequência?
 - Esse problema é conhecido como **mineração de sequências (frequentes)**
 
-| ID Cliente |   Data   | Transação             |
-| :--------- | :------: | :-------------------- |
-| 1          | 25/06/19 | aveia                 |
-| 1          | 30/06/19 | castanha              |
-| 2          | 10/06/19 | granola, mel          |
-| 2          | 15/06/19 | aveia                 |
-| 2          | 20/06/19 | banana, suco, leite   |
-| 3          | 25/06/19 | aveia, iogurte, leite |
-| 4          | 25/06/19 | aveia                 |
-| 4          | 30/06/19 | banana, leite         |
-| 4          | 25/07/19 | castanha              |
-| 5          | 12/06/19 | castanha              |
-| 6          | 10/06/19 | aveia, granola        |
-| 6          | 11/06/19 | leite                 |
-| 6          | 17/06/19 | banana, leite         |
+| **ID Cliente** | **Data** | **Transação**         |
+| :------------- | :------: | :-------------------- |
+| 1              | 25/06/19 | aveia                 |
+| 1              | 30/06/19 | castanha              |
+| 2              | 10/06/19 | granola, mel          |
+| 2              | 15/06/19 | aveia                 |
+| 2              | 20/06/19 | banana, suco, leite   |
+| 3              | 25/06/19 | aveia, iogurte, leite |
+| 4              | 25/06/19 | aveia                 |
+| 4              | 30/06/19 | banana, leite         |
+| 4              | 25/07/19 | castanha              |
+| 5              | 12/06/19 | castanha              |
+| 6              | 10/06/19 | aveia, granola        |
+| 6              | 11/06/19 | leite                 |
+| 6              | 17/06/19 | banana, leite         |
 
 #### Definições
 
-• Por exemplo a sequência 𝑔𝑚 𝑎(𝑏𝑠𝑙) representa a sequência de compras do
-cliente 2 na base de dados anterior
-• Itemsets são delimitados por parêntesis; itemsets unitários são representados sem
-parêntesis
-• Uma sequência 𝛼 = 𝑎!𝑎" … 𝑎# é uma subsequência de uma sequência 𝛽 =
-𝑏!𝑏" … 𝑏$ , 𝛼 ⊑ 𝛽, se existe uma função 𝜑: 1: 𝑛 → [1: 𝑚] tal que
-• 𝑎! ⊆ 𝑏" ! ; e
-• ∀𝑖, 𝑗 [𝑖 < 𝑗 → 𝜑 𝑖 < 𝜑 𝑗 ]
-• As sequências 𝑔𝑚 𝑏 , 𝑚𝑎𝑏 e 𝑎 são subsequências de 𝑔𝑚 𝑎(𝑏𝑠𝑙)
-• A sequência 𝑔𝑚𝑎 𝑏 não é uma subsequência de 𝑔𝑚 𝑎(𝑏𝑠𝑙)
-• Note que a ordem é definida somente entre elementos, e não dentro dos
-itemsets
-• Contudo, vamos assumir que os elementos são dispostos conforme alguma ordem dentro
-dos itemsets (em nosso caso, a ordem que forma apresentados na base original)
+- A base de dados é um conjunto de transações consistindo em:
+  - ID do cliente
+  - Timestamp da transação
+  - Itens 'comprados'
+- Os itens da transação são um itemset de uma coleção de possíveis itens
+- Uma **sequência** é uma **lista ordenada de itemsets**
+  - Os itemsets também são chamados de elementos
+- Para um conjunto de itens $I$, uma sequência $s = \langle s_1 s_2 \dots s_n \rangle$ em que cada $s_i \subseteq I$ é um itemset
+  - Por definição, um item não pode aparecer mais de uma vez num itemset, mas pode aparecer várias vezes numa sequência
 
 ---
 
-• Podemos redefinir a base de dados como um conjunto
-de pares (sid, s) em que sid é um identificador de
-sequência e s uma sequência
-• Cada identificador de cliente é um sid
-• As diferentes transações de um cliente ordenados pelo
-tempo formam a sequência
-• Um cliente (sid, s) suporta uma sequência α se α ⊑ s
-para
-• Assim, definimos o suporte de uma sequência como
-• sup 𝛼 = 𝑠𝑖𝑑, 𝑠 𝛼 ⊑ 𝑠 |
-• Exemplo:
-• sup a = 5
-• sup gb = 2
-• sup l = 4
-
-|  sid  | s                               |
-| :---: | :------------------------------ |
-|   1   | $$\langle ac \rangle$$          |
-|   2   | $$\langle (gm)a(bsl) \rangle$$  |
-|   3   | $$\langle (ail) \rangle$$       |
-|   4   | $$\langle a (bl) c \rangle$$    |
-|   5   | $$\langle c \rangle$$           |
-|   6   | $$\langle (ag) l (bl) \rangle$$ |
+- Por exemplo, a sequência $\langle (gm) a (bsl) \rangle$ representa a sequência de compras do cliente 2 na base de dados anterior
+  - Itemsets são delimitados por parêntesis; itemsets unitários são representados sem parêntesis
+- Uma sequência $\alpha = \langle a_1 a_2 \dots a_n \rangle$ é uma subsequência de uma sequência $\beta = \langle b_1 b_2 \dots b_m \rangle$, $\alpha \subseteq \beta$, se existe uma função $\phi: [1:n] \to [1:m]$ tal que
+  - $a_1 \subseteq b_{\phi(1)}$; e
+  - $\forall i, j [i < j \to \phi(i) < \phi(j)]$
+- As sequências $\langle (gm) b \rangle$, $\langle mab \rangle$ e $\langle a \rangle$ são subsequências de $\langle (gm) a (bsl) \rangle$
+- Note que a ordem é definida somente entre elementos, e não dentro dos itemsets
+  - Contudo, vamos assumir que os elementos são dispostos conforme alguma ordem dentro dos itemsets (em nosso caso, a ordem que forma apresentados na base original)
 
 ---
 
-• Uma sequência α é frequente se sup(α) ≥ minsup
-• Uma sequência α tem tamanho k (é uma k-sequência) se ∑ 𝑎= = 𝑘
-• Uma sequência frequente é dita máxima se não existe uma supersequência própria que seja frequente
-• Ela é fechada se não existe uma supersequência própria com o mesmo suporte
+- Podemos redefinir a base de dados como um conjunto de pares $(sid, s)$ em que sid é um identificador de sequência e s uma sequência
+  - Cada identificador de cliente é um sid
+  - As diferentes transações de um cliente ordenados pelo tempo formam a sequência
+- Um cliente $(sid, s)$ suporta uma sequência $\alpha$ se $\alpha \subseteq s$ para
+- Assim, definimos o suporte de uma sequência como
+  - $sup(\alpha) = |\{(sid, s) | \alpha \subseteq s\}|$
+- Exemplo:
+  - $sup(\langle a \rangle) = 5$
+  - $sup(\langle gb \rangle) = 2$
+  - $sup(\langle l \rangle) = 4$
+
+| **sid** | **s**                           |
+| :-----: | :------------------------------ |
+|    1    | $$\langle ac \rangle$$          |
+|    2    | $$\langle (gm)a(bsl) \rangle$$  |
+|    3    | $$\langle (ail) \rangle$$       |
+|    4    | $$\langle a (bl) c \rangle$$    |
+|    5    | $$\langle c \rangle$$           |
+|    6    | $$\langle (ag) l (bl) \rangle$$ |
+
+---
+
+- Uma sequência $\alpha$ é frequente se $sup(\alpha) \geq minsup$
+- Uma sequência $\alpha$ tem tamanho $k$ (é uma k-sequência) se $\sum |a_i| = k$
+- Uma sequência frequente é dita máxima se não existe uma supersequência própria que seja frequente
+- Ela é fechada se não existe uma supersequência própria com o mesmo suporte
 
 #### Mineração de sequências frequentes
 
@@ -1845,21 +1847,114 @@ para
 
 #### Generalized Sequential Patterns (GSP)
 
----
+- O GSP é um algoritmo baseado no Apriori para minerar sequências frequentes
+- Ele também foi proposto por Agrawal e Srikant em 1996
+- Por ser baseado no Apriori, o algoritmo adota a estratégia de busca em largura
+- O algoritmo usa sequências frequentes de tamanho $k-1$ para gerar candidatas de tamanho $k$ e avaliar o suporte,
+- Ele também emprega a propriedade de antimonotonicidade do suporte para podar o espaço de busca
 
 ---
+
+- Assim como o Apriori, o algoritmo faz diversas passadas sobre a base de dados
+- Na primeira passada, o algoritmo verifica o suporte de cada item
+  - Os itens individualmente são sequências simples de tamanho 1
+- Pela propriedade do Apriori, somente os itens frequentes são mantidos e servem de base para a geração dos candidatos de tamanho 2
+- Cada par $\langle x \rangle$ e $\langle y \rangle$ de sequências de tamanho 1 dá origem a duas sequências de tamanho 2
+  - $\langle xy \rangle$
+  - $\langle (xy) \rangle$
+- A exceção se dá quando $x=y$, nesse caso somente a primeira é gerada
+- Logo, o conjunto de candidatos de tamanho 2 é:
+  - $C^{(2)} = \{ \langle xy \rangle | (x, y) \in F^{(1)} \times F^{(1)} \} \cup \{ \langle (xy) \rangle | (x, y) \in F^{(1)} \times F^{(1)} \wedge x \neq y\}$
+
+---
+
+- Os candidatos que possuam subsequências de tamanho $k-1$ infrequentes são removidos do conjunto
+- Então, o suporte dos candidatos é computado com uma passada na base, e os infrequentes são descartados
+- A partir de $k=3$, os candidatos são gerados da seguinte forma:
+  - Sejam $s_1$ e $s_2$ duas sequências frequentes de tamanho $k-1$ tais que ambas sejam idênticas após a remoção do primeiro item de $s_1$ e do último item de $s_2$
+  - As sequências são unidas para gerar uma candidata de tamanha k
+    - A nova candidata será a sequência $s_1$ estendida com o último item de $s_2$
+  - O último item será um elemento separado se ele era um elemento separado em $s_2$, ou será agregado ao último elemento de $s_1$ caso contrário
+- O algoritmo repete o processo enquanto houverem candidatos no próximo nível
 
 ### Sequential Pattern Discovery using Equivalence classes (Spade)
 
----
+- Outra abordagem para mineração de sequências frequentes foi proposta por Zaki em 2001
+- O algoritmo Spade é baseado no Eclat
+- Assim como o Eclat, ele utiliza uma representação da base de dados similar à vertical e divide o espaço de busca de acordo com o prefixo das sequências
 
 ---
 
----
+- Para obter a representação vertical, vamos associar a cada item $i$ uma tupla $(sid, pos(i))$
+  - $pos(i)$ é a lista de todos os elementos em que $i$ ocorre na sequência referente ao cliente $sid$
+- A lista de todos os pares sequência-posição de um item é chamada de **poslist** e é denotada por $\mathcal{L}(i)$
+- Exemplos:
+  - $\mathcal{L}(l) = \{ (2, \{3\}), (3, \{1\}), (4, \{2\}), (6, \{2, 3\} ) \}$
+  - $\mathcal{L}(g) = \{ (2, \{1\}), (6, \{1\}) \}$ 
+- A representação vertical da base pode ser obtida pelas poslists de todos os itens
+  - Note que $sup(i) = |\mathcal{L}(i)|$
+
+| **sid** | **s**                           |
+| :------ | :------------------------------ |
+| 1       | $$\langle ac \rangle$$          |
+| 2       | $$\langle (gm)a(bsl) \rangle$$  |
+| 3       | $$\langle (ail) \rangle$$       |
+| 4       | $$\langle a (bl) c \rangle$$    |
+| 5       | $$\langle c \rangle$$           |
+| 6       | $$\langle (ag) l (bl) \rangle$$ |
+
+| **item** | **pos(item)**                         |
+| :------- | :------------------------------------ |
+| a        | { (1,1), (2,2), (3,1), (4,1), (6,1) } |
+| b        | { (2,3), (4,2), (6,3) }               |
+| c        | { (1,2), (4,3), (5,1) }               |
+| g        | { (2,1), (6,1) }                      |
+| i        | { (3,1) }                             |
+| l        | { (2,3), (3,1), (4,2), (6,23) }       |
+| s        | { (2,3) }                             |
 
 ---
 
+- Zaki demonstrou que novas sequências podem ser geradas a partir da **junção temporal** de duas sequências que pertençam a uma mesma classe de equivalência (compartilham um prefixo de tamanho $k-1$)
+- O suporte pode ser computado pela interseção das poslists
+- Supondo que as sequências a serem unidas compartilham um prefixo P, três situações podem ocorrer:
+- Juntar duas sequências (Px) e (Py): resulta em (Pxy)
+- Juntar duas sequências (Px) e Py: resulta em (Px)y
+- Juntar duas sequências Px e Py: pode resultar em Pxy, Pyx e P(xy) dependendo da ordem temporal de x e y; um caso particular ocorre quando x=y, nesse caso, a junção só pode resultar em Pxx
+
 ---
+
+- Juntar duas sequências (Px) e (Py): resulta em (Pxy)
+  - Sejam $\mathcal{L}(Px)$ e $\mathcal{L}(Py)$ as poslists de (Px) e (Py). A poslist de (Pxy) é gerada da seguinte forma: $\mathcal{L}((Pxy)) = \left{ \left( i, pos((Px)) \cap pos((Py)) \right) | \left( i, pos((Px)) \right) \in \mathcal{L}((Px)) \wedge \left( i, pos((Py)) \right) \in \mathcal{L}((Py)) \wedge pos((Px)) \cap pos((Py)) \neq \emptyset \right}$
+  - Ou seja, é o conjunto de sequência-posições em que ambos ocorrem ao mesmo tempo
+  - O caso P(xy) é análogo a esse
+- Juntar duas sequências (Px) e Py: resulta em (Px)y
+  - $\mathcal{L}((Px)y) = \left{ \left( i, \left{ v \in pos(Py) | \exists u \in pos((Px)) u < v \wedge \left( i, pos(Py) \right) \in \mathcal{L}(Py) \wedge \left( i, pos((Px)) \right) \in \mathcal{L}((PX)) \right} \right) \right}$;
+  - Ou seja, são todas as sequências em que ambas acontecem, porém agora somente as posições em que $y$ ocorre temporalmente após $x$ são mantidas
+  - O caso é equivalente a Pxy e Pyx
+
+---
+
+- Sejam as sequências $\langle gb \rangle$ e $\langle gl \rangle$ pertencentes à classe de equivalência de $g$, e suas respectivas poslists $\mathcal{L}(gb) = \{ (2,3), (6,3) \}$ e $\mathcal{L}(gl) = \{ (2,3), (6,3) \}$
+  - $\mathcal{L}(g(bl)) = \{ (2,3), (6,3) \}$
+  - $\mathcal{L}(gbl) = \emptyset$
+  - $\mathcal{L}(glb) = \emptyset$
+- O algoritmo segue explorando o espaço de busca enquanto as classes de equivalência não forem vazias
+
+---
+
+- **ALGORITHM 10.2. Algorithm SPADE**
+  - `// Initial Call:` $\mathcal{F} \leftarrow \emptyset, k \leftarrow 0, P \leftarrow \left{ \langle s, \mathcal{L}(s) \rangle | s \in \sum, sup(s) \geq minsup \right}$
+  - **SPADE** $(P, minsup, \mathcal{F}, k)$
+    - **foreach** $r_a \in P$ **do**
+      - $\mathcal{F} \leftarrow \mathcal{F} \cup \left{ (r_a, sup(r_a)) \right}$
+      - $P_a \leftarrow \emptyset$
+      - **foreach** $r_b \in P$ **do**
+        - $r_{ab} = r_a + r_b$
+        - $\mathcal{L}(r_{ab}) = \mathcal{L}(r_a) \cap \mathcal{L}(r_b)$
+        - **if** $sup(r_{ab}) \geq minsup$ **then**
+          - $P_a \leftarrow P_a \cup \left{ \langle r_{ab}, \mathcal{L}(r_{ab}) \rangle \right}$
+      - **if** $P_a \neq \emptyset$ **then** SPADE $(P, minsup, \mathcal{F}, k+1)$
 
 ### Leitura (Aula 08) - Sequências
 
