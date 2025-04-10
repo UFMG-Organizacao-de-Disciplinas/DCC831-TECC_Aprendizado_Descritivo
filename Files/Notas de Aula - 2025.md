@@ -1679,6 +1679,18 @@ Os azuis e verdes são classes de equivalência.
 - Assim como o Eclat, o MAFIA também assume uma representação vertical dos dados usando vetores de bits
 - O algoritmo também assume uma ordem lexicográfica sobre os itens e a ordem parcial de subconjuntos entre os itemsets durante a exploração
 
+Se eu quero minimizar a quantidade de itens mostrados pro usuário, posso mostrar os maximais.
+
+Existem vários algoritmos que encontram os maximais.
+
+Nessa época dos anos 2000, assim como hoje é com IA e Deep Learning, na época era essa mineração de itens frequentes.
+
+"Os maximais estão na fronteira"
+
+"A maioria dos artigos na época costumava usar vetores de bits para representar itemsets" Isso por causa dos benefícios de velocidade de processamento para uniões e interseções.
+
+Na notação vertical, a primeira coluna são os itens, e a segunda é a lista das transações que possuem esse item. Para calcular rapidamente o suporte é manter em uma estrutura auxiliar a quantidade de bits ativos.
+
 ---
 
 - Durante a exploração do espaço de busca, o algoritmo divide os itens em dois grupos
@@ -1687,6 +1699,19 @@ Os azuis e verdes são classes de equivalência.
 - O conjunto de todos os itens que podem aparecer numa dada subárvore é a união entre o head e o tail (chamado de **HUT** - head union tail - pelos autores)
 - Ao invés de adotar uma exploração puramente em profundidade, em cada nó, o algoritmo avalia os filhos imediatos para remover possíveis extensões do tail
   - Eles chamam essa estratégia de **reordenamento dinâmico (dynamic reordering)**
+
+- [JV]
+  - O conjunto de itens será dividido em dois:
+    - Head: itemset que já visitei
+    - Tail: itens que ainda vou considerar
+  - HUT: Maior itemset que pode ser obtido a partir da sub árvore explorada.
+  - "Posso podar se encontrar algum que seja maior do que o já encontrado"
+
+- [JV]
+  - Algoritmo
+    - No nível que eu tô, ele calcula o suporte de todos os filhos. Então ele pode podar todos os que forem infrequentes.
+    - Dúvida: se todos os items de determinado nível fossem infrequentes, isso implicaria na head ser infrequente também?
+      - Não. Isso porque sempre estamos indo do mais geral pro menos geral.
 
 ---
 
@@ -1698,6 +1723,20 @@ Os azuis e verdes são classes de equivalência.
 - Como só 12 é frequente, 3 e 4 podem ser removidos do tail porque qualquer candidato dessa subárvore que inclua esses itens será infrequente
   - O ramo de 12 é podado
 
+[Imagem]
+
+- [JV]
+  - Sempre descarta os itens que são infrequentes.
+  - Se o HUT encontrado é subconjunto de um maximal já encontrado, posso podar todo o HUT.
+  - Algoritmo:
+    - Começa gerando todas as combinações simples do item do head com os itens do tail.
+    - Poda todos os que forem infrequentes.
+    - Depois de remover os infrequentes, remove também do tail.
+    - Obs.: Mesmo que um item frequente seja composto por diversos conjuntos infrequentes, ainda assim ele permanece sendo frequente.
+      - Ex.: Se eu compro AB, compro AC, compro AD. Embora apenas exista uma ocorrência de AB, uma de AC e uma de AD, ainda assim, A foi comprado 3 vezes, logo, é frequente.
+    - Obs.: Best-First Search: Procura sempre o melhor. Procura sempre o caminho com maior estimativa de lucro. Parece um pouco com o conceito do algoritmo de Prim.
+    - Ao final dessa análise, após podado o que deve ser podado, as folhas representam os conjuntos maximais.
+
 ---
 
 - Note que, sempre que uma folha é visitada, um candidato a itemset máximo é encontrado
@@ -1707,6 +1746,12 @@ Os azuis e verdes são classes de equivalência.
   - Se $c(X) \subseteq c(y)$, então $X_y \subseteq i(c(X))$ (isto é, $y$ pertence ao conjunto fechado da classe à qual $X$ pertence)
   - Nesse caso, $y$ pode ser incorporado ao head e removido do tail
 - Essa poda é chamada de Parent Equivalence Pruning (PEP)
+
+- [JV]
+  - "Sempre entra, nunca sai"
+  - "Todo itemset maximal, é também um itemset fechado"
+  - Itemset fechado: O maior itemset de uma classe de equivalência.
+    - Ele explicou um pouco mais. Tem algo sobre checar todos os que têm a mesma cobertura e verificar qual o maior ou algo assim.
 
 ---
 
@@ -1730,6 +1775,20 @@ Os azuis e verdes são classes de equivalência.
     - if (**C** is a leaf and **C**.head is not in **MFI**)
       - Add **C**.head to **MFI**
 
+- [JV]
+  - Algoritmo
+    - Faz o HUT
+    - Faz a poda do apriori
+    - Faz a poda do PEP para poder o Tail
+    - E para cada item vai procurando usando o Best-First
+  - No artigo tem os pseudo-códigos dos outros sub-códigos.
+  - A maior crítica a esse método é que não tem muito uma métrica de qualidade. O que temos é a definição do suporte e se ele é bom o bastante pro usuário.
+- [Quadro]
+  - $MFI \subseteq FCI \subseteq FIM$
+  - Apriori: $FIM =  \{ X \subseteq I | sup (x) \geq minsup \}$
+  - DCI: $FCI = \{ X \subseteq I | X = i(c(x)) \wedge sup (x) \geq minsup \}$
+  - MAFIA: $MFI = \{ X \subseteq I | sup (x) \geq minsup \wedge \nexists Y \supseteq X \wedge sup (y) \geq minsup \}$
+
 ---
 
 - Exemplo: minsup = 2
@@ -1750,6 +1809,9 @@ Os azuis e verdes são classes de equivalência.
 - Burdick, D., Calimlim, M., & Gehrke, J. (2001, April). Mafia: A maximal frequent itemset algorithm for transactional databases. In Proceedings 17th international conference on data engineering (pp. 443-452). IEEE.
 - Lucchese, C., Orlando, S., & Perego, R. (2004, November). DCI Closed: A Fast and Memory Efficient Algorithm to Mine Frequent Closed Itemsets. In FIMI.
 
+- [JV]
+  - É interessante, agora que já entendeu como o algoritmo funciona, ler e entender a narrativa do artigo.
+
 ### Slide: aula06-sequencias (Aula 08)
 
 #### Introdução (Aula 08)
@@ -1757,9 +1819,14 @@ Os azuis e verdes são classes de equivalência.
 - Nessa aula, vamos discutir o problema de mineração de sequências em bases de dados
 - Esse problema ocorre com frequência em diversas áreas
   - Identificar trajetórias dos alunos de computação
-  - Identificar perfil (temporal) de compras dos clientes (celular -> capa protetora -> fone de ouvido)
+  - Identificar perfil (temporal) de compras dos clientes (celular $\to$ capa protetora $\to$ fone de ouvido)
   - Identificar padrões de genes e proteínas no genoma
 - Enquanto itemsets são padrões intra-transações, aqui estamos buscando padrões inter-transações
+
+- [JV]
+  - Agora buscaremos ver as trajetórias usuais.
+  - Talvez poderíamos avaliar quais disciplinas os alunos tendam a fazer mais frequentemente. Distintos da sequência usual.
+  - Busca-se entender os comportamentos dos clientes.
 
 ---
 
@@ -1770,21 +1837,21 @@ Os azuis e verdes são classes de equivalência.
   - Determinados itens são comprados em sequência?
 - Esse problema é conhecido como **mineração de sequências (frequentes)**
 
-| **ID Cliente** | **Data** | **Transação**         |
-| :------------- | :------: | :-------------------- |
-| 1              | 25/06/19 | aveia                 |
-| 1              | 30/06/19 | castanha              |
-| 2              | 10/06/19 | granola, mel          |
-| 2              | 15/06/19 | aveia                 |
-| 2              | 20/06/19 | banana, suco, leite   |
-| 3              | 25/06/19 | aveia, iogurte, leite |
-| 4              | 25/06/19 | aveia                 |
-| 4              | 30/06/19 | banana, leite         |
-| 4              | 25/07/19 | castanha              |
-| 5              | 12/06/19 | castanha              |
-| 6              | 10/06/19 | aveia, granola        |
-| 6              | 11/06/19 | leite                 |
-| 6              | 17/06/19 | banana, leite         |
+| **ID Cliente** | **Data** | **Transação**         | **JV: Enxugado** |
+| :------------- | :------: | :-------------------- | :--------------- |
+| 1              | 25/06/19 | aveia                 | a                |
+| 1              | 30/06/19 | castanha              | c                |
+| 2              | 10/06/19 | granola, mel          | gm               |
+| 2              | 15/06/19 | aveia                 | a                |
+| 2              | 20/06/19 | banana, suco, leite   | bsl              |
+| 3              | 25/06/19 | aveia, iogurte, leite | ail              |
+| 4              | 25/06/19 | aveia                 | a                |
+| 4              | 30/06/19 | banana, leite         | bl               |
+| 4              | 25/07/19 | castanha              | c                |
+| 5              | 12/06/19 | castanha              | c                |
+| 6              | 10/06/19 | aveia, granola        | ag               |
+| 6              | 11/06/19 | leite                 | l                |
+| 6              | 17/06/19 | banana, leite         | bl               |
 
 #### Definições
 
@@ -1798,6 +1865,13 @@ Os azuis e verdes são classes de equivalência.
 - Para um conjunto de itens $I$, uma sequência $s = \langle s_1 s_2 \dots s_n \rangle$ em que cada $s_i \subseteq I$ é um itemset
   - Por definição, um item não pode aparecer mais de uma vez num itemset, mas pode aparecer várias vezes numa sequência
 
+- [JV]
+  - Exemplo de sequência: $\langle (gm) a (bsl) \rangle$  
+    - gm: granola e mel
+    - a: aveia
+    - bsl: banana, suco e leite
+    - Cada grupinho faz parte de uma transação. Eles apenas estão ordenados temporalmente, não internamente. Tanto que $\langle gm \rangle \equiv \langle mg \rangle$.
+
 ---
 
 - Por exemplo, a sequência $\langle (gm) a (bsl) \rangle$ representa a sequência de compras do cliente 2 na base de dados anterior
@@ -1808,6 +1882,12 @@ Os azuis e verdes são classes de equivalência.
 - As sequências $\langle (gm) b \rangle$, $\langle mab \rangle$ e $\langle a \rangle$ são subsequências de $\langle (gm) a (bsl) \rangle$
 - Note que a ordem é definida somente entre elementos, e não dentro dos itemsets
   - Contudo, vamos assumir que os elementos são dispostos conforme alguma ordem dentro dos itemsets (em nosso caso, a ordem que forma apresentados na base original)
+
+- [JV]
+  - Para simplificação de notação, sempre que uma transação tiver apenas um item, ele não fica englobado por parênteses. Se tiver 2 ou mais, tem.
+  - Uma sequência é subsequência de outra se todos os itens de um subconjunto aparecem no outro, e mantém a mesma ordem, mesmo que não estejam nas mesmas posições, e não precisam ser necessariamente contíguos.
+  - Então, uma forma de analisar é se cada um dos grupinhos de itens das transações é subconjunto das outras transações.
+  - Eu ainda posso explicar isso aqui melhor. Eu entendi, mas não anotei legal.
 
 ---
 
@@ -1877,7 +1957,7 @@ Os azuis e verdes são classes de equivalência.
   - O último item será um elemento separado se ele era um elemento separado em $s_2$, ou será agregado ao último elemento de $s_1$ caso contrário
 - O algoritmo repete o processo enquanto houverem candidatos no próximo nível
 
-### Sequential Pattern Discovery using Equivalence classes (Spade)
+#### Sequential Pattern Discovery using Equivalence classes (Spade)
 
 - Outra abordagem para mineração de sequências frequentes foi proposta por Zaki em 2001
 - O algoritmo Spade é baseado no Eclat
@@ -1890,7 +1970,7 @@ Os azuis e verdes são classes de equivalência.
 - A lista de todos os pares sequência-posição de um item é chamada de **poslist** e é denotada por $\mathcal{L}(i)$
 - Exemplos:
   - $\mathcal{L}(l) = \{ (2, \{3\}), (3, \{1\}), (4, \{2\}), (6, \{2, 3\} ) \}$
-  - $\mathcal{L}(g) = \{ (2, \{1\}), (6, \{1\}) \}$ 
+  - $\mathcal{L}(g) = \{ (2, \{1\}), (6, \{1\}) \}$
 - A representação vertical da base pode ser obtida pelas poslists de todos os itens
   - Note que $sup(i) = |\mathcal{L}(i)|$
 
@@ -1956,7 +2036,7 @@ Os azuis e verdes são classes de equivalência.
           - $P_a \leftarrow P_a \cup \left{ \langle r_{ab}, \mathcal{L}(r_{ab}) \rangle \right}$
       - **if** $P_a \neq \emptyset$ **then** SPADE $(P, minsup, \mathcal{F}, k+1)$
 
-### Leitura (Aula 08) - Sequências
+#### Leitura (Aula 08) - Sequências
 
 - Seções 10.1 e 10.2 Zaki e Meira
 - Capítulo 11 Aggarwal e Han
