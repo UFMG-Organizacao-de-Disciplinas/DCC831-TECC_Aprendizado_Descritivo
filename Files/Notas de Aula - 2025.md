@@ -1750,9 +1750,126 @@ Os azuis e verdes são classes de equivalência.
 - Burdick, D., Calimlim, M., & Gehrke, J. (2001, April). Mafia: A maximal frequent itemset algorithm for transactional databases. In Proceedings 17th international conference on data engineering (pp. 443-452). IEEE.
 - Lucchese, C., Orlando, S., & Perego, R. (2004, November). DCI Closed: A Fast and Memory Efficient Algorithm to Mine Frequent Closed Itemsets. In FIMI.
 
-## Aula 07 | 08/04/2025 | Mineração de sequências
+### Slide: aula06-sequencias (Aula 08)
 
-### Aula 08 | 10/04/2025 | Mineração de sequências
+#### Introdução (Aula 08)
+
+- Nessa aula, vamos discutir o problema de mineração de sequências em bases de dados
+- Esse problema ocorre com frequência em diversas áreas
+  - Identificar trajetórias dos alunos de computação
+  - Identificar perfil (temporal) de compras dos clientes (celular -> capa protetora -> fone de ouvido)
+  - Identificar padrões de genes e proteínas no genoma
+- Enquanto itemsets são padrões intra-transações, aqui estamos buscando padrões inter-transações
+
+---
+
+- Para ilustrar, considere a seguinte base de dados
+- Os clientes fazem diversas compras na loja
+  - Mais de 1 item pode ser adquirido em uma transação
+- Existe algum padrão de compras?
+  - Determinados itens são comprados em sequência?
+- Esse problema é conhecido como **mineração de sequências (frequentes)**
+
+| ID Cliente |   Data   | Transação             |
+| :--------- | :------: | :-------------------- |
+| 1          | 25/06/19 | aveia                 |
+| 1          | 30/06/19 | castanha              |
+| 2          | 10/06/19 | granola, mel          |
+| 2          | 15/06/19 | aveia                 |
+| 2          | 20/06/19 | banana, suco, leite   |
+| 3          | 25/06/19 | aveia, iogurte, leite |
+| 4          | 25/06/19 | aveia                 |
+| 4          | 30/06/19 | banana, leite         |
+| 4          | 25/07/19 | castanha              |
+| 5          | 12/06/19 | castanha              |
+| 6          | 10/06/19 | aveia, granola        |
+| 6          | 11/06/19 | leite                 |
+| 6          | 17/06/19 | banana, leite         |
+
+#### Definições
+
+• Por exemplo a sequência 𝑔𝑚 𝑎(𝑏𝑠𝑙) representa a sequência de compras do
+cliente 2 na base de dados anterior
+• Itemsets são delimitados por parêntesis; itemsets unitários são representados sem
+parêntesis
+• Uma sequência 𝛼 = 𝑎!𝑎" … 𝑎# é uma subsequência de uma sequência 𝛽 =
+𝑏!𝑏" … 𝑏$ , 𝛼 ⊑ 𝛽, se existe uma função 𝜑: 1: 𝑛 → [1: 𝑚] tal que
+• 𝑎! ⊆ 𝑏" ! ; e
+• ∀𝑖, 𝑗 [𝑖 < 𝑗 → 𝜑 𝑖 < 𝜑 𝑗 ]
+• As sequências 𝑔𝑚 𝑏 , 𝑚𝑎𝑏 e 𝑎 são subsequências de 𝑔𝑚 𝑎(𝑏𝑠𝑙)
+• A sequência 𝑔𝑚𝑎 𝑏 não é uma subsequência de 𝑔𝑚 𝑎(𝑏𝑠𝑙)
+• Note que a ordem é definida somente entre elementos, e não dentro dos
+itemsets
+• Contudo, vamos assumir que os elementos são dispostos conforme alguma ordem dentro
+dos itemsets (em nosso caso, a ordem que forma apresentados na base original)
+
+---
+
+• Podemos redefinir a base de dados como um conjunto
+de pares (sid, s) em que sid é um identificador de
+sequência e s uma sequência
+• Cada identificador de cliente é um sid
+• As diferentes transações de um cliente ordenados pelo
+tempo formam a sequência
+• Um cliente (sid, s) suporta uma sequência α se α ⊑ s
+para
+• Assim, definimos o suporte de uma sequência como
+• sup 𝛼 = 𝑠𝑖𝑑, 𝑠 𝛼 ⊑ 𝑠 |
+• Exemplo:
+• sup a = 5
+• sup gb = 2
+• sup l = 4
+
+|  sid  | s                               |
+| :---: | :------------------------------ |
+|   1   | $$\langle ac \rangle$$          |
+|   2   | $$\langle (gm)a(bsl) \rangle$$  |
+|   3   | $$\langle (ail) \rangle$$       |
+|   4   | $$\langle a (bl) c \rangle$$    |
+|   5   | $$\langle c \rangle$$           |
+|   6   | $$\langle (ag) l (bl) \rangle$$ |
+
+---
+
+• Uma sequência α é frequente se sup(α) ≥ minsup
+• Uma sequência α tem tamanho k (é uma k-sequência) se ∑ 𝑎= = 𝑘
+• Uma sequência frequente é dita máxima se não existe uma supersequência própria que seja frequente
+• Ela é fechada se não existe uma supersequência própria com o mesmo suporte
+
+#### Mineração de sequências frequentes
+
+- O problema de mineração de sequências frequentes consiste em encontrar todas as sequências cujo suporte esteja acima de um limiar mínimo definido pelo usuário
+- Existem abordagens tanto para minerar todo o conjunto de sequências frequentes quanto para representações compactas desse conjunto
+- Nessa aula veremos apenas as abordagens para minerar todo o conjunto de sequências frequentes
+- Essas abordagens são extensões dos principais algoritmos para mineração de conjuntos de itens frequentes
+
+#### Generalized Sequential Patterns (GSP)
+
+---
+
+---
+
+### Sequential Pattern Discovery using Equivalence classes (Spade)
+
+---
+
+---
+
+---
+
+---
+
+---
+
+### Leitura (Aula 08) - Sequências
+
+- Seções 10.1 e 10.2 Zaki e Meira
+- Capítulo 11 Aggarwal e Han
+- [Link][Link_2001] Zaki, M.J. SPADE: An Efficient Algorithm for Mining Frequent Sequences. Machine Learning 42, 31–60 (2001).
+- [Link][Link_1996] Srikant R., Agrawal R. (1996) Mining sequential patterns: Generalizations and performance improvements. In: Apers P., Bouzeghoub M., Gardarin G. (eds) Advances in Database Technology — EDBT '96. EDBT 1996. Lecture Notes in Computer Science, vol 1057. Springer, Berlin, Heidelberg.
+
+[Link_2001]: <https://doi.org/10.1023/A:1007652502315>
+[Link_1996]: <https://doi.org/10.1007/BFb0014140>
 
 ## Aula 09 | 15/04/2025 | Mineração de grafos
 
