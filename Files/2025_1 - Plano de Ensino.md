@@ -23,7 +23,7 @@ Diferenças entre aprendizado descritivo e preditivo. Aprendizado descritivo nã
 |   08 | 10/04/2025 | Mineração de sequências                                                                            |
 |   09 | 15/04/2025 | Mineração de grafos                                                                                |
 |   10 | 17/04/2025 | Mineração de grafos                                                                                |
-|   11 | 22/04/2025 | Regras de associação e métricas de qualidade - PROVA 1 (Marcada previamente                        |
+|   11 | 22/04/2025 | Regras de associação e métricas de qualidade - PROVA 1 (Marcada previamente)                       |
 |   12 | 24/04/2025 | Aprendizado descritivo supervisionado: padrões emergentes, contrastantes e descoberta de subgrupos |
 |   13 | 29/04/2025 | Descoberta de subgrupos                                                                            |
 |   14 | 06/05/2025 | Descoberta de subgrupos                                                                            |
