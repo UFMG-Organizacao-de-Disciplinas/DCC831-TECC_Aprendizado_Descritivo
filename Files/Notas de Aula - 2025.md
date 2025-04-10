@@ -1,6 +1,6 @@
-# Aprendizado Descritivo - Renato Vimieiro - 2025
+# Aprendizado Descritivo - Renato Vimieiro - 2025.1
 
-‘’
+<!-- ‘’ -->
 
 ## Aula 01 | 18/03/2025 | Apresentação do curso - [JV: Cheguei atrasado]
 
@@ -91,7 +91,7 @@ Aqui, não queremos obter nenhum entendimento sobre o que já vimos antes, mas s
 - Dessa forma, podemos apontar a primeira diferença para aprendizado preditivo:
   - Não temos mais a necessidade de dividir o conjunto de instâncias em treinamento e validação
 - A divisão entre treinamento e validação não faz mais sentido, pois queremos obter um modelo para os dados que temos em mãos
-- Consequentemente, a avaliação dos resultados (modelos) se torna mais difícil, já que não temos mais uma ‘verdade absoluta’ para compararmos as saídas
+- Consequentemente, a avaliação dos resultados (modelos) se torna mais difícil, já que não temos mais uma 'verdade absoluta' para compararmos as saídas
 
 - JV
   - > A premissa é "eu não sei nada sobre os dados", "então preciso encontrar um modelo que descreva os dados"
@@ -175,7 +175,7 @@ Resposta: Dá para tentar refinar a forma de análise e o cálculo da função o
 - A mesma tarefa, porém, pode ser apresentada como descritiva
 - O objetivo no agrupamento descritivo é obter uma função $q: \mathcal{D} \to \mathcal{C}$, que mapeia as instâncias coletadas no conjunto de dados $\mathcal{D}$ a grupos específicos (clusters) $\mathcal{C}$
   - A diferença aqui é que assumimos como domínio apenas o conjunto de instâncias em mãos, e não toda população de instâncias possíveis
-  - Ou seja, o resultado do nosso agrupamento é ‘apenas’ uma divisão das instâncias em grupos, permitindo a análise de similaridade entre elas; não estamos interessados em alocar novas instâncias aos grupos encontrados
+  - Ou seja, o resultado do nosso agrupamento é 'apenas' uma divisão das instâncias em grupos, permitindo a análise de similaridade entre elas; não estamos interessados em alocar novas instâncias aos grupos encontrados
 
 ---
 
@@ -275,7 +275,7 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 ---
 
 - Kosinski et al. (2013), um grupo de pesquisadores da Universidade de Cambridge, -oletaram dados sobre a personalidade e gostos de usuários do Facebook através do aplicativo MyPersonality
-- O objetivo do trabalho foi demonstrar que ‘curtidas’ do Facebook poderiam ser usadas -ara predizer com acurácia informações sensíveis dos usuários
+- O objetivo do trabalho foi demonstrar que 'curtidas' do Facebook poderiam ser usadas -ara predizer com acurácia informações sensíveis dos usuários
 - O app posteriormente foi relacionado ao escândalo do Cambridge Analytica; e os dados em si são carregados de controvérsia
 - Embora seja um exemplo negativo, ele ilustra bem a utilidade da tarefa que estudaremos hoje
 
@@ -286,7 +286,7 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 
 ---
 
-- Em resumo, os desenvolvedores do app coletaram uma série de dados de voluntários, mas, em particular suas ‘curtidas’ no site
+- Em resumo, os desenvolvedores do app coletaram uma série de dados de voluntários, mas, em particular suas 'curtidas' no site
 - Provost e Foster (2013) utilizaram esses dados para demonstrar como a modelagem descritiva traz informações úteis
 - Seguem alguns exemplos de regras:
 
@@ -320,7 +320,7 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 - Um conjunto $X \subseteq I$ é chamado de *itemset*
 - Um itemset de tamanho k é chamado de k-itemset
 - Denotamos o conjunto de todos os k-itemsets por $I^{(k)}$
-- Similarmente, como estamos lidando com ‘transações’, vamos identificá-las individualmente por IDs, que serão chamados de tids
+- Similarmente, como estamos lidando com 'transações', vamos identificá-las individualmente por IDs, que serão chamados de tids
 - Logo, o conjunto $T = \{t_1, t_2, \dots, t_n\}$ é o conjunto de transações consideradas, identificadas pelos seus respectivos tids
 
 - JV
@@ -501,7 +501,7 @@ Extensão: a interseção das colunas
 - Se considerarmos a relação de subconjuntos como uma relação de ordem parcial, temos que o espaço de busca é estruturado como um reticulado
   - Esse reticulado pode ser visualizado como um grafo, onde somente as relações diretas são representadas
   - Ou seja, se $A \subseteq B \wedge |A| = |B| - 1$, então existe uma aresta entre A e B no diagrama
-- Assim, a mineração de conjunto de itens frequentes é resolvida por uma ‘simples’ busca no reticulado associado
+- Assim, a mineração de conjunto de itens frequentes é resolvida por uma 'simples' busca no reticulado associado
 - Essa busca pode ser tanto uma busca em largura quanto em profundidade
   - De fato, existem abordagens baseadas em ambas as buscas
 - No entanto, a maioria das abordagens compartilham a mesma estrutura de busca:
@@ -684,22 +684,22 @@ Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, s
 $$
 \begin{bmatrix}
   TID & Muesli & Oats & Milk & Yoghurt & Biscuits & Tea \\
-  1 & 1 & 0 & 1 & 1 & 0 & 1 \\
-  2 & 0 & 1 & 1 & 0 & 0 & 0 \\
-  3 & 0 & 0 & 1 & 0 & 1 & 1 \\
-  4 & 1 & 0 & 0 & 1 & 0 & 0 \\
-  5 & 0 & 1 & 1 & 0 & 0 & 1 \\
-  6 & 1 & 0 & 1 & 0 & 0 & 1 \\
+  1   &      1 &    0 &    1 &       1 &        0 &   1 \\
+  2   &      0 &    1 &    1 &       0 &        0 &   0 \\
+  3   &      0 &    0 &    1 &       0 &        1 &   1 \\
+  4   &      1 &    0 &    0 &       1 &        0 &   0 \\
+  5   &      0 &    1 &    1 &       0 &        0 &   1 \\
+  6   &      1 &    0 &    1 &       0 &        0 &   1 \\
 \end{bmatrix}
 \Rightarrow
 \begin{bmatrix}
   TID & Muesli & Milk & Tea \\
-  1 & 1 & 1 & 1 \\
-  2 & 0 & 1 & 0 \\
-  3 & 0 & 1 & 1 \\
-  4 & 1 & 0 & 0 \\
-  5 & 0 & 1 & 1 \\
-  6 & 1 & 1 & 1 \\
+    1 &      1 &    1 &   1 \\
+    2 &      0 &    1 &   0 \\
+    3 &      0 &    1 &   1 \\
+    4 &      1 &    0 &   0 \\
+    5 &      0 &    1 &   1 \\
+    6 &      1 &    1 &   1 \\
 \end{bmatrix}
 $$
 
@@ -742,6 +742,8 @@ $$
 
 [Imagem(b): Number of frequent itemsets]
 
+#### Eclat - Próxima aula
+
 ## Aula 04 | 27/03/2025 | Mineração de conjuntos de itens
 
 ### Aula passada
@@ -750,8 +752,8 @@ $$
 - Frequente, infrequente.
 - Como calcula o suporte
   - A partir dos itens frequentes: tabelas de 0 e 1.
-  - Pra isso usaca árvore de ???
-  - Para cada transação gerava os itemsets de tamanho k, ia na árvore ???
+  - Pra isso usava árvore de prefixos
+  - Para cada transação gerava os itemsets de tamanho k, ia na árvore de prefixos
   - E incrementava o suporte daquela chave
 
 [JV: escrevi o que ele tá falando, mas não tô entendendo]
@@ -822,11 +824,16 @@ Ele faz uma busca em profundidade (DFS)
 
 Ele faz subpartições até que o número de transações seja pequeno o suficiente para caber na memória.
 
+- Durante a busca em profundidade, o algoritmo particiona os conjuntos de itens conforme a relação de equivalência e o nível da árvore
+- O particionamento pode ser encerrado tão logo os tidsets caibam na memória e as interseções possam ser computadas facilmente
+- Contudo, a estratégia pode ser usada durante toda a execução do algoritmo
+- O cálculo do suporte no algoritmo se restringe a calcular o tamanho do tidset
+
 ---
 
-- **Algoritmo 8.3 - Algoritmo ECLAT**
+- **ALGORITHM 8.3. Algorithm ECLAT**
 - // Initial Call: $\mathcal{F} \leftarrow \emptyset, P \leftarrow \{ \langle i, t(i) \rangle | i \in \mathcal{I}, |t(i)| \geq minsup \} $
-- ECLAT $(P, minsup, \mathcal{F})$:
+- **ECLAT** $(P, minsup, \mathcal{F})$:
   - **foreach** $\langle X_a, t(X_a) \rangle \in P$ **do**
     - $\mathcal{F} \leftarrow \mathcal{F} \cup \{(X_a, sup(X_a))\}$
     - $P_a \leftarrow \emptyset$
@@ -882,8 +889,6 @@ Pelo que eu tô entendendo:
 
 Se $A \subseteq B$, então $c(B) \subseteq c(A)$ (Cobertura)
 
----
-
 #### Eclat (Equivalence Class Transformation) [2]
 
 - O custo computacional do algoritmo está diretamente relacionado ao tamanho dos tidsets
@@ -897,7 +902,13 @@ Se $A \subseteq B$, então $c(B) \subseteq c(A)$ (Cobertura)
 - Contudo, se o conjunto for esparso, isso representará um desperdício muito grande de espaço. Então vetores de Ids se tornam mais interessantes.
   - As computações de interseção são feitas como na função merge do mergesort
 
-##### Diffsets e dEclat
+##### Diffsets e dEclat [Próxima aula]
+
+- Percebendo o problema de se manter os tidsets em memória, Zaki e Gouda propuseram em 2001 (o artigo só foi publicado em 2003) uma solução alternativa
+- Eles propuseram armazenar as diferenças entre os tidsets dos membros de uma classe e dos prefixos que a definem
+- Eles chamaram esse conjunto de **diffset**
+- Formalmente, para um prefixo P e um itemset PX, o diffset de X, $d(PX) = c(P) - c(PX)$
+- Seriam armazenados, portanto, o suporte do itemset e seu diffset
 
 Em bases de dados densos, varia bem pouco o suporte entre os itens. Então, faria mais sentido guardar só a diferença ao invés de guardar o todo.
 
@@ -927,10 +938,19 @@ Se só é guardado o valor das diferenças, acaba sendo um problema fazer as int
 
 ---
 
-- $C(PX) - C(PY)$
-- $C(PX) - C(PY) \cup C(P) - C(P)$
-- $C(PX) \cap \overline{C(PY)} \cup C(P) \cap \overline{C(P)}$
-- $C(PX) \cup \overline{C(P)} \cap C(P) \cup \overline{C(P)}$
+- Por definição, $d(PXY) = c(PX) - c(PXY) = c(PX) - c(PY)$
+- Podemos adicionar, ao conjunto acima, o conjunto vazio $(c(P) - c(P))$ sem alterá-lo
+- Logo, $d(PXY) = c(PX) - c(PY) + c(P) - c(P) - c(P) = (c(P)-c(PY)) - (c(P) - c(PX)) = d(PY) - d(PX)$
+- Em outras palavras, podemos usar os diffsets dos conjuntos base para calcular o diffset do novo candidato
+- A variante do Eclat que usa diffsets ficou conhecida como dEclat
+
+$C(PX) - C(PY)$
+
+$C(PX) - C(PY) \cup C(P) - C(P)$
+
+$C(PX) \cap \overline{C(PY)} \cup C(P) \cap \overline{C(P)}$
+
+$C(PX) \cup \overline{C(P)} \cap C(P) \cup \overline{C(P)}$
 
 ## Aula 05 | 01/04/2025 | Mineração de conjuntos de itens
 
@@ -1000,8 +1020,21 @@ Ele fez um monte de igualdades com operações de conjuntos.
 ---
 ---
 
+---
+
 - **ALGORITHM 8.4. Algorithm dEclat**
-  - ...
+  - //`Initial Call:` $\mathcal{F} \leftarrow \emptyset, P \leftarrow \{ \langle i, d(i), sup(i) \rangle | i \in \mathcal{I}, d(i) = \mathcal{T}\\t(i), sup(i) \geq minsup \}$
+  - **dEclat** $(P, minsup, \mathcal{F})$:
+    - **foreach** $\langle X_a, d(X_a), sup(X_a) \rangle \in P$ **do**
+      - $\mathcal{F} \leftarrow \mathcal{F} \cup \{(X_a, sup(X_a))\}$
+      - $P_a \leftarrow \emptyset$
+      - **foreach** $\langle X_b, d(X_b), sup(X_b) \rangle \in P$, with $X_b > X_a$ **do**
+        - $X_{ab} = X_a \cup X_b$
+        - $d(X_{ab}) = d(X_b) \\ d(X_a)$
+        - $sup(X_{ab}) = sup(X_a) - |d(X_{ab})|$
+        - **if** $sup(X_{ab}) \geq minsup$ **then**
+          - $P_a \leftarrow P_a \cup \{ \langle X_{ab}, d(X_{ab}), sup(X_{ab}) \rangle \}$
+      - **if** $P_a \neq \emptyset$ **then** dEclat $(P_a, minsup, \mathcal{F})$
 
 ---
 
@@ -1009,6 +1042,12 @@ Ele fez um monte de igualdades com operações de conjuntos.
 - Porém, em conjuntos esparsos, o algoritmo original é a melhor opção
 
 Para bases esparsas: eClat; para bases densas: dEclat
+
+[Imagem (a): Minimun Support (%) - Connect]
+
+[Imagem (b): Minimun Support (%) - pumsb*]
+
+[Imagem (c): Minimun Support (%) - T40I10D100K]
 
 #### Leitura (Aula 05)
 
@@ -1022,7 +1061,7 @@ Boa parte da explicação estão nos artigos. A implementação tá no Borgelt.
 
 ### Slide: aula04-FPGrowth (Aula 05)
 
-#### Recapitulando
+#### Recapitulando (Aula 05)
 
 - Apriori: reduzir o número de passsadas em disco
 - Eclat: trazer pra memória e assim reduzir o número de passadas em disco, tendendo a zero.
@@ -1077,17 +1116,14 @@ Basicamente, ele limpa os infrequentes, e depois disso, vai inserindo as transa�
 - Para facilitar a busca pelos padrões, a árvore é equipada com uma estrutura adicional para localizar a ocorrência dos itens e sua frequência
 - Exemplo
 
-$$
-\begin{bmatrix}
-  TID & Muesli (a) & Oats (b) & Milk (c) & Yoghurt (d) & Biscuits (e) & Tea (f) \\
-  1 & 1 & 0 & 1 & 1 & 0 & 1\\
-  2 & 0 & 1 & 1 & 0 & 0 & 0\\
-  3 & 0 & 0 & 1 & 0 & 1 & 1\\
-  4 & 1 & 0 & 0 & 1 & 0 & 0\\
-  5 & 0 & 1 & 1 & 0 & 0 & 1\\
-  6 & 1 & 0 & 1 & 0 & 0 & 1\\
-\end{bmatrix}
-$$
+| **TID** | **Muesli (a)** | **Oats (b)** | **Milk (c)** | **Yoghurt (d)** | **Biscuits (e)** | **Tea (f)** |
+| :------ | :------------: | :----------: | :----------: | :-------------: | :--------------: | :---------: |
+| 1       |       1        |      0       |      1       |        1        |        0         |      1      |
+| 2       |       0        |      1       |      1       |        0        |        0         |      0      |
+| 3       |       0        |      0       |      1       |        0        |        1         |      1      |
+| 4       |       1        |      0       |      0       |        1        |        0         |      0      |
+| 5       |       0        |      1       |      1       |        0        |        0         |      1      |
+| 6       |       1        |      0       |      1       |        0        |        0         |      1      |
 
 minsup = 2
 
@@ -1199,17 +1235,14 @@ Basicamente, ele limpa os infrequentes, e depois disso, vai inserindo as transa�
 - Para facilitar a busca pelos padrões, a árvore é equipada com uma estrutura adicional para localizar a ocorrência dos itens e sua frequência
 - Exemplo
 
-$$
-\begin{bmatrix}
-  TID & Muesli (a) & Oats (b) & Milk (c) & Yoghurt (d) & Biscuits (e) & Tea (f) \\
-  1 & 1 & 0 & 1 & 1 & 0 & 1\\
-  2 & 0 & 1 & 1 & 0 & 0 & 0\\
-  3 & 0 & 0 & 1 & 0 & 1 & 1\\
-  4 & 1 & 0 & 0 & 1 & 0 & 0\\
-  5 & 0 & 1 & 1 & 0 & 0 & 1\\
-  6 & 1 & 0 & 1 & 0 & 0 & 1\\
-\end{bmatrix}
-$$
+| **TID** | **Muesli (a)** | **Oats (b)** | **Milk (c)** | **Yoghurt (d)** | **Biscuits (e)** | **Tea (f)** |
+| :------ | :------------: | :----------: | :----------: | :-------------: | :--------------: | :---------: |
+| 1       |       1        |      0       |      1       |        1        |        0         |      1      |
+| 2       |       0        |      1       |      1       |        0        |        0         |      0      |
+| 3       |       0        |      0       |      1       |        0        |        1         |      1      |
+| 4       |       1        |      0       |      0       |        1        |        0         |      0      |
+| 5       |       0        |      1       |      1       |        0        |        0         |      1      |
+| 6       |       1        |      0       |      1       |        0        |        0         |      1      |
 
 #### Mineração dos padrões [Aula 05] (Aula 06)
 
@@ -1326,9 +1359,11 @@ A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e
 
 ---
 
-[Duas imagens do comparativo das eficiências do FP-Growth, Eclat e Apriori]
+[Imagem (a): FP-Growth VS Eclat VS Apriori - Chess]
 
----
+[Imagem (b): FP-Growth VS Eclat VS Apriori - Mushroom]
+
+Figuras retiradas de Borgelt, C. An Implementation of the FP-growth Algorithm
 
 #### Leitura [Aula 05]
 
@@ -1370,7 +1405,7 @@ A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e
 - Os que ocorrem somente na segunda transação, possuem cobertura $c(X)=1$, e, portanto, são equivalentes a $a_{1}a_{2}\dots a_{100}$
   - Além disso, se estivéssemos somente interessados nos itemsets frequentes sem a informação da frequência, todos seriam equivalentes a esse itemset
 - Em outras palavras, os mais de $10^{30}$ itemsets que seriam retornados por qualquer dos algoritmos vistos poderiam ser representados somente por esses dois conjuntos
-- Esses conjuntos formam, dessa forma, uma representação compacta de todo o conjunto de itemsets frequentes
+- Esses conjuntos formam, dessa forma, uma **representação compacta** de todo o conjunto de itemsets frequentes
 - Em particular, eles estão relacionados a dois tipos de representações compactas que veremos nessa aula
   - Conjuntos frequentes **máximos**
   - Conjuntos frequentes **fechados**
@@ -1409,14 +1444,14 @@ A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e
 
 - Exemplo: minsup=1
 
-|  TID | Muesli (m) | Oats (o) | Milk (m) | Yoghurt (y) |
-| ---: | ---------: | -------: | -------: | ----------: |
-|    1 |          1 |        0 |        1 |           1 |
-|    2 |          0 |        1 |        1 |           0 |
-|    3 |          0 |        0 |        1 |           0 |
-|    4 |          1 |        0 |        0 |           1 |
-|    5 |          0 |        1 |        1 |           0 |
-|    6 |          1 |        0 |        1 |           0 |
+| TID  | Muesli (m) | Oats (o) | Milk (m) | Yoghurt (y) |
+| :--- | :--------: | :------: | :------: | :---------: |
+| 1    |     1      |    0     |    1     |      1      |
+| 2    |     0      |    1     |    1     |      0      |
+| 3    |     0      |    0     |    1     |      0      |
+| 4    |     1      |    0     |    0     |      1      |
+| 5    |     0      |    1     |    1     |      0      |
+| 6    |     1      |    0     |    1     |      0      |
 
 ---
 
@@ -1534,7 +1569,15 @@ Os azuis e verdes são classes de equivalência.
 
 "Você consegue encontrar todos ..."
 
-##### DCI_Closed
+##### DCI_Closed - Próxima aula
+
+## Aula 07 | 08/04/2025 | Mineração de sequências - Faltei pq tava passando mal
+
+### Slide: aula05-repr-compactadas (Aula 07)
+
+#### Algoritmos para encontrar representações compactas (Aula 07)
+
+##### DCI_Closed (Aula 07)
 
 - O algoritmo DCI_Closed foi proposto em 2004 por C. Lucchese, S. Orlando e R. Perego
 - Ele também adota uma representação vertical da base de dados para facilitar a verificação dos conjuntos fechados
@@ -1554,7 +1597,7 @@ Os azuis e verdes são classes de equivalência.
 
 ---
 
-- Um gerador $X = Y_i$ é dito ordem-conservante sse $i \prec (i(c(X)) - X)$
+- Um gerador $X = Y_i$ é dito **ordem-conservante** sse $i \prec (i(c(X)) - X)$
   - Em palavras, $X$ é ordem-conservante se todo item que tiver que ser adicionado a X para obter o conjunto fechado for maior que $i$
 - Teorema 1: Para todo conjunto fechado $Y \neq i(c(\emptyset))$, existe uma sequência de $n \geq 1$ extensões (items) $i_0 \prec i_1 \prec \dots \prec i_{n-1}$ tais que $gen_0 = Y_0i_0$, $gen_1 = Y_1i_1$, $gen_{n-1} = Y_{n-1}i_{n-1}$, em que todos os $gen_k$ são ordem- conservantes, $Y_0 = i(c(\emptyset))$, $Y_{j+1} = i(c(Y_ji_j))$ e $Y_n=Y$.
 - Corolário: Essa sequência é única.
@@ -1562,7 +1605,7 @@ Os azuis e verdes são classes de equivalência.
 ---
 
 - O problema agora é verificar se um gerador é ordem-conservante
-- Lema 1: Seja $gen = Y_i$, para um conjunto fechado $Y$ e item $i$. Se $\exists j $\prec$ i [j \notin gen \wedge c(gen) \subseteq c(j)]$, então $gen$ não é ordem-conservante.
+- Lema 1: Seja $gen = Y_i$, para um conjunto fechado $Y$ e item $i$. Se $\exists j \prec i [j \notin gen \wedge c(gen) \subseteq c(j)]$, então $gen$ não é ordem-conservante.
   - Intuitivamente, $c(gen) \subseteq c(j)$ implica em $j \in i(c(gen))$, e como $j \notin gen$, $j \in i(c(gen)) - gen$; ou seja, $i \nprec i(c(gen)) - gen$
 - Sendo assim, basta mantermos uma lista de elementos menores que $i$ não pertencentes a $gen$ para verificarmos se ele é ordem-conservante durante a execução do algoritmo
   - Essa lista é chamada de **pre-set**
@@ -1612,17 +1655,22 @@ Os azuis e verdes são classes de equivalência.
 
 - Exemplo: minsup = 2
 
-$$
-\begin{bmatrix}
-  TID & Muesli (a) & Oats (b) & Milk (c) & Yoghurt (d) & Biscuits (e) & Tea (f) \\
-  1 & 1 & 0 & 1 & 1 & 0 & 1\\
-  2 & 0 & 1 & 1 & 0 & 0 & 0\\
-  3 & 0 & 0 & 1 & 0 & 1 & 1\\
-  4 & 1 & 0 & 0 & 1 & 0 & 0\\
-  5 & 0 & 1 & 1 & 0 & 0 & 1\\
-  6 & 1 & 0 & 1 & 0 & 0 & 1\\
-\end{bmatrix}
-$$
+| **TID** | **Muesli (a)** | **Oats (b)** | **Milk (c)** | **Yoghurt (d)** | **Biscuits (e)** | **Tea (f)** |
+| :------ | :------------: | :----------: | :----------: | :-------------: | :--------------: | :---------: |
+| 1       |       1        |      0       |      1       |        1        |        0         |      1      |
+| 2       |       0        |      1       |      1       |        0        |        0         |      0      |
+| 3       |       0        |      0       |      1       |        0        |        1         |      1      |
+| 4       |       1        |      0       |      0       |        1        |        0         |      0      |
+| 5       |       0        |      1       |      1       |        0        |        0         |      1      |
+| 6       |       1        |      0       |      1       |        0        |        0         |      1      |
+
+##### MAFIA: Maximal Frequent Itemset Algorithm - Próxima aula
+
+## Aula 08 | 10/04/2025 | Mineração de sequências
+
+### Slide: aula05-repr-compactadas (Aula 08)
+
+#### Algoritmos para encontrar representações compactas (Aula 08)
 
 ##### MAFIA: Maximal Frequent Itemset Algorithm
 
@@ -1695,7 +1743,7 @@ $$
 |       5 |              0 |            1 |            1 |               0 |                0 |           1 |
 |       6 |              1 |            0 |            1 |               0 |                0 |           1 |
 
-##### Leitura (Aula 06)
+##### Leitura (Aula 08)
 
 - Seção 9.1 Zaki e Meira
 - Seção 6.2.6 Han et al.
@@ -1706,9 +1754,9 @@ $$
 
 ### Aula 08 | 10/04/2025 | Mineração de sequências
 
-### Aula 09 | 15/04/2025 | Mineração de grafos
+## Aula 09 | 15/04/2025 | Mineração de grafos
 
-### Aula 10 | 17/04/2025 | Mineração de grafos
+## Aula 10 | 17/04/2025 | Mineração de grafos
 
 ### Aula 11 | 22/04/2025 | Regras de associação e métricas de qualidade
 
