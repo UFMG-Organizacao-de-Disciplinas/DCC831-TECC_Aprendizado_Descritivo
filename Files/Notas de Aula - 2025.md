@@ -63,6 +63,7 @@ Aqui, não queremos obter nenhum entendimento sobre o que já vimos antes, mas s
 - Essa tarefa consiste em encontrar subgrupos de elementos homogêneos nos dados
 
 ---
+
 ---
 
 - [JV]
@@ -100,11 +101,12 @@ Aqui, não queremos obter nenhum entendimento sobre o que já vimos antes, mas s
 
 ---
 
-- Por outro lado, segundo Flach (2012), *o aprendizado descritivo leva à descoberta genuína de novos conhecimentos, e, dessa forma, está situado entre as áreas de mineração de dados e aprendizado de máquina*
+- Por outro lado, segundo Flach (2012), _o aprendizado descritivo leva à descoberta genuína de novos conhecimentos, e, dessa forma, está situado entre as áreas de mineração de dados e aprendizado de máquina_
 - O objetivo de se buscar um modelo descritivo dos dados se justifica nas situações em que se quer responder perguntas do tipo “o quê aconteceu?”
 - Ou seja, esses modelos descrevem situações passadas e, assim, auxiliam no processo de tomada de decisão Aprendizado
 
 - JV
+
   - O aprendizado descritivo leva a descoberta e novos conhecimentos. Estando entre mineração de dados e aprendizado de máquina.
   - Busca responder "o quê aconteceu?"
   - Descrevem situações passadas e com isso auxiliam no processo de **tomada de decisão**.
@@ -117,10 +119,11 @@ Aqui, não queremos obter nenhum entendimento sobre o que já vimos antes, mas s
 
 ---
 
-- Considere a seguinte situação em que um grande *Market place* deseja reduzir os custos de distribuição dos produtos que ele vende
+- Considere a seguinte situação em que um grande _Market place_ deseja reduzir os custos de distribuição dos produtos que ele vende
 - Uma prática muito utilizada atualmente é manter centros de distribuição regionais para estocar produtos vendidos frequentemente, reduzindo o custo e tempo de transporte, e, consequentemente, aumentando a satisfação dos clientes
 - Apesar da estocagem de produtos populares nas regionais ser uma decisão trivial, ela pode ser aprimorada analisando-se o histórico de vendas
 - Nesse histórico, podemos encontrar itens menos populares que, com certa frequência, são adquiridos junto com os mais populares
+
   - Isso nos permite decidir estocar também esses produtos menos populares, em menor quantidade, mas evitando, assim, um custo maior de se enviar tais produtos individualmente de centros mais distantes
 
 - JV
@@ -268,7 +271,7 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 
 - Hoje iremos focar num dos modelos mais conhecidos de aprendizado descritivo: mineração de regras de associação
 - O problema foi inicialmente proposto pelos executivos do Wal-Mart para descoberta de padrões de consumo nos supermercados
-- Por essa razão, muitas vezes a área é também conhecida, sobretudo em inglês, como *Market basket analysis*
+- Por essa razão, muitas vezes a área é também conhecida, sobretudo em inglês, como _Market basket analysis_
 - Contudo, diversas aplicações podem tirar proveito desse tipo de modelo
 - Antes de entrarmos nos detalhes técnicos, vamos analisar um estudo de caso
 
@@ -317,7 +320,7 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 
 - Chamamos os elementos do conjunto $I = \{x_1, x_2, \dots, x_m\}$ de itens
 - Esses elementos são as variáveis de análise que estamos considerando
-- Um conjunto $X \subseteq I$ é chamado de *itemset*
+- Um conjunto $X \subseteq I$ é chamado de _itemset_
 - Um itemset de tamanho k é chamado de k-itemset
 - Denotamos o conjunto de todos os k-itemsets por $I^{(k)}$
 - Similarmente, como estamos lidando com 'transações', vamos identificá-las individualmente por IDs, que serão chamados de tids
@@ -335,18 +338,19 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 
 ---
 
-- O conjunto $Y \subseteq T$ é chamado de *tidset*
+- O conjunto $Y \subseteq T$ é chamado de _tidset_
 - É conveniente assumir que tanto os itemsets quanto os tidsets são sempre armazenados ordenados pela ordem lexicográfica dos itens e transações (seja ela qual for)
 - Cada transação consiste de um identificador (tid) e um conjunto de itens
   - Ou seja, cada transação é um par $(t, X)$ em que $t \in T$ e $X \subseteq I$
 - Formalmente, um conjunto de dados será uma tripla $(T, I, D)$
+
   - T e I são os conjuntos de tids e itens
   - $D \subseteq T \times I$ é uma relação binária em que $(t, i) \in D \bicond i \in X$ na transação $(t, X)$
   - Dizemos que a transação t **contém** o item i
 
 - JV
   - O Conjunto $Y \subseteq T$ é chamado de **Tidset**
-  - É válido assumir que *itemsets* e *tidsets* são ordenados por ordem lexicográfica dos itens e transações. (Não importa qual ordem, mas estão de algum modo ordenados)
+  - É válido assumir que _itemsets_ e _tidsets_ são ordenados por ordem lexicográfica dos itens e transações. (Não importa qual ordem, mas estão de algum modo ordenados)
   - Cada transação consiste de um identificador (TID) e um conjunto de itens
     - Então, cada transação é um par $(t, X)$ em que $t \in T$ e $X \subseteq I$
   - Formalmente, um conjunto de dados será uma tripla $(T, I, D)$
@@ -369,14 +373,14 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 
 Ou seja: $t$ contém $X$ se $|X - t| = 0$
 
-|  TID | Muesli | Oats | Milk | Yoghurt | Biscuits |  Tea |
-| ---: | -----: | ---: | ---: | ------: | -------: | ---: |
-|    1 |      1 |    0 |    1 |       1 |        0 |    1 |
-|    2 |      0 |    1 |    1 |       0 |        0 |    0 |
-|    3 |      0 |    0 |    1 |       0 |        1 |    1 |
-|    4 |      1 |    0 |    0 |       1 |        0 |    0 |
-|    5 |      0 |    1 |    1 |       0 |        0 |    1 |
-|    6 |      1 |    0 |    1 |       0 |        0 |    1 |
+| TID | Muesli | Oats | Milk | Yoghurt | Biscuits | Tea |
+| --: | -----: | ---: | ---: | ------: | -------: | --: |
+|   1 |      1 |    0 |    1 |       1 |        0 |   1 |
+|   2 |      0 |    1 |    1 |       0 |        0 |   0 |
+|   3 |      0 |    0 |    1 |       0 |        1 |   1 |
+|   4 |      1 |    0 |    0 |       1 |        0 |   0 |
+|   5 |      0 |    1 |    1 |       0 |        0 |   1 |
+|   6 |      1 |    0 |    1 |       0 |        0 |   1 |
 
 ---
 
@@ -401,14 +405,14 @@ O uso de extensão e intensão vêm da ideia filosófica e semiótica de que a e
   - $c(\{muesly, oats\}) = ?$
   - $i({4, 5}) = ?$
 
-|  TID | Muesli | Oats | Milk | Yoghurt | Biscuits |  Tea |
-| ---: | -----: | ---: | ---: | ------: | -------: | ---: |
-|    1 |      1 |    0 |    1 |       1 |        0 |    1 |
-|    2 |      0 |    1 |    1 |       0 |        0 |    0 |
-|    3 |      0 |    0 |    1 |       0 |        1 |    1 |
-|    4 |      1 |    0 |    0 |       1 |        0 |    0 |
-|    5 |      0 |    1 |    1 |       0 |        0 |    1 |
-|    6 |      1 |    0 |    1 |       0 |        0 |    1 |
+| TID | Muesli | Oats | Milk | Yoghurt | Biscuits | Tea |
+| --: | -----: | ---: | ---: | ------: | -------: | --: |
+|   1 |      1 |    0 |    1 |       1 |        0 |   1 |
+|   2 |      0 |    1 |    1 |       0 |        0 |   0 |
+|   3 |      0 |    0 |    1 |       0 |        1 |   1 |
+|   4 |      1 |    0 |    0 |       1 |        0 |   0 |
+|   5 |      0 |    1 |    1 |       0 |        0 |   1 |
+|   6 |      1 |    0 |    1 |       0 |        0 |   1 |
 
 Intensão: conjunto de itens comuns a todos os elementos de um determinado conjunto de transações.
 
@@ -486,14 +490,14 @@ Extensão: a interseção das colunas
   - $\{muesli, oats, milk\}$?
   - $\{muesli, milk\}$?
 
-|  TID | Muesli | Oats | Milk | Yoghurt | Biscuits |  Tea |
-| ---: | -----: | ---: | ---: | ------: | -------: | ---: |
-|    1 |      1 |    0 |    1 |       1 |        0 |    1 |
-|    2 |      0 |    1 |    1 |       0 |        0 |    0 |
-|    3 |      0 |    0 |    1 |       0 |        1 |    1 |
-|    4 |      1 |    0 |    0 |       1 |        0 |    0 |
-|    5 |      0 |    1 |    1 |       0 |        0 |    1 |
-|    6 |      1 |    0 |    1 |       0 |        0 |    1 |
+| TID | Muesli | Oats | Milk | Yoghurt | Biscuits | Tea |
+| --: | -----: | ---: | ---: | ------: | -------: | --: |
+|   1 |      1 |    0 |    1 |       1 |        0 |   1 |
+|   2 |      0 |    1 |    1 |       0 |        0 |   0 |
+|   3 |      0 |    0 |    1 |       0 |        1 |   1 |
+|   4 |      1 |    0 |    0 |       1 |        0 |   0 |
+|   5 |      0 |    1 |    1 |       0 |        0 |   1 |
+|   6 |      1 |    0 |    1 |       0 |        0 |   1 |
 
 ---
 
@@ -540,7 +544,9 @@ Aquele diagrama explica bastante o que que isso quis dizer. Basicamente, no conj
 Complexidade do algoritmo: $O(2^I \cdot T \cdot I)$
 
 - **// ALGORITHM 8.1. Algoritm BruteForce**
+
   - **BruteForce** $(D, \mathcal{I}, minsup)$:
+
     - $\mathcal{F} \leftarrow \emptyset$ // set of frequent itemsets
       - **foreach** $X \subseteq \mathcal{I}$ **do**
         - $sup(X) \leftarrow ComputeSupport (X, D)$
@@ -586,6 +592,7 @@ Então temos dois problemas principais: reduzir o espaço de busca e reduzir a c
 - Os algoritmos que veremos hoje exploram propriedades do problema para amortizar o custo da computação de suporte, e evitar retrabalho na avaliação dos candidatos
 
 ---
+
 ---
 
 O que é mesmo o suporte? 🤔
@@ -618,6 +625,7 @@ Mas o que é mesmo a cobertura?
   - **Todo subconjunto de um conjunto frequente é frequente**
 
 ---
+
 ---
 
 Muito interessante isso daí de cima.
@@ -653,7 +661,7 @@ Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, s
   - $k \leftarrow 1$ `// k denotes the level`
   - **while** $\mathcal{C}^{(k)} \neq \emptyset$ **do**
     - ComputeSupport $(\mathcal{C}^{(k)}, D)$
-    - **foreach** *leaf* $X \in \mathcal{C}^{(k)}$ **do**
+    - **foreach** _leaf_ $X \in \mathcal{C}^{(k)}$ **do**
       - **if** $sup(X) \geq minsup$ **then** $\mathcal{F} \leftarrow \mathcal{F} \cup \{(X, sup(X))\}$
       - **else** remove $X$ from $\mathcal{C}^{(k)}$
     - $\mathcal{C}^{(k+1)} \leftarrow$ ExtendPrefixTree($\mathcal{C}^{(k)}$)
@@ -663,6 +671,7 @@ Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, s
 ---
 
 - ComputeSupport $(\mathcal{C}^{(k)}, D)$:
+
   - **foreach** $\langle t, i(t) \rangle \in D$ **do**
     - **foreach** k-subset $X \subseteq i(t)$ **do**
       - **if** $X \in \mathcal{C}^{(k)}$ **then** $sup(X) \leftarrow sup(X) + 1$
@@ -673,7 +682,7 @@ Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, s
       - $X_{ab} \leftarrow X_a \cup X_b$ `// prune candidate if there are any infrequent subsets`
       - **if** $X_j \in \mathcal{C}^{(k)}$, **for all** $X_j \subset X_{ab}$, such that $|X_j| = |X_{ab}|-1$ **then**
         - Add $X_{ab}$ as child of $X_a$ with $sup(X_{ab}) \leftarrow 0$
-    - **if** *no extensions from* $X_a$ **then**
+    - **if** _no extensions from_ $X_a$ **then**
       - Remove $X_a$, and all ancestors of $X_a with no extensions, from $\mathcal{C}^{(k)}$
   - **return** $\mathcal{C}^{(k)}$
 
@@ -767,6 +776,7 @@ $$
 Eu tô achando que se eu compro $J = \{A, B, C\}$, Então o conjunto potência dele é $P(J) = \{\emptyset, A, B, C, AB, AC, BC, ABC\}$, e então, incrementaria 1 para um desses grupos
 
 - Cálculo de suporte:
+
   - Para cada um dos itemsets tem que verificar se ele tá na árvore K(?)
 
 - Se os itemsets estão em memória...
@@ -981,6 +991,7 @@ $C(PX) \cup \overline{C(P)} \cap C(P) \cup \overline{C(P)}$
 - A variante do Eclat que usa diffsets ficou conhecida como dEclat
 
 ---
+
 ---
 
 - $d(PXY) = c(PX) - c(PY) = c(PX) - c(PXY)$
@@ -1018,6 +1029,7 @@ Ele fez um monte de igualdades com operações de conjuntos.
 - $PX \cap \overline{PY} = \{1, 5\}$
 
 ---
+
 ---
 
 ---
@@ -1323,6 +1335,7 @@ A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e
 - E se a FP-tree não couber na memória?
   - A solução é particionar/projetar a base de dados em memória secundária antes de iniciar a construção da árvore
 - Como construir a FP-tree de forma eficiente?
+
   - Solução proposta por Christian Borgelt otimiza memória e tempo
   - Representação básica dos dados: lista de vetores de inteiros
   - Dados (projeções) são carregados inteiramente para memória
@@ -1371,7 +1384,7 @@ Figuras retiradas de Borgelt, C. An Implementation of the FP-growth Algorithm
 - Seção 8.2.3 Zaki e Meira
 - [Borgelt, C. (2005) An Implementation of the FP-growth Algorithm][LinkFPGrowth]
 
-[LinkFPGrowth]: <https://borgelt.net/papers/fpgrowth.pdf>
+[LinkFPGrowth]: https://borgelt.net/papers/fpgrowth.pdf
 
 ### Slide: aula05-repr-compactadas (Aula 06)
 
@@ -1382,12 +1395,13 @@ Figuras retiradas de Borgelt, C. An Implementation of the FP-growth Algorithm
 - Para motivar a necessidade dessas representações, considere uma base de dados com somente duas transações e 100 itens:
   - $D = \{(0, a_{1}, a_{2}, \dots, a_{50}), (1, a_{1}, a_{2}, \dots, a_{100})\}$
 - Se considerarmos um minsup=1, essa base terá
+
   - $\binom{100}{1} + \binom{100}{2} + \dots + \binom{100}{100} = 2^{100} - 1 \approx 1.27E^{30}$
 
 - [JV]
   - Podemos considerar que:
     - $01 = a_{1}a_{2}\dots a_{50}$
-    - $ 1 = a_{1}a_{2}\dots a_{100}$
+    - $ 1 = a*{1}a*{2}\dots a\_{100}$
   - O que seriam representações compactas do conjunto de itemsets frequentes
 
 ---
@@ -1444,20 +1458,20 @@ Figuras retiradas de Borgelt, C. An Implementation of the FP-growth Algorithm
 
 - Exemplo: minsup=1
 
-| TID  | Muesli (m) | Oats (o) | Milk (m) | Yoghurt (y) |
-| :--- | :--------: | :------: | :------: | :---------: |
-| 1    |     1      |    0     |    1     |      1      |
-| 2    |     0      |    1     |    1     |      0      |
-| 3    |     0      |    0     |    1     |      0      |
-| 4    |     1      |    0     |    0     |      1      |
-| 5    |     0      |    1     |    1     |      0      |
-| 6    |     1      |    0     |    1     |      0      |
+| TID | Muesli (m) | Oats (o) | Milk (m) | Yoghurt (y) |
+| :-- | :--------: | :------: | :------: | :---------: |
+| 1   |     1      |    0     |    1     |      1      |
+| 2   |     0      |    1     |    1     |      0      |
+| 3   |     0      |    0     |    1     |      0      |
+| 4   |     1      |    0     |    0     |      1      |
+| 5   |     0      |    1     |    1     |      0      |
+| 6   |     1      |    0     |    1     |      0      |
 
 ---
 
 ```mermaid
 flowchart LR
-  
+
   %% Styles
   classDef Infrequent fill:#ffffff, color:#000000;
   classDef Frequent fill:#fffba6, color:#000000;
@@ -1508,7 +1522,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  
+
   %% Styles
   classDef Infrequent fill:#ffffff, color:#000000;
   classDef Frequent1 fill:#fffba6, color:#000000;
@@ -1624,17 +1638,17 @@ Os azuis e verdes são classes de equivalência.
     - $new\_gen \leftarrow$ CLOSED_SET $\cup i$ \\\\ Build a new generator
     - **if** $supp(new\_gen) \geq minsupp$ **then**
       - $\neg$ is_dup (new_gen, PRE_SET) **then** \\\\ if $new\_gen$ is both frequent and order preserving
-      - CLOSED_SET $_{New} \leftarrow new\_gen$
-      - POST_SET $_{New} \leftarrow \emptyset$
+      - CLOSED*SET $*{New} \leftarrow new_gen$
+      - POST*SET $*{New} \leftarrow \emptyset$
       - **for all** $j \in$ POST_SET **do** \\\\ Compute closure of $new\_gen$
         - **if** $g(new\_gen) \subseteq g(j)$ **then**
-          - CLOSED_SET $_{New} \leftarrow$ CLOSED_SET $_{New} \cup j$
+          - CLOSED*SET $*{New} \leftarrow$ CLOSED*SET $*{New} \cup j$
         - **else**
-          - POST_SET $_{New} \leftarrow$ POST_SET$_{New} \cup j$
+          - POST*SET $*{New} \leftarrow$ POST*SET$*{New} \cup j$
         - **end if**
       - **end for**
-      - **Write Out** CLOSED_SET $_{New}$ *and its support*
-      - DCI_Closed $_d$ CLOSED_SET $_{New}$, PRE_SET, POST_SET $_{New}$
+      - **Write Out** CLOSED*SET $*{New}$ _and its support_
+      - DCI*Closed $_d$ CLOSED_SET $*{New}$, PRE_SET, POST_SET $_{New}$
       - PRE_SET $leftarrow$ PRE_SET $\cup i$
     - **end if**
   - **end while**
@@ -1698,9 +1712,11 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
   - **Tail**: os itens que são maiores que o maior elemento do Head (possíveis extensões para o itemset)
 - O conjunto de todos os itens que podem aparecer numa dada subárvore é a união entre o head e o tail (chamado de **HUT** - head union tail - pelos autores)
 - Ao invés de adotar uma exploração puramente em profundidade, em cada nó, o algoritmo avalia os filhos imediatos para remover possíveis extensões do tail
+
   - Eles chamam essa estratégia de **reordenamento dinâmico (dynamic reordering)**
 
 - [JV]
+
   - O conjunto de itens será dividido em dois:
     - Head: itemset que já visitei
     - Tail: itens que ainda vou considerar
@@ -1761,7 +1777,8 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 
 ---
 
-- Pseudocode: *MAFIA* (**C**, **MFI**, Boolean **IsHUT**)
+- Pseudocode: _MAFIA_ (**C**, **MFI**, Boolean **IsHUT**)
+
   - name **HUT** = **C**.head $\cup$ **C**.tail
   - if **HUT** is in **MFI**
     - Stop generation of children and return
@@ -1769,7 +1786,7 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
     - For each item **i** in **C**.trimmed_tail
       - **IsHUT** = whether **i** is in the first item in the trail
       - **newNode** = **C** $\cup$ **I**
-      - *MAFIA* (**newNode, MFI, IsHUT**)
+      - _MAFIA_ (**newNode, MFI, IsHUT**)
     - if (**IsHUT** and all extensions are frequent)
       - Stop search and go back up subtree
     - if (**C** is a leaf and **C**.head is not in **MFI**)
@@ -1863,10 +1880,11 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 - Uma **sequência** é uma **lista ordenada de itemsets**
   - Os itemsets também são chamados de elementos
 - Para um conjunto de itens $I$, uma sequência $s = \langle s_1 s_2 \dots s_n \rangle$ em que cada $s_i \subseteq I$ é um itemset
+
   - Por definição, um item não pode aparecer mais de uma vez num itemset, mas pode aparecer várias vezes numa sequência
 
 - [JV]
-  - Exemplo de sequência: $\langle (gm) a (bsl) \rangle$  
+  - Exemplo de sequência: $\langle (gm) a (bsl) \rangle$
     - gm: granola e mel
     - a: aveia
     - bsl: banana, suco e leite
@@ -1881,6 +1899,7 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
   - $\forall i, j [i < j \to \phi(i) < \phi(j)]$
 - As sequências $\langle (gm) b \rangle$, $\langle mab \rangle$ e $\langle a \rangle$ são subsequências de $\langle (gm) a (bsl) \rangle$
 - Note que a ordem é definida somente entre elementos, e não dentro dos itemsets
+
   - Contudo, vamos assumir que os elementos são dispostos conforme alguma ordem dentro dos itemsets (em nosso caso, a ordem que forma apresentados na base original)
 
 - [JV]
@@ -1918,12 +1937,127 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 - Uma sequência frequente é dita máxima se não existe uma supersequência própria que seja frequente
 - Ela é fechada se não existe uma supersequência própria com o mesmo suporte
 
-#### Mineração de sequências frequentes
+## Aula 09 | 15/04/2025 | Mineração de grafos
+
+### Slide: aula06-sequencias (Aula 09)
+
+#### Introdução (Aula 09)
+
+- Nessa aula, vamos discutir o problema de mineração de sequências em bases de dados
+- Esse problema ocorre com frequência em diversas áreas
+  - Identificar trajetórias dos alunos de computação
+  - Identificar perfil (temporal) de compras dos clientes (celular $\to$ capa protetora $\to$ fone de ouvido)
+  - Identificar padrões de genes e proteínas no genoma
+- Enquanto itemsets são padrões intra-transações, aqui estamos buscando padrões inter-transações
+
+---
+
+- Para ilustrar, considere a seguinte base de dados
+- Os clientes fazem diversas compras na loja
+  - Mais de 1 item pode ser adquirido em uma transação
+- Existe algum padrão de compras?
+  - Determinados itens são comprados em sequência?
+- Esse problema é conhecido como **mineração de sequências (frequentes)**
+
+| **ID Cliente** | **Data** | **Transação**         | **JV: Enxugado** |
+| :------------- | :------: | :-------------------- | :--------------- |
+| 1              | 25/06/19 | aveia                 | a                |
+| 1              | 30/06/19 | castanha              | c                |
+| 2              | 10/06/19 | granola, mel          | gm               |
+| 2              | 15/06/19 | aveia                 | a                |
+| 2              | 20/06/19 | banana, suco, leite   | bsl              |
+| 3              | 25/06/19 | aveia, iogurte, leite | ail              |
+| 4              | 25/06/19 | aveia                 | a                |
+| 4              | 30/06/19 | banana, leite         | bl               |
+| 4              | 25/07/19 | castanha              | c                |
+| 5              | 12/06/19 | castanha              | c                |
+| 6              | 10/06/19 | aveia, granola        | ag               |
+| 6              | 11/06/19 | leite                 | l                |
+| 6              | 17/06/19 | banana, leite         | bl               |
+
+#### Definições (Aula 09)
+
+- A base de dados é um conjunto de transações consistindo em:
+  - ID do cliente
+  - Timestamp da transação
+  - Itens 'comprados'
+- Os itens da transação são um itemset de uma coleção de possíveis itens
+- Uma **sequência** é uma **lista ordenada de itemsets**
+  - Os itemsets também são chamados de elementos
+- Para um conjunto de itens $I$, uma sequência $s = \langle s_1 s_2 \dots s_n \rangle$ em que cada $s_i \subseteq I$ é um itemset
+  - Por definição, um item não pode aparecer mais de uma vez num itemset, mas pode aparecer várias vezes numa sequência
+
+---
+
+- Por exemplo, a sequência $\langle (gm) a (bsl) \rangle$ representa a sequência de compras do cliente 2 na base de dados anterior
+  - Itemsets são delimitados por parêntesis; itemsets unitários são representados sem parêntesis
+- Uma sequência $\alpha = \langle a_1 a_2 \dots a_n \rangle$ é uma subsequência de uma sequência $\beta = \langle b_1 b_2 \dots b_m \rangle$, $\alpha \subseteq \beta$, se existe uma função $\phi: [1:n] \to [1:m]$ tal que
+  - $a_1 \subseteq b_{\phi(1)}$; e
+  - $\forall i, j [i < j \to \phi(i) < \phi(j)]$
+- As sequências $\langle (gm) b \rangle$, $\langle mab \rangle$ e $\langle a \rangle$ são subsequências de $\langle (gm) a (bsl) \rangle$
+- Note que a ordem é definida somente entre elementos, e não dentro dos itemsets
+
+  - Contudo, vamos assumir que os elementos são dispostos conforme alguma ordem dentro dos itemsets (em nosso caso, a ordem que forma apresentados na base original)
+
+- [JV]
+  - Tentando explicar sobre as subsequências:
+
+| Itemset $a$                    | Itemset $b$                    | $b$ é subsequência de $a$? |
+| :----------------------------- | :----------------------------- | :------------------------: |
+| $\langle (gm) a (bsl) \rangle$ | $\langle (gm) b \rangle$       |            Sim             |
+| $\langle (mg) a (lsb) \rangle$ | $\langle (gm) a (bls) \rangle$ |            Sim             |
+| $\langle (gm) a (bsl) \rangle$ | $\langle (gm) a \rangle$       |            Sim             |
+
+...
+
+---
+
+- Podemos redefinir a base de dados como um conjunto de pares $(sid, s)$ em que sid é um identificador de sequência e s uma sequência
+  - Cada identificador de cliente é um sid
+  - As diferentes transações de um cliente ordenados pelo tempo formam a sequência
+- Um cliente $(sid, s)$ suporta uma sequência $\alpha$ se $\alpha \subseteq s$ para
+- Assim, definimos o suporte de uma sequência como
+  - $sup(\alpha) = |\{(sid, s) | \alpha \subseteq s\}|$
+- Exemplo:
+  - $sup(\langle a \rangle) = 5$
+  - $sup(\langle gb \rangle) = 2$
+  - $sup(\langle l \rangle) = 4$
+
+| **sid** | **s**                           |
+| :-----: | :------------------------------ |
+|    1    | $$\langle ac \rangle$$          |
+|    2    | $$\langle (gm)a(bsl) \rangle$$  |
+|    3    | $$\langle (ail) \rangle$$       |
+|    4    | $$\langle a (bl) c \rangle$$    |
+|    5    | $$\langle c \rangle$$           |
+|    6    | $$\langle (ag) l (bl) \rangle$$ |
+
+- [JV]
+  - Essa representação é similar à representação horizontal.
+  - Nessa definição ignoramos o timestamp. Focamos apenas na sequência cronológica.
+  - Nesse caso o tempo apenas é usado pra ordenar, mas não é considerado na sequência.
+  - Cobertura: todos os elementos do qual o itemset é subsequência.
+  - O suporte é o tamanho da cobertura.
+
+---
+
+- Uma sequência $\alpha$ é frequente se $sup(\alpha) \geq minsup$
+- Uma sequência $\alpha$ tem tamanho $k$ (é uma k-sequência) se $\sum |a_i| = k$
+- Uma sequência frequente é dita máxima se não existe uma supersequência própria que seja frequente
+- Ela é fechada se não existe uma supersequência própria com o mesmo suporte
+
+- [JV]
+  - $\sum |a_i| = k$: conta o total de itens. Sem se preocupar com repetição ou não.
+
+#### Mineração de sequências frequentes - (Aula 09)
 
 - O problema de mineração de sequências frequentes consiste em encontrar todas as sequências cujo suporte esteja acima de um limiar mínimo definido pelo usuário
 - Existem abordagens tanto para minerar todo o conjunto de sequências frequentes quanto para representações compactas desse conjunto
 - Nessa aula veremos apenas as abordagens para minerar todo o conjunto de sequências frequentes
 - Essas abordagens são extensões dos principais algoritmos para mineração de conjuntos de itens frequentes
+
+- [JV]
+  - Não veremos as maximais e fechadas das sequências. Nem as formas densas, embora existam.
 
 #### Generalized Sequential Patterns (GSP)
 
@@ -1932,6 +2066,9 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 - Por ser baseado no Apriori, o algoritmo adota a estratégia de busca em largura
 - O algoritmo usa sequências frequentes de tamanho $k-1$ para gerar candidatas de tamanho $k$ e avaliar o suporte,
 - Ele também emprega a propriedade de antimonotonicidade do suporte para podar o espaço de busca
+
+- [JV]
+  - Se uma sequência é infrequente, qualquer supersequência dela também será infrequente.
 
 ---
 
@@ -1944,7 +2081,16 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
   - $\langle (xy) \rangle$
 - A exceção se dá quando $x=y$, nesse caso somente a primeira é gerada
 - Logo, o conjunto de candidatos de tamanho 2 é:
+
   - $C^{(2)} = \{ \langle xy \rangle | (x, y) \in F^{(1)} \times F^{(1)} \} \cup \{ \langle (xy) \rangle | (x, y) \in F^{(1)} \times F^{(1)} \wedge x \neq y\}$
+
+- [JV]
+  - Primeiro calcula o suporte de cada item individual.
+  - Depois, à partir de cada sequência, geram-se três candidatos
+    - Ex: $\langle a \rangle$ e $\langle b \rangle$ geram:
+      - $\langle ab \rangle$, $\langle ba \rangle$, $\langle (ab) \rangle$.
+    - Ou dois candidatos, se desconsiderarmos que $\langle ba \rangle$ será gerado em outra iteração.
+  - Todos de tamanho dois não verificamos a propriedade apriori.
 
 ---
 
@@ -1956,6 +2102,15 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
     - A nova candidata será a sequência $s_1$ estendida com o último item de $s_2$
   - O último item será um elemento separado se ele era um elemento separado em $s_2$, ou será agregado ao último elemento de $s_1$ caso contrário
 - O algoritmo repete o processo enquanto houverem candidatos no próximo nível
+
+- [JV]
+  - Esse daqui foi muito confuso
+  - ga+(am) = g(am)
+  - ga+am = gam
+  - (ga)+am = (ga)m
+  - (ga)+(am) = (gam)
+  - aba+bab = abab
+  - bab+aba = baba
 
 #### Sequential Pattern Discovery using Equivalence classes (Spade)
 
@@ -1993,6 +2148,9 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 | l        | { (2,3), (3,1), (4,2), (6,23) }       |
 | s        | { (2,3) }                             |
 
+- [JV]
+  - No caso do l, o 23, na verdade é uma lista $[2, 3]$
+
 ---
 
 - Zaki demonstrou que novas sequências podem ser geradas a partir da **junção temporal** de duas sequências que pertençam a uma mesma classe de equivalência (compartilham um prefixo de tamanho $k-1$)
@@ -2009,9 +2167,16 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
   - Ou seja, é o conjunto de sequência-posições em que ambos ocorrem ao mesmo tempo
   - O caso P(xy) é análogo a esse
 - Juntar duas sequências (Px) e Py: resulta em (Px)y
+
   - $\mathcal{L}((Px)y) = \left{ \left( i, \left{ v \in pos(Py) | \exists u \in pos((Px)) u < v \wedge \left( i, pos(Py) \right) \in \mathcal{L}(Py) \wedge \left( i, pos((Px)) \right) \in \mathcal{L}((PX)) \right} \right) \right}$;
   - Ou seja, são todas as sequências em que ambas acontecem, porém agora somente as posições em que $y$ ocorre temporalmente após $x$ são mantidas
   - O caso é equivalente a Pxy e Pyx
+
+- [JV]
+  - Agora veremos os dois prefixos. E apenas consideraremos o último item. Não a última transação.
+  - Se considerarmos Py, onde P ocorreu na posição 1, e y está na posição 6;
+  - E temos Px, onde P ocorreu na posição 2, e x está na posição 2;
+  - Se gerarmos Pyx, teríamos que o y está antes do x, mas temporalmente deveria estar depois. Logo, consideramos que ele será infrequente, podendo então podar.
 
 ---
 
@@ -2043,14 +2208,12 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 - [Link][Link_2001] Zaki, M.J. SPADE: An Efficient Algorithm for Mining Frequent Sequences. Machine Learning 42, 31–60 (2001).
 - [Link][Link_1996] Srikant R., Agrawal R. (1996) Mining sequential patterns: Generalizations and performance improvements. In: Apers P., Bouzeghoub M., Gardarin G. (eds) Advances in Database Technology — EDBT '96. EDBT 1996. Lecture Notes in Computer Science, vol 1057. Springer, Berlin, Heidelberg.
 
-[Link_2001]: <https://doi.org/10.1023/A:1007652502315>
-[Link_1996]: <https://doi.org/10.1007/BFb0014140>
-
-## Aula 09 | 15/04/2025 | Mineração de grafos
+[Link_2001]: https://doi.org/10.1023/A:1007652502315
+[Link_1996]: https://doi.org/10.1007/BFb0014140
 
 ## Aula 10 | 17/04/2025 | Mineração de grafos
 
-### Aula 11 | 22/04/2025 | Regras de associação e métricas de qualidade
+## Aula 11 | 22/04/2025 | Regras de associação e métricas de qualidade
 
 ### Aula 12 | 24/04/2025 | Aprendizado descritivo supervisionado: padrões emergentes, contrastantes e descoberta de subgrupos
 
