@@ -1,3 +1,6 @@
 {
-  "promptDelete": false
+  "promptDelete": false,
+  "showUnsupportedFiles": true,
+  "useTab": false,
+  "tabSize": 2
 }
