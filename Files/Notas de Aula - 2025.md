@@ -2213,6 +2213,512 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 
 ## Aula 10 | 17/04/2025 | Mineração de grafos
 
+### Slide: aula06-sequencias (Aula 10)
+
+#### Introdução (Aula 10)
+
+- Nessa aula, vamos discutir o problema de mineração de sequências em bases de dados
+- Esse problema ocorre com frequência em diversas áreas
+  - Identificar trajetórias dos alunos de computação
+  - Identificar perfil (temporal) de compras dos clientes (celular $\to$ capa protetora $\to$ fone de ouvido)
+  - Identificar padrões de genes e proteínas no genoma
+- Enquanto itemsets são padrões intra-transações, aqui estamos buscando padrões inter-transações
+
+---
+
+- Para ilustrar, considere a seguinte base de dados
+- Os clientes fazem diversas compras na loja
+  - Mais de 1 item pode ser adquirido em uma transação
+- Existe algum padrão de compras?
+  - Determinados itens são comprados em sequência?
+- Esse problema é conhecido como **mineração de sequências (frequentes)**
+
+| **ID Cliente** | **Data** | **Transação**         | **JV: Enxugado** |
+| :------------- | :------: | :-------------------- | :--------------- |
+| 1              | 25/06/19 | aveia                 | a                |
+| 1              | 30/06/19 | castanha              | c                |
+| 2              | 10/06/19 | granola, mel          | gm               |
+| 2              | 15/06/19 | aveia                 | a                |
+| 2              | 20/06/19 | banana, suco, leite   | bsl              |
+| 3              | 25/06/19 | aveia, iogurte, leite | ail              |
+| 4              | 25/06/19 | aveia                 | a                |
+| 4              | 30/06/19 | banana, leite         | bl               |
+| 4              | 25/07/19 | castanha              | c                |
+| 5              | 12/06/19 | castanha              | c                |
+| 6              | 10/06/19 | aveia, granola        | ag               |
+| 6              | 11/06/19 | leite                 | l                |
+| 6              | 17/06/19 | banana, leite         | bl               |
+
+#### Definições (Slide aula06 - Aula 10)
+
+- A base de dados é um conjunto de transações consistindo em:
+  - ID do cliente
+  - Timestamp da transação
+  - Itens 'comprados'
+- Os itens da transação são um itemset de uma coleção de possíveis itens
+- Uma **sequência** é uma **lista ordenada de itemsets**
+  - Os itemsets também são chamados de elementos
+- Para um conjunto de itens $I$, uma sequência $s = \langle s_1 s_2 \dots s_n \rangle$ em que cada $s_i \subseteq I$ é um itemset
+  - Por definição, um item não pode aparecer mais de uma vez num itemset, mas pode aparecer várias vezes numa sequência
+
+---
+
+- Por exemplo, a sequência $\langle (gm) a (bsl) \rangle$ representa a sequência de compras do cliente 2 na base de dados anterior
+  - Itemsets são delimitados por parêntesis; itemsets unitários são representados sem parêntesis
+- Uma sequência $\alpha = \langle a_1 a_2 \dots a_n \rangle$ é uma subsequência de uma sequência $\beta = \langle b_1 b_2 \dots b_m \rangle$, $\alpha \subseteq \beta$, se existe uma função $\phi: [1:n] \to [1:m]$ tal que
+  - $a_1 \subseteq b_{\phi(1)}$; e
+  - $\forall i, j [i < j \to \phi(i) < \phi(j)]$
+- As sequências $\langle (gm) b \rangle$, $\langle mab \rangle$ e $\langle a \rangle$ são subsequências de $\langle (gm) a (bsl) \rangle$
+- Note que a ordem é definida somente entre elementos, e não dentro dos itemsets
+
+  - Contudo, vamos assumir que os elementos são dispostos conforme alguma ordem dentro dos itemsets (em nosso caso, a ordem que forma apresentados na base original)
+
+- [JV]
+  - Tentando explicar sobre as subsequências:
+
+| Itemset $a$                    | Itemset $b$                    | $b$ é subsequência de $a$? |
+| :----------------------------- | :----------------------------- | :------------------------: |
+| $\langle (gm) a (bsl) \rangle$ | $\langle (gm) b \rangle$       |            Sim             |
+| $\langle (mg) a (lsb) \rangle$ | $\langle (gm) a (bls) \rangle$ |            Sim             |
+| $\langle (gm) a (bsl) \rangle$ | $\langle (gm) a \rangle$       |            Sim             |
+
+...
+
+---
+
+- Podemos redefinir a base de dados como um conjunto de pares $(sid, s)$ em que sid é um identificador de sequência e s uma sequência
+  - Cada identificador de cliente é um sid
+  - As diferentes transações de um cliente ordenados pelo tempo formam a sequência
+- Um cliente $(sid, s)$ suporta uma sequência $\alpha$ se $\alpha \subseteq s$ para
+- Assim, definimos o suporte de uma sequência como
+  - $sup(\alpha) = |\{(sid, s) | \alpha \subseteq s\}|$
+- Exemplo:
+  - $sup(\langle a \rangle) = 5$
+  - $sup(\langle gb \rangle) = 2$
+  - $sup(\langle l \rangle) = 4$
+
+| **sid** | **s**                           |
+| :-----: | :------------------------------ |
+|    1    | $$\langle ac \rangle$$          |
+|    2    | $$\langle (gm)a(bsl) \rangle$$  |
+|    3    | $$\langle (ail) \rangle$$       |
+|    4    | $$\langle a (bl) c \rangle$$    |
+|    5    | $$\langle c \rangle$$           |
+|    6    | $$\langle (ag) l (bl) \rangle$$ |
+
+- [JV]
+  - Essa representação é similar à representação horizontal.
+  - Nessa definição ignoramos o timestamp. Focamos apenas na sequência cronológica.
+  - Nesse caso o tempo apenas é usado pra ordenar, mas não é considerado na sequência.
+  - Cobertura: todos os elementos do qual o itemset é subsequência.
+  - O suporte é o tamanho da cobertura.
+
+---
+
+- Uma sequência $\alpha$ é frequente se $sup(\alpha) \geq minsup$
+- Uma sequência $\alpha$ tem tamanho $k$ (é uma k-sequência) se $\sum |a_i| = k$
+- Uma sequência frequente é dita máxima se não existe uma supersequência própria que seja frequente
+- Ela é fechada se não existe uma supersequência própria com o mesmo suporte
+
+- [JV]
+  - $\sum |a_i| = k$: conta o total de itens. Sem se preocupar com repetição ou não.
+
+#### Mineração de sequências frequentes - (Aula 10)
+
+- O problema de mineração de sequências frequentes consiste em encontrar todas as sequências cujo suporte esteja acima de um limiar mínimo definido pelo usuário
+- Existem abordagens tanto para minerar todo o conjunto de sequências frequentes quanto para representações compactas desse conjunto
+- Nessa aula veremos apenas as abordagens para minerar todo o conjunto de sequências frequentes
+- Essas abordagens são extensões dos principais algoritmos para mineração de conjuntos de itens frequentes
+
+- [JV]
+  - Não veremos as maximais e fechadas das sequências. Nem as formas densas, embora existam.
+
+#### Generalized Sequential Patterns (GSP) (Aula 10)
+
+- O GSP é um algoritmo baseado no Apriori para minerar sequências frequentes
+- Ele também foi proposto por Agrawal e Srikant em 1996
+- Por ser baseado no Apriori, o algoritmo adota a estratégia de busca em largura
+- O algoritmo usa sequências frequentes de tamanho $k-1$ para gerar candidatas de tamanho $k$ e avaliar o suporte,
+- Ele também emprega a propriedade de antimonotonicidade do suporte para podar o espaço de busca
+
+- [JV]
+  - Se uma sequência é infrequente, qualquer supersequência dela também será infrequente.
+
+---
+
+- Assim como o Apriori, o algoritmo faz diversas passadas sobre a base de dados
+- Na primeira passada, o algoritmo verifica o suporte de cada item
+  - Os itens individualmente são sequências simples de tamanho 1
+- Pela propriedade do Apriori, somente os itens frequentes são mantidos e servem de base para a geração dos candidatos de tamanho 2
+- Cada par $\langle x \rangle$ e $\langle y \rangle$ de sequências de tamanho 1 dá origem a duas sequências de tamanho 2
+  - $\langle xy \rangle$
+  - $\langle (xy) \rangle$
+- A exceção se dá quando $x=y$, nesse caso somente a primeira é gerada
+- Logo, o conjunto de candidatos de tamanho 2 é:
+
+  - $C^{(2)} = \{ \langle xy \rangle | (x, y) \in F^{(1)} \times F^{(1)} \} \cup \{ \langle (xy) \rangle | (x, y) \in F^{(1)} \times F^{(1)} \wedge x \neq y\}$
+
+- [JV]
+  - Primeiro calcula o suporte de cada item individual.
+  - Depois, à partir de cada sequência, geram-se três candidatos
+    - Ex: $\langle a \rangle$ e $\langle b \rangle$ geram:
+      - $\langle ab \rangle$, $\langle ba \rangle$, $\langle (ab) \rangle$.
+    - Ou dois candidatos, se desconsiderarmos que $\langle ba \rangle$ será gerado em outra iteração.
+  - Todos de tamanho dois não verificamos a propriedade apriori.
+
+---
+
+- Os candidatos que possuam subsequências de tamanho $k-1$ infrequentes são removidos do conjunto
+- Então, o suporte dos candidatos é computado com uma passada na base, e os infrequentes são descartados
+- A partir de $k=3$, os candidatos são gerados da seguinte forma:
+  - Sejam $s_1$ e $s_2$ duas sequências frequentes de tamanho $k-1$ tais que ambas sejam idênticas após a remoção do primeiro item de $s_1$ e do último item de $s_2$
+  - As sequências são unidas para gerar uma candidata de tamanha k
+    - A nova candidata será a sequência $s_1$ estendida com o último item de $s_2$
+  - O último item será um elemento separado se ele era um elemento separado em $s_2$, ou será agregado ao último elemento de $s_1$ caso contrário
+- O algoritmo repete o processo enquanto houverem candidatos no próximo nível
+
+- [JV]
+  - Esse daqui foi muito confuso
+  - ga+(am) = g(am)
+  - ga+am = gam
+  - (ga)+am = (ga)m
+  - (ga)+(am) = (gam)
+  - aba+bab = abab
+  - bab+aba = baba
+
+#### Sequential Pattern Discovery using Equivalence classes (Spade) (Aula 10)
+
+- Outra abordagem para mineração de sequências frequentes foi proposta por Zaki em 2001
+- O algoritmo Spade é baseado no Eclat
+- Assim como o Eclat, ele utiliza uma representação da base de dados similar à vertical e divide o espaço de busca de acordo com o prefixo das sequências
+
+---
+
+- Para obter a representação vertical, vamos associar a cada item $i$ uma tupla $(sid, pos(i))$
+  - $pos(i)$ é a lista de todos os elementos em que $i$ ocorre na sequência referente ao cliente $sid$
+- A lista de todos os pares sequência-posição de um item é chamada de **poslist** e é denotada por $\mathcal{L}(i)$
+- Exemplos:
+  - $\mathcal{L}(l) = \{ (2, \{3\}), (3, \{1\}), (4, \{2\}), (6, \{2, 3\} ) \}$
+  - $\mathcal{L}(g) = \{ (2, \{1\}), (6, \{1\}) \}$
+- A representação vertical da base pode ser obtida pelas poslists de todos os itens
+  - Note que $sup(i) = |\mathcal{L}(i)|$
+
+| **sid** | **s**                           |
+| :------ | :------------------------------ |
+| 1       | $$\langle ac \rangle$$          |
+| 2       | $$\langle (gm)a(bsl) \rangle$$  |
+| 3       | $$\langle (ail) \rangle$$       |
+| 4       | $$\langle a (bl) c \rangle$$    |
+| 5       | $$\langle c \rangle$$           |
+| 6       | $$\langle (ag) l (bl) \rangle$$ |
+
+| **item** | **pos(item)**                         |
+| :------- | :------------------------------------ |
+| a        | { (1,1), (2,2), (3,1), (4,1), (6,1) } |
+| b        | { (2,3), (4,2), (6,3) }               |
+| c        | { (1,2), (4,3), (5,1) }               |
+| g        | { (2,1), (6,1) }                      |
+| i        | { (3,1) }                             |
+| l        | { (2,3), (3,1), (4,2), (6,23) }       |
+| s        | { (2,3) }                             |
+
+- [JV]
+  - No caso do l, o 23, na verdade é uma lista $[2, 3]$
+
+---
+
+- Zaki demonstrou que novas sequências podem ser geradas a partir da **junção temporal** de duas sequências que pertençam a uma mesma classe de equivalência (compartilham um prefixo de tamanho $k-1$)
+- O suporte pode ser computado pela interseção das poslists
+- Supondo que as sequências a serem unidas compartilham um prefixo P, três situações podem ocorrer:
+- Juntar duas sequências (Px) e (Py): resulta em (Pxy)
+- Juntar duas sequências (Px) e Py: resulta em (Px)y
+- Juntar duas sequências Px e Py: pode resultar em Pxy, Pyx e P(xy) dependendo da ordem temporal de x e y; um caso particular ocorre quando x=y, nesse caso, a junção só pode resultar em Pxx
+
+---
+
+- Juntar duas sequências (Px) e (Py): resulta em (Pxy)
+  - Sejam $\mathcal{L}(Px)$ e $\mathcal{L}(Py)$ as poslists de (Px) e (Py). A poslist de (Pxy) é gerada da seguinte forma: $\mathcal{L}((Pxy)) = \left{ \left( i, pos((Px)) \cap pos((Py)) \right) | \left( i, pos((Px)) \right) \in \mathcal{L}((Px)) \wedge \left( i, pos((Py)) \right) \in \mathcal{L}((Py)) \wedge pos((Px)) \cap pos((Py)) \neq \emptyset \right}$
+  - Ou seja, é o conjunto de sequência-posições em que ambos ocorrem ao mesmo tempo
+  - O caso P(xy) é análogo a esse
+- Juntar duas sequências (Px) e Py: resulta em (Px)y
+
+  - $\mathcal{L}((Px)y) = \left{ \left( i, \left{ v \in pos(Py) | \exists u \in pos((Px)) u < v \wedge \left( i, pos(Py) \right) \in \mathcal{L}(Py) \wedge \left( i, pos((Px)) \right) \in \mathcal{L}((PX)) \right} \right) \right}$;
+  - Ou seja, são todas as sequências em que ambas acontecem, porém agora somente as posições em que $y$ ocorre temporalmente após $x$ são mantidas
+  - O caso é equivalente a Pxy e Pyx
+
+- [JV]
+  - Agora veremos os dois prefixos. E apenas consideraremos o último item. Não a última transação.
+  - Se considerarmos Py, onde P ocorreu na posição 1, e y está na posição 6;
+  - E temos Px, onde P ocorreu na posição 2, e x está na posição 2;
+  - Se gerarmos Pyx, teríamos que o y está antes do x, mas temporalmente deveria estar depois. Logo, consideramos que ele será infrequente, podendo então podar.
+
+---
+
+- Sejam as sequências $\langle gb \rangle$ e $\langle gl \rangle$ pertencentes à classe de equivalência de $g$, e suas respectivas poslists $\mathcal{L}(gb) = \{ (2,3), (6,3) \}$ e $\mathcal{L}(gl) = \{ (2,3), (6,3) \}$
+  - $\mathcal{L}(g(bl)) = \{ (2,3), (6,3) \}$
+  - $\mathcal{L}(gbl) = \emptyset$
+  - $\mathcal{L}(glb) = \emptyset$
+- O algoritmo segue explorando o espaço de busca enquanto as classes de equivalência não forem vazias
+
+---
+
+- **ALGORITHM 10.2. Algorithm SPADE**
+  - `// Initial Call:` $\mathcal{F} \leftarrow \emptyset, k \leftarrow 0, P \leftarrow \left{ \langle s, \mathcal{L}(s) \rangle | s \in \sum, sup(s) \geq minsup \right}$
+  - **SPADE** $(P, minsup, \mathcal{F}, k)$
+    - **foreach** $r_a \in P$ **do**
+      - $\mathcal{F} \leftarrow \mathcal{F} \cup \left{ (r_a, sup(r_a)) \right}$
+      - $P_a \leftarrow \emptyset$
+      - **foreach** $r_b \in P$ **do**
+        - $r_{ab} = r_a + r_b$
+        - $\mathcal{L}(r_{ab}) = \mathcal{L}(r_a) \cap \mathcal{L}(r_b)$
+        - **if** $sup(r_{ab}) \geq minsup$ **then**
+          - $P_a \leftarrow P_a \cup \left{ \langle r_{ab}, \mathcal{L}(r_{ab}) \rangle \right}$
+      - **if** $P_a \neq \emptyset$ **then** SPADE $(P, minsup, \mathcal{F}, k+1)$
+
+#### Leitura (Aula 10)
+
+- Seções 10.1 e 10.2 Zaki e Meira
+- Capítulo 11 Aggarwal e Han
+- [Link][Link_2001] Zaki, M.J. SPADE: An Efficient Algorithm for Mining Frequent Sequences. Machine Learning 42, 31–60 (2001).
+- [Link][Link_1996] Srikant R., Agrawal R. (1996) Mining sequential patterns: Generalizations and performance improvements. In: Apers P., Bouzeghoub M., Gardarin G. (eds) Advances in Database Technology — EDBT '96. EDBT 1996. Lecture Notes in Computer Science, vol 1057. Springer, Berlin, Heidelberg.
+
+### Slide: aula07-grafos (Aula 10)
+
+#### Introdução - Aula 10
+
+- Nessa aula, vamos discutir o problema de mineração de subgrafos frequentes em bases de dados de grafos.
+- A mineração de subgrafos frequentes tem ganhado destaque nos últimos anos com aplicações em diversas áreas:
+  - Quimioinformática: descoberta de princípios ativos de fármacos
+  - Bioinformática: padrões de interação em redes de proteínas
+  - Engenharia de Software: análise do fluxo de controle de aplicações
+
+---
+
+- Considerando o contexto de quimioinformática, temos o seguinte exemplo:
+
+Cafeína, Teobromina, Teofilina, Sildenafil (Viagra)
+
+(Imagens de estruturas químicas omitidas)
+
+#### Definições (Aula 10)
+
+- Um grafo é uma quádrupla $(V, E, l, L)$ em que:
+  - $V$ é um conjunto de vértices;
+  - $E$ é um conjunto de arestas;
+  - $l: V \rightarrow \Sigma_v$ é uma função que determina o rótulo dos vértices;
+  - $L: E \rightarrow \Sigma_e$ é uma função que determina o rótulo das arestas.
+
+(Imagem de um grafo)
+
+---
+
+- Sejam $G_1$ e $G_2$ dois grafos rotulados com os mesmos alfabetos $\Sigma_v$ e $\Sigma_e$.
+- Dizemos que $G_1$ é subgrafo isomorfo a $G_2$, representado por $G_1 \subseteq G_2$, se existe uma função injetora $\phi: V_1 \rightarrow V_2$ tal que:
+  - $(u, v) \in E_1 \Leftrightarrow (\phi(u), \phi(v)) \in E_2$
+  - $\forall u \in V_1,\ l(u) = l(\phi(u))$
+  - $\forall (u, v) \in E_1,\ L(u,v) = L(\phi(u), \phi(v))$
+
+(Três imagens de grafos: $G_1$, $G_3$ e $G_4$)
+
+---
+
+- Uma base de dados $D = \{G_1, G_2, \dots, G_n\}$ é um conjunto de grafos rotulados.
+- O suporte de um grafo (padrão) $G$ é o número de grafos em $D$ em que $G$ está contido:
+
+  - $\text{sup}(G) = |\{G_i \in D\ |\ G \subseteq G_i\}|$
+
+- Um padrão $G$ é frequente se $\text{sup}(G) \geq minsup$
+
+(Imagem de vários subgrafos)
+
+---
+
+- O problema de mineração de subgrafos frequentes consiste em encontrar todos os **subgrafos conexos** que satisfaçam o suporte mínimo definido pelo usuário.
+- Comparado aos problemas vistos até agora, esse é o mais difícil em termos computacionais.
+  - O problema de isomorfismo é NP-difícil.
+- Um grafo com $m$ vértices possui $O(m^2)$ arestas.
+- O número de subgrafos com $m$ vértices é, portanto, $2^{O(m^2)}$.
+- Considerando grafos rotulados com $|\Sigma_v| = |\Sigma_e| = s$, $s^m$ rotulações diferentes de vértices e $s^{m^2}$ rotulações de arestas.
+- Logo, o espaço de busca do problema é $2^{O(m^2)} \left(s^{O(m)}\right) \left(s^{O(m^2)}\right)$.
+
+#### Mineração de subgrafos frequentes
+
+- Assim como aconteceu com os problemas anteriores, existem duas categorias de algoritmos:
+  - Baseados no 'Apriori' (geração de candidatos)
+  - Baseados no 'FP-Growth' (crescimento de padrões)
+- Os algoritmos baseados no Apriori se subdividem em mais grupos:
+  - Os baseados no aumento do número de vértices; e
+  - Os baseados no aumento do número de arestas.
+- Os baseados em crescimento de padrões frequentemente utilizam extensões de arestas para crescê-los.
+
+##### Geração de candidatos (AGM)
+
+- A geração de candidatos com aumento do número de vértices é usada no algoritmo AGM (Apriori-based Graph Mining) proposto por Inokuchi et al. em 2000
+- A ideia é juntar dois grafos com k vértices que compartilhem um núcleo com k-1 vértices para formar um candidato com k+1 vértices
+
+##### Geração de candidatos (FSG)
+
+- A geração de candidatos com aumento no número de arestas é usada pelo algoritmo FSG, proposto por Kuramochi e Karypis em 2001.
+- Dois padrões com $k$ arestas são juntados se eles compartilham um núcleo (possuem um mesmo subgrafo) com $k-1$ arestas.
+  - Ou seja, $G_1$ e $G_2$ são juntados se existe uma aresta em $G_1$ e uma aresta em $G_2$ tais que a remoção das duas torna os subgrafos isomorfos entre si.
+  - Consequentemente, o candidato terá as arestas de $G_1$ mais essa aresta de $G_2$.
+- Ao contrário do que ocorre com o método baseado em vértices, aqui o candidato resultante pode não ter um número maior de vértices que os padrões do qual foi gerado
+
+---
+
+- Um conceito importante para a geração de candidatos é o de vértices topologicamente equivalentes
+- Considere os grafos abaixo
+
+(Imagens de grafos)
+
+---
+
+- Para entender o processo de geração de candidatos, vamos considerar dois grafos genéricos $G_1$ e $G_2$ com $k$ arestas que compartilham um núcleo comum com $k-1$ arestas
+  - Na figura, o núcleo é omitido e somente as arestas não compartilhadas são ilustradas; os vértices dentro da caixa fazem parte do núcleo.
+  - Se $a$ é topologicamente equivalente a $c$, dizemos que $a=c$
+  - Se $b$ e $d$ possuem o mesmo rótulo, dizemos que $b=d$
+- Temos 4 possíveis situações
+
+---
+
+- Situação 1 [$a \neq c$ e $b \neq d$]: Nesse caso, somente um candidato pode ser gerado, já que a 'nova' aresta incide em vértices distintos
+
+---
+
+- Situação 2 [$a=c$ e $b \neq d$]: Nesse caso, temos duas possibilidades:
+  - A 'nova' aresta incide sobre vértices distintos como na situação 1
+  - A 'nova' aresta incide sobre o vértice equivalente a $a$ (ou $c$)
+
+---
+
+- Situação 3 [$a \neq c$ e $b=d$]: Nesse caso, temos duas possibilidades:
+  - A 'nova' aresta incide sobre vértices distintos como na situação 1
+  - A 'nova' aresta incide sobre o vértice equivalente a $b$ (ou $d$)
+
+---
+
+- Situação 4 [$a=c$ e $b=d$]: Nesse caso, qualquer das possibilidades anteriores pode ocorrer; ou seja, pelo menos 3 candidatos são gerados.
+
+---
+
+- Além dessas situações, dois grafos podem compartilhar múltiplos núcleos. Cada um deles pode gerar candidatos distintos.
+
+  - Podem existir até $k-1$ núcleos distintos para dois padrões de tamanho $k$.
+
+---
+
+- Naturalmente, muitos desses candidatos serão isomorfos entre si, devendo, portanto, serem descartados exceto uma cópia
+- O controle de isomorfismo é feito atribuindo-se um código (string) a partir de cada matriz de adjacências
+- Grafos com mesmo código são isomorfos
+- Os detalhes são omitidos, mas podem ser consultados no artigo original
+
+---
+
+##### Crescimento de padrões (gSpan)
+
+- De maneira similar ao que acontece com itemsets, os algoritmos baseados em geração de candidatos possuem desempenho inferior aos baseados em crescimento de padrões, já que muitos candidatos são podados
+- Em 2002, Yan e Han (FP-Growth) propuseram o algoritmo gSpan (Graph-based Substructure Pattern Mining)
+- O algoritmo estende os padrões acrescentando arestas, uma por vez, de forma similar ao comportamento do FP-Growth
+- Os autores também propuseram representar grafos por sequências de strings
+  - Isso, de certa forma, mapeia o problema de mineração de grafos para mineração de sequências; levando ao aproveitamento de ideias propostas na última
+- Cada aresta do grafo é representada pela string:
+  - $\langle v_i, v_j, l(v_i), l(v_j), L(v_i, v_j) \rangle$
+
+---
+
+- A extensão dos padrões proposta por Yan e Han se baseia na árvore geradora da busca em profundidade
+- Os vértices do grafo são ordenados conforme a ordem de visitação de uma busca em profundidade no grafo
+  - Vértices visitados no início são menores que os visitados no fim
+  - Subscritos dos vértices indicam a ordem de visitação
+- O caminho mais curto entre o primeiro vértice e o último é chamado de **caminho mais à direita (rightmost path)**
+- Considerando a busca em profundidade, as arestas são divididas em dois conjuntos:
+  - **Fordward edges**: arestas que fazem parte da árvore geradora da DFS
+  - **Backward edges**: demais arestas
+
+---
+
+- As arestas podem ser ordenadas dentro dos respectivos conjuntos da seguinte forma:
+  - **Forward edges**: $e_1 = \left( v_{i_1}, v_{j_1} \right)$, $e_2 = \left( v_{i_2}, v_{j_2} \right)$, $e_1 \preceq_F e_2 \leftrightarrow j_1 < j_2$
+  - **Backward edges**: $e_1 \preceq_B e_2 \leftrightarrow [i_1 < i_2 \lor (i_1 = i_2 \land j_1 < j_2)]$
+- Adicionalmente comparamos arestas dos conjuntos da seguinte forma:
+  - $e_1 \preceq_{BF} e_2$ sse:
+    - $e_1$ é uma aresta de retorno; $e_2$ é uma aresta de árvore; e $i_1 < j_2$
+    - $e_1$ é uma aresta de árvore; $e_2$ é uma aresta de retorno; e $j_1 \leq i_2$
+- Combinando a ordem dos vértices, com a ordem sobre as arestas e a ordem lexicográfica definida sobre os rótulos (de vértices e arestas), definimos uma ordem total sobre as arestas (códigos)
+- Dessa forma, os grafos podem ser representados como sequências de strings (códigos) referentes às suas arestas
+
+---
+
+- Exemplo:
+  - Retirado da Figura 11.6 Zaki e Meira
+
+(Imagem de grafos com arestas rotuladas)
+
+---
+
+- Note que diferentes buscas geram diferentes representações
+- Podemos estender a ordem lexicográfica das arestas para as representações (grafos)
+- Chamamos de **representação canônica** a menor dentre todas as representações de um grafo
+- Dois grafos são isomorfos se possuem a mesma representação canônica
+- Assim, o problema de encontrar subgrafos frequentes é equivalente a enumerar suas representações canônicas
+  - Uma vez que as representações são sequências, o problema é essencialmente um problema de mineração de sequências
+
+---
+
+- O gSpan explora em profundidade o espaço de busca estendendo prefixos (subgrafos) com arestas no caminho mais à direita
+  - O artigo original demonstra que representações canônicas só podem ser geradas por arestas seguindo o caminho mais à direita
+- Ele inicia com o prefixo vazio e o estende com cada uma das arestas em ordem
+  - As possíveis extensões são determinadas a partir dos caminhos mais à direita dos grafos em que o prefixo ocorre
+- O suporte das extensões são computados e, caso sejam frequentes e canônicas, são exploradas recursivamente
+
+---
+
+- **ALGORITHM 11.1. Algorithm gSpan**
+  - // Initial Call: $C \leftarrow \emptyset$
+  - **gSpan** $(C, D, minsup)$:
+    - $\epsilon \leftarrow RightMostPath-Extensions(C, D)$ `// extensions and supports`
+    - **foreach** $(t, sup(t)) \in \epsilon$ do
+      - $C' \leftarrow C \cup t$ `// extend the code with extended edge tuple t`
+      - $sup(C') \leftarrow sup(t)$ `// record the support of new extension`
+      - `// recursively call gSpan if code is frequent and canonical`
+      - **if** $sup(C') \geq minsup$ **and** IsCanonical $(C')$ **then**
+        - **gSpan** $(C', D, minsup)$
+
+---
+
+- Exemplo: $D = \{G_1, G_2\}, minsup=2$
+
+#### Extensões do problema
+
+- Assim como ocorre com sequências e itemsets, o número de subgrafos frequentes pode ser bastante elevado em uma base
+  - Isso acaba dificultando a análise dos resultados
+- Existem abordagens, como o CloseGraph proposto por Yan e Han, que mineram padrões fechados
+- Pode-se também buscar padrões contrastantes: com suporte mínimo em um subconjunto e máximo em outro
+  - Exemplo: subgrafos que ocorrem com frequência no conjunto de moléculas que potencializam um efeito desejado; e que sejam infrequentes no conjunto de moléculas que apresentem efeitos adversos
+  - Essa abordagem foi sugerida por Borgelt e Berthold no algoritmo chamado MoFa
+  - Suporte mínimo é usado para podar o espaço de busca, enquanto o máximo usado para filtrar padrões indesejados
+- Na linha de algoritmos, existem abordagens heurísticas para o problema, dado seu alto custo computacional
+- Outras linhas de pesquisa incluem uso de abordagens distribuídas como o Fractal proposto por Dias et al. em 2019
+
+#### Leitura
+
+- Capítulo 11 Zaki e Meira
+- Seção 7.5 Tan et al.
+- Capítulo 5 Mining Graph Data, Diane Cook e Lawrence Holder
+- Akihiro Inokuchi, Takashi Washio, and Hiroshi Motoda. 2000. An Apriori-Based Algorithm for Mining
+  Frequent Substructures from Graph Data. In Proceedings of the 4th European Conference on Principles of
+  Data Mining and Knowledge Discovery (PKDD '00). Springer-Verlag, Berlin, Heidelberg, 13–23.
+- Michihiro Kuramochi and George Karypis. 2001. Frequent Subgraph Discovery. In Proceedings of the 2001
+  IEEE International Conference on Data Mining (ICDM '01). IEEE Computer Society, USA, 313–320.
+- Xifeng Yan and Jiawei Han. 2002. GSpan: Graph-Based Substructure Pattern Mining. In Proceedings of the
+  2002 IEEE International Conference on Data Mining (ICDM '02). IEEE Computer Society, USA, 721.
+- Xifeng Yan and Jiawei Han. 2003. CloseGraph: mining closed frequent graph patterns. In Proceedings of the
+  ninth ACM SIGKDD international conference on Knowledge discovery and data mining (KDD '03). Association
+  for Computing Machinery, New York, NY, USA, 286–295. <https://doi.org/10.1145/956750.956784>
+- Christian Borgelt and Michael R. Berthold. 2002. Mining Molecular Fragments: Finding Relevant
+  Substructures of Molecules. In Proceedings of the 2002 IEEE International Conference on Data Mining
+  (ICDM '02). IEEE Computer Society, USA, 51
+
 ## Aula 11 | 22/04/2025 | Regras de associação e métricas de qualidade
 
 ### Aula 12 | 24/04/2025 | Aprendizado descritivo supervisionado: padrões emergentes, contrastantes e descoberta de subgrupos
