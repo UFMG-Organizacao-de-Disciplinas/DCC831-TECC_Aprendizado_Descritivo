@@ -2296,6 +2296,9 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 - [Link][Link_2001] Zaki, M.J. SPADE: An Efficient Algorithm for Mining Frequent Sequences. Machine Learning 42, 31–60 (2001).
 - [Link][Link_1996] Srikant R., Agrawal R. (1996) Mining sequential patterns: Generalizations and performance improvements. In: Apers P., Bouzeghoub M., Gardarin G. (eds) Advances in Database Technology — EDBT '96. EDBT 1996. Lecture Notes in Computer Science, vol 1057. Springer, Berlin, Heidelberg.
 
+[Link_2001]: https://doi.org/10.1023/A:1007652502315
+[Link_1996]: https://doi.org/10.1007/BFb0014140
+
 ### Slide: aula07-grafos (Aula 10)
 
 #### Introdução - Aula 10
