@@ -2376,6 +2376,10 @@ Nessa imagem, o $G_3$ é subgrafo isomorfo de $G_1$, mas $G_4$ não.
   - Ele colocou a mesma quantidade de rotulações de arestas e vértices com o mesmo valor só pra simplificar.
   - Tem gente que vai pra mineração de grafos distribuídos.
 
+## Aula 11 | 22/04/2025 | Regras de associação e métricas de qualidade
+
+### Slide: aula07-grafos (Aula 11)
+
 #### Mineração de subgrafos frequentes
 
 - Assim como aconteceu com os problemas anteriores, existem duas categorias de algoritmos:
@@ -2386,10 +2390,32 @@ Nessa imagem, o $G_3$ é subgrafo isomorfo de $G_1$, mas $G_4$ não.
   - Os baseados no aumento do número de arestas.
 - Os baseados em crescimento de padrões frequentemente utilizam extensões de arestas para crescê-los.
 
+- [JV]
+  - O de Vértices tende a ser pior que o de arestas.
+
 ##### Geração de candidatos (AGM)
 
 - A geração de candidatos com aumento do número de vértices é usada no algoritmo AGM (Apriori-based Graph Mining) proposto por Inokuchi et al. em 2000
 - A ideia é juntar dois grafos com k vértices que compartilhem um núcleo com k-1 vértices para formar um candidato com k+1 vértices
+
+- [JV]
+  - É calculado calcular suporte por ter que procurar isomorfismo de grafos.
+    - Automorfismo é mais fácil que isomorfismo
+  - Prioridade do apriori: antimonotonicidade
+    - Se um grafo é infrequente, qualquer supergrafo dele também será infrequente.
+  - Algoritmo
+    - Buscar o isomorfismo entre os dois grafos
+      - Pega a matriz de adjacência de um grafo e compara com o outro
+      - Caso removidas as colunas (i,i), ela não resulte numa matriz de adjacência isomorfa, entre ambos, então tente todas as remanescentes permutações
+      - Se for isomorfo
+        - remove as últimas linhas e colunas das duas, e cria um novo candidato misturando a linha e coluna do primeiro com a linha e coluna do segundo.
+          - Porém, não se sabe qual o rótulo existente, ou não, entre os dois vértices adicionados.
+          - Então, criam-se candidatos com todos os possíveis rótulos, inclusive a inexistência de rótulo.
+      - Comparam-se também os rótulos, mas isso não ficou tão claro.
+    - Pra calcular o suporte, gerando a sub-estrutura, confere se ela é subgrafo de outra
+  - Não faz sentido falar de ordem lexicográfica de strings
+    - Representação canônica de uma matriz de adjacência
+    - Tipo uma identidade, um hash
 
 ##### Geração de candidatos (FSG)
 
@@ -2399,9 +2425,19 @@ Nessa imagem, o $G_3$ é subgrafo isomorfo de $G_1$, mas $G_4$ não.
   - Consequentemente, o candidato terá as arestas de $G_1$ mais essa aresta de $G_2$.
 - Ao contrário do que ocorre com o método baseado em vértices, aqui o candidato resultante pode não ter um número maior de vértices que os padrões do qual foi gerado
 
+- [JV]
+  - FSG - Frequent Sub Graph (?)
+
 ---
 
 - Um conceito importante para a geração de candidatos é o de vértices topologicamente equivalentes
+  - [JV]
+    - Topologicamente equivalentes:
+      - Grafos que mantém a mesma estrutura geral.
+      - Pra comparar, pode-se comparar entre possibilidades de novas arestas a novos vértices e/ou a arestas existentes.
+      - Lembrando também da comparação dos rótulos.
+      - É uma equivalência estrutural entre vértices de dois grafos distintos.
+      - É isomorfo se consegue-se fazer um mapeamento 1:1 entre os vértices e arestas de um pro outro.
 - Considere os grafos abaixo
 
 (Imagens de grafos)
@@ -2412,17 +2448,32 @@ Nessa imagem, o $G_3$ é subgrafo isomorfo de $G_1$, mas $G_4$ não.
   - Na figura, o núcleo é omitido e somente as arestas não compartilhadas são ilustradas; os vértices dentro da caixa fazem parte do núcleo.
   - Se $a$ é topologicamente equivalente a $c$, dizemos que $a=c$
   - Se $b$ e $d$ possuem o mesmo rótulo, dizemos que $b=d$
+  - [JV]
+    - Nesse caso estão sendo definidos dois tipos de igualdades que serão representados com o mesmo símbolo de igualdade.
 - Temos 4 possíveis situações
+  - [JV]
+    - Quando definimos esse núcleo, é como se as arestas que saem dele vão para os vértices externos fossem perdidas.
+
+| X          | $a=c$ | $a \neq c$ |
+| ---------- | :---: | :--------: |
+| $b=d$      |   1   |     4      |
+| $b \neq d$ |   2   |     3      |
 
 ---
 
 - Situação 1 [$a \neq c$ e $b \neq d$]: Nesse caso, somente um candidato pode ser gerado, já que a 'nova' aresta incide em vértices distintos
+  - [JV]
+    - Obs.:
+      - A imagem dele é meio confusa. G1 e G2 são os grafos inteiros. O quadradinho apenas representa o núcleo desses grafos. O que eu havia entendido antes e está errado é que o núcleo se chamava G1 e o núcleo se chamava G2.
+      - Outro detalhe, os vértices $a$ e $c$ são vértices contidos no núcleo de um grafo grafo omitido;
 
 ---
 
 - Situação 2 [$a=c$ e $b \neq d$]: Nesse caso, temos duas possibilidades:
   - A 'nova' aresta incide sobre vértices distintos como na situação 1
   - A 'nova' aresta incide sobre o vértice equivalente a $a$ (ou $c$)
+  - [JV]
+    - Uma análise interessante é observarmos que se apenas houver um mesmo vértice $a$ que seja topologicamente equivalente a $c$, então, apenas o segundo caso ocorre, visto que não há um segundo vértice para se anexar a aresta.
 
 ---
 
@@ -2434,11 +2485,16 @@ Nessa imagem, o $G_3$ é subgrafo isomorfo de $G_1$, mas $G_4$ não.
 
 - Situação 4 [$a=c$ e $b=d$]: Nesse caso, qualquer das possibilidades anteriores pode ocorrer; ou seja, pelo menos 3 candidatos são gerados.
 
+- [JV]
+  - Foi comentado sobre o "pelo menos 3 candidatos". Ele disse não saber porque escreveu assim, e considera que serão sempre 3, ou talvez, "no máximo 3".
+
 ---
 
 - Além dessas situações, dois grafos podem compartilhar múltiplos núcleos. Cada um deles pode gerar candidatos distintos.
 
   - Podem existir até $k-1$ núcleos distintos para dois padrões de tamanho $k$.
+
+[Imagens de grafos]
 
 ---
 
@@ -2447,7 +2503,16 @@ Nessa imagem, o $G_3$ é subgrafo isomorfo de $G_1$, mas $G_4$ não.
 - Grafos com mesmo código são isomorfos
 - Os detalhes são omitidos, mas podem ser consultados no artigo original
 
----
+- [JV]
+  - Geração de versão canônica de string da matriz de adjacência. Feito na força bruta.
+    - Da matriz triangular superior, coluna a coluna, lineariza-se todos os rótulos.
+    - Gera-se todas as as permutações dessa string e a mais lexicograficamente mais ordenada, é a versão canônica.
+
+## Aula 12 | 24/04/2025 | Aprendizado descritivo supervisionado: padrões emergentes, contrastantes e descoberta de subgrupos
+
+### Slide: aula07-grafos (Aula 12)
+
+#### Mineração de subgrafos frequentes (Aula 12)
 
 ##### Crescimento de padrões (gSpan)
 
@@ -2553,10 +2618,6 @@ Nessa imagem, o $G_3$ é subgrafo isomorfo de $G_1$, mas $G_4$ não.
 - Christian Borgelt and Michael R. Berthold. 2002. Mining Molecular Fragments: Finding Relevant
   Substructures of Molecules. In Proceedings of the 2002 IEEE International Conference on Data Mining
   (ICDM '02). IEEE Computer Society, USA, 51
-
-## Aula 11 | 22/04/2025 | Regras de associação e métricas de qualidade
-
-### Aula 12 | 24/04/2025 | Aprendizado descritivo supervisionado: padrões emergentes, contrastantes e descoberta de subgrupos
 
 ### Aula 13 | 29/04/2025 | Descoberta de subgrupos
 
