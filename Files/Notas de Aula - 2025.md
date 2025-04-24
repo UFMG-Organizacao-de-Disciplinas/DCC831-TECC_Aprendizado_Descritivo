@@ -2522,11 +2522,22 @@ Nessa imagem, o $G_3$ é subgrafo isomorfo de $G_1$, mas $G_4$ não.
 - Os autores também propuseram representar grafos por sequências de strings
   - Isso, de certa forma, mapeia o problema de mineração de grafos para mineração de sequências; levando ao aproveitamento de ideias propostas na última
 - Cada aresta do grafo é representada pela string:
+
   - $\langle v_i, v_j, l(v_i), l(v_j), L(v_i, v_j) \rangle$
+    - [JV]
+      - $v_i$ e $v_j$ são os vértices que compõem a aresta
+      - $l(v_i)$ e $l(v_j)$ são os rótulos dos vértices
+      - $L(v_i, v_j)$ é o rótulo da aresta
+
+- [JV]
+  - Começa com um grafo vazio e vai aumentando o grafo.
+  - Projeta uma Base
+  - Analisa todas as arestas possíveis para expandir
 
 ---
 
 - A extensão dos padrões proposta por Yan e Han se baseia na árvore geradora da busca em profundidade
+  - [JV] Baseado na ordem em que encontrou.
 - Os vértices do grafo são ordenados conforme a ordem de visitação de uma busca em profundidade no grafo
   - Vértices visitados no início são menores que os visitados no fim
   - Subscritos dos vértices indicam a ordem de visitação
@@ -2534,12 +2545,24 @@ Nessa imagem, o $G_3$ é subgrafo isomorfo de $G_1$, mas $G_4$ não.
 - Considerando a busca em profundidade, as arestas são divididas em dois conjuntos:
   - **Fordward edges**: arestas que fazem parte da árvore geradora da DFS
   - **Backward edges**: demais arestas
+    - [JV]
+      - Arestas de retorno que vão para aresta já visitada antes.
+      - $\langle v_i, v_j, \dots \rangle$ é uma aresta de retorno se $v_i < v_j$, ou seja, $v_i$ foi visitado antes de $v_j$ na DFS
 
 ---
 
 - As arestas podem ser ordenadas dentro dos respectivos conjuntos da seguinte forma:
   - **Forward edges**: $e_1 = \left( v_{i_1}, v_{j_1} \right)$, $e_2 = \left( v_{i_2}, v_{j_2} \right)$, $e_1 \preceq_F e_2 \leftrightarrow j_1 < j_2$
+    - [JV]
+      - $j_1$ e $j_2$ representam a sequência de visitação dos vértices.
+      - $\preceq_F$: é definida a ordem de precedência entre arestas de avanço.
   - **Backward edges**: $e_1 \preceq_B e_2 \leftrightarrow [i_1 < i_2 \lor (i_1 = i_2 \land j_1 < j_2)]$
+    - [JV]
+      - "Uma aresta (2, 0) vem antes de (3, 1)"; (3, 1) vem antes de (3, 2)
+      - $\preceq_B$: é definida a ordem de precedência entre arestas de retorno.
+  - [JV]
+    - resumindo essa questão de ordenação de arestas: Estamos rodando a DFS e depois ~~ordenando lexicograficamente, primeiro pela origem, depois pela chegada.~~
+    - Esse entendimento superior é falso. Na verdade, estamos ordenando justamente a sequência das arestas visitadas. E a sequência de comparações é bem esquisita mesmo.
 - Adicionalmente comparamos arestas dos conjuntos da seguinte forma:
   - $e_1 \preceq_{BF} e_2$ sse:
     - $e_1$ é uma aresta de retorno; $e_2$ é uma aresta de árvore; e $i_1 < j_2$
@@ -2549,10 +2572,42 @@ Nessa imagem, o $G_3$ é subgrafo isomorfo de $G_1$, mas $G_4$ não.
 
 ---
 
+```mermaid
+flowchart LR
+  A
+```
+
+- [JV]
+
+  - Arestas:
+
+    - $e_x = \langle v_i, v_j, l(v_i), l(v_j), L(v_i, v_j) \rangle$
+    - $e_1 = \langle 0, 1, a, a, q \rangle$
+    - $e_2 = \langle 1, 2, a, a, r \rangle$
+    - $e_3 = \langle 2, 0, a, a, r \rangle$
+    - $e_4 = \langle 1, 3, a, b, r \rangle$
+    - Ordem: $e_1 \preceq e_2 \preceq e_3 \preceq e_4$
+
+  - Uma comparação que causou muita dúvida, foi:
+    - $e_4 = \langle 1, 3, a, b, r \rangle$
+    - $e_4 = \langle 0, 3, a, b, r \rangle$
+    - Entre elas, qual é menor?
+    - Resposta: a primeira
+
+```mermaid
+flowchart LR
+  0 --- 1
+  1 --- 2
+  1 --- 3
+  0 --- 3
+```
+
 - Exemplo:
   - Retirado da Figura 11.6 Zaki e Meira
 
 (Imagem de grafos com arestas rotuladas)
+
+- [JV] Exercício: fazer as representações de arestas de todos os 3 grafos e ver que o G1 de fato é menor.
 
 ---
 
@@ -2619,7 +2674,9 @@ Nessa imagem, o $G_3$ é subgrafo isomorfo de $G_1$, mas $G_4$ não.
   Substructures of Molecules. In Proceedings of the 2002 IEEE International Conference on Data Mining
   (ICDM '02). IEEE Computer Society, USA, 51
 
-### Aula 13 | 29/04/2025 | Descoberta de subgrupos
+### Slide: aula08-regras-de-associação
+
+## Aula 13 | 29/04/2025 | Descoberta de subgrupos
 
 ### Aula 14 | 06/05/2025 | Descoberta de subgrupos
 
