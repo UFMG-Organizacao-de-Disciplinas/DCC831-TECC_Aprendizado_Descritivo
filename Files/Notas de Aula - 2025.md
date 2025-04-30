@@ -2609,6 +2609,12 @@ flowchart LR
 
 - [JV] Exercício: fazer as representações de arestas de todos os 3 grafos e ver que o G1 de fato é menor.
 
+## Aula 13 | 29/04/2025 | Descoberta de subgrupos
+
+### Slide: aula07-grafos (Aula 13)
+
+- [JV] Entender melhor o que significa esse tal caminho "mais a direita"
+
 ---
 
 - Note que diferentes buscas geram diferentes representações
@@ -2626,6 +2632,8 @@ flowchart LR
   - As possíveis extensões são determinadas a partir dos caminhos mais à direita dos grafos em que o prefixo ocorre
 - O suporte das extensões são computados e, caso sejam frequentes e canônicas, são exploradas recursivamente
 
+- [JV] Verifica-se o suporte de cada grafo no momento em que são calculados os novos grafos
+
 ---
 
 - **ALGORITHM 11.1. Algorithm gSpan**
@@ -2639,9 +2647,37 @@ flowchart LR
       - **if** $sup(C') \geq minsup$ **and** IsCanonical $(C')$ **then**
         - **gSpan** $(C', D, minsup)$
 
+- [JV]
+  - C: Padrão, usa o
+  - D: Base projetada
+
 ---
 
 - Exemplo: $D = \{G_1, G_2\}, minsup=2$
+
+- [JV]
+  - Começa com $\mathcal{C} = \emptyset$
+  - Define onde ocorrem as arestas: $\epsilon = \{$
+    - $(\langle 0, 1,a, b, 1\rangle, \{G1, G2\}),$
+    - $(\langle 0, 1,a, b, 1\rangle, \{G1, G2\}),$
+    - $(\langle 0, 1, b, a, 1\rangle, \{G1, G2\}),$ # Descartado por não ser canônico com o primeiro
+    - $(\langle 0, 1, b, b, 1\rangle, \{G2\}),$ # Descartado por não ter o suporte mínimo
+  - $\}$
+  - $\mathcal{C} = (\langle 1, 1, a, a, 1\rangle, \{G1, G2\})$
+  - $\epsilon = \{$
+    - $(\langle 1, 2, a, b, 1 \rangle, \{G1, G2\}),$
+    - $(\langle 0, 2, a, b, 1 \rangle, \{G1, G2\}),$
+  - $\}$
+  - No geral, prefe-se partir do mais profundo
+  - $\mathcal{C} = (\langle 0, 1, a, b, 1\rangle, \{G1, G2\})$
+  - $\epsilon = \{$
+    - $(\langle 1, 2, b, a, 1 \rangle, \{G1, G2\}),$
+    - $(\langle 0, 2, a, a, 1 \rangle, \{G1, G2\}),$ # Não é canônico
+    - $(\langle 0, 2, a, b, 1 \rangle, \{G1, G2\}),$
+    - $(\langle 1, 2, b, b, 1 \rangle, \{G1\}),$ # Infrequente
+  - $\}$
+  - Ao analisar quais são os melhores, ao testar novos padrões, podemos re-indexar os vértices, porém um vértice ab sempre será menor que um ba, então mesmo que eu fizesse o a ser 0, ainda assim não o tornaria menor. Eu poderia explicar melhor mas meu celeblotaquenemumpeitimdefrango
+  - > Teve um brilhante lá que...
 
 #### Extensões do problema
 
@@ -2662,14 +2698,14 @@ flowchart LR
 - Capítulo 5 Mining Graph Data, Diane Cook e Lawrence Holder
 - Akihiro Inokuchi, Takashi Washio, and Hiroshi Motoda. 2000. An Apriori-Based Algorithm for Mining
   Frequent Substructures from Graph Data. In Proceedings of the 4th European Conference on Principles of
-  Data Mining and Knowledge Discovery (PKDD '00). Springer-Verlag, Berlin, Heidelberg, 13–23.
+  Data Mining and Knowledge Discovery (PKDD '00). Springer-Verlag, Berlin, Heidelberg, 13-23.
 - Michihiro Kuramochi and George Karypis. 2001. Frequent Subgraph Discovery. In Proceedings of the 2001
-  IEEE International Conference on Data Mining (ICDM '01). IEEE Computer Society, USA, 313–320.
+  IEEE International Conference on Data Mining (ICDM '01). IEEE Computer Society, USA, 313-320.
 - Xifeng Yan and Jiawei Han. 2002. GSpan: Graph-Based Substructure Pattern Mining. In Proceedings of the
   2002 IEEE International Conference on Data Mining (ICDM '02). IEEE Computer Society, USA, 721.
 - Xifeng Yan and Jiawei Han. 2003. CloseGraph: mining closed frequent graph patterns. In Proceedings of the
   ninth ACM SIGKDD international conference on Knowledge discovery and data mining (KDD '03). Association
-  for Computing Machinery, New York, NY, USA, 286–295. <https://doi.org/10.1145/956750.956784>
+  for Computing Machinery, New York, NY, USA, 286-295. <https://doi.org/10.1145/956750.956784>
 - Christian Borgelt and Michael R. Berthold. 2002. Mining Molecular Fragments: Finding Relevant
   Substructures of Molecules. In Proceedings of the 2002 IEEE International Conference on Data Mining
   (ICDM '02). IEEE Computer Society, USA, 51
