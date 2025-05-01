@@ -54,6 +54,20 @@ Representação vertical:
 
 #### a. Qual é a intenção do conjunto $\{T300, T600, T800\}$?
 
+Convertendo para a nova notação:
+
+- **Qual é a intenção do conjunto $\{3, 6, 8\}$?**
+
+Revisitando: Intensão é o conjunto de itens que são comuns a todos os TIDs do conjunto. Sendo assim...
+
+- **Cobertura das transações:**
+
+  - $c(3) = \{B, C\}$
+  - $c(6) = \{B, C\}$
+  - $c(8) = \{A, B, C, E\}$
+
+- **Resposta:** $i(\{3, 6, 8\}) = c(3) \cap c(6) \cap c(8) = \{B, C\}$.
+
 #### b. Qual a cobertura do conjunto de itens resultante do item anterior?
 
 ### 3. Quantos candidatos de tamanho 2 são avaliados pelo Apriori considerando os dados do exercício 01 e um suporte mínimo de 20%?
