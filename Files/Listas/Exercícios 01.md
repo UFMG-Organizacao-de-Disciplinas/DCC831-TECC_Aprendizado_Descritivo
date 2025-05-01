@@ -26,6 +26,30 @@ Prof. Renato Vimieiro
 
 #### Resposta Q1
 
+Reescrevendo TIDs e Itens para facilitar a leitura:
+
+| TID | Itens |
+| --- | :---- |
+| 1   | ABE   |
+| 2   | BD    |
+| 3   | BC    |
+| 4   | ABD   |
+| 5   | AC    |
+| 6   | BC    |
+| 7   | AC    |
+| 8   | ABCE  |
+| 9   | ABC   |
+
+Representação vertical:
+
+| Item | TIDs                |
+| ---- | :------------------ |
+| A    | 1, 4, 5, 7, 8, 9    |
+| B    | 1, 2, 3, 4, 6, 8, 9 |
+| C    | 3, 5, 6, 7, 8, 9    |
+| D    | 2, 4                |
+| E    | 1, 8                |
+
 ### 2. Considerando os dados do exercício anterior, responda
 
 #### a. Qual é a intenção do conjunto $\{T300, T600, T800\}$?
