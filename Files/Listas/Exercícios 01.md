@@ -70,6 +70,10 @@ Revisitando: Intensão é o conjunto de itens que são comuns a todos os TIDs do
 
 #### b. Qual a cobertura do conjunto de itens resultante do item anterior?
 
+Considerando as coberturas dos itens encontrados pela intensão:
+
+- $c(i(\{3, 6, 8\})) = c(\{B, C\}) = c(B) \cap c(C) = \{3, 6, 8, 9\}$.
+
 ### 3. Quantos candidatos de tamanho 2 são avaliados pelo Apriori considerando os dados do exercício 01 e um suporte mínimo de 20%?
 
 ### 4. Mostre a execução do Apriori para obter os candidatos e itemsets frequentes de tamanho 3 para o exemplo acima
