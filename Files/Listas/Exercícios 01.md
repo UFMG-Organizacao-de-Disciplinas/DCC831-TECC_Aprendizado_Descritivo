@@ -76,6 +76,50 @@ Considerando as coberturas dos itens encontrados pela intensão:
 
 ### 3. Quantos candidatos de tamanho 2 são avaliados pelo Apriori considerando os dados do exercício 01 e um suporte mínimo de 20%?
 
+- Recapitulando a sequência do Apriori:
+  - Percorre todos os itens e calcula seu suporte.
+  - Todos os que forem frequentes são combinados para gerar os candidatos de tamanho 2.
+  - Cálculo de candidatos:
+    - Junta dois itens de tamanho $k$ para gerar candidatos de tamanho $k+1$
+      - onde $C = Prefixo + Sufixo$, onde $|Prefixo| \geq 0$ e $|Sufixo| = 1$,
+      - E $C_{1}^{k} = P + S_1$ e $C_{2}^{k} = P + S_2$ geram $C_{3}^{k+1} = P + S_1 + S_2$.
+  - Assim que um candidato cujo suporte é menor que o mínimo, ele é descartado e não é considerado para a próxima iteração.
+
+Resposta:
+
+Número de transações: 9
+
+| $Itens^1$ | Suporte | Suporte Relativo ($sup(i)/ \mid TID \mid )$ | Frequente? |
+| --------- | ------- | ------------------------------------------- | ---------- |
+| A         | 6       | $6/9 = 0.\bar{6}$                           | Sim        |
+| B         | 7       | $7/9 = 0.\bar{7}$                           | Sim        |
+| C         | 6       | $6/9 = 0.\bar{6}$                           | Sim        |
+| D         | 2       | $2/9 = 0.\bar{2}$                           | Sim        |
+| E         | 2       | $2/9 = 0.\bar{2}$                           | Sim        |
+
+- Geração de candidatos de tamanho 2:
+  - Item $A: \{B, C, D, E\} = \{AB, AC, AD, AE\}$
+  - Item $B: \{C, D, E\} = \{BC, BD, BE\}$
+  - Item $C: \{D, E\} = \{CD, CE\}$
+  - Item $D: \{E\} = \{DE\}$
+  - Item $E: \{\}$
+
+| $Itens^2$ | Suporte | Suporte Relativo $(suprel(i) = sup(i)/ \mid TID \mid )$ | Frequente? $(suprel(i) \geq 0.2)$ |
+| --------- | ------- | ------------------------------------------------------- | --------------------------------- |
+| AB        | 4       | $4/9 = 0.\bar{4}$                                       | Sim                               |
+| AC        | 3       | $3/9 = 0.\bar{3}$                                       | Sim                               |
+| AD        | 1       | $1/9 = 0.\bar{1}$                                       | Não                               |
+| AE        | 2       | $2/9 = 0.\bar{2}$                                       | Sim                               |
+| BC        | 4       | $4/9 = 0.\bar{4}$                                       | Sim                               |
+| BD        | 2       | $2/9 = 0.\bar{2}$                                       | Sim                               |
+| BE        | 2       | $2/9 = 0.\bar{2}$                                       | Sim                               |
+| CD        | 0       | $0/9 = 0.\bar{0}$                                       | Não                               |
+| CE        | 1       | $1/9 = 0.\bar{1}$                                       | Não                               |
+| DE        | 0       | $0/9 = 0.\bar{0}$                                       | Não                               |
+
+- Candidatos de tamanho 2: 10
+- **Candidatos frequentes de tamanho 2: 6**
+
 ### 4. Mostre a execução do Apriori para obter os candidatos e itemsets frequentes de tamanho 3 para o exemplo acima
 
 ### 5. Desenhe a FP-tree referente à tabela do exercício 01 com um suporte mínimo de 20%
