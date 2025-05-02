@@ -591,19 +591,15 @@ Então temos dois problemas principais: reduzir o espaço de busca e reduzir a c
 - As múltiplas passadas no conjunto de dados (armazenado em memória secundária) torna o algoritmo impraticável até mesmo para pequenos volumes
 - Os algoritmos que veremos hoje exploram propriedades do problema para amortizar o custo da computação de suporte, e evitar retrabalho na avaliação dos candidatos
 
----
-
----
-
-O que é mesmo o suporte? 🤔
-
-- Recapitulando da aula anterior, o Suporte aparantemente é um encurtamento para o "Suporte Mínimo" (minsup) que é o limiar que define se determinado item é frequente o bastante ou não.
+- [JV]
+  - O que é mesmo o suporte? 🤔
+  - Recapitulando da aula anterior, o Suporte aparentemente é ~~um encurtamento para~~ o "Suporte Mínimo" (minsup) que é o limiar que define se determinado item é frequente o bastante ou não.
+    - Corrigindo: o suporte é a quantidade de vezes que determinado item aparece no conjunto de dados.
+    - Entretanto, a definição de minsup está correta.
   - Esse valor é dado pela seguinte fórmula:
     - $sup(X) = |c(X)|$, onde $c(X)$ é a cobertura do itemset $X$.
-
-Mas o que é mesmo a cobertura?
-
-- A cobertura é o conjunto de transações que contém um itemset $X$. Ou seja, é o conjunto de transações que contém todos os itens do itemset $X$.
+  - Mas o que é mesmo a cobertura?
+    - A cobertura é o conjunto de transações que contém um itemset $X$. Ou seja, é o conjunto de transações que contém todos os itens do itemset $X$.
 
 #### Apriori
 
@@ -614,6 +610,8 @@ Mas o que é mesmo a cobertura?
 - Isso é viabilizado pela propriedade de **anti-monotonicidade** da função suporte
 - Essa é uma das propriedades mais importantes para a área
 
+- Autores: Rakesh Agrawal (Data Insights Labs) e Ramakrishnan Srikant (Google Fellow) (1994)
+
 ##### Anti-monotonicidade do suporte
 
 - Considere dois itemsets $A$ e $B$ quaisquer. Se $A \subseteq B$, então $sup(A) \geq sup(B)$.
@@ -621,16 +619,13 @@ Mas o que é mesmo a cobertura?
   - No caso mais simples, um conjunto de dois itens não pode ocorrer em mais transações que cada um dos itens individualmente
 - Consequentemente, se o itemset A é infrequente, B também será.
 - Isso define a propriedade de anti-monotonicidade da função suporte, também conhecida como a propriedade do Apriori
+
   - **Todo superconjunto de um conjunto infrequente é infrequente**
   - **Todo subconjunto de um conjunto frequente é frequente**
 
----
-
----
-
-Muito interessante isso daí de cima.
-
-Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, se X é frequente, nada garante que Y também seja. Porém, se Y é frequente, isso garante que todos os possíveis subconjuntos de Y também serão frequentes.
+- [JV]
+  - Muito interessante isso daí de cima.
+  - Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, se X é frequente, nada garante que Y também seja. Porém, se Y é frequente, isso garante que todos os possíveis subconjuntos de Y também serão frequentes.
 
 #### Apriori [2]
 
@@ -660,7 +655,7 @@ Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, s
   - **foreach** $i \in \mathcal{I}$ **do** Add $i$ as child of $\emptyset$ in $\mathcal{C}^{(1)}$ with $sup(i) \leftarrow 0$
   - $k \leftarrow 1$ `// k denotes the level`
   - **while** $\mathcal{C}^{(k)} \neq \emptyset$ **do**
-    - ComputeSupport $(\mathcal{C}^{(k)}, D)$
+    - **ComputeSupport** $(\mathcal{C}^{(k)}, D)$
     - **foreach** _leaf_ $X \in \mathcal{C}^{(k)}$ **do**
       - **if** $sup(X) \geq minsup$ **then** $\mathcal{F} \leftarrow \mathcal{F} \cup \{(X, sup(X))\}$
       - **else** remove $X$ from $\mathcal{C}^{(k)}$
@@ -670,13 +665,13 @@ Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, s
 
 ---
 
-- ComputeSupport $(\mathcal{C}^{(k)}, D)$:
+- **ComputeSupport** $(\mathcal{C}^{(k)}, D)$:
 
   - **foreach** $\langle t, i(t) \rangle \in D$ **do**
     - **foreach** k-subset $X \subseteq i(t)$ **do**
       - **if** $X \in \mathcal{C}^{(k)}$ **then** $sup(X) \leftarrow sup(X) + 1$
 
-- ExtendPrefixTree $(\mathcal{C}^{(k)})$:
+- **ExtendPrefixTree** $(\mathcal{C}^{(k)})$:
   - **foreach** leaf $X_a \in \mathcal{C}^{(k)}$ **do**
     - **foreach** leaf $X_b \in SIBLING(X_a)$, such that $b > a$ **do**
       - $X_{ab} \leftarrow X_a \cup X_b$ `// prune candidate if there are any infrequent subsets`
@@ -2637,6 +2632,7 @@ flowchart LR
 ---
 
 - **ALGORITHM 11.1. Algorithm gSpan**
+
   - // Initial Call: $C \leftarrow \emptyset$
   - **gSpan** $(C, D, minsup)$:
     - $\epsilon \leftarrow RightMostPath-Extensions(C, D)$ `// extensions and supports`
@@ -2926,6 +2922,10 @@ Retirado de Algoritmo 6.3 de Tan et al.
 - Capítulo 12 Zaki e Meira
 
 ## Aula 15 | 08/05/2025 | Descoberta de subgrupos
+
+### Slide: aula09-SD
+
+#### Introdução (Aula 15)
 
 ### Aula 16 | 13/05/2025 | Mineração de modelos excepcionais
 
