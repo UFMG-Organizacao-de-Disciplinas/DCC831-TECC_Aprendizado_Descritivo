@@ -308,23 +308,23 @@ flowchart LR
 
 #### Itemset e Tidsets
 
-- Chamamos os elementos do conjunto $I = \{x_1, x_2, \dots, x_m\}$ de itens
+- Chamamos os elementos do conjunto $I = \lbrace x_1, x_2, \dots, x_m \rbrace$ de itens
 - Esses elementos são as variáveis de análise que estamos considerando
 - Um conjunto $X \subseteq I$ é chamado de _itemset_
 - Um itemset de tamanho $k$ é chamado de k-itemset
 - Denotamos o conjunto de todos os k-itemsets por $I^{(k)}$
 - Similarmente, como estamos lidando com 'transações', vamos identificá-las individualmente por IDs, que serão chamados de tids
-- Logo, o conjunto $T = \{t_1, t_2, \dots, t_n\}$ é o conjunto de transações consideradas, identificadas pelos seus respectivos tids
+- Logo, o conjunto $T = \lbrace t_1, t_2, \dots, t_n \rbrace$ é o conjunto de transações consideradas, identificadas pelos seus respectivos tids
 
 - [JV]
   - Os "produtos" da cesta de compras são chamados de "Itens".
-    - $I = \{x_1, x_2, \dots, x_m\}$
+    - $I = \lbrace x_1, x_2, \dots, x_m \rbrace$
   - Esses elementos serão as **variáveis de análise**
   - Um conjunto $X \subseteq I$ é chamado de **Itemset**
   - Um itemset de tamanho $k$ é chamado de **k-itemset**
   - Denotamos o conjunto de todos os **k-itemsets** por $I^(k)$
   - Todas as "Transações" serão identificadas por IDs, ou então, **TID** (Transaction ID)
-  - O conjunto $T = \{t_1, t_2, \dots, t_n\}$ é o conjunto das transações.
+  - O conjunto $T = \lbrace t_1, t_2, \dots, t_n \rbrace$ é o conjunto das transações.
 
 ---
 
@@ -377,22 +377,22 @@ flowchart LR
 - Esse conjunto é chamado de **extensão** ou **cobertura** de $X$
 - Ele é definido pela seguinte função:
   - $c: P(I) \to P(T)$
-  - $c(X) = \{t \in T | \forall i \in X(t, i) \in D\}$
+  - $c(X) = \lbrace t \in T | \forall i \in X(t, i) \in D \rbrace$
 - Dado um tidset Y, podemos querer saber o maior conjunto de itens comuns às transações de Y.
 - Esse conjunto é chamado de **intensão** (Não é intenção!) de Y.
 - Ele é definido por
 
   - $i: P(T) \to P(I)$
-  - $i(Y) = \{x \in I | \forall t \in Y(t, x) \in D\}$
+  - $i(Y) = \lbrace x \in I | \forall t \in Y(t, x) \in D \rbrace$
 
 - [JV] O uso de extensão e intensão vêm da ideia filosófica e semiótica de que a extensão é o conjunto de coisas que se encaixam em uma definição, enquanto a intensão é a definição em si.
 
 ---
 
 - Exemplos:
-  - $i(\{1, 5, 6\}) = \{milk, tea\}$
-  - $c(\{milk, tea\}) = \{1, 3, 5, 6\}$
-  - $c(\{muesly, oats\}) = ?$
+  - $i(\lbrace 1, 5, 6 \rbrace) = \lbrace milk, tea \rbrace$
+  - $c(\lbrace milk, tea \rbrace) = \lbrace 1, 3, 5, 6 \rbrace$
+  - $c(\lbrace muesly, oats \rbrace) = ?$
   - $i({4, 5}) = ?$
 
 | TID | Muesli | Oats | Milk | Yoghurt | Biscuits | Tea |
@@ -477,10 +477,10 @@ flowchart LR
 
 - Dessa forma, dizemos que um itemset é frequente sse $sup(X) \geq minsup$
 - Exemplos, considerando $minsup=2$:
-  - $\{milk\}; sup(\{milk\}) = 5$
-  - $\{milk, tea\}; sup(\{milk, tea\}) = 4$
-  - $\{muesli, oats, milk\}$?
-  - $\{muesli, milk\}$?
+  - $\lbrace milk \rbrace; sup(\lbrace milk \rbrace) = 5$
+  - $\lbrace milk, tea \rbrace; sup(\lbrace milk, tea \rbrace) = 4$
+  - $\lbrace muesli, oats, milk \rbrace$?
+  - $\lbrace muesli, milk \rbrace$?
 
 | TID | Muesli | Oats | Milk | Yoghurt | Biscuits | Tea |
 | --: | -----: | ---: | ---: | ------: | -------: | --: |
@@ -624,7 +624,7 @@ Complexidade do algoritmo: $O(2^I \cdot T \cdot I)$
 
 - [JV]
   - Muito interessante isso daí de cima.
-  - Basicamente entendemos que $sup(X=\{A, B\}) \geq sup(Y=\{A, B, C\})$ com isso, se X é frequente, nada garante que Y também seja. Porém, se Y é frequente, isso garante que todos os possíveis subconjuntos de Y também serão frequentes.
+  - Basicamente entendemos que $sup(X=\lbrace A, B \rbrace) \geq sup(Y=\lbrace A, B, C \rbrace)$ com isso, se X é frequente, nada garante que Y também seja. Porém, se Y é frequente, isso garante que todos os possíveis subconjuntos de Y também serão frequentes.
 
 #### Apriori [2]
 
@@ -650,13 +650,13 @@ Complexidade do algoritmo: $O(2^I \cdot T \cdot I)$
 
 - **APRIORI** $(D, \mathcal{I}, minsup)$:
   - $\mathcal{F} \gets \emptyset$
-  - $\mathcal{C}^{(1)} \gets \{\emptyset\}$ `// Initial prefix tree with single items`
+  - $\mathcal{C}^{(1)} \gets \lbrace \emptyset \rbrace$ `// Initial prefix tree with single items`
   - **foreach** $i \in \mathcal{I}$ **do** Add $i$ as child of $\emptyset$ in $\mathcal{C}^{(1)}$ with $sup(i) \gets 0$
   - $k \gets 1$ `// k denotes the level`
   - **while** $\mathcal{C}^{(k)} \neq \emptyset$ **do**
     - **ComputeSupport** $(\mathcal{C}^{(k)}, D)$
     - **foreach** _leaf_ $X \in \mathcal{C}^{(k)}$ **do**
-      - **if** $sup(X) \geq minsup$ **then** $\mathcal{F} \gets \mathcal{F} \cup \{(X, sup(X))\}$
+      - **if** $sup(X) \geq minsup$ **then** $\mathcal{F} \gets \mathcal{F} \cup \lbrace (X, sup(X)) \rbrace$
       - **else** remove $X$ from $\mathcal{C}^{(k)}$
     - $\mathcal{C}^{(k+1)} \gets$ ExtendPrefixTree($\mathcal{C}^{(k)}$)
     - $k \gets k+1$
@@ -766,7 +766,7 @@ $$
     2. Se o BD é denso, as transações são mais largas.
        - $\binom{|t|}{k}$
        - Quando é esparso, funciona bem. Quando é denso que começa a dar problema.
-  - Eu tô achando que se eu compro $J = \{A, B, C\}$, Então o conjunto potência dele é $P(J) = \{\emptyset, A, B, C, AB, AC, BC, ABC\}$, e então, incrementaria 1 para um desses grupos
+  - Eu tô achando que se eu compro $J = \lbrace A, B, C \rbrace$, Então o conjunto potência dele é $P(J) = \lbrace \emptyset, A, B, C, AB, AC, BC, ABC \rbrace$, e então, incrementaria 1 para um desses grupos
   - Cálculo de suporte:
     - Para cada um dos itemsets tem que verificar se ele tá na árvore K(?)
   - Se os itemsets estão em memória...
@@ -806,11 +806,11 @@ $$
 - [JV]
   - Cria-se uma relação de equivalência pelos prefixos.
   - Diz-se que dois itemsets são equivalentes se o prefixos dos dois são iguais.
-  - Consideremos que temos o seguinte conjunto potência: $\mathcal{P}(I) = \{\emptyset, A, B, C, AB, AC, BC, ABC\}$. Na forma de representação, seria como se agrupássemos os dados em grupos de prefixos:
-    - $\emptyset: \{\emptyset, A, B, C, AB, AC, BC, ABC\}$
-    - $A: \{A, AB, AC, ABC\}$
-    - $B: \{B, BC\}$
-    - $C: \{C\}$
+  - Consideremos que temos o seguinte conjunto potência: $\mathcal{P}(I) = \lbrace \emptyset, A, B, C, AB, AC, BC, ABC \rbrace$. Na forma de representação, seria como se agrupássemos os dados em grupos de prefixos:
+    - $\emptyset: \lbrace \emptyset, A, B, C, AB, AC, BC, ABC \rbrace$
+    - $A: \lbrace A, AB, AC, ABC \rbrace$
+    - $B: \lbrace B, BC \rbrace$
+    - $C: \lbrace C \rbrace$
   - E então seriam varridos de C para A (ou o $\emptyset$).
   - Poderia-se também fazer subgrupos de subgrupos, dependendo do tamanho do conjunto de prefixos.
 
@@ -828,16 +828,16 @@ $$
 ---
 
 - **ALGORITHM 8.3. Algorithm ECLAT**
-- // Initial Call: $\mathcal{F} \gets \emptyset, P \gets \{ \langle i, t(i) \rangle | i \in \mathcal{I}, |t(i)| \geq minsup \}$
+- // Initial Call: $\mathcal{F} \gets \emptyset, P \gets \lbrace  \langle i, t(i) \rangle | i \in \mathcal{I}, |t(i)| \geq minsup  \rbrace$
 - **ECLAT** $(P, minsup, \mathcal{F})$:
   - **foreach** $\langle X_a, t(X_a) \rangle \in P$ **do**
-    - $\mathcal{F} \gets \mathcal{F} \cup \{(X_a, sup(X_a))\}$
+    - $\mathcal{F} \gets \mathcal{F} \cup \lbrace (X_a, sup(X_a)) \rbrace$
     - $P_a \gets \emptyset$
     - **foreach** $\langle X_b, t(X_b) \rangle \in P$, with $X_b > X_a$ **do**
       - $X_{ab} = X_a \cup X_b$
       - $t(X_{ab}) = t(X_a) \cap t(X_b)$
       - **if** $sup(X_{ab}) \geq minsup$ **then**
-        - $P_a \gets P_a \cup \{ \langle X_{ab}, t(X_{ab}) \rangle \}$
+        - $P_a \gets P_a \cup \lbrace  \langle X_{ab}, t(X_{ab}) \rangle  \rbrace$
     - **if** $P_a \neq \emptyset$ **then** ECLAT $(P_a, minsup, \mathcal{F})$
 
 [JV: Droga, foquei em transcrever brevemente e esqueci de prestar atenção na explicação do professor]
@@ -980,28 +980,28 @@ $$
     - $d(PY) - d(PX)$
   - $d(PX) = ...$
   - Outro exemplo:
-    - $P = \{1, 2, 3, 4, 5\}$
-    - $X = \{1, 3, 5\}$
-    - $Y = \{2, 3, 4\}$
-    - $PX = \{1, 3, 5\}$
-    - $PY = \{2, 3, 4\}$
-    - $\overline{PY} = \{1, 5\}$
-    - $PX \cap \overline{PY} = \{1, 5\}$
+    - $P = \lbrace 1, 2, 3, 4, 5 \rbrace$
+    - $X = \lbrace 1, 3, 5 \rbrace$
+    - $Y = \lbrace 2, 3, 4 \rbrace$
+    - $PX = \lbrace 1, 3, 5 \rbrace$
+    - $PY = \lbrace 2, 3, 4 \rbrace$
+    - $\overline{PY} = \lbrace 1, 5 \rbrace$
+    - $PX \cap \overline{PY} = \lbrace 1, 5 \rbrace$
 
 ---
 
 - **ALGORITHM 8.4. Algorithm dEclat**
-  - //`Initial Call:` $\mathcal{F} \gets \emptyset, P \gets \{ \langle i, d(i), sup(i) \rangle | i \in \mathcal{I}, d(i) = \mathcal{T}\\t(i), sup(i) \geq minsup \}$
+  - //`Initial Call:` $\mathcal{F} \gets \emptyset, P \gets \lbrace  \langle i, d(i), sup(i) \rangle | i \in \mathcal{I}, d(i) = \mathcal{T}\\t(i), sup(i) \geq minsup  \rbrace$
   - **dEclat** $(P, minsup, \mathcal{F})$:
     - **foreach** $\langle X_a, d(X_a), sup(X_a) \rangle \in P$ **do**
-      - $\mathcal{F} \gets \mathcal{F} \cup \{(X_a, sup(X_a))\}$
+      - $\mathcal{F} \gets \mathcal{F} \cup \lbrace (X_a, sup(X_a)) \rbrace$
       - $P_a \gets \emptyset$
       - **foreach** $\langle X_b, d(X_b), sup(X_b) \rangle \in P$, with $X_b > X_a$ **do**
         - $X_{ab} = X_a \cup X_b$
         - $d(X_{ab}) = d(X_b) \setminus d(X_a)$
         - $sup(X_{ab}) = sup(X_a) - |d(X_{ab})|$
         - **if** $sup(X_{ab}) \geq minsup$ **then**
-          - $P_a \gets P_a \cup \{ \langle X_{ab}, d(X_{ab}), sup(X_{ab}) \rangle \}$
+          - $P_a \gets P_a \cup \lbrace  \langle X_{ab}, d(X_{ab}), sup(X_{ab}) \rangle  \rbrace$
       - **if** $P_a \neq \emptyset$ **then** dEclat $(P_a, minsup, \mathcal{F})$
 
 ---
@@ -1076,6 +1076,7 @@ $$
 - Segundo, o algoritmo percorre novamente a base processando as transações ordenadas pela frequência dos itens
   - Os itens nas transações são ordenados em ordem decrescente de frequência e os infrequentes são filtrados
 - As transações são então inseridas na árvore enquanto processadas
+
   - Itens são nós da árvore
   - Cada nó armazena um item e sua frequência (número de transações que o contém)
 
@@ -1096,32 +1097,33 @@ $$
 | 6       |       1        |      0       |      1       |        0        |        0         |      1      |
 
 - [JV]
-    - $minsup = 2$
-    - Em ordem de maior suporte pra menor suporte: $cfabd$
-        1. cfad
-        2. cb
-        3. cf
-        4. ad
-        5. cfb
-        6. cfa
-    - Obs.: Ignoram-se os itens infrequentes.
+  - $minsup = 2$
+  - Em ordem de maior suporte pra menor suporte: $cfabd$
+    1. cfad
+    2. cb
+    3. cf
+    4. ad
+    5. cfb
+    6. cfa
+  - Obs.: Ignoram-se os itens infrequentes.
 
 #### Mineração dos padrões [Aula 05]
 
 - A mineração dos padrões se inicia uma vez que a FP-Tree tenha sido construída
 - A construção agora ocorre aumentando-se prefixos dos padrões em ordem crescente de suporte
 - As transações que satisfaçam (contém) o padrão sendo construído são projetadas em uma nova árvore
-    - Itens podem se tornar infrequentes nessa nova base e são descartados
+  - Itens podem se tornar infrequentes nessa nova base e são descartados
 - Os padrões encontrados nessa nova árvore devem incluir o prefixo que a gerou
 - O algoritmo segue com as extensões recursivamente até que um único ramo seja obtido
-    - Se a árvore possui um único ramo, os padrões obteníveis são todas as combinações dos nós
+
+  - Se a árvore possui um único ramo, os padrões obteníveis são todas as combinações dos nós
 
 - [JV]
-    - Para se minerar as transações de volta, percorremos a lista de itens e então subimos dele até a raiz.
-    - Partindo do item menos frequente e indo pro item mais frequente, fazemos projeções da árvore.
-    - Essas projeções são sub-árvores da árvore original.
-    - No caso do d, percorrerei todos os nós da lista encadeada de de d's, indo dele até a raiz. A junção de todos os nós que eu passar, formará uma nova árvore. E essa será a projeção do item d.
-    - Mas ainda não entendi o que precisa ser feito após essa primeira projeção.
+  - Para se minerar as transações de volta, percorremos a lista de itens e então subimos dele até a raiz.
+  - Partindo do item menos frequente e indo pro item mais frequente, fazemos projeções da árvore.
+  - Essas projeções são sub-árvores da árvore original.
+  - No caso do d, percorrerei todos os nós da lista encadeada de de d's, indo dele até a raiz. A junção de todos os nós que eu passar, formará uma nova árvore. E essa será a projeção do item d.
+  - Mas ainda não entendi o que precisa ser feito após essa primeira projeção.
 
 ---
 
@@ -1151,8 +1153,8 @@ flowchart LR
 ```
 
 - [JV]
-    - Há também uma lista encadeada para todos os nós com ocorrências de um mesmo item.
-    - A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e calcularmos sua frequência.
+  - Há também uma lista encadeada para todos os nós com ocorrências de um mesmo item.
+  - A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e calcularmos sua frequência.
 
 #### Continua na próxima aula
 
@@ -1190,6 +1192,7 @@ flowchart LR
 - Segundo, o algoritmo percorre novamente a base processando as transações ordenadas pela frequência dos itens
   - Os itens nas transações são ordenados em ordem decrescente de frequência e os infrequentes são filtrados
 - As transações são então inseridas na árvore enquanto processadas
+
   - Itens são nós da árvore
   - Cada nó armazena um item e sua frequência (número de transações que o contém)
 
@@ -1247,8 +1250,9 @@ flowchart LR
 ```
 
 - [JV]
-    - Há também uma lista encadeada para todos os nós com ocorrências de um mesmo item.
-    - A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e calcularmos sua frequência.
+
+  - Há também uma lista encadeada para todos os nós com ocorrências de um mesmo item.
+  - A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e calcularmos sua frequência.
 
 - [JV] Explicação do Algoritmo
   - Para se minerar as transações de volta, percorremos a lista de itens e então subimos dele até a raiz.
@@ -1346,7 +1350,7 @@ Figuras retiradas de Borgelt, C. An Implementation of the FP-growth Algorithm
 - Nessa aula, vamos discutir representações compactas para o conjunto de todos os conjuntos de itens frequentes de uma base de dados
 - Representações compactas são subconjuntos a partir dos quais é possível derivar todos os conjuntos de itens frequentes
 - Para motivar a necessidade dessas representações, considere uma base de dados com somente duas transações e 100 itens:
-  - $D = \{(0, a_{1}, a_{2}, \dots, a_{50}), (1, a_{1}, a_{2}, \dots, a_{100})\}$
+  - $D = \lbrace (0, a_{1}, a_{2}, \dots, a_{50}), (1, a_{1}, a_{2}, \dots, a_{100}) \rbrace$
 - Se considerarmos um minsup=1, essa base terá
 
   - $\binom{100}{1} + \binom{100}{2} + \dots + \binom{100}{100} = 2^{100} - 1 \approx 1.27E^{30}$
@@ -1402,9 +1406,9 @@ Figuras retiradas de Borgelt, C. An Implementation of the FP-growth Algorithm
 - Essa necessidade de novas passadas na base de dados para computar o suporte dos itemsets frequentes a partir dos máximos torna a representação incompleta
 - Os conjuntos fechados, por outro lado, são uma representação completa, já que tanto os itemsets quanto seu suporte podem ser derivados desses conjuntos
 - Como dito, todo conjunto fechado dá origem a uma classe de equivalência
-  - $[X] = \{Y \subseteq I | c(Y) = c(X)\} = \{Y \subseteq I | i(c(Y)) = X\}$
+  - $[X] = \lbrace Y \subseteq I | c(Y) = c(X) \rbrace = \lbrace Y \subseteq I | i(c(Y)) = X \rbrace$
 - Assim, podemos verificar o suporte de um itemset frequente a partir dos conjuntos fechados da seguinte forma
-  - $sup(𝑋) = max \{sup(Y) | Y \in \mathcal{C} \wedge X \subseteq Y\}$
+  - $sup(𝑋) = max \lbrace sup(Y) | Y \in \mathcal{C} \wedge X \subseteq Y \rbrace$
   - Em outras palavras, basta encontrarmos a classe de equivalência à qual o itemset pertence; todo itemset frequente ou é fechado ou pertence à classe de equivalência de algum conjunto fechado, como o suporte é anti-monotônico, se ele não for fechado, ele pertence à classe do de maior suporte.
 
 ---
@@ -1431,17 +1435,17 @@ flowchart LR
   classDef Maximal fill:#fffba6, color:#000000, stroke-width:5px, stroke:#000000;
 
   %% Vértices
-  MOKY(("MOKY $$\{\}$$")):::Infrequent
-  MOK(("MOK $$\{\}$$")):::Infrequent
-  MOY(("MOY $$\{\}$$")):::Infrequent
+  MOKY(("MOKY $$\lbrace  \rbrace$$")):::Infrequent
+  MOK(("MOK $$\lbrace  \rbrace$$")):::Infrequent
+  MOY(("MOY $$\lbrace  \rbrace$$")):::Infrequent
   MKY(("MKY $$1$$")):::Maximal
-  OKY(("OKY $$\{\}$$")):::Infrequent
-  MO(("MO $$\{\}$$")):::Infrequent
+  OKY(("OKY $$\lbrace  \rbrace$$")):::Infrequent
+  MO(("MO $$\lbrace  \rbrace$$")):::Infrequent
   MK(("MK $$16$$")):::Frequent
   MY(("MY $$14$$")):::Frequent
   OK(("OK $$25$$")):::Maximal
-  OY(("OY $$\{\}$$")):::Infrequent
-  KY(("KY $$\{\}$$")):::Infrequent
+  OY(("OY $$\lbrace  \rbrace$$")):::Infrequent
+  KY(("KY $$\lbrace  \rbrace$$")):::Infrequent
   M(("M $$146$$")):::Frequent
   O(("O $$25$$")):::Frequent
   K(("K $$12356$$")):::Frequent
@@ -1484,17 +1488,17 @@ flowchart LR
   classDef Maximal fill:#fffba6, color:#000000, stroke-width:5px, stroke:#000000;
 
   %% Vértices
-  MOKY(("MOKY $$\{\}$$")):::Infrequent
-  MOK(("MOK $$\{\}$$")):::Infrequent
-  MOY(("MOY $$\{\}$$")):::Infrequent
+  MOKY(("MOKY $$\lbrace  \rbrace$$")):::Infrequent
+  MOK(("MOK $$\lbrace  \rbrace$$")):::Infrequent
+  MOY(("MOY $$\lbrace  \rbrace$$")):::Infrequent
   MKY(("MKY $$1$$")):::Maximal
-  OKY(("OKY $$\{\}$$")):::Infrequent
-  MO(("MO $$\{\}$$")):::Infrequent
+  OKY(("OKY $$\lbrace  \rbrace$$")):::Infrequent
+  MO(("MO $$\lbrace  \rbrace$$")):::Infrequent
   MK(("MK $$16$$")):::Frequent
   MY(("MY $$14$$")):::Frequent
   OK(("OK $$25$$")):::Maximal
-  OY(("OY $$\{\}$$")):::Infrequent
-  KY(("KY $$\{\}$$")):::Infrequent
+  OY(("OY $$\lbrace  \rbrace$$")):::Infrequent
+  KY(("KY $$\lbrace  \rbrace$$")):::Infrequent
   M(("M $$146$$")):::Frequent
   O(("O $$25$$")):::Frequent
   K(("K $$12356$$")):::Frequent
@@ -1755,9 +1759,9 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
   - A maior crítica a esse método é que não tem muito uma métrica de qualidade. O que temos é a definição do suporte e se ele é bom o bastante pro usuário.
 - [Quadro]
   - $MFI \subseteq FCI \subseteq FIM$
-  - Apriori: $FIM =  \{ X \subseteq I | sup (x) \geq minsup \}$
-  - DCI: $FCI = \{ X \subseteq I | X = i(c(x)) \wedge sup (x) \geq minsup \}$
-  - MAFIA: $MFI = \{ X \subseteq I | sup (x) \geq minsup \wedge \nexists Y \supseteq X \wedge sup (y) \geq minsup \}$
+  - Apriori: $FIM =  \lbrace  X \subseteq I | sup (x) \geq minsup  \rbrace$
+  - DCI: $FCI = \lbrace  X \subseteq I | X = i(c(x)) \wedge sup (x) \geq minsup  \rbrace$
+  - MAFIA: $MFI = \lbrace  X \subseteq I | sup (x) \geq minsup \wedge \nexists Y \supseteq X \wedge sup (y) \geq minsup  \rbrace$
 
 ---
 
@@ -1868,7 +1872,7 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
   - As diferentes transações de um cliente ordenados pelo tempo formam a sequência
 - Um cliente $(sid, s)$ suporta uma sequência $\alpha$ se $\alpha \subseteq s$ para
 - Assim, definimos o suporte de uma sequência como
-  - $sup(\alpha) = |\{(sid, s) | \alpha \subseteq s\}|$
+  - $sup(\alpha) = |\lbrace (sid, s) | \alpha \subseteq s \rbrace|$
 - Exemplo:
   - $sup(\langle a \rangle) = 5$
   - $sup(\langle gb \rangle) = 2$
@@ -1970,7 +1974,7 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
   - As diferentes transações de um cliente ordenados pelo tempo formam a sequência
 - Um cliente $(sid, s)$ suporta uma sequência $\alpha$ se $\alpha \subseteq s$ para
 - Assim, definimos o suporte de uma sequência como
-  - $sup(\alpha) = |\{(sid, s) | \alpha \subseteq s\}|$
+  - $sup(\alpha) = |\lbrace (sid, s) | \alpha \subseteq s \rbrace|$
 - Exemplo:
   - $sup(\langle a \rangle) = 5$
   - $sup(\langle gb \rangle) = 2$
@@ -2035,7 +2039,7 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 - A exceção se dá quando $x=y$, nesse caso somente a primeira é gerada
 - Logo, o conjunto de candidatos de tamanho 2 é:
 
-  - $C^{(2)} = \{ \langle xy \rangle | (x, y) \in F^{(1)} \times F^{(1)} \} \cup \{ \langle (xy) \rangle | (x, y) \in F^{(1)} \times F^{(1)} \wedge x \neq y\}$
+  - $C^{(2)} = \lbrace  \langle xy \rangle | (x, y) \in F^{(1)} \times F^{(1)}  \rbrace \cup \lbrace  \langle (xy) \rangle | (x, y) \in F^{(1)} \times F^{(1)} \wedge x \neq y \rbrace$
 
 - [JV]
   - Primeiro calcula o suporte de cada item individual.
@@ -2077,8 +2081,8 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
   - $pos(i)$ é a lista de todos os elementos em que $i$ ocorre na sequência referente ao cliente $sid$
 - A lista de todos os pares sequência-posição de um item é chamada de **poslist** e é denotada por $\mathcal{L}(i)$
 - Exemplos:
-  - $\mathcal{L}(l) = \{ (2, \{3\}), (3, \{1\}), (4, \{2\}), (6, \{2, 3\} ) \}$
-  - $\mathcal{L}(g) = \{ (2, \{1\}), (6, \{1\}) \}$
+  - $\mathcal{L}(l) = \lbrace  (2, \lbrace 3 \rbrace), (3, \lbrace 1 \rbrace), (4, \lbrace 2 \rbrace), (6, \lbrace 2, 3 \rbrace )  \rbrace$
+  - $\mathcal{L}(g) = \lbrace  (2, \lbrace 1 \rbrace), (6, \lbrace 1 \rbrace)  \rbrace$
 - A representação vertical da base pode ser obtida pelas poslists de todos os itens
   - Note que $sup(i) = |\mathcal{L}(i)|$
 
@@ -2141,8 +2145,8 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
   - $pos(i)$ é a lista de todos os elementos em que $i$ ocorre na sequência referente ao cliente $sid$
 - A lista de todos os pares sequência-posição de um item é chamada de **poslist** e é denotada por $\mathcal{L}(i)$
 - Exemplos:
-  - $\mathcal{L}(l) = \{ (2, \{3\}), (3, \{1\}), (4, \{2\}), (6, \{2, 3\} ) \}$
-  - $\mathcal{L}(g) = \{ (2, \{1\}), (6, \{1\}) \}$
+  - $\mathcal{L}(l) = \lbrace  (2, \lbrace 3 \rbrace), (3, \lbrace 1 \rbrace), (4, \lbrace 2 \rbrace), (6, \lbrace 2, 3 \rbrace )  \rbrace$
+  - $\mathcal{L}(g) = \lbrace  (2, \lbrace 1 \rbrace), (6, \lbrace 1 \rbrace)  \rbrace$
 - A representação vertical da base pode ser obtida pelas poslists de todos os itens
   - Note que $sup(i) = |\mathcal{L}(i)|$
 
@@ -2155,39 +2159,39 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 | 5       | $$\langle c \rangle$$           |
 | 6       | $$\langle (ag) l (bl) \rangle$$ |
 
-| **item** | **pos(item)**                             |
-| :------- | :---------------------------------------- |
-| a        | $\{ (1,1), (2,2), (3,1), (4,1), (6,1) \}$ |
-| b        | $\{ (2,3), (4,2), (6,3) \}$               |
-| c        | $\{ (1,2), (4,3), (5,1) \}$               |
-| g        | $\{ (2,1), (6,1) \}$                      |
-| i        | $\{ (3,1) \}$                             |
-| l        | $\{ (2,3), (3,1), (4,2), (6,23) \}$       |
-| s        | $\{ (2,3) \}$                             |
+| **item** | **pos(item)**                                         |
+| :------- | :---------------------------------------------------- |
+| a        | $\lbrace  (1,1), (2,2), (3,1), (4,1), (6,1)  \rbrace$ |
+| b        | $\lbrace  (2,3), (4,2), (6,3)  \rbrace$               |
+| c        | $\lbrace  (1,2), (4,3), (5,1)  \rbrace$               |
+| g        | $\lbrace  (2,1), (6,1)  \rbrace$                      |
+| i        | $\lbrace  (3,1)  \rbrace$                             |
+| l        | $\lbrace  (2,3), (3,1), (4,2), (6,23)  \rbrace$       |
+| s        | $\lbrace  (2,3)  \rbrace$                             |
 
 - [JV Anotação no quadro]
   - $ms = minsup = 3$
-  - itens com suporte mínimo: $\{a, b, c, l\}$
+  - itens com suporte mínimo: $\lbrace a, b, c, l \rbrace$
   - Checa com o
   - $P_a:$
     - Verifica naquela lista ali de trás de $pos(item)$, e vai verificando se os itens aparecem nessa ordem para os dois itens nas transações de um mesmo cliente.
     - $\emptyset a - \emptyset a:$ aa | ~~(aa)~~ (Como os dois são o mesmo item, é descartado)
       - $aa:$ Infrequente
     - $\emptyset a - \emptyset b: ab | (ab)$
-      - $ab: pos = \{ (2,3), (4,2), (6,3) \}$
+      - $ab: pos = \lbrace  (2,3), (4,2), (6,3)  \rbrace$
       - $(ab):$ Infrequente
     - $\emptyset a - \emptyset c: ac | (ac)$
-      - $ac: pos = \{ (1,2), (4,3) \}$ Infrequente
+      - $ac: pos = \lbrace  (1,2), (4,3)  \rbrace$ Infrequente
       - $(ac):$ Infrequente
     - $\emptyset a - \emptyset l: al|(al)$
-      - $al: pos = \{ (2,3), (4,2), (6, 23) \}$
+      - $al: pos = \lbrace  (2,3), (4,2), (6, 23)  \rbrace$
       - $(al):$ Infrequente
-  - Então, os frequentes são: $\{ ab, al\}$
+  - Então, os frequentes são: $\lbrace  ab, al \rbrace$
   - $P_{ab}$
     - $ab - ab: abb$
     - $ab - al: abl|a(bl)$
-      - $a(bl): pos = (2,3), (4,2), (6,3) \}$
-  - Então os frequentes são: $\{ a(bl) \}$
+      - $a(bl): pos = (2,3), (4,2), (6,3)  \rbrace$
+  - Então os frequentes são: $\lbrace  a(bl)  \rbrace$
   - $P_{a(bl)}$
     - $a(bl) - a(bl): a(bl)l$ Isso daqui eu não entendi.
   -
@@ -2221,8 +2225,8 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 
 ---
 
-- Sejam as sequências $\langle gb \rangle$ e $\langle gl \rangle$ pertencentes à classe de equivalência de $g$, e suas respectivas poslists $\mathcal{L}(gb) = \{ (2,3), (6,3) \}$ e $\mathcal{L}(gl) = \{ (2,3), (6,3) \}$
-  - $\mathcal{L}(g(bl)) = \{ (2,3), (6,3) \}$
+- Sejam as sequências $\langle gb \rangle$ e $\langle gl \rangle$ pertencentes à classe de equivalência de $g$, e suas respectivas poslists $\mathcal{L}(gb) = \lbrace  (2,3), (6,3)  \rbrace$ e $\mathcal{L}(gl) = \lbrace  (2,3), (6,3)  \rbrace$
+  - $\mathcal{L}(g(bl)) = \lbrace  (2,3), (6,3)  \rbrace$
   - $\mathcal{L}(gbl) = \emptyset$
   - $\mathcal{L}(glb) = \emptyset$
 - O algoritmo segue explorando o espaço de busca enquanto as classes de equivalência não forem vazias
@@ -2301,10 +2305,10 @@ Nessa imagem, o $G_3$ é subgrafo isomorfo de $G_1$, mas $G_4$ não.
 
 ---
 
-- Uma base de dados $D = \{G_1, G_2, \dots, G_n\}$ é um conjunto de grafos rotulados.
+- Uma base de dados $D = \lbrace G_1, G_2, \dots, G_n \rbrace$ é um conjunto de grafos rotulados.
 - O suporte de um grafo (padrão) $G$ é o número de grafos em $D$ em que $G$ está contido:
 
-  - $\text{sup}(G) = |\{G_i \in D\ |\ G \subseteq G_i\}|$
+  - $\text{sup}(G) = |\lbrace G_i \in D\ |\ G \subseteq G_i \rbrace|$
 
 - Um padrão $G$ é frequente se $\text{sup}(G) \geq minsup$
 
@@ -2607,29 +2611,29 @@ flowchart LR
 
 ---
 
-- Exemplo: $D = \{G_1, G_2\}, minsup=2$
+- Exemplo: $D = \lbrace G_1, G_2 \rbrace, minsup=2$
 
 - [JV]
   - Começa com $\mathcal{C} = \emptyset$
-  - Define onde ocorrem as arestas: $\epsilon = \{$
-    - $(\langle 0, 1,a, b, 1\rangle, \{G1, G2\}),$
-    - $(\langle 0, 1,a, b, 1\rangle, \{G1, G2\}),$
-    - $(\langle 0, 1, b, a, 1\rangle, \{G1, G2\}),$ # Descartado por não ser canônico com o primeiro
-    - $(\langle 0, 1, b, b, 1\rangle, \{G2\}),$ # Descartado por não ter o suporte mínimo
-  - $\}$
-  - $\mathcal{C} = (\langle 1, 1, a, a, 1\rangle, \{G1, G2\})$
-  - $\epsilon = \{$
-    - $(\langle 1, 2, a, b, 1 \rangle, \{G1, G2\}),$
-    - $(\langle 0, 2, a, b, 1 \rangle, \{G1, G2\}),$
-  - $\}$
+  - Define onde ocorrem as arestas: $\epsilon = \lbrace $
+    - $(\langle 0, 1,a, b, 1\rangle, \lbrace G1, G2 \rbrace),$
+    - $(\langle 0, 1,a, b, 1\rangle, \lbrace G1, G2 \rbrace),$
+    - $(\langle 0, 1, b, a, 1\rangle, \lbrace G1, G2 \rbrace),$ # Descartado por não ser canônico com o primeiro
+    - $(\langle 0, 1, b, b, 1\rangle, \lbrace G2 \rbrace),$ # Descartado por não ter o suporte mínimo
+  - $ \rbrace$
+  - $\mathcal{C} = (\langle 1, 1, a, a, 1\rangle, \lbrace G1, G2 \rbrace)$
+  - $\epsilon = \lbrace $
+    - $(\langle 1, 2, a, b, 1 \rangle, \lbrace G1, G2 \rbrace),$
+    - $(\langle 0, 2, a, b, 1 \rangle, \lbrace G1, G2 \rbrace),$
+  - $ \rbrace$
   - No geral, prefe-se partir do mais profundo
-  - $\mathcal{C} = (\langle 0, 1, a, b, 1\rangle, \{G1, G2\})$
-  - $\epsilon = \{$
-    - $(\langle 1, 2, b, a, 1 \rangle, \{G1, G2\}),$
-    - $(\langle 0, 2, a, a, 1 \rangle, \{G1, G2\}),$ # Não é canônico
-    - $(\langle 0, 2, a, b, 1 \rangle, \{G1, G2\}),$
-    - $(\langle 1, 2, b, b, 1 \rangle, \{G1\}),$ # Infrequente
-  - $\}$
+  - $\mathcal{C} = (\langle 0, 1, a, b, 1\rangle, \lbrace G1, G2 \rbrace)$
+  - $\epsilon = \lbrace $
+    - $(\langle 1, 2, b, a, 1 \rangle, \lbrace G1, G2 \rbrace),$
+    - $(\langle 0, 2, a, a, 1 \rangle, \lbrace G1, G2 \rbrace),$ # Não é canônico
+    - $(\langle 0, 2, a, b, 1 \rangle, \lbrace G1, G2 \rbrace),$
+    - $(\langle 1, 2, b, b, 1 \rangle, \lbrace G1 \rbrace),$ # Infrequente
+  - $ \rbrace$
   - Ao analisar quais são os melhores, ao testar novos padrões, podemos re-indexar os vértices, porém um vértice ab sempre será menor que um ba, então mesmo que eu fizesse o a ser 0, ainda assim não o tornaria menor. Eu poderia explicar melhor mas meu celeblotaquenemumpeitimdefrango
   - > Teve um brilhante lá que...
 
@@ -2691,7 +2695,7 @@ flowchart LR
 
 - Como as regras interessantes são aquelas que satisfazem o suporte mínimo, elas podem ser geradas a partir dos itemsets frequentes
 - Podem ser geradas $2^k - 2$ regras a partir de um k-itemset
-  - $r(X) = \{(X - Y) \to Y | Y \subseteq X$ e $0 < |Y| < k\}$
+  - $r(X) = \lbrace (X - Y) \to Y | Y \subseteq X$ e $0 < |Y| < k \rbrace$
   - Note que, como X é frequente, o suporte dos antecedentes e consequentes da regra também são itemsets frequentes e, portanto, já tiveram suporte computado. Assim, não há necessidade de novas passadas na base de dados para computar a confiança da regra
 - Embora não seja anti-monotônica, se $(X - Y) \to Y$ não satisfaz a restrição de confiança, então $(X - Y') \to Y'$ também não satisfaz para todo $Y' \supset Y$
 
