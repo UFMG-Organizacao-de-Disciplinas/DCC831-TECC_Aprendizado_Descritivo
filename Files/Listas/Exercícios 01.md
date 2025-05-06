@@ -124,6 +124,81 @@ Número de transações: 9
 
 ### 5. Desenhe a FP-tree referente à tabela do exercício 01 com um suporte mínimo de 20%
 
+| TID | Itens |
+| --- | :---- |
+| 1   | ABE   |
+| 2   | BD    |
+| 3   | BC    |
+| 4   | ABD   |
+| 5   | AC    |
+| 6   | BC    |
+| 7   | AC    |
+| 8   | ABCE  |
+| 9   | ABC   |
+
+- Ordenando por suporte decrescente:
+
+| $Itens^1$ | Suporte |
+| --------- | ------- |
+| B         | 7       |
+| A         | 6       |
+| C         | 6       |
+| D         | 2       |
+| E         | 2       |
+
+- Reordenando os itens da transação por suporte:
+
+| TID | Itens |
+| --- | :---- |
+| 1   | BAE   |
+| 2   | BD    |
+| 3   | BC    |
+| 4   | BAD   |
+| 5   | AC    |
+| 6   | BC    |
+| 7   | AC    |
+| 8   | BACE  |
+| 9   | BAC   |
+
+- A FP-tree é construída da seguinte forma:
+  - Cada transação é inserida na árvore, começando pela raiz e seguindo os filhos da árvore.
+  - Se o filho não existe, ele é criado e a transação continua a ser inserida.
+  - Se o filho já existe, o contador do nó é incrementado.
+
+```mermaid
+graph LR
+  direction LR
+
+  %% Empty root
+  0(("$$\varnothing$$"))
+
+  A((A))
+  B((B))
+  C((C))
+  D((D))
+  E((E))
+
+  B1((B1))
+  B2((B2))
+
+  C1((C1))
+
+  %% FP-tree
+  A --- B1
+  A --- C1
+  A --- E
+
+  B1 --- A2
+  B1 --- C1
+
+  C1 --- A3
+
+  %% Contadores
+  A1 -->|6| A
+  B1 -->|7| B
+  C1 -->|6| C
+```
+
 ### 6. Projete a FP-tree para o item I3 a partir da árvore obtida acima
 
 ### 7. Execute 3 níveis (chamadas recursivas) do DCI_Closed com a base de dados do exercício 01 e suporte mínimo de 20%
@@ -131,23 +206,23 @@ Número de transações: 9
 ### 8. (Adaptado de Zaki e Meira 10.5 Q5) Considerando a tabela abaixo, execute as três primeiras chamadas recursivas do Spade. Assuma $minsup=3$
 
 | ID  | Time | Itens   |
-| --- | ---- | ------- |
-| S1  | 10   | A, B    |
-| S1  | 20   | B       |
-| S1  | 30   | A, B    |
-| S1  | 40   | A, C    |
-| S2  | 20   | A, C    |
-| S2  | 30   | A, B, C |
-| S2  | 50   | B       |
-| S3  | 10   | A       |
-| S3  | 30   | B       |
-| S3  | 40   | A       |
-| S3  | 50   | C       |
-| S3  | 60   | B       |
-| S4  | 30   | A, B    |
-| S4  | 40   | A       |
-| S4  | 50   | B       |
-| S4  | 60   | C       |
+| --- | ---: | ------- |
+| S1  |   10 | A, B    |
+| S1  |   20 | B       |
+| S1  |   30 | A, B    |
+| S1  |   40 | A, C    |
+| S2  |   20 | A, C    |
+| S2  |   30 | A, B, C |
+| S2  |   50 | B       |
+| S3  |   10 | A       |
+| S3  |   30 | B       |
+| S3  |   40 | A       |
+| S3  |   50 | C       |
+| S3  |   60 | B       |
+| S4  |   30 | A, B    |
+| S4  |   40 | A       |
+| S4  |   50 | B       |
+| S4  |   60 | C       |
 
 #### a. Obtenha a representação vertical da base de dados
 
