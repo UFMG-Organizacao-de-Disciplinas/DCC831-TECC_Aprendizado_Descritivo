@@ -113,87 +113,91 @@ flowchart LR
 ## Slide 3 - Mineração de itens frequentes: Apriori e Eclat
 
 - **Anti-monotonicidade** ou **Propriedade do Apriori:** à medida em que o número de itens aumenta o suporte sempre irá se manter ou reduzir, nunca aumentar. "cobertura de conjuntos de itens é, no máximo, tão grande quanto a de seus subconjuntos"
-    - Se $A \subseteq B$, então $sup(A) \geq sup(B)$.
-    - "Todo superconjunto de um con"
-    - **Todo superconjunto de um conjunto infrequente é infrequente**
-    - **Todo subconjunto de um conjunto frequente é frequente**
+  - Se $A \subseteq B$, então $sup(A) \geq sup(B)$.
+  - "Todo superconjunto de um con"
+  - **Todo superconjunto de um conjunto infrequente é infrequente**
+  - **Todo subconjunto de um conjunto frequente é frequente**
+
 ### Apriori
 
 - Busca em largura (level-wise approach): os conjuntos de tamanho k são explorados antes dos de tamanho k+1
-    - Identifica os itens frequentes
-    - Calcula suporte
-    - Elimina infrequentes
-    - Gera candidatos de tamanho k+1 a partir dos conjuntos frequentes que compartilham prefixo de tamanho k-1.
+
+  - Identifica os itens frequentes
+  - Calcula suporte
+  - Elimina infrequentes
+  - Gera candidatos de tamanho k+1 a partir dos conjuntos frequentes que compartilham prefixo de tamanho k-1.
 
 - Duas maiores influências no desempenho:
-    1. minsup baixo
-    2. Transações largas/BD denso
+  1. minsup baixo
+  2. Transações largas/BD denso
 
 ### Eclat (Equivalence Class Transformation)
 
 - Visa o uso da Representação Vertical $(x, c(x))$ dos dados
 - **Relação de Equivalência:** dois itemsets são equivalentes se o prefixo deles é igual.
-    - Com isso, geram-se projeções de conjuntos de dados em que apenas transações com determinado prefixo serão consideradas.
-    - Matematicamente
-        - Seja $p: P(I) \times \mathbb{N} \rightarrow P(I)$ uma função prefixo. $p(X, k) = X[1:k]$.
-        - A relação $\theta_k \subseteq P(I) \times P(I), A \theta_k B \equiv p(A, k) = p(B, k)$, é uma relação de equivalência
+  - Com isso, geram-se projeções de conjuntos de dados em que apenas transações com determinado prefixo serão consideradas.
+  - Matematicamente
+    - Seja $p: P(I) \times \mathbb{N} \rightarrow P(I)$ uma função prefixo. $p(X, k) = X[1:k]$.
+    - A relação $\theta_k \subseteq P(I) \times P(I), A \theta_k B \equiv p(A, k) = p(B, k)$, é uma relação de equivalência
 - Consideremos que temos o seguinte conjunto potência: $\mathcal{P}(I) = \{\emptyset, A, B, C, AB, AC, BC, ABC\}$.
-    - Na forma de representação, seria como se agrupássemos os dados em grupos de prefixos:
-        - $\emptyset: \{\emptyset, A, B, C, AB, AC, BC, ABC\}$
-        - $A: \{A, AB, AC, ABC\}$
-        - $B: \{B, BC\}$
-        - $C: \{C\}$
-    - E então seriam varridos de C para A (não consideramos o $\emptyset$) usando DFS
-    - Poderia-se também fazer subgrupos de subgrupos, dependendo do tamanho do conjunto de prefixos.
+  - Na forma de representação, seria como se agrupássemos os dados em grupos de prefixos:
+    - $\emptyset: \{\emptyset, A, B, C, AB, AC, BC, ABC\}$
+    - $A: \{A, AB, AC, ABC\}$
+    - $B: \{B, BC\}$
+    - $C: \{C\}$
+  - E então seriam varridos de C para A (não consideramos o $\emptyset$) usando DFS
+  - Poderia-se também fazer subgrupos de subgrupos, dependendo do tamanho do conjunto de prefixos.
 
 #### Entendendo o algoritmo ECLAT
 
 - Começamos com todos os itens frequentes de tamanho 1 e seu conjunto de transações;
 - Para cada item e suas transações:
-    - Esse item é adicionado à lista global de frequentes
-    - Os novos frequentes são vazios.
-    - Para cada outro item maior que o primeiro e suas respectivas transações:
-        - Une os dois à partir de um mesmo prefixo.
-        - A transação desse novo item é a interseção entre as transações de ambos
-        - Se o suporte desse novo item é maior ou igual ao minsup
-            - Adiciona essa dupla (item, transações) à lista dos novos frequentes
-    - Se novos itens frequentes foram encontrados, chama recursivamente
+  - Esse item é adicionado à lista global de frequentes
+  - Os novos frequentes são vazios.
+  - Para cada outro item maior que o primeiro e suas respectivas transações:
+    - Une os dois à partir de um mesmo prefixo.
+    - A transação desse novo item é a interseção entre as transações de ambos
+    - Se o suporte desse novo item é maior ou igual ao minsup
+      - Adiciona essa dupla (item, transações) à lista dos novos frequentes
+  - Se novos itens frequentes foram encontrados, chama recursivamente
 
 #### Análises sobre o Algoritmo ECLAT
 
 - **Custo computacional:** depende do tamanho dos tidsets e seu cálculo de interseção.
 - **Custo de espaço:** depende do tamanho dos tidsets
 - Pode ser implementado como vetor de bits ou ids
-    - **Bits:**
-        - **Benefício:** cálculo de interseção rápido; tamanho do tidset em tabela auxiliar
-        - **Desvantagem:** se esparso, muito desperdício de espaço.
-    - **Ids:**
-        - **Benefício:** melhor para esparsos.
+  - **Bits:**
+    - **Benefício:** cálculo de interseção rápido; tamanho do tidset em tabela auxiliar
+    - **Desvantagem:** se esparso, muito desperdício de espaço.
+  - **Ids:**
+    - **Benefício:** melhor para esparsos.
 
 ### Diffsets + Eclat = dEclat
 
 - **Diffsets:** diferença entre os TIDs dos membros e o prefixo que as define
-    - Ex.:
-        - $\{P, PX, PX, PX, P, X\}$
-        - $c(P) = \{ 1, 2, 3, 4, 5\}$
-        - $c(X) = \{2, 3, 4, 6\}$
-        - $c(PX) = \{ 2, 3, 4\}$
-        - $d(PX) = c(P) - c(PX)$
-            - $d(PX) = \{ 1, 2, 3, 4, 5\} - \{ 2, 3, 4\}$
-            - $d(PX) = \{1, 5\}$
 
-    - **Problema:** suporte não é mais calculado pela cardinalidade do conjunto.
-    - **Novo cálculo de suporte:**
-        - $sup(PX) = sup(P) - |d(PX)|$
-            - **Explicação:** a ideia é que quantos elementos temos em P menos o que tem apenas apenas em P e não em X.
-            - $sup(PXY) = sup(PX) - |d(PXY)|$
-            - $sup(PXY) = (sup(P) - |d(PX)|) - |d(PXY)|$
-                - **Explicação:** o $sup(PXY)$ será basicamente o tamanho de P, tirado o que `tem no P e não no X`, também tirado o que `tem no P e não no XY`
-        - **Conclusão:** podemos usar os diffsets dos conjuntos bases para gerar os diffsets dos novos candidatos.
+  - Ex.:
+
+    - $\{P, PX, PX, PX, P, X\}$
+    - $c(P) = \{ 1, 2, 3, 4, 5\}$
+    - $c(X) = \{2, 3, 4, 6\}$
+    - $c(PX) = \{ 2, 3, 4\}$
+    - $d(PX) = c(P) - c(PX)$
+      - $d(PX) = \{ 1, 2, 3, 4, 5\} - \{ 2, 3, 4\}$
+      - $d(PX) = \{1, 5\}$
+
+  - **Problema:** suporte não é mais calculado pela cardinalidade do conjunto.
+  - **Novo cálculo de suporte:**
+    - $sup(PX) = sup(P) - |d(PX)|$
+      - **Explicação:** a ideia é que quantos elementos temos em P menos o que tem apenas apenas em P e não em X.
+      - $sup(PXY) = sup(PX) - |d(PXY)|$
+      - $sup(PXY) = (sup(P) - |d(PX)|) - |d(PXY)|$
+        - **Explicação:** o $sup(PXY)$ será basicamente o tamanho de P, tirado o que `tem no P e não no X`, também tirado o que `tem no P e não no XY`
+    - **Conclusão:** podemos usar os diffsets dos conjuntos bases para gerar os diffsets dos novos candidatos.
 
 #### Entendendo o algoritmo dEclat
 
-- 
+-
 
 ## Slide 5 - Representações compactas
 
