@@ -94,9 +94,9 @@ flowchart LR
     - Ex.: $i(\lbrace 1, 3 \rbrace) = \lbrace A, B, C \rbrace$
     - Explicação: as transações 1 e 3 têm simultaneamente os itens A, B e C
   - **Representação Horizontal:** Col1: transações; Col2: intensões
-    - $(t, i(t))$
+    - $(t, i(\{t\}))$
   - **Representação Vertical:** Col1: itens; Col2: coberturas
-    - $(x, c(x))$
+    - $(x, c(\{x\}))$
   - **Suporte:** tamanho da cobertura
     - $sup(X) = |c(X)|$
   - **Minsup:** suporte mínimo para que determinado conjunto de itens seja considerado frequente
@@ -277,7 +277,165 @@ flowchart LR
 
 ## Slide 5 - Representações Compactas
 
+### Representações Compactas
 
+- **Representações Compactas:** Subconjuntos a partir dos quais é possível derivar todos os conjuntos de itens frequentes.
+  - Ex.:
+    - $D = \lbrace (0, a_{1}, a_{2}, \dots, a_{50}), (1, a_{1}, a_{2}, \dots, a_{100}) \rbrace$
+    - Se considerarmos que $X = a_{1} a_{2} \dots a_{50}$ e que $Y = a_{1} a_{2} \dots a_{100}$, poderíamos representar os conjuntos de $minsup=1$ como sendo $Y$ e os conjuntos de $minsup = 2$ como sendo $X$.
+    - Podem ser subdivididos em:
+      - **Conjuntos Fechados:** é o maior item dentro de uma mesma classe de equivalência; É uma **Representação Completa**
+      - **Conjuntos Máximos:** é o maior item dentre todos os **Conjuntos Fechados**. Eles definem a borda entre o que é frequente e o que é infrequente.
+        - **Intuição:** entenda que, se eu tenho um item frequente $ABC$ e que, qualquer novo item que eu adicionar a esse conjunto o tornará infrequente, logo, ele é máximo. Sendo assim, todos os subconjuntos que podem ser gerados usando os itens presentes em $ABC$ também serão frequentes.
+        - **Limitação no cálculo do suporte:** não dá para calcular o suporte através deles. Será necessário varrer novamente o BD. Isso a torna **incompleta**
+  - Ambos não geram ganhos computacionais se usados nos algoritmos anteriores.
+- **Geradores Mínimos:** os menores itens de uma classe de equivalência. Geralmente serão os itens unitários.
+- **Classe de Equivalência:** conjunto de itemsets que possuem o mesmo suporte.
+
+#### Relação entre Classe de Equivalência e Conjunto Fechado
+
+- Considere o seguinte banco de dados com transações:
+
+| TID | Itens |
+| --- | ----- |
+| 1   | A B C |
+| 2   | A B C |
+| 3   | A B   |
+| 4   | A C   |
+
+- Cálculo dos suportes:
+
+| Itemset | Suporte |
+| ------- | ------- |
+| A       | 4       |
+| B       | 3       |
+| C       | 3       |
+| AB      | 3       |
+| AC      | 3       |
+| BC      | 2       |
+| ABC     | 2       |
+
+- Classes de equivalência:
+
+| Suporte | Classe de Equivalência | Conjuntos Fechados |
+| ------- | ---------------------- | ------------------ |
+| 2       | $\{ABC, BC\}$          | ABC                |
+| 3       | $\{AB, AC, B, C\}$     | AB, AC             |
+| 4       | $\{A\}$                | A                  |
+
+- Conjuntos fechados
+  - **Classe com suporte 2:**
+    - {ABC, BC}
+    - `ABC` ⊃ `BC` e ambos têm suporte 2 → ✅ **ABC é o conjunto fechado**
+  - **Classe com suporte 3:**
+    - {AB, AC, B, C}
+    - `AB` ⊃ `B`, `AC` ⊃ `C` e todos têm suporte 3 → ✅ **AB e AC são fechados**
+    - `B` e `C` **não** são fechados pois podem ser estendidos sem perda de suporte.
+- **Classe com suporte 4:**
+  - {A}
+  - `A` não pode ser estendido sem perder suporte → ✅ **A é fechado**
+
+### DCI_Closed
+
+- Adota representação vertical, ou seja: $(item, c(\{item\}))$
+- Divisão e Conquista
+- **Ideia:** escalar reticulado percorrendo cada Classe de Equivalência uma só vez.
+- Na base, assume-se a ordem lexicográfica.
+- No geral, qualquer ordem serve, e essa ordem é definida por $\prec$
+- Para os fechados encontrados, expande-os com itens ainda não investigados
+  - Esses candidatos são chamados de **geradores**
+  - Esse **gerador** é um conjunto $X = Yi$ onde $Y$ é um conjunto fechado e $i$ é um item.
+  - Esse **gerador** é ordem-conservante se $i$ for anterior aos itens já pertencentes a $Y$
+  - Essa sequência é única
+- **Intuição:** Se todos os itens adicionados sempre são colocados no topo, assim ficando organizados em ordem crescente, então ele é ordem-conservante.
+
+- Para garantir durante a execução que o gerador é ordem-conservante, mantenhamos uma **pre-set** que contém todos os itens não pertencentes ao gerador que sejam menores que $i$.
+
+- Geradores são avaliados em ordem lexicográfica
+- Se encontrar gerador não **ordem-conservante**: poda o ramo
+
+#### Exemplo de geradores ordem-conservantes.
+
+```mermaid
+
+flowchart LR
+%% Vértices
+MOKY(("MOKY: $$\emptyset$$"))
+MOK(("MOK: $$\emptyset$$"))
+MOY(("MOY: $$\emptyset$$"))
+MKY(("MKY: $$1$$"))
+OKY(("OKY: $$\emptyset$$"))
+MO(("MO: $$\emptyset$$"))
+MK(("MK: $$16$$"))
+MY(("MY: $$14$$"))
+OK(("OK: $$25$$"))
+OY(("OY: $$\emptyset$$"))
+KY(("KY: $$\emptyset$$"))
+M(("M: $$146$$"))
+O(("O: $$25$$"))
+K(("K: $$12356$$"))
+Y(("Y: $$14$$"))
+Vazio(("$$\emptyset$$"))
+
+Vazio --> M & O & K & Y
+
+M --> MO & MK & MY
+O --> OK & OY
+K --> KY
+
+MO --> MOK & MOY
+MK --> MKY
+OK --> OKY
+
+MOK --> MOKY
+```
+
+### Entendendo o algoritmo DCI_Closed
+
+- Falando muito por alto:
+- Vai gerando uma árvore de geradores organizadinhos do menor pro maior.
+ 
+### MAFIA - Maximal Frequent Itemset Algorithm
+
+- Best-First/Branch-and-bound
+- Representação vertical ou seja: $(item, c(\{item\}))$
+- Vetores de Bits
+    - Para calcular rapidamente o suporte basta ter uma estrutura auxiliar que conta a quantidade de bits ativos.
+- Assume ordem lexicográfica entre itens e entre itemsets.
+
+- Separa os itens em dois:
+    - **Head:** rótulo do nó atual
+    - **Tail:** Itens maiores que o maior do Head
+- **HUT:** Head Union Tail - Conjunto de todos os itens que podem aparecer em dada sub-árvore.
+
+- Algoritmo:
+    - Percorre a árvore de geradores ordem-conservantes
+    - No nível que tô:
+        - Calcula o suporte dos filhos
+        - Poda infrequentes
+        - Percorre filhos.
+    - Se o HUT encontrado é subconjunto de outro itemset encontrado, pode-se podar todo esse HUT.
+
+- Sempre que uma folha é visitada, um candidato a itemset máximo é encontrado.
+- **Parent Equivalence Pruning (PEP):** se os TIDs do item $y$ que está no tail contém as transações de $X$ (head), então, $y$ é adicionado ao head e removido do tail.
+
+- Se o HUT é subconjunto de um máximo já descoberto, então ele é frequente e pode ser podado.
+
+#### Entendendo o Algoritmo MAFIA
+
+- Algoritmo (Pre-escrito em aula. Não rodei o algoritmo na cabeça pra explicar)
+    - Faz o HUT
+    - Faz a poda do apriori
+    - Faz a poda do PEP para poder o Tail
+    - E para cada item vai procurando usando o Best-First
+- No artigo tem os pseudo-códigos dos outros sub-códigos.
 
 ## Slide 6 - Mineração de sequências
+
+
+
 ## Slide 7 - Mineração de grafos
+
+```
+
+```
