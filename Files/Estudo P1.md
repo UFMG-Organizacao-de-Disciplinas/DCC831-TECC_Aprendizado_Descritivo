@@ -79,19 +79,19 @@ flowchart LR
 ## Slide 2 - Mineração de Itens Frequentes
 
 - **Vocabulário**
-  - **Itens:** elementos pertencentes ao conjunto: $I = \{x_1, x_2, \dots, x_m\}$
+  - **Itens:** elementos pertencentes ao conjunto: $I = \lbrace x_1, x_2, \dots, x_m \rbrace$
   - **Itemset:** subconjunto de elementos contidos em $I$
   - **k-itemset:** |itemset| = k
   - **k-itemsets:** todos os itemsets de tamanho $k = I^{(k)}$
   - **ID:** Identificador referente a um itemset
-  - **TID:** Transaction ID; ID de uma transação de items $T = \{t_1, t_2, \dots, t_n\}$
+  - **TID:** Transaction ID; ID de uma transação de items $T = \lbrace t_1, t_2, \dots, t_n \rbrace$
   - **Tidset:** conjunto de parte das transações
   - **Transação:** um par $(t, X)$ onde $t \in T$ e $X \subseteq I$
   - **Cobertura** ou **Extensão:** conjunto de transações em que determinado conjunto de itens está presente
-    - Ex.: $c(\{A, B, C\}) = \{1, 3\}$
+    - Ex.: $c(\lbrace A, B, C \rbrace) = \lbrace 1, 3 \rbrace$
     - Explicação: os itens A, B e C aparecem simultaneamente nas transações 1 e 3
   - **Intensão:** o maior conjunto de itens comuns à um conjunto de transações
-    - Ex.: $i(\{1, 3\}) = \{A, B, C\}$
+    - Ex.: $i(\lbrace 1, 3 \rbrace) = \lbrace A, B, C \rbrace$
     - Explicação: as transações 1 e 3 têm simultaneamente os itens A, B e C
   - **Representação Horizontal:** Col1: transações; Col2: intensões
     - $(t, i(t))$
@@ -104,7 +104,7 @@ flowchart LR
   - **Suporte Relativo:** suporte relativo à quantidade de transações
     - $rsup(X) = |c(X)|/|T|$
   - **Conjunto Potência:** todos os potenciais subconjuntos de um conjunto
-    - Ex.: $\mathcal{P}(\{A, B, C\}) = \{\emptyset, \{A\}, \{B\}, \{C\}, \{A, B\}, \{A, C\}, \{B, C\}, \{A, B, C\}\}$
+    - Ex.: $\mathcal{P}(\lbrace A, B, C \rbrace) = \lbrace \emptyset, \lbrace A \rbrace, \lbrace B \rbrace, \lbrace C \rbrace, \lbrace A, B \rbrace, \lbrace A, C \rbrace, \lbrace B, C \rbrace, \lbrace A, B, C \rbrace \rbrace$
   - **Reticulado:** grafo representando todos os itens do conjunto potência, onde cada nível é composto por um **k-itemset**, onde $0 \leq k \leq |X|$;
     - cada nó é direcionado a outro somente se
       1. o primeiro é subconjunto do segundo
@@ -139,12 +139,12 @@ flowchart LR
   - Matematicamente
     - Seja $p: P(I) \times \mathbb{N} \rightarrow P(I)$ uma função prefixo. $p(X, k) = X[1:k]$.
     - A relação $\theta_k \subseteq P(I) \times P(I), A \theta_k B \equiv p(A, k) = p(B, k)$, é uma relação de equivalência
-- Consideremos que temos o seguinte conjunto potência: $\mathcal{P}(I) = \{\emptyset, A, B, C, AB, AC, BC, ABC\}$.
+- Consideremos que temos o seguinte conjunto potência: $\mathcal{P}(I) = \lbrace \emptyset, A, B, C, AB, AC, BC, ABC \rbrace$.
   - Na forma de representação, seria como se agrupássemos os dados em grupos de prefixos:
-    - $\emptyset: \{\emptyset, A, B, C, AB, AC, BC, ABC\}$
-    - $A: \{A, AB, AC, ABC\}$
-    - $B: \{B, BC\}$
-    - $C: \{C\}$
+    - $\emptyset: \lbrace \emptyset, A, B, C, AB, AC, BC, ABC \rbrace$
+    - $A: \lbrace A, AB, AC, ABC \rbrace$
+    - $B: \lbrace B, BC \rbrace$
+    - $C: \lbrace C \rbrace$
   - E então seriam varridos de C para A (não consideramos o $\emptyset$) usando DFS
   - Poderia-se também fazer subgrupos de subgrupos, dependendo do tamanho do conjunto de prefixos.
 
@@ -178,13 +178,13 @@ flowchart LR
 
   - Ex.:
 
-    - $\{P, PX, PX, PX, P, X\}$
-    - $c(P) = \{ 1, 2, 3, 4, 5\}$
-    - $c(X) = \{2, 3, 4, 6\}$
-    - $c(PX) = \{ 2, 3, 4\}$
+    - $\lbrace P, PX, PX, PX, P, X \rbrace$
+    - $c(P) = \lbrace  1, 2, 3, 4, 5 \rbrace$
+    - $c(X) = \lbrace 2, 3, 4, 6 \rbrace$
+    - $c(PX) = \lbrace  2, 3, 4 \rbrace$
     - $d(PX) = c(P) - c(PX)$
-      - $d(PX) = \{ 1, 2, 3, 4, 5\} - \{ 2, 3, 4\}$
-      - $d(PX) = \{1, 5\}$
+      - $d(PX) = \lbrace  1, 2, 3, 4, 5 \rbrace - \lbrace  2, 3, 4 \rbrace$
+      - $d(PX) = \lbrace 1, 5 \rbrace$
 
   - **Problema:** suporte não é mais calculado pela cardinalidade do conjunto.
   - **Novo cálculo de suporte:**
