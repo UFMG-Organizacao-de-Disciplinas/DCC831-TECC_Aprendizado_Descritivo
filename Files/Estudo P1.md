@@ -432,10 +432,26 @@ MOK --> MOKY
 
 ## Slide 6 - Mineração de sequências
 
-
+- GSP (baseado no apriori) 
+- SPADE (Eclat): Pos(item); Px, Py e Pxy
 
 ## Slide 7 - Mineração de grafos
 
-```
+- **Isomorfo:** mapeia tanto vértice quanto rótulo.
+- Baseado no apriori e no FP-Growth
+    - Apriori: Número de vértices ou Número de arestas
 
-```
+- AGM: Apriori-based Graph Mining
+    - Compara matrizes de adjacência, remove última linha e coluna;
+    - Se forem isomorfas, re-adiciona e os dois itens que faltaram cria todos os candidatos possíveis dentre as labels
+- FSG - Arestas
+    - dado uma mesma base:
+        1. adiciona os dois em nós diferentes
+        2. Nós diferentes ou mesmo nó
+        3. Os dois nós num mesmo novo vértice
+        4. Dois diferentes; um nos dois; dois em um
+    - Vários possíveis mesmo núcleo
+- gSpan
+    - definição da aresta (idx 1, idx 2, lb1, lb2, arco)
+    - Definição de prioridade ao percorrer.
+    - Representação canônica: é a menor.
