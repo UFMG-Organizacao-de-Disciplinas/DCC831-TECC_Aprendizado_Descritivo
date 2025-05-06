@@ -1010,7 +1010,7 @@ $$
 - Porém, em conjuntos esparsos, o algoritmo original é a melhor opção
 
 - [JV]
-    - Para bases esparsas: Eclat; para bases densas: dEclat
+  - Para bases esparsas: Eclat; para bases densas: dEclat
 
 [Imagem (a): Minimun Support (%) - Connect]
 
@@ -1027,7 +1027,7 @@ $$
 - Christian Borgelt. Efficient Implementations of Apriori and Eclat. Workshop of Frequent Item Set Mining Implementations (FIMI 2003, Melbourne, FL, USA).
 
 - [JV]
-    - Boa parte da explicação estão nos artigos. A implementação tá no Borgelt.
+  - Boa parte da explicação estão nos artigos. A implementação tá no Borgelt.
 
 ### Slide: aula04-FPGrowth (Aula 05)
 

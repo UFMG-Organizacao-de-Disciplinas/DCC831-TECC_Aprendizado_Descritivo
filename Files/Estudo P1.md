@@ -199,13 +199,13 @@ flowchart LR
 
 - Começa pegando todos os itens, seus diffsets e suportes caso tenham suporte mínimo.
 - Para cada tripla (Item ($X_a$), diffset, suporte):
-    - Adiciona aos itens frequentes globais ($\mathcal{F}$)
-    - Define os novos frequentes como vazio
-    - Para cada um dos outros itens ($X_b$) maiores que o atual
-        - Gera o novo candidato ($X_{ab}$)
-        - Seu diffset ($d(X_{ab})$) será o diffset do segundo menos o diffset do primeiro
-        - Se tiver suporte mínimo, adiciona essa tripa aos novos requentes
-    - Se houver novos frequentes, chama dEclat recursivamente.
+  - Adiciona aos itens frequentes globais ($\mathcal{F}$)
+  - Define os novos frequentes como vazio
+  - Para cada um dos outros itens ($X_b$) maiores que o atual
+    - Gera o novo candidato ($X_{ab}$)
+    - Seu diffset ($d(X_{ab})$) será o diffset do segundo menos o diffset do primeiro
+    - Se tiver suporte mínimo, adiciona essa tripa aos novos requentes
+  - Se houver novos frequentes, chama dEclat recursivamente.
 
 #### Comparativo entre Eclat e dEclat
 
