@@ -1033,7 +1033,7 @@ $$
 
 #### Recapitulando (Aula 05)
 
-- Apriori: reduzir o número de passsadas em disco
+- Apriori: reduzir o número de passadas em disco
 - Eclat: trazer pra memória e assim reduzir o número de passadas em disco, tendendo a zero.
 
 #### Introdução (Aula 05)
@@ -1044,7 +1044,7 @@ $$
 - Os padrões são construídos ao longo do processamento em profundidade
 - Esse algoritmo é, talvez, o algoritmo sequencial mais eficiente para busca de conjuntos de itens frequentes
 
-A ideia é evitar ter que computar os candidatos.
+- [JV] A ideia é evitar ter que computar os candidatos.
 
 #### FP-Growth
 
@@ -1079,7 +1079,7 @@ A ideia é evitar ter que computar os candidatos.
   - Itens são nós da árvore
   - Cada nó armazena um item e sua frequência (número de transações que o contém)
 
-Basicamente, ele limpa os infrequentes, e depois disso, vai inserindo as transações em uma árvore.
+- [JV] Basicamente, ele limpa os infrequentes, e depois disso, vai inserindo as transações em uma árvore.
 
 ---
 
@@ -1095,38 +1095,33 @@ Basicamente, ele limpa os infrequentes, e depois disso, vai inserindo as transa�
 | 5       |       0        |      1       |      1       |        0        |        0         |      1      |
 | 6       |       1        |      0       |      1       |        0        |        0         |      1      |
 
-minsup = 2
-
-Em ordem de maior suporte pra menor suporte: cfabd
-
-1. cfad
-2. cb
-3. cf
-4. ad
-5. cfb
-6. cfa
-
-Obs.: Ignoram-se os itens infrequentes.
+- [JV]
+    - $minsup = 2$
+    - Em ordem de maior suporte pra menor suporte: $cfabd$
+        1. cfad
+        2. cb
+        3. cf
+        4. ad
+        5. cfb
+        6. cfa
+    - Obs.: Ignoram-se os itens infrequentes.
 
 #### Mineração dos padrões [Aula 05]
 
 - A mineração dos padrões se inicia uma vez que a FP-Tree tenha sido construída
 - A construção agora ocorre aumentando-se prefixos dos padrões em ordem crescente de suporte
 - As transações que satisfaçam (contém) o padrão sendo construído são projetadas em uma nova árvore
-- Itens podem se tornar infrequentes nessa nova base e são descartados
+    - Itens podem se tornar infrequentes nessa nova base e são descartados
 - Os padrões encontrados nessa nova árvore devem incluir o prefixo que a gerou
 - O algoritmo segue com as extensões recursivamente até que um único ramo seja obtido
-  - Se a árvore possui um único ramo, os padrões obteníveis são todas as combinações dos nós
+    - Se a árvore possui um único ramo, os padrões obteníveis são todas as combinações dos nós
 
-Para se minerar as transações de volta, percorremos a lista de itens e então subimos dele até a raiz.
-
-Partindo do item menos frequente e indo pro item mais frequente, fazemos projeções da árvore.
-
-Essas projeções são sub-árvores da árvore original.
-
-No caso do d, percorrerei todos os nós da lista encadeada de de d's, indo dele até a raiz. A junção de todos os nós que eu passar, formará uma nova árvore. E essa será a projeção do item d.
-
-Mas ainda não entendi o que precisa ser feito após essa primeira projeção.
+- [JV]
+    - Para se minerar as transações de volta, percorremos a lista de itens e então subimos dele até a raiz.
+    - Partindo do item menos frequente e indo pro item mais frequente, fazemos projeções da árvore.
+    - Essas projeções são sub-árvores da árvore original.
+    - No caso do d, percorrerei todos os nós da lista encadeada de de d's, indo dele até a raiz. A junção de todos os nós que eu passar, formará uma nova árvore. E essa será a projeção do item d.
+    - Mas ainda não entendi o que precisa ser feito após essa primeira projeção.
 
 ---
 
@@ -1155,9 +1150,9 @@ flowchart LR
   A1 --> D2(("$$d:1$$"))
 ```
 
-Há também uma lista encadeada para todos os nós com ocorrências de um mesmo item.
-
-A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e calcularmos sua frequência.
+- [JV]
+    - Há também uma lista encadeada para todos os nós com ocorrências de um mesmo item.
+    - A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e calcularmos sua frequência.
 
 #### Continua na próxima aula
 
@@ -1185,7 +1180,7 @@ A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e
 - A busca pelos padrões se dá inteiramente através da árvore sem a necessidade de se voltar à base de dados
 - Dessa forma, a primeira tarefa do algoritmo é construir essa estrutura
 
-"A partir da Base de Dados, como fazer a árvore de prefixos?"
+- [JV] "A partir da Base de Dados, como fazer a árvore de prefixos?"
 
 ---
 
@@ -1198,7 +1193,7 @@ A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e
   - Itens são nós da árvore
   - Cada nó armazena um item e sua frequência (número de transações que o contém)
 
-Basicamente, ele limpa os infrequentes, e depois disso, vai inserindo as transações em uma árvore.
+- [JV] Basicamente, ele limpa os infrequentes, e depois disso, vai inserindo as transações em uma árvore.
 
 ---
 
@@ -1251,9 +1246,9 @@ flowchart LR
   A1 --> D2(("$$d:1$$"))
 ```
 
-Há também uma lista encadeada para todos os nós com ocorrências de um mesmo item.
-
-A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e calcularmos sua frequência.
+- [JV]
+    - Há também uma lista encadeada para todos os nós com ocorrências de um mesmo item.
+    - A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e calcularmos sua frequência.
 
 - [JV] Explicação do Algoritmo
   - Para se minerar as transações de volta, percorremos a lista de itens e então subimos dele até a raiz.
@@ -1262,8 +1257,8 @@ A lista encadeada serve para podermos percorrer todos os nós de um mesmo item e
   - No caso do d, percorrerei todos os nós da lista encadeada de de d's, indo dele até a raiz. A junção de todos os nós que eu passar, formará uma nova árvore. E essa será a projeção do item d.
   - Mas ainda não entendi o que precisa ser feito após essa primeira projeção.
 - [JV] Explicação 2
-  - Primeiro filtra pelos itens frequentes, removendo os infrenquentes.
-    - Ex: minsup = 2
+  - Primeiro filtra pelos itens frequentes, removendo os infrequentes.
+    - Ex: $minsup = 2$
   - Depois disso, ele faz a... "transposição horizontal(?)", ou seja, para cara transação, ele lista todos os itens frequentes que estão presentes nela.
   - Então ordena cada um desses itens por seu suporte.
     - Ex:
