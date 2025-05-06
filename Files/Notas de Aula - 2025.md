@@ -1651,12 +1651,12 @@ Os azuis e verdes são classes de equivalência.
 - O algoritmo também assume uma ordem lexicográfica sobre os itens e a ordem parcial de subconjuntos entre os itemsets durante a exploração
 
 - [JV]
-    - Se eu quero minimizar a quantidade de itens mostrados pro usuário, posso mostrar os maximais.
-    - Existem vários algoritmos que encontram os maximais.
-    - Nessa época dos anos 2000, assim como hoje é com IA e Deep Learning, na época era essa mineração de itens frequentes.
-    - "Os maximais estão na fronteira"
-    - "A maioria dos artigos na época costumava usar vetores de bits para representar itemsets" Isso por causa dos benefícios de velocidade de processamento para uniões e interseções.
-    - Na notação vertical, a primeira coluna são os itens, e a segunda é a lista das transações que possuem esse item. Para calcular rapidamente o suporte é manter em uma estrutura auxiliar a quantidade de bits ativos.
+  - Se eu quero minimizar a quantidade de itens mostrados pro usuário, posso mostrar os maximais.
+  - Existem vários algoritmos que encontram os maximais.
+  - Nessa época dos anos 2000, assim como hoje é com IA e Deep Learning, na época era essa mineração de itens frequentes.
+  - "Os maximais estão na fronteira"
+  - "A maioria dos artigos na época costumava usar vetores de bits para representar itemsets" Isso por causa dos benefícios de velocidade de processamento para uniões e interseções.
+  - Na notação vertical, a primeira coluna são os itens, e a segunda é a lista das transações que possuem esse item. Para calcular rapidamente o suporte é manter em uma estrutura auxiliar a quantidade de bits ativos.
 
 ---
 
@@ -1669,6 +1669,7 @@ Os azuis e verdes são classes de equivalência.
   - Eles chamam essa estratégia de **reordenamento dinâmico (dynamic reordering)**
 
 - [JV]
+
   - O conjunto de itens será dividido em dois:
     - Head: itemset que já visitei
     - Tail: itens que ainda vou considerar

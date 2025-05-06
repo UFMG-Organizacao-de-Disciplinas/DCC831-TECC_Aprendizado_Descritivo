@@ -354,7 +354,7 @@ flowchart LR
 - Geradores são avaliados em ordem lexicográfica
 - Se encontrar gerador não **ordem-conservante**: poda o ramo
 
-#### Exemplo de geradores ordem-conservantes.
+#### Exemplo de geradores ordem-conservantes
 
 ```mermaid
 
@@ -394,27 +394,28 @@ MOK --> MOKY
 
 - Falando muito por alto:
 - Vai gerando uma árvore de geradores organizadinhos do menor pro maior.
- 
+
 ### MAFIA - Maximal Frequent Itemset Algorithm
 
 - Best-First/Branch-and-bound
 - Representação vertical ou seja: $(item, c(\{item\}))$
 - Vetores de Bits
-    - Para calcular rapidamente o suporte basta ter uma estrutura auxiliar que conta a quantidade de bits ativos.
+  - Para calcular rapidamente o suporte basta ter uma estrutura auxiliar que conta a quantidade de bits ativos.
 - Assume ordem lexicográfica entre itens e entre itemsets.
 
 - Separa os itens em dois:
-    - **Head:** rótulo do nó atual
-    - **Tail:** Itens maiores que o maior do Head
+  - **Head:** rótulo do nó atual
+  - **Tail:** Itens maiores que o maior do Head
 - **HUT:** Head Union Tail - Conjunto de todos os itens que podem aparecer em dada sub-árvore.
 
 - Algoritmo:
-    - Percorre a árvore de geradores ordem-conservantes
-    - No nível que tô:
-        - Calcula o suporte dos filhos
-        - Poda infrequentes
-        - Percorre filhos.
-    - Se o HUT encontrado é subconjunto de outro itemset encontrado, pode-se podar todo esse HUT.
+
+  - Percorre a árvore de geradores ordem-conservantes
+  - No nível que tô:
+    - Calcula o suporte dos filhos
+    - Poda infrequentes
+    - Percorre filhos.
+  - Se o HUT encontrado é subconjunto de outro itemset encontrado, pode-se podar todo esse HUT.
 
 - Sempre que uma folha é visitada, um candidato a itemset máximo é encontrado.
 - **Parent Equivalence Pruning (PEP):** se os TIDs do item $y$ que está no tail contém as transações de $X$ (head), então, $y$ é adicionado ao head e removido do tail.
@@ -424,34 +425,35 @@ MOK --> MOKY
 #### Entendendo o Algoritmo MAFIA
 
 - Algoritmo (Pre-escrito em aula. Não rodei o algoritmo na cabeça pra explicar)
-    - Faz o HUT
-    - Faz a poda do apriori
-    - Faz a poda do PEP para poder o Tail
-    - E para cada item vai procurando usando o Best-First
+  - Faz o HUT
+  - Faz a poda do apriori
+  - Faz a poda do PEP para poder o Tail
+  - E para cada item vai procurando usando o Best-First
 - No artigo tem os pseudo-códigos dos outros sub-códigos.
 
 ## Slide 6 - Mineração de sequências
 
-- GSP (baseado no apriori) 
-- SPADE (Eclat): Pos(item); Px, Py e Pxy
+- GSP (baseado no apriori)
+- SPADE (Eclat): Pos(item); $Px$, $Py$ e $Pxy$
 
 ## Slide 7 - Mineração de grafos
 
 - **Isomorfo:** mapeia tanto vértice quanto rótulo.
 - Baseado no apriori e no FP-Growth
-    - Apriori: Número de vértices ou Número de arestas
+
+  - Apriori: Número de vértices ou Número de arestas
 
 - AGM: Apriori-based Graph Mining
-    - Compara matrizes de adjacência, remove última linha e coluna;
-    - Se forem isomorfas, re-adiciona e os dois itens que faltaram cria todos os candidatos possíveis dentre as labels
+  - Compara matrizes de adjacência, remove última linha e coluna;
+  - Se forem isomorfas, re-adiciona e os dois itens que faltaram cria todos os candidatos possíveis dentre as labels
 - FSG - Arestas
-    - dado uma mesma base:
-        1. adiciona os dois em nós diferentes
-        2. Nós diferentes ou mesmo nó
-        3. Os dois nós num mesmo novo vértice
-        4. Dois diferentes; um nos dois; dois em um
-    - Vários possíveis mesmo núcleo
+  - dado uma mesma base:
+    1. adiciona os dois em nós diferentes
+    2. Nós diferentes ou mesmo nó
+    3. Os dois nós num mesmo novo vértice
+    4. Dois diferentes; um nos dois; dois em um
+  - Vários possíveis mesmo núcleo
 - gSpan
-    - definição da aresta (idx 1, idx 2, lb1, lb2, arco)
-    - Definição de prioridade ao percorrer.
-    - Representação canônica: é a menor.
+  - definição da aresta (idx 1, idx 2, lb1, lb2, arco)
+  - Definição de prioridade ao percorrer.
+  - Representação canônica: é a menor.
