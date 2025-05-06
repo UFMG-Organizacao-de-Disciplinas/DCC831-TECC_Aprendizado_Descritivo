@@ -1,18 +1,16 @@
-# Aprendizado Descritivo - Renato Vimieiro - 2025.1
-
-<!-- ‘’ -->
+# Aprendizado Descritivo - Renato Vimieiro - 2025.1 <!-- ‘’ -->
 
 ## Aula 01 | 18/03/2025 | Apresentação do curso - [JV: Cheguei atrasado]
 
-### Slide 1 - aula01-intro
+### Slide 1 - aula01-intro - Introdução: aprendizado descritivo x preditivo
 
 #### Introdução
 
 - Quando falamos sobre aprendizado de máquina e mineração de dados, frequentemente associamos essas expressões a predição de valores
-- Mais especificamente, temos a ideia de que aprendizado de máquina (AM) se resume a, dada uma entrada X, encontrar uma função f(X) que retorne o valor de uma variável alvo Y
-  - Quando a variável alvo Y é categórica, chamamos o problema de **classificação**
-  - Quando a variável alvo Y é contínua, chamamos o problema de **regressão**
-- Assim, o senso comum define AM como aprender uma função f capaz de predizer valores para dados ainda não coletados
+- Mais especificamente, temos a ideia de que aprendizado de máquina (AM) se resume a, dada uma entrada $X$, encontrar uma função $f(X)$ que retorne o valor de uma variável alvo $Y$
+  - Quando a variável alvo $Y$ é categórica, chamamos o problema de **classificação**
+  - Quando a variável alvo $Y$ é contínua, chamamos o problema de **regressão**
+- Assim, o senso comum define AM como aprender uma função $f$ capaz de predizer valores para dados ainda não coletados
 - Essa definição, embora restritiva, é correta para a classe de tarefas elencadas acima, chamadas de **aprendizado preditivo**
 
 #### Aprendizado Preditivo
@@ -24,7 +22,7 @@
 - Como o algoritmo obtém o modelo guiado por esse conjunto de entrada (treinamento), a tarefa é classificada como 'supervisionada', já que $l(x)$ faz o papel de 'professor'
 - Da mesma forma, como o modelo aprendido é usado para predizer valores de saída de novas instâncias, ele é chamado de preditivo
 
-- JV
+- [JV]
   - O que desejamos é receber informações e conseguir retornar um rótulo.
   - Nem todos de aprendizado de máquina levam em consideração os rótulos.
   - Aprendizado supervisionado preditivo
@@ -41,30 +39,28 @@
 
 ```mermaid
 flowchart LR
-  Trat[(Tratamento)]
+  Trei[(Treinamento)]
   Cons[Construção]
   Ava[Avaliação]
   Uso["Uso (Modelo)"]
   Val[(Validação)]
-  Trat --> Cons
+
+  Trei --> Cons
   Cons --> Ava
   Ava --> Uso
   Ava --> Cons
   Val --> Ava
 ```
 
-Aqui, não queremos obter nenhum entendimento sobre o que já vimos antes, mas sim, ter meios de prever como serão classificados os próximos itens que veremos.
+- [JV]
+  - Aqui, não queremos obter nenhum entendimento sobre o que já vimos antes, mas sim, ter meios de prever como serão classificados os próximos itens que veremos.
 
 ---
 
-- Embora métodos de regressão e classificação (aprendizado supervisionado) sejam os -ais populares em AM, existem outras abordagens preditivas que não requerem a variável -lvo para ajustarem modelos
+- Embora métodos de regressão e classificação (aprendizado supervisionado) sejam os mais populares em AM, existem outras abordagens preditivas que não requerem a variável alvo para ajustarem modelos
 - Técnicas que não utilizam essas variáveis são classificadas como **não-supervisionadas**
 - Uma tarefa de aprendizado não-supervisionado bastante popular é a de agrupamento (clustering)
 - Essa tarefa consiste em encontrar subgrupos de elementos homogêneos nos dados
-
----
-
----
 
 - [JV]
   - Exemplo: câncer de mama
@@ -74,7 +70,7 @@ Aqui, não queremos obter nenhum entendimento sobre o que já vimos antes, mas s
     - E com isso, tentar predizer se a quimioterapia será eficaz ou não para uma nova paciente.
   - No aprendizado não supervisionado não há rótulos.
   - Uma tarefa de aprendizado não-supervisionado bastante popular é a de agrupamento (clustering)
-    - Um dos mais conhecidos é o k-menas
+    - Um dos mais conhecidos é o k-means
 
 ---
 
@@ -94,7 +90,7 @@ Aqui, não queremos obter nenhum entendimento sobre o que já vimos antes, mas s
 - A divisão entre treinamento e validação não faz mais sentido, pois queremos obter um modelo para os dados que temos em mãos
 - Consequentemente, a avaliação dos resultados (modelos) se torna mais difícil, já que não temos mais uma 'verdade absoluta' para compararmos as saídas
 
-- JV
+- [JV]
   - > A premissa é "eu não sei nada sobre os dados", "então preciso encontrar um modelo que descreva os dados"
   - "Estatística não é boa para descrever grafos"
   - O Descritivo é tão importante quanto prever coisas, mas atuam em momentos diferentes.
@@ -103,19 +99,19 @@ Aqui, não queremos obter nenhum entendimento sobre o que já vimos antes, mas s
 
 - Por outro lado, segundo Flach (2012), _o aprendizado descritivo leva à descoberta genuína de novos conhecimentos, e, dessa forma, está situado entre as áreas de mineração de dados e aprendizado de máquina_
 - O objetivo de se buscar um modelo descritivo dos dados se justifica nas situações em que se quer responder perguntas do tipo “o quê aconteceu?”
-- Ou seja, esses modelos descrevem situações passadas e, assim, auxiliam no processo de tomada de decisão Aprendizado
+- Ou seja, esses modelos descrevem situações passadas e, assim, auxiliam no processo de tomada de decisão
 
-- JV
+- [JV]
 
   - O aprendizado descritivo leva a descoberta e novos conhecimentos. Estando entre mineração de dados e aprendizado de máquina.
   - Busca responder "o quê aconteceu?"
   - Descrevem situações passadas e com isso auxiliam no processo de **tomada de decisão**.
 
   - 4 paradigmas científicos
-    - Indução, teórico, ...
+    - experimental, teórica, computacional e baseada em dados
   - Antes viam o fenômenos, criavam teorias, tentavam provar que as teorias se aplicavam.
   - Atualmente usamos um modelo baseado em dados
-    - Veem como os dados se comportas, criam teorias e tentam provar que os dados se comportam de acordo com a teoria.
+    - Veem como os dados se comportam, criam teorias e tentam provar que os dados se comportam de acordo com a teoria.
 
 ---
 
@@ -126,28 +122,29 @@ Aqui, não queremos obter nenhum entendimento sobre o que já vimos antes, mas s
 
   - Isso nos permite decidir estocar também esses produtos menos populares, em menor quantidade, mas evitando, assim, um custo maior de se enviar tais produtos individualmente de centros mais distantes
 
-- JV
+- [JV]
   - Uma das coisas feitas nessa disciplina é a busca por regularidades de acontecimentos em conjuntos.
-  - Há uma interseção bem grande entre aprendizado descritivo e Mineração de Dados.
+  - Há uma interseção bem grande entre Aprendizado Descritivo e Mineração de Dados.
 
 ---
 
 - Considere um segundo caso real em que executivos do Wal-Mart utilizaram de AM para aumentar as vendas diante da ameaça do furação Frances em 2004
 - Enquanto o furacão atravessava o Caribe, os executivos queriam prever os produtos que seus clientes consumiam diante de catástrofes
+- Imagem: [What Wal-Mart Knows About Customers' Habits](https://www.nytimes.com/2004/11/14/business/yourmoney/what-walmart-knows-about-customers-habits.html)
 
-- JV
+- [JV]
   - > What Wal-Mart knows about Customers' Habits
-  - Eles avaliaram de que forma os usuários se comportavam em relação a desastres naturais e o que compravam nas cidades que tavam para ser afetadas.
+  - Eles avaliaram de que forma os usuários se comportavam em relação a desastres naturais e o que compravam nas cidades que seriam afetadas.
     - A decisão trivial era considerar que faria sentido estocar pilha, água mineral, lanterna e produtos não específicos.
-    - Eles descobriram que houve um aumento de 7x nas vendas de Pop Tarts sabor morando, e o campeão dos aumentos foi a cerveja.
+    - Eles descobriram que houve um aumento de 7x nas vendas de Pop Tarts sabor morango, e o campeão dos aumentos foi a cerveja.
     - Nessa situação eles mais queriam descrever o passado do que predizer o futuro.
   - Embora seja abordado como preditivo, na prática seria um exemplo de aprendizado descritivo supervisionado.
   - Exceptional Model Mining
-    - Busca-se encontrar quais conjuntos de itens são não-usualmente comprados qunado algum evento ocorre.
+    - Busca-se encontrar quais conjuntos de itens são não-usualmente comprados quando algum evento ocorre.
 
-Dúvida: Como fazer para discernimos se um aumento, como no caso do Pop Tarts foi de fato devido aos furacões ou se calhou de, nesses dois mesmos intervalos de tempo, foram veículados anúncios desse produto; sendo então apenas uma coincidência?
+**Dúvida:** Como fazer para discernimos se um aumento, como no caso do Pop Tarts foi de fato devido aos furacões ou se calhou de, nesses dois mesmos intervalos de tempo, foram veiculados anúncios desse produto; sendo então apenas uma coincidência?
 
-Resposta: Dá para tentar refinar a forma de análise e o cálculo da função objetivo. Porém, devido ao caráter qualitativo, é difícil de se ter certeza de que essa atipicidade nessa busca por padrões atípicos sejam separados.
+**Resposta:** Dá para tentar refinar a forma de análise e o cálculo da função objetivo. Porém, devido ao caráter qualitativo, é difícil de se ter certeza de que essa atipicidade nessa busca por padrões atípicos sejam separados.
 
 ---
 
@@ -184,9 +181,9 @@ Resposta: Dá para tentar refinar a forma de análise e o cálculo da função o
 
 [Imagem: Agrupamento preditivo//Agrupamento Descritivo]
 
-No modelo Preditivo, tenta-se definir limites para que próximos itens sejam classificados de acordo com o que foi visto anteriormente.
-
-Já no Descritivo, tenta-se encontrar padrões que descrevam o que foi visto anteriormente.
+- [JV]
+  - No modelo Preditivo, tenta-se definir limites para que próximos itens sejam classificados de acordo com o que foi visto anteriormente.
+  - Já no Descritivo, tenta-se encontrar padrões que descrevam o que foi visto anteriormente.
 
 ---
 
@@ -198,28 +195,26 @@ Já no Descritivo, tenta-se encontrar padrões que descrevam o que foi visto ant
 
 [Imagem: Distribuição de quadrados azuis e círculos vermelhos]
 
-No exemplo apontado pode-se separar as distribuições dos pontos em 4 quadrantes, isso baseado na estimativa do que já ocorreu antes, busca então estimar onde estarão posicionados os quadradinhos azuis e as bolinhas vermelhas.
-
-É importante também identificar quais são as regularidades existentes em certos padrões irregulares.
+- [JV]
+  - No exemplo apontado pode-se separar as distribuições dos pontos em 4 quadrantes, isso baseado na estimativa do que já ocorreu antes, busca então estimar onde estarão posicionados os quadradinhos azuis e as bolinhas vermelhas.
+  - É importante também identificar quais são as regularidades existentes em certos padrões irregulares.
 
 ---
 
 - O primeiro objetivo induz uma abordagem preditiva
 - Logo, o abordamos como um problema de classificação
+- [Imagem 1: árvore de alguma coisa]
+- [Imagem 2: Distribuição dos pontos]
 
-Às vezes usa-se o mesmo modelo entre preditivo e descritivo, porém, um pra descrever e o outro pra predizer.
-
-[Imagem: Distribuição dos pontos]
+- [JV] Às vezes usa-se o mesmo modelo entre preditivo e descritivo, porém, um pra descrever e o outro pra predizer.
 
 ---
 
 - O segundo objetivo induz a uma abordagem descritiva
 - Logo, abordamos o problema como uma tarefa de descoberta de subgrupos
-- [JV]
+- [Imagem: Definindo grupo independente]
   - $\sigma_1 \equiv x_1 \in [0.3, 0.7) \wedge x_2 \geq 0.9$
   - $\sigma_2 \equiv x_1 \in [0.275, 0.7) \wedge x_2 \leq 0.1$
-
-[Imagem: Definindo grupo independente]
 
 ---
 
@@ -235,37 +230,28 @@ No exemplo apontado pode-se separar as distribuições dos pontos em 4 quadrante
 
 #### Comentários sobre o curso
 
-Nesse curso busca-se a parte teoria dos algoritmos, não necessariamente em sua aplicação.
-
-Ela é teórica, densa em algoritmo, e a aplicação em código é mínimo.
-
-Busca-se "botar uma lupa" sobre a descoberta de padrões.
-
-A primeira parte será toda não-supervisionada.
-
-A busca de padrões em grafos pode ser usada na área de fármacos para encontrar quais sub-estruturas são as mais frequentes em determinados remédios para determinada infermidade?
-
-A segunda parte será de aprendizado supervisionado.
-
-Por volta de 20 de maio tem uma prova.
-
-Haverá um tipo de "roleplaying" das atividades. Ele separou as salas em 8 grupos. Um grupo era o "historiador" (buscava entender qual era o contexto), o outro era o "metodologista" (tentatva entender como o algoritmo funcionava), "Aplicações", "Coletar as apresentações e redigir", "Publicar o resumo em um site da turma". O "hacker" é quem busca os códigos existentes, tenta entender, fazer funcionar e documentar como fez funcionar.
-
-"Daqui para baixo é a parte mais recente, talvez mais pós graduação, ou coisas que não estão nos livros".
-
-Cada grupo vai rotacionar em cada uma das tarefas. Serão 9 artigos no total que leremos.
-
-Os Seminários (aplicações), veremos de fato aplicações
-
-O que ele quer com o projeto? Uma interação maior com o professor. A parte mais prática da disciplina.
-
-Na parte de ... será o ... que foi quem inventou.
-
-Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Dong and James Bailey 2012;
+- Nesse curso busca-se a parte teoria dos algoritmos, não necessariamente em sua aplicação.
+- Ela é teórica, densa em algoritmo, e a aplicação em código é mínimo.
+- Busca-se "botar uma lupa" sobre a descoberta de padrões.
+- A primeira parte será toda não-supervisionada.
+- A busca de padrões em grafos pode ser usada na área de fármacos para encontrar quais sub-estruturas são as mais frequentes em determinados remédios para determinada infermidade?
+- A segunda parte será de aprendizado supervisionado.
+- Por volta de 20 de maio tem uma prova.
+- Haverá um tipo de "roleplaying" das atividades. Ele separou as salas em 8 grupos. Um grupo era o
+  - "historiador" (buscava entender qual era o contexto), o outro era o
+  - "metodologista" (tentava entender como o algoritmo funcionava),
+  - "Aplicações", "Coletar as apresentações e redigir", "Publicar o resumo em um site da turma". O
+  - "hacker" é quem busca os códigos existentes, tenta entender, fazer funcionar e documentar como fez funcionar.
+- "Daqui para baixo é a parte mais recente, talvez mais pós graduação, ou coisas que não estão nos livros".
+- Cada grupo vai rotacionar em cada uma das tarefas. Serão 9 artigos no total que leremos.
+- Os Seminários (aplicações), veremos de fato aplicações
+- O que ele quer com o projeto? Uma interação maior com o professor. A parte mais prática da disciplina.
+- Na parte de ... será o ... que foi quem inventou.
+- Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Dong and James Bailey 2012;
 
 ## Aula 02 | 20/03/2025 | Aprendizado descritivo x preditivo
 
-### Slide - aula02-FIM
+### Slide - aula02-FIM - Mineração de Itens Frequentes
 
 #### Introdução - Aula 2
 
@@ -277,12 +263,12 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 
 ---
 
-- Kosinski et al. (2013), um grupo de pesquisadores da Universidade de Cambridge, -oletaram dados sobre a personalidade e gostos de usuários do Facebook através do aplicativo MyPersonality
+- Kosinski et al. (2013), um grupo de pesquisadores da Universidade de Cambridge, coletaram dados sobre a personalidade e gostos de usuários do Facebook através do aplicativo MyPersonality
 - O objetivo do trabalho foi demonstrar que 'curtidas' do Facebook poderiam ser usadas -ara predizer com acurácia informações sensíveis dos usuários
 - O app posteriormente foi relacionado ao escândalo do Cambridge Analytica; e os dados em si são carregados de controvérsia
 - Embora seja um exemplo negativo, ele ilustra bem a utilidade da tarefa que estudaremos hoje
 
-- JV
+- [JV]
   - Kosinski (2013) coletavam dados das personalidades através do MyPersonality.
     - Escândalo do Cambridge Analytica
   - Buscava predizer a personalidade baseado nas curtidas feitas no Facebook
@@ -293,13 +279,17 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 - Provost e Foster (2013) utilizaram esses dados para demonstrar como a modelagem descritiva traz informações úteis
 - Seguem alguns exemplos de regras:
 
-- JV
+- [JV]
   - Provost e Foster (2013) utilizaram os dados para demonstrar a modelagem descritiva e as informações úteis.
   - Alguns exemplos de regras:
-    - Selena Gomez -> Demi Lovato
-    - Linking Park & Disturbed & System of a Down & Korn -> Slipknot
-    - SpongeBob SquarePants & Converse [JV: empresa do All Stars] -> Patrick Star
-    - Skittles & Mountain Dew -> Gatorade
+    - Selena Gomez $\to$ Demi Lovato
+      - $Support=0.010; Strength=0.419; Lift=27.59; Leverage=0.0100$
+    - Linking Park & Disturbed & System of a Down & Korn $\to$ Slipknot
+      - $Support=0.011; Strength=0.862; Lift=25.50; Leverage=0.0107$
+    - SpongeBob SquarePants & Converse [JV: empresa do All Stars] $\to$ Patrick Star
+      - $Support=0.010; Strength=0.654; Lift=24.94; Leverage=0.0097$
+    - Skittles & Mountain Dew $\to$ Gatorade
+      - $Support=0.010; Strength=0.519; Lift=25.23; Leverage=0.0100$
 
 [JV: Offtopic: o diretor da Google daqui fez doutorado no PPGCC]
 
@@ -311,7 +301,7 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
   - Majoritariamente de consumo de músicas, mas, como intencionado pelo estudo original, revela traços de personalidade dos usuários
 - Respeitados os limites éticos e legais, essas informações são úteis em diversos contextos: campanhas de marketing, desenvolvimento de produtos, ...
 
-- JV
+- [JV]
   - A ideia de itens em cesta de compra pode ser generalizada para itens virtuais
   - Busca-se encontrar co-ocorrências de itens de análise
   - Dados os limites éticos, pode-se usar essa análise para se atingir diversos objetivos.
@@ -321,12 +311,12 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 - Chamamos os elementos do conjunto $I = \{x_1, x_2, \dots, x_m\}$ de itens
 - Esses elementos são as variáveis de análise que estamos considerando
 - Um conjunto $X \subseteq I$ é chamado de _itemset_
-- Um itemset de tamanho k é chamado de k-itemset
+- Um itemset de tamanho $k$ é chamado de k-itemset
 - Denotamos o conjunto de todos os k-itemsets por $I^{(k)}$
 - Similarmente, como estamos lidando com 'transações', vamos identificá-las individualmente por IDs, que serão chamados de tids
 - Logo, o conjunto $T = \{t_1, t_2, \dots, t_n\}$ é o conjunto de transações consideradas, identificadas pelos seus respectivos tids
 
-- JV
+- [JV]
   - Os "produtos" da cesta de compras são chamados de "Itens".
     - $I = \{x_1, x_2, \dots, x_m\}$
   - Esses elementos serão as **variáveis de análise**
@@ -345,10 +335,10 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 - Formalmente, um conjunto de dados será uma tripla $(T, I, D)$
 
   - T e I são os conjuntos de tids e itens
-  - $D \subseteq T \times I$ é uma relação binária em que $(t, i) \in D \bicond i \in X$ na transação $(t, X)$
-  - Dizemos que a transação t **contém** o item i
+  - $D \subseteq T \times I$ é uma relação binária em que $(t, i) \in D \leftrightarrow i \in X$ na transação $(t, X)$
+  - Dizemos que a transação $t$ **contém** o item $i$
 
-- JV
+- [JV]
   - O Conjunto $Y \subseteq T$ é chamado de **Tidset**
   - É válido assumir que _itemsets_ e _tidsets_ são ordenados por ordem lexicográfica dos itens e transações. (Não importa qual ordem, mas estão de algum modo ordenados)
   - Cada transação consiste de um identificador (TID) e um conjunto de itens
@@ -358,7 +348,7 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
     - I: Atributos ou itens
     - D: Relação binária entre eles.
     - $T$ e $I$ são os conjuntos de tids e itens
-    - $D \subsetq T \times I$ é a relação binária em que $(t, i) \in D$...
+    - $D \subseteq T \times I$ é a relação binária em que $(t, i) \in D$...
 
 ---
 
@@ -366,12 +356,11 @@ Na parte de supervisionado: Sebastian Ventura e José Maria Luna 2018; Guozhu Do
 - Dizemos que $t$ contém um itemset X sse $\forall i \in X (t, i) \in D$
 
 - Exemplo:
-  - I = {muesli, oats, milk, yoghurt, biscuits, tea}
-  - T = {1,2,3,4,5,6}
-  - (1, {muesli, milk, yoghurt, tea})
-  - 5 contém {milk, tea}
-
-Ou seja: $t$ contém $X$ se $|X - t| = 0$
+  - $I = {muesli, oats, milk, yoghurt, biscuits, tea}$
+  - $T = {1,2,3,4,5,6}$
+  - $(1, {muesli, milk, yoghurt, tea})$
+  - 5 contém ${milk, tea}$
+- [JV] Ou seja: $t$ contém $X$ se $|X - t| = 0$
 
 | TID | Muesli | Oats | Milk | Yoghurt | Biscuits | Tea |
 | --: | -----: | ---: | ---: | ------: | -------: | --: |
@@ -392,10 +381,11 @@ Ou seja: $t$ contém $X$ se $|X - t| = 0$
 - Dado um tidset Y, podemos querer saber o maior conjunto de itens comuns às transações de Y.
 - Esse conjunto é chamado de **intensão** (Não é intenção!) de Y.
 - Ele é definido por
+
   - $i: P(T) \to P(I)$
   - $i(Y) = \{x \in I | \forall t \in Y(t, x) \in D\}$
 
-O uso de extensão e intensão vêm da ideia filosófica e semiótica de que a extensão é o conjunto de coisas que se encaixam em uma definição, enquanto a intensão é a definição em si.
+- [JV] O uso de extensão e intensão vêm da ideia filosófica e semiótica de que a extensão é o conjunto de coisas que se encaixam em uma definição, enquanto a intensão é a definição em si.
 
 ---
 
@@ -414,12 +404,11 @@ O uso de extensão e intensão vêm da ideia filosófica e semiótica de que a e
 |   5 |      0 |    1 |    1 |       0 |        0 |   1 |
 |   6 |      1 |    0 |    1 |       0 |        0 |   1 |
 
-Intensão: conjunto de itens comuns a todos os elementos de um determinado conjunto de transações.
-
-Extensão: o conjunto de transações que contenham um determinado conjunto de itens.
-
-Intensão: a interseção das linhas
-Extensão: a interseção das colunas
+- [JV]
+  - **Intensão:** conjunto de itens comuns a todos os elementos de um determinado conjunto de transações.
+  - **Extensão:** o conjunto de transações que contenham um determinado conjunto de itens.
+  - **Intensão:** a interseção das linhas
+  - **Extensão:** a interseção das colunas
 
 #### Representações de conjuntos de dados
 
@@ -473,13 +462,16 @@ Extensão: a interseção das colunas
 
 #### Mineração de Conjuntos de itens frequentes
 
-- Uma definição de "regra interessante" é ela ocorrer com certa frequência.
-- Então é necessário definir um limiar entre o que é frequente e o que é infrequente
-  - Esse limiar é chamado de suporte mínimo (minsup)
-- O suporte de um itemset é o tamanho de sua cobertura
+- Uma das visões sobre o que seria uma regra interessante é que ela deve ocorrer com certa frequência, ou seja, ela não ocorre simplesmente por chance
+- Isso implica que o analista deve definir o limiar para separar o que é frequente e infrequente
+  - Esse limiar é chamado de suporte mínimo ($minsup$)
+- O **suporte** de um itemset é o tamanho de sua cobertura
   - $sup(X) = |c(X)|$
-- Como essa definição é dependente do contexto, admite-se também a definição do suporte relativo
+- Como essa definição é dependente do contexto, admite-se também a definição do **suporte relativo**
+
   - $rsup(X) = |c(X)| / |T|$
+
+- [JV] Uma definição de "regra interessante" é ela ocorrer com certa frequência.
 
 ---
 
@@ -509,29 +501,39 @@ Extensão: a interseção das colunas
 - Essa busca pode ser tanto uma busca em largura quanto em profundidade
   - De fato, existem abordagens baseadas em ambas as buscas
 - No entanto, a maioria das abordagens compartilham a mesma estrutura de busca:
+
   - Identificam candidatos navegando o espaço de busca
   - Computam o suporte desses candidatos, descartando os infrequentes
 
-Relação de ordem parcial: $X \subseteq Y \leftrightarrow X \leq Y$
-
-Conjunto potência: é o conjunto de todos os possíveis subconjuntos de um conjunto.
+- [JV]
+  - Relação de ordem parcial: $X \subseteq Y \leftrightarrow X \leq Y$
+  - **Conjunto potência:** é o conjunto de todos os possíveis subconjuntos de um conjunto.
 
 ```mermaid
 flowchart TD
-  null[["\null"]]
+  null("$$\varnothing$$")
+  A(A)
+  B(B)
+  C(C)
+  AB(AB)
+  AC(AC)
+  BC(BC)
+  ABC(ABC)
   null --> A & B & C
   A --> AB & AC
   B --> AB & BC
   C --> AC & BC
+  AB --> ABC
+  AC --> ABC
+  BC --> ABC
 ```
 
-- JV
+- [JV]
   - O espaço de busca do problema é o conjunto potência do conjunto de itens
   - Se considerarmos a relação de subconjuntos como uma relação de ordem parcial, temos que o espaço de busca é estruturado como um reticulado
     - Esse reticulado pode ser visualizado como um grafo, onde somente as relações diretas são representadas
     - Ou seja, se $A \subseteq B \land |A| = |B| - 1$, então existe uma aresta entre A e B no diagrama
-
-Aquele diagrama explica bastante o que que isso quis dizer. Basicamente, no conjunto potência, cada nível vai ter um elemento a mais que o nível anterior.
+  - Aquele diagrama explica bastante o que que isso quis dizer. Basicamente, no conjunto potência, cada nível vai ter um elemento a mais que o nível anterior.
 
 #### Algoritmo Ingênuo
 
@@ -543,38 +545,37 @@ Aquele diagrama explica bastante o que que isso quis dizer. Basicamente, no conj
 
 Complexidade do algoritmo: $O(2^I \cdot T \cdot I)$
 
-- **// ALGORITHM 8.1. Algoritm BruteForce**
+- **ALGORITHM 8.1. Algoritm BruteForce**
 
   - **BruteForce** $(D, \mathcal{I}, minsup)$:
 
-    - $\mathcal{F} \leftarrow \emptyset$ // set of frequent itemsets
-      - **foreach** $X \subseteq \mathcal{I}$ **do**
-        - $sup(X) \leftarrow ComputeSupport (X, D)$
-        - **if** $sup(X) \leq minsup$ **then**
-          - $\mathcal{F} \leftarrow \mathcal{F} \cup {(X, sup(X))}$
-      - **return** $\mathcal{F}$
+    - $\mathcal{F} \gets \emptyset$ // set of frequent itemsets
+    - **foreach** $X \subseteq \mathcal{I}$ **do**
+      - $sup(X) \gets ComputeSupport (X, D)$
+      - **if** $sup(X) \geq minsup$ **then**
+        - $\mathcal{F} \gets \mathcal{F} \cup {(X, sup(X))}$
+    - **return** $\mathcal{F}$
 
   - **ComputeSupport** $(X, D)$:
-    - $sup(X) \leftarrow 0$
+    - $sup(X) \gets 0$
     - **foreach** $\langle t, i(t) \rangle \in D$ **do**
       - **if** $X \subseteq i(t)$ **then**
-        - $sup(X) \leftarrow sup(X) + 1$
+        - $sup(X) \gets sup(X) + 1$
   - **return** $sup(X)$
 
 ---
 
 - A computação do suporte de um itemset requer uma passada sobre o conjunto de dados, ou seja, requer tempo $O(|T|)$
 - Verificar se uma dada transação contém um itemset requer tempo $O(|I|)$
-- Portanto, o custo total de computação do suporte é $O(|T|)$
+- Portanto, o custo total de computação do suporte é $O(|I \cdot T|)$
 - O espaço de busca, por sua vez, é o conjunto potência de $I$. Logo, a complexidade do algoritmo ingênuo é $O(2^I \cdot I \cdot T)$
 
 ---
 
 - A complexidade do espaço de busca é inerente ao problema. Contudo o algoritmo é ineficiente mesmo em espaços pequenos
 - Note que o conjunto de dados não é mantido em memória, portanto a computação do suporte torna o algoritmo impraticável
-- Os algoritmos mais "sofisticados" atacam majoritariamente o problema de computação de suporte, evitando computações desnecessáris, e/ou adotando estratégias mais eficientes para computá-lo.
-
-Então temos dois problemas principais: reduzir o espaço de busca e reduzir a complexidade para calcular o suporte.
+- Os algoritmos mais "sofisticados" atacam majoritariamente o problema de computação de suporte, evitando computações desnecessárias, e/ou adotando estratégias mais eficientes para computá-lo.
+- [JV] Então temos dois problemas principais: reduzir o espaço de busca e reduzir a complexidade para calcular o suporte.
 
 #### Leitura - Aula 02
 
@@ -583,7 +584,7 @@ Então temos dois problemas principais: reduzir o espaço de busca e reduzir a c
 
 ## Aula 03 | 25/03/2025 | Mineração de conjuntos de itens - Faltei - Mineração de itens frequentes: Apriori e Eclat
 
-### Slide: aula03-apriori_eclat (Aula 03)
+### Slide: aula03-apriori_eclat (Aula 03) - Mineração de itens frequentes: Apriori e Eclat
 
 #### Introdução (Aula 03)
 
@@ -593,9 +594,7 @@ Então temos dois problemas principais: reduzir o espaço de busca e reduzir a c
 
 - [JV]
   - O que é mesmo o suporte? 🤔
-  - Recapitulando da aula anterior, o Suporte aparentemente é ~~um encurtamento para~~ o "Suporte Mínimo" (minsup) que é o limiar que define se determinado item é frequente o bastante ou não.
-    - Corrigindo: o suporte é a quantidade de vezes que determinado item aparece no conjunto de dados.
-    - Entretanto, a definição de minsup está correta.
+  - Recapitulando da aula anterior, o Suporte é a quantidade de vezes que determinado item aparece no conjunto de dados; já o "Suporte Mínimo" ($minsup$) é o limiar que define se determinado item é frequente o bastante ou não.
   - Esse valor é dado pela seguinte fórmula:
     - $sup(X) = |c(X)|$, onde $c(X)$ é a cobertura do itemset $X$.
   - Mas o que é mesmo a cobertura?
@@ -650,17 +649,17 @@ Então temos dois problemas principais: reduzir o espaço de busca e reduzir a c
 ---
 
 - **APRIORI** $(D, \mathcal{I}, minsup)$:
-  - $\mathcal{F} \leftarrow \emptyset$
-  - $\mathcal{C}^{(1)} \leftarrow \{\emptyset\}$ `// Initial prefix tree with single items`
-  - **foreach** $i \in \mathcal{I}$ **do** Add $i$ as child of $\emptyset$ in $\mathcal{C}^{(1)}$ with $sup(i) \leftarrow 0$
-  - $k \leftarrow 1$ `// k denotes the level`
+  - $\mathcal{F} \gets \emptyset$
+  - $\mathcal{C}^{(1)} \gets \{\emptyset\}$ `// Initial prefix tree with single items`
+  - **foreach** $i \in \mathcal{I}$ **do** Add $i$ as child of $\emptyset$ in $\mathcal{C}^{(1)}$ with $sup(i) \gets 0$
+  - $k \gets 1$ `// k denotes the level`
   - **while** $\mathcal{C}^{(k)} \neq \emptyset$ **do**
     - **ComputeSupport** $(\mathcal{C}^{(k)}, D)$
     - **foreach** _leaf_ $X \in \mathcal{C}^{(k)}$ **do**
-      - **if** $sup(X) \geq minsup$ **then** $\mathcal{F} \leftarrow \mathcal{F} \cup \{(X, sup(X))\}$
+      - **if** $sup(X) \geq minsup$ **then** $\mathcal{F} \gets \mathcal{F} \cup \{(X, sup(X))\}$
       - **else** remove $X$ from $\mathcal{C}^{(k)}$
-    - $\mathcal{C}^{(k+1)} \leftarrow$ ExtendPrefixTree($\mathcal{C}^{(k)}$)
-    - $k \leftarrow k+1$
+    - $\mathcal{C}^{(k+1)} \gets$ ExtendPrefixTree($\mathcal{C}^{(k)}$)
+    - $k \gets k+1$
   - **return** $\mathcal{F}^{(k)}$
 
 ---
@@ -669,21 +668,21 @@ Então temos dois problemas principais: reduzir o espaço de busca e reduzir a c
 
   - **foreach** $\langle t, i(t) \rangle \in D$ **do**
     - **foreach** k-subset $X \subseteq i(t)$ **do**
-      - **if** $X \in \mathcal{C}^{(k)}$ **then** $sup(X) \leftarrow sup(X) + 1$
+      - **if** $X \in \mathcal{C}^{(k)}$ **then** $sup(X) \gets sup(X) + 1$
 
 - **ExtendPrefixTree** $(\mathcal{C}^{(k)})$:
   - **foreach** leaf $X_a \in \mathcal{C}^{(k)}$ **do**
     - **foreach** leaf $X_b \in SIBLING(X_a)$, such that $b > a$ **do**
-      - $X_{ab} \leftarrow X_a \cup X_b$ `// prune candidate if there are any infrequent subsets`
+      - $X_{ab} \gets X_a \cup X_b$ `// prune candidate if there are any infrequent subsets`
       - **if** $X_j \in \mathcal{C}^{(k)}$, **for all** $X_j \subset X_{ab}$, such that $|X_j| = |X_{ab}|-1$ **then**
-        - Add $X_{ab}$ as child of $X_a$ with $sup(X_{ab}) \leftarrow 0$
+        - Add $X_{ab}$ as child of $X_a$ with $sup(X_{ab}) \gets 0$
     - **if** _no extensions from_ $X_a$ **then**
       - Remove $X_a$, and all ancestors of $X_a with no extensions, from $\mathcal{C}^{(k)}$
   - **return** $\mathcal{C}^{(k)}$
 
 ---
 
-- Exemplo (minsup=3):
+- Exemplo $(minsup=3)$:
 
 $$
 \begin{bmatrix}
@@ -730,7 +729,7 @@ $$
 ---
 
 - A redução do suporte mínimo tem um impacto muito grande no custo computacional do algoritmo
-  - O tamanho dos candidatos aumenta -> Mais candidatos são avaliados em cada nível -> o tamanho dos conjuntos frequentes aumenta -> mais níveis são explorados
+  - O tamanho dos candidatos aumenta $\to$ Mais candidatos são avaliados em cada nível $\to$ o tamanho dos conjuntos frequentes aumenta $\to$ mais níveis são explorados
 
 [Imagem(a): Number of candidate itemsets]
 
@@ -752,42 +751,38 @@ $$
 
 ### Aula passada
 
-- Algoritmo apriori
+- Algoritmo Apriori
 - Frequente, infrequente.
 - Como calcula o suporte
+
   - A partir dos itens frequentes: tabelas de 0 e 1.
   - Pra isso usava árvore de prefixos
   - Para cada transação gerava os itemsets de tamanho k, ia na árvore de prefixos
   - E incrementava o suporte daquela chave
 
-[JV: escrevi o que ele tá falando, mas não tô entendendo]
-
-- Duas coisas influenciam o desempenho do algoritmo
-  1. Ele falou algo
-  2. Se o BD é denso, as transações são mais largas.
-- $\binom{|t|}{k}$
-- Quando é esparso, funciona bem. Quando é denso que começa a dar problema.
-
-Eu tô achando que se eu compro $J = \{A, B, C\}$, Então o conjunto potência dele é $P(J) = \{\emptyset, A, B, C, AB, AC, BC, ABC\}$, e então, incrementaria 1 para um desses grupos
-
-- Cálculo de suporte:
-
-  - Para cada um dos itemsets tem que verificar se ele tá na árvore K(?)
-
-- Se os itemsets estão em memória...
-- Se quero gerar o itemset $XY$ partindo de $X \cup Y$, posso dizer que o suporte será $|c(X) \cap c(Y)|$
+- [JV: escrevi o que ele tá falando, mas não tô entendendo]
+  - Duas coisas influenciam o desempenho do algoritmo
+    1. Ele falou algo
+    2. Se o BD é denso, as transações são mais largas.
+       - $\binom{|t|}{k}$
+       - Quando é esparso, funciona bem. Quando é denso que começa a dar problema.
+  - Eu tô achando que se eu compro $J = \{A, B, C\}$, Então o conjunto potência dele é $P(J) = \{\emptyset, A, B, C, AB, AC, BC, ABC\}$, e então, incrementaria 1 para um desses grupos
+  - Cálculo de suporte:
+    - Para cada um dos itemsets tem que verificar se ele tá na árvore K(?)
+  - Se os itemsets estão em memória...
+  - Se quero gerar o itemset $XY$ partindo de $X \cup Y$, posso dizer que o suporte será $|c(X) \cap c(Y)|$
 
 ### Slide: aula03-apriori_eclat (Aula 04)
 
 #### Eclat (Equivalence Class Transformation)
 
-Dada a representação vertical dos dados, consigo calcular o suporte por essa intercessão.
-
 - Dadas as deficiências do Apriori, M. Zaki propôs, em 2000, o algoritmo Equivalence Class Transformation (Eclat)
 - A proposta do algoritmo é 'eliminar' a necessidade de passadas no conjunto de dados para computar o suporte
 - Para isso, ele parte de uma representação vertical dos dados, e se baseia no fato de que a cobertura da união de dois itemsets é a interseção de suas coberturas
 
-Problema: como mantenho todos os itemsets gerados em memória?
+- [JV]
+  - Dada a representação vertical dos dados, consigo calcular o suporte por essa intercessão.
+  - Problema: como mantenho todos os itemsets gerados em memória?
 
 ---
 
@@ -795,11 +790,10 @@ Problema: como mantenho todos os itemsets gerados em memória?
 - Contudo, todos os tidsets podem não caber na memória principal. Assim, é necessário algum mecanismo que possibilite a divisão do espaço de busca em subproblemas independentes que caibam na memória
 - A divisão é feita conforme uma relação de equivalência estabelecida sobre os candidatos
 
-Tenta manter tudo na memória principal
-
-A ideia é partir o problema em subproblemas e trazer esses subproblemas pra memória.
-
-Surgiu através da criação de uma relação de equivalência entre os itemsets
+- [JV]
+  - Tenta manter tudo na memória principal
+  - A ideia é partir o problema em subproblemas e trazer esses subproblemas pra memória.
+  - Surgiu através da criação de uma relação de equivalência entre os itemsets
 
 ---
 
@@ -809,60 +803,54 @@ Surgiu através da criação de uma relação de equivalência entre os itemsets
 - Por exemplo, todos os conjuntos que contêm o item Muesli pertencem à classe de equivalência $[Muesli]_{\theta_1}$
 - Intuitivamente, essas classes servem como projeções do conjunto de dados, em que somente as transações contendo aquele prefixo são consideradas
 
-Cria-se uma relação de equivalência pelos prefixos.
-
-Diz-se que dois itemsets são equivalentes se o prefixos dos dois são iguais.
-
-Consideremos que temos o seguinte conjunto potência: $P(I) = \{\emptyset, A, B, C, AB, AC, BC, ABC\}$. Na forma de representação, seria como se agrupássemos os dados em grupos de prefixos:
-
-- $A: \{A, AB, AC, ABC\}$
-- $B: \{B, BC\}$
-- $C: \{C\}$
-
-E então seriam varridos de C para A.
-
-Poderia-se também fazer subgrupos de subgrupos, dependendo do tamanho do conjunto de prefixos.
+- [JV]
+  - Cria-se uma relação de equivalência pelos prefixos.
+  - Diz-se que dois itemsets são equivalentes se o prefixos dos dois são iguais.
+  - Consideremos que temos o seguinte conjunto potência: $\mathcal{P}(I) = \{\emptyset, A, B, C, AB, AC, BC, ABC\}$. Na forma de representação, seria como se agrupássemos os dados em grupos de prefixos:
+    - $\emptyset: \{\emptyset, A, B, C, AB, AC, BC, ABC\}$
+    - $A: \{A, AB, AC, ABC\}$
+    - $B: \{B, BC\}$
+    - $C: \{C\}$
+  - E então seriam varridos de C para A (ou o $\emptyset$).
+  - Poderia-se também fazer subgrupos de subgrupos, dependendo do tamanho do conjunto de prefixos.
 
 ---
-
-Ele faz uma busca em profundidade (DFS)
-
-Ele faz subpartições até que o número de transações seja pequeno o suficiente para caber na memória.
 
 - Durante a busca em profundidade, o algoritmo particiona os conjuntos de itens conforme a relação de equivalência e o nível da árvore
 - O particionamento pode ser encerrado tão logo os tidsets caibam na memória e as interseções possam ser computadas facilmente
 - Contudo, a estratégia pode ser usada durante toda a execução do algoritmo
 - O cálculo do suporte no algoritmo se restringe a calcular o tamanho do tidset
 
+- [JV]
+  - Ele faz uma busca em profundidade (DFS)
+  - Ele faz subpartições até que o número de transações seja pequeno o suficiente para caber na memória.
+
 ---
 
 - **ALGORITHM 8.3. Algorithm ECLAT**
-- // Initial Call: $\mathcal{F} \leftarrow \emptyset, P \leftarrow \{ \langle i, t(i) \rangle | i \in \mathcal{I}, |t(i)| \geq minsup \} $
+- // Initial Call: $\mathcal{F} \gets \emptyset, P \gets \{ \langle i, t(i) \rangle | i \in \mathcal{I}, |t(i)| \geq minsup \}$
 - **ECLAT** $(P, minsup, \mathcal{F})$:
   - **foreach** $\langle X_a, t(X_a) \rangle \in P$ **do**
-    - $\mathcal{F} \leftarrow \mathcal{F} \cup \{(X_a, sup(X_a))\}$
-    - $P_a \leftarrow \emptyset$
+    - $\mathcal{F} \gets \mathcal{F} \cup \{(X_a, sup(X_a))\}$
+    - $P_a \gets \emptyset$
     - **foreach** $\langle X_b, t(X_b) \rangle \in P$, with $X_b > X_a$ **do**
       - $X_{ab} = X_a \cup X_b$
       - $t(X_{ab}) = t(X_a) \cap t(X_b)$
       - **if** $sup(X_{ab}) \geq minsup$ **then**
-        - $P_a \leftarrow P_a \cup \{ \langle X_{ab}, t(X_{ab}) \rangle \}$
+        - $P_a \gets P_a \cup \{ \langle X_{ab}, t(X_{ab}) \rangle \}$
     - **if** $P_a \neq \emptyset$ **then** ECLAT $(P_a, minsup, \mathcal{F})$
 
 [JV: Droga, foquei em transcrever brevemente e esqueci de prestar atenção na explicação do professor]
 
-P guarda todos os frequentes da chamada anterior. porque ele filtro toudos que são infrequentes pelo minsup
-
-para cada um dos frequentes dos candidatos, armazena no ocnjunto de itens frequentes globais
-
-e a partir dele gera em profundidade a combinação dele com todos os outros que vêm pra frente.
-
-Evitam redundância: 1. partições; 2. Ordem sistemática de combinação dos itens.
-
-1. A B C
-2. A com B e C: AB AC
-3. AB com AC: ABC
-4. B com C: BC
+- [JV]
+  - P guarda todos os frequentes da chamada anterior. porque ele filtrou todos que são infrequentes pelo minsup
+  - para cada um dos frequentes dos candidatos, armazena no conjunto de itens frequentes globais
+  - e a partir dele gera em profundidade a combinação dele com todos os outros que vêm pra frente.
+  - Evitam redundância: 1. partições; 2. Ordem sistemática de combinação dos itens.
+    1. A B C
+    2. A com B e C: AB AC
+    3. AB com AC: ABC
+    4. B com C: BC
 
 ##### Representações de conjuntos de dados (Aula 4)
 
@@ -886,13 +874,12 @@ $$
 \end{bmatrix}
 $$
 
-Pelo que eu tô entendendo:
-
-1. Começa pegando todos os itens que tenham uma quantidade de transações maior que o minsup (o valor mínimo aceitável para que consideremos relevante)
-2. Depois disso, começamos fazendo a intercessão das transações entre o primeiro conjunto de itens que passou pela comparação com o segundo conjunto.
-3. Depois disso, vê se o resultado dessas intercessões é grande o bastante.
-
-Se $A \subseteq B$, então $c(B) \subseteq c(A)$ (Cobertura)
+- [JV]
+  - Pelo que eu tô entendendo:
+    1. Começa pegando todos os itens que tenham uma quantidade de transações maior que o minsup (o valor mínimo aceitável para que consideremos relevante)
+    2. Depois disso, começamos fazendo a intercessão das transações entre o primeiro conjunto de itens que passou pela comparação com o segundo conjunto.
+    3. Depois disso, vê se o resultado dessas intercessões é grande o bastante.
+  - Se $A \subseteq B$, então $c(B) \subseteq c(A)$ (Cobertura)
 
 #### Eclat (Equivalence Class Transformation) [2]
 
@@ -915,47 +902,37 @@ Se $A \subseteq B$, então $c(B) \subseteq c(A)$ (Cobertura)
 - Formalmente, para um prefixo P e um itemset PX, o diffset de X, $d(PX) = c(P) - c(PX)$
 - Seriam armazenados, portanto, o suporte do itemset e seu diffset
 
-Em bases de dados densos, varia bem pouco o suporte entre os itens. Então, faria mais sentido guardar só a diferença ao invés de guardar o todo.
-
-Ao invés de chamar de tidset, passaram a chamar de diffset.
-
-...
-
-Pode-se armazenar em vetores de bits ao invés de vetores de inteiros.
-
-Usando o vetor de bits, é como se fosse:
-
-A = [00110, 01001, 01100, 00011]
-
-E para calcular o suporte (?) cobetura(?)
-
-basta fazer um cálculo rápido de 0 a 255 para dizer quantos bits estão ativos, e então fazer a contagem de bits ativos somando esses valores.
-
-0 -> 1
-1 -> 1
-2 -> 1
-...
-255 -> ...
-
-Outra forma de condensar é: Se sei que um determinado conjunto é grande o bastante, posso inferir que todos os que são menores que eles também são grandes o bastante.
-
-Se só é guardado o valor das diferenças, acaba sendo um problema fazer as intercessões.
+- [JV]
+  - Em bases de dados densos, varia bem pouco o suporte entre os itens. Então, faria mais sentido guardar só a diferença ao invés de guardar o todo.
+  - Ao invés de chamar de tidset, passaram a chamar de diffset.
+  - ...
+  - Pode-se armazenar em vetores de bits ao invés de vetores de inteiros.
+  - Usando o vetor de bits, é como se fosse:
+    - $A = [00110, 01001, 01100, 00011]$
+  - E para calcular o suporte (?) cobertura(?)
+  - basta fazer um cálculo rápido de 0 a 255 para dizer quantos bits estão ativos, e então fazer a contagem de bits ativos somando esses valores.
+    - $0 \to 1$
+    - $1 \to 1$
+    - $2 \to 1$
+    - ...
+    - $255 \to ...$
+  - Outra forma de condensar é: Se sei que um determinado conjunto é grande o bastante, posso inferir que todos os que são menores que eles também são grandes o bastante.
+  - Se só é guardado o valor das diferenças, acaba sendo um problema fazer as intercessões.
 
 ---
 
-- Por definição, $d(PXY) = c(PX) - c(PXY) = c(PX) - c(PY)$
-- Podemos adicionar, ao conjunto acima, o conjunto vazio $(c(P) - c(P))$ sem alterá-lo
-- Logo, $d(PXY) = c(PX) - c(PY) + c(P) - c(P) - c(P) = (c(P)-c(PY)) - (c(P) - c(PX)) = d(PY) - d(PX)$
-- Em outras palavras, podemos usar os diffsets dos conjuntos base para calcular o diffset do novo candidato
-- A variante do Eclat que usa diffsets ficou conhecida como dEclat
+- [JV]
 
-$C(PX) - C(PY)$
+  - Por definição, $d(PXY) = c(PX) - c(PXY) = c(PX) - c(PY)$
+  - Podemos adicionar, ao conjunto acima, o conjunto vazio $(c(P) - c(P))$ sem alterá-lo
+  - Logo, $d(PXY) = c(PX) - c(PY) + c(P) - c(P) - c(P) = (c(P)-c(PY)) - (c(P) - c(PX)) = d(PY) - d(PX)$
+  - Em outras palavras, podemos usar os diffsets dos conjuntos base para calcular o diffset do novo candidato
+  - A variante do Eclat que usa diffsets ficou conhecida como dEclat
 
-$C(PX) - C(PY) \cup C(P) - C(P)$
-
-$C(PX) \cap \overline{C(PY)} \cup C(P) \cap \overline{C(P)}$
-
-$C(PX) \cup \overline{C(P)} \cap C(P) \cup \overline{C(P)}$
+  - $C(PX) - C(PY)$
+  - $C(PX) - C(PY) \cup C(P) - C(P)$
+  - $C(PX) \cap \overline{C(PY)} \cup C(P) \cap \overline{C(P)}$
+  - $C(PX) \cup \overline{C(P)} \cap C(P) \cup \overline{C(P)}$
 
 ## Aula 05 | 01/04/2025 | Mineração de conjuntos de itens
 
@@ -985,62 +962,46 @@ $C(PX) \cup \overline{C(P)} \cap C(P) \cup \overline{C(P)}$
 - Em outras palavras, podemos usar os diffsets dos conjuntos base para calcular o diffset do novo candidato
 - A variante do Eclat que usa diffsets ficou conhecida como dEclat
 
----
-
----
-
-- $d(PXY) = c(PX) - c(PY) = c(PX) - c(PXY)$
-- $c(PXY) = c(PX) \cap c(PY)$
-
-"Diferença é a mesma coisa que interseção com complemento"
-
-- $d(PXY) = ...$
-
-Ele fez um monte de igualdades com operações de conjuntos.
-
-- $d(PXY) =$
-- $c(PX) - c(PY) =$
-- $c(PX) - c(PXY) =$
-- $[c(PX) - c(PXY)] \cup [c(P) - c(P)] =$
-- $[c(PX) \cap \overline{c(PXY)}] \cup [c(P) \cap \overline{c(P)}]$
-- $[c(PX) \cup c(P)] \cap [\overline{c(PY)} \cup \overline{c(P)}] \cap \overline{d(PX)}$
-- $(c(PX) \cap \overline{c(PY)}) \cup (c(P) \cap \overline{c(P)}) \cup (c(P) \cap \overline{c(PY)}) \cup (c(P) \cap \overline{c(P)} \cap \overline{d(PX)})$
-- $(Q \subseteq d(PY)) \cup (\emptyset) \cup (d(PY)) \cup (\emptyset) \cap (\overline{d(PX)})$
-- $d(PY) \cap \overline{d(PX)} =$
-- $d(PY) - d(PX)$
-
----
-
-- $d(PX) = ...$
-
----
-
-- $P = \{1, 2, 3, 4, 5\}$
-- $X = \{1, 3, 5\}$
-- $Y = \{2, 3, 4\}$
-- $PX = \{1, 3, 5\}$
-- $PY = \{2, 3, 4\}$
-- $\overline{PY} = \{1, 5\}$
-- $PX \cap \overline{PY} = \{1, 5\}$
-
----
-
----
+- [JV]
+  - $d(PXY) = c(PX) - c(PY) = c(PX) - c(PXY)$
+  - $c(PXY) = c(PX) \cap c(PY)$
+    - "Diferença é a mesma coisa que interseção com complemento"
+    - - $d(PXY) = ...$
+  - Ele fez um monte de igualdades com operações de conjuntos.
+    - $d(PXY) =$
+    - $c(PX) - c(PY) =$
+    - $c(PX) - c(PXY) =$
+    - $[c(PX) - c(PXY)] \cup [c(P) - c(P)] =$
+    - $[c(PX) \cap \overline{c(PXY)}] \cup [c(P) \cap \overline{c(P)}]$
+    - $[c(PX) \cup c(P)] \cap [\overline{c(PY)} \cup \overline{c(P)}] \cap \overline{d(PX)}$
+    - $(c(PX) \cap \overline{c(PY)}) \cup (c(P) \cap \overline{c(P)}) \cup (c(P) \cap \overline{c(PY)}) \cup (c(P) \cap \overline{c(P)} \cap \overline{d(PX)})$
+    - $(Q \subseteq d(PY)) \cup (\emptyset) \cup (d(PY)) \cup (\emptyset) \cap (\overline{d(PX)})$
+    - $d(PY) \cap \overline{d(PX)} =$
+    - $d(PY) - d(PX)$
+  - $d(PX) = ...$
+  - Outro exemplo:
+    - $P = \{1, 2, 3, 4, 5\}$
+    - $X = \{1, 3, 5\}$
+    - $Y = \{2, 3, 4\}$
+    - $PX = \{1, 3, 5\}$
+    - $PY = \{2, 3, 4\}$
+    - $\overline{PY} = \{1, 5\}$
+    - $PX \cap \overline{PY} = \{1, 5\}$
 
 ---
 
 - **ALGORITHM 8.4. Algorithm dEclat**
-  - //`Initial Call:` $\mathcal{F} \leftarrow \emptyset, P \leftarrow \{ \langle i, d(i), sup(i) \rangle | i \in \mathcal{I}, d(i) = \mathcal{T}\\t(i), sup(i) \geq minsup \}$
+  - //`Initial Call:` $\mathcal{F} \gets \emptyset, P \gets \{ \langle i, d(i), sup(i) \rangle | i \in \mathcal{I}, d(i) = \mathcal{T}\\t(i), sup(i) \geq minsup \}$
   - **dEclat** $(P, minsup, \mathcal{F})$:
     - **foreach** $\langle X_a, d(X_a), sup(X_a) \rangle \in P$ **do**
-      - $\mathcal{F} \leftarrow \mathcal{F} \cup \{(X_a, sup(X_a))\}$
-      - $P_a \leftarrow \emptyset$
+      - $\mathcal{F} \gets \mathcal{F} \cup \{(X_a, sup(X_a))\}$
+      - $P_a \gets \emptyset$
       - **foreach** $\langle X_b, d(X_b), sup(X_b) \rangle \in P$, with $X_b > X_a$ **do**
         - $X_{ab} = X_a \cup X_b$
         - $d(X_{ab}) = d(X_b) \\ d(X_a)$
         - $sup(X_{ab}) = sup(X_a) - |d(X_{ab})|$
         - **if** $sup(X_{ab}) \geq minsup$ **then**
-          - $P_a \leftarrow P_a \cup \{ \langle X_{ab}, d(X_{ab}), sup(X_{ab}) \rangle \}$
+          - $P_a \gets P_a \cup \{ \langle X_{ab}, d(X_{ab}), sup(X_{ab}) \rangle \}$
       - **if** $P_a \neq \emptyset$ **then** dEclat $(P_a, minsup, \mathcal{F})$
 
 ---
@@ -1396,7 +1357,7 @@ Figuras retiradas de Borgelt, C. An Implementation of the FP-growth Algorithm
 - [JV]
   - Podemos considerar que:
     - $01 = a_{1}a_{2}\dots a_{50}$
-    - $ 1 = a*{1}a*{2}\dots a\_{100}$
+    - $1 = a_{1}a_{2} \dots a_{100}$
   - O que seriam representações compactas do conjunto de itemsets frequentes
 
 ---
@@ -1628,23 +1589,23 @@ Os azuis e verdes são classes de equivalência.
 
 - **procedure** $DCI\_Closed_d$ (CLOSED_SET, PRE_SET, POST_SET)
   - **while** POST_SET $neq \emptyset$ **do**
-    - $i \leftarrow min_{\prec}$ (POST_SET)
-    - POST_SET $leftarrow$ POST_SET \ $i$
-    - $new\_gen \leftarrow$ CLOSED_SET $\cup i$ \\\\ Build a new generator
+    - $i \gets min_{\prec}$ (POST_SET)
+    - POST_SET $gets$ POST_SET \ $i$
+    - $new\_gen \gets$ CLOSED_SET $\cup i$ \\\\ Build a new generator
     - **if** $supp(new\_gen) \geq minsupp$ **then**
       - $\neg$ is_dup (new_gen, PRE_SET) **then** \\\\ if $new\_gen$ is both frequent and order preserving
-      - CLOSED*SET $*{New} \leftarrow new_gen$
-      - POST*SET $*{New} \leftarrow \emptyset$
+      - CLOSED*SET $*{New} \gets new_gen$
+      - POST*SET $*{New} \gets \emptyset$
       - **for all** $j \in$ POST_SET **do** \\\\ Compute closure of $new\_gen$
         - **if** $g(new\_gen) \subseteq g(j)$ **then**
-          - CLOSED*SET $*{New} \leftarrow$ CLOSED*SET $*{New} \cup j$
+          - CLOSED*SET $*{New} \gets$ CLOSED*SET $*{New} \cup j$
         - **else**
-          - POST*SET $*{New} \leftarrow$ POST*SET$*{New} \cup j$
+          - POST*SET $*{New} \gets$ POST*SET$*{New} \cup j$
         - **end if**
       - **end for**
       - **Write Out** CLOSED*SET $*{New}$ _and its support_
       - DCI*Closed $_d$ CLOSED_SET $*{New}$, PRE_SET, POST_SET $_{New}$
-      - PRE_SET $leftarrow$ PRE_SET $\cup i$
+      - PRE_SET $gets$ PRE_SET $\cup i$
     - **end if**
   - **end while**
 - **end procedure**
@@ -2272,16 +2233,16 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 ---
 
 - **ALGORITHM 10.2. Algorithm SPADE**
-  - `// Initial Call:` $\mathcal{F} \leftarrow \emptyset, k \leftarrow 0, P \leftarrow \left{ \langle s, \mathcal{L}(s) \rangle | s \in \sum, sup(s) \geq minsup \right}$
+  - `// Initial Call:` $\mathcal{F} \gets \emptyset, k \gets 0, P \gets \left{ \langle s, \mathcal{L}(s) \rangle | s \in \sum, sup(s) \geq minsup \right}$
   - **SPADE** $(P, minsup, \mathcal{F}, k)$
     - **foreach** $r_a \in P$ **do**
-      - $\mathcal{F} \leftarrow \mathcal{F} \cup \left{ (r_a, sup(r_a)) \right}$
-      - $P_a \leftarrow \emptyset$
+      - $\mathcal{F} \gets \mathcal{F} \cup \left{ (r_a, sup(r_a)) \right}$
+      - $P_a \gets \emptyset$
       - **foreach** $r_b \in P$ **do**
         - $r_{ab} = r_a + r_b$
         - $\mathcal{L}(r_{ab}) = \mathcal{L}(r_a) \cap \mathcal{L}(r_b)$
         - **if** $sup(r_{ab}) \geq minsup$ **then**
-          - $P_a \leftarrow P_a \cup \left{ \langle r_{ab}, \mathcal{L}(r_{ab}) \rangle \right}$
+          - $P_a \gets P_a \cup \left{ \langle r_{ab}, \mathcal{L}(r_{ab}) \rangle \right}$
       - **if** $P_a \neq \emptyset$ **then** SPADE $(P, minsup, \mathcal{F}, k+1)$
 
 #### Leitura (Aula 10)
@@ -2633,12 +2594,12 @@ flowchart LR
 
 - **ALGORITHM 11.1. Algorithm gSpan**
 
-  - // Initial Call: $C \leftarrow \emptyset$
+  - // Initial Call: $C \gets \emptyset$
   - **gSpan** $(C, D, minsup)$:
-    - $\epsilon \leftarrow RightMostPath-Extensions(C, D)$ `// extensions and supports`
+    - $\epsilon \gets RightMostPath-Extensions(C, D)$ `// extensions and supports`
     - **foreach** $(t, sup(t)) \in \epsilon$ do
-      - $C' \leftarrow C \cup t$ `// extend the code with extended edge tuple t`
-      - $sup(C') \leftarrow sup(t)$ `// record the support of new extension`
+      - $C' \gets C \cup t$ `// extend the code with extended edge tuple t`
+      - $sup(C') \gets sup(t)$ `// record the support of new extension`
       - `// recursively call gSpan if code is frequent and canonical`
       - **if** $sup(C') \geq minsup$ **and** IsCanonical $(C')$ **then**
         - **gSpan** $(C', D, minsup)$
@@ -2927,7 +2888,7 @@ Retirado de Algoritmo 6.3 de Tan et al.
 
 #### Introdução (Aula 15)
 
-### Aula 16 | 13/05/2025 | Mineração de modelos excepcionais
+## Aula 16 | 13/05/2025 | Mineração de modelos excepcionais
 
 ### Aula 17 | 15/05/2025 | Mineração de modelos excepcionais
 
