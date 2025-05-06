@@ -998,7 +998,7 @@ $$
       - $P_a \gets \emptyset$
       - **foreach** $\langle X_b, d(X_b), sup(X_b) \rangle \in P$, with $X_b > X_a$ **do**
         - $X_{ab} = X_a \cup X_b$
-        - $d(X_{ab}) = d(X_b) \\ d(X_a)$
+        - $d(X_{ab}) = d(X_b) \setminus d(X_a)$
         - $sup(X_{ab}) = sup(X_a) - |d(X_{ab})|$
         - **if** $sup(X_{ab}) \geq minsup$ **then**
           - $P_a \gets P_a \cup \{ \langle X_{ab}, d(X_{ab}), sup(X_{ab}) \rangle \}$
@@ -1009,7 +1009,8 @@ $$
 - Essa abordagem se mostrou muito eficiente para conjuntos densos
 - Porém, em conjuntos esparsos, o algoritmo original é a melhor opção
 
-Para bases esparsas: eClat; para bases densas: dEclat
+- [JV]
+    - Para bases esparsas: Eclat; para bases densas: dEclat
 
 [Imagem (a): Minimun Support (%) - Connect]
 
@@ -1025,7 +1026,8 @@ Para bases esparsas: eClat; para bases densas: dEclat
 - Zaki, M.J., Gouda, K.: Fast vertical mining using diffsets. Technical Report 01-1, Computer Science Dept., Rensselaer Polytechnic Institute (March 2001) 10
 - Christian Borgelt. Efficient Implementations of Apriori and Eclat. Workshop of Frequent Item Set Mining Implementations (FIMI 2003, Melbourne, FL, USA).
 
-Boa parte da explicação estão nos artigos. A implementação tá no Borgelt.
+- [JV]
+    - Boa parte da explicação estão nos artigos. A implementação tá no Borgelt.
 
 ### Slide: aula04-FPGrowth (Aula 05)
 
