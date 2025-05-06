@@ -1351,15 +1351,15 @@ Figuras retiradas de Borgelt, C. An Implementation of the FP-growth Algorithm
 - Representações compactas são subconjuntos a partir dos quais é possível derivar todos os conjuntos de itens frequentes
 - Para motivar a necessidade dessas representações, considere uma base de dados com somente duas transações e 100 itens:
   - $D = \lbrace (0, a_{1}, a_{2}, \dots, a_{50}), (1, a_{1}, a_{2}, \dots, a_{100}) \rbrace$
-- Se considerarmos um minsup=1, essa base terá
+- Se considerarmos um $minsup=1$, essa base terá
 
   - $\binom{100}{1} + \binom{100}{2} + \dots + \binom{100}{100} = 2^{100} - 1 \approx 1.27E^{30}$
 
 - [JV]
   - Podemos considerar que:
-    - $01 = a_{1}a_{2}\dots a_{50}$
+    - $0 = a_{1}a_{2}\dots a_{50}$
     - $1 = a_{1}a_{2} \dots a_{100}$
-  - O que seriam representações compactas do conjunto de itemsets frequentes
+  - Que seriam representações compactas do conjunto de itemsets frequentes
 
 ---
 
@@ -1372,8 +1372,8 @@ Figuras retiradas de Borgelt, C. An Implementation of the FP-growth Algorithm
 
 ---
 
-- Os que ocorrem em ambas as transações, possuem cobertura $c(X)=01$, e, portanto, são equivalentes a $a_{1}a_{2}\dots a_{50}$
-- Os que ocorrem somente na segunda transação, possuem cobertura $c(X)=1$, e, portanto, são equivalentes a $a_{1}a_{2}\dots a_{100}$
+- Os que ocorrem em ambas as transações, possuem cobertura $c(X)=\{0, 1\}$, e, portanto, são equivalentes a $a_{1}a_{2}\dots a_{50}$
+- Os que ocorrem somente na segunda transação, possuem cobertura $c(X)= \{ 1 \}$, e, portanto, são equivalentes a $a_{1}a_{2}\dots a_{100}$
   - Além disso, se estivéssemos somente interessados nos itemsets frequentes sem a informação da frequência, todos seriam equivalentes a esse itemset
 - Em outras palavras, os mais de $10^{30}$ itemsets que seriam retornados por qualquer dos algoritmos vistos poderiam ser representados somente por esses dois conjuntos
 - Esses conjuntos formam, dessa forma, uma **representação compacta** de todo o conjunto de itemsets frequentes
@@ -1383,7 +1383,7 @@ Figuras retiradas de Borgelt, C. An Implementation of the FP-growth Algorithm
 
 #### Representações compactas
 
-- O particionamento dos itemsets no exemplo anterior se deu pelos tidsets que compunham suas extensões
+- O particionamento dos itemsets no exemplo anterior se deu pelos tidsets que compunham suas extensões [JV: Ou, cobertura]
 - De fato, o raciocínio se aplica a qualquer base de dados. Ou seja, podemos particionar os itemsets conforme sua cobertura
 - Dentro de cada classe de equivalência, podemos ordenar os elementos conforme a relação de subconjunto
   - O maior elemento da classe é chamado de conjunto fechado ou **closed itemset**
@@ -1413,7 +1413,7 @@ Figuras retiradas de Borgelt, C. An Implementation of the FP-growth Algorithm
 
 ---
 
-- Exemplo: minsup=1
+- Exemplo: $minsup=1$
 
 | TID | Muesli (m) | Oats (o) | Milk (m) | Yoghurt (y) |
 | :-- | :--------: | :------: | :------: | :---------: |
@@ -1552,7 +1552,7 @@ Os azuis e verdes são classes de equivalência.
 
 - O algoritmo DCI_Closed foi proposto em 2004 por C. Lucchese, S. Orlando e R. Perego
 - Ele também adota uma representação vertical da base de dados para facilitar a verificação dos conjuntos fechados
-- O algoritmo explora o espaço de busca usando uma estratégia dividir- e-conquistar
+- O algoritmo explora o espaço de busca usando uma estratégia dividir-e-conquistar
 - Os autores demonstraram que o problema pode ser decomposto em subproblemas independentes, permitindo inclusive uma solução paralela
 
 ---
@@ -1564,12 +1564,12 @@ Os azuis e verdes são classes de equivalência.
   - Essa ordem será representado por $\prec$
 - Novos candidatos são gerados a partir dos conjuntos fechados obtidos, estendendo-os com itens ainda não investigados
   - Esses candidatos são chamados de **geradores**
-  - Formalmente, um gerador é um conjunto $X = Y_i$, para um conjunto fechado $Y$ e um item $i$
+  - Formalmente, um gerador é um conjunto $X = Y i$, para um conjunto fechado $Y$ e um item $i$
 
 ---
 
 - Um gerador $X = Y_i$ é dito **ordem-conservante** sse $i \prec (i(c(X)) - X)$
-  - Em palavras, $X$ é ordem-conservante se todo item que tiver que ser adicionado a X para obter o conjunto fechado for maior que $i$
+  - Em palavras, $X$ é ordem-conservante se todo item que tiver que ser adicionado a $X$ para obter o conjunto fechado for maior que $i$
 - Teorema 1: Para todo conjunto fechado $Y \neq i(c(\emptyset))$, existe uma sequência de $n \geq 1$ extensões (items) $i_0 \prec i_1 \prec \dots \prec i_{n-1}$ tais que $gen_0 = Y_0i_0$, $gen_1 = Y_1i_1$, $gen_{n-1} = Y_{n-1}i_{n-1}$, em que todos os $gen_k$ são ordem- conservantes, $Y_0 = i(c(\emptyset))$, $Y_{j+1} = i(c(Y_ji_j))$ e $Y_n=Y$.
 - Corolário: Essa sequência é única.
 
@@ -1650,17 +1650,13 @@ Os azuis e verdes são classes de equivalência.
 - Assim como o Eclat, o MAFIA também assume uma representação vertical dos dados usando vetores de bits
 - O algoritmo também assume uma ordem lexicográfica sobre os itens e a ordem parcial de subconjuntos entre os itemsets durante a exploração
 
-Se eu quero minimizar a quantidade de itens mostrados pro usuário, posso mostrar os maximais.
-
-Existem vários algoritmos que encontram os maximais.
-
-Nessa época dos anos 2000, assim como hoje é com IA e Deep Learning, na época era essa mineração de itens frequentes.
-
-"Os maximais estão na fronteira"
-
-"A maioria dos artigos na época costumava usar vetores de bits para representar itemsets" Isso por causa dos benefícios de velocidade de processamento para uniões e interseções.
-
-Na notação vertical, a primeira coluna são os itens, e a segunda é a lista das transações que possuem esse item. Para calcular rapidamente o suporte é manter em uma estrutura auxiliar a quantidade de bits ativos.
+- [JV]
+    - Se eu quero minimizar a quantidade de itens mostrados pro usuário, posso mostrar os maximais.
+    - Existem vários algoritmos que encontram os maximais.
+    - Nessa época dos anos 2000, assim como hoje é com IA e Deep Learning, na época era essa mineração de itens frequentes.
+    - "Os maximais estão na fronteira"
+    - "A maioria dos artigos na época costumava usar vetores de bits para representar itemsets" Isso por causa dos benefícios de velocidade de processamento para uniões e interseções.
+    - Na notação vertical, a primeira coluna são os itens, e a segunda é a lista das transações que possuem esse item. Para calcular rapidamente o suporte é manter em uma estrutura auxiliar a quantidade de bits ativos.
 
 ---
 
@@ -1673,7 +1669,6 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
   - Eles chamam essa estratégia de **reordenamento dinâmico (dynamic reordering)**
 
 - [JV]
-
   - O conjunto de itens será dividido em dois:
     - Head: itemset que já visitei
     - Tail: itens que ainda vou considerar
@@ -1765,7 +1760,7 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 
 ---
 
-- Exemplo: minsup = 2
+- Exemplo: $minsup = 2$
 
 | **TID** | **Muesli (a)** | **Oats (b)** | **Milk (c)** | **Yoghurt (d)** | **Biscuits (e)** | **Tea (f)** |
 | ------: | -------------: | -----------: | -----------: | --------------: | ---------------: | ----------: |
