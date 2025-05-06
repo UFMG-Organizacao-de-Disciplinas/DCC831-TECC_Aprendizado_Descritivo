@@ -275,6 +275,9 @@ flowchart LR
       - Se a árvore é um ramo, para e gera todas as combinações entre os nós
       - Senão: Executa novamente "Minera Padrões"
 
-## Slide 5 - Representações compactas
+## Slide 5 - Representações Compactas
 
-###
+
+
+## Slide 6 - Mineração de sequências
+## Slide 7 - Mineração de grafos
