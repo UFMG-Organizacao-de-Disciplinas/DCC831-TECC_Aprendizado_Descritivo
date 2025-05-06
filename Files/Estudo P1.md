@@ -211,6 +211,71 @@ flowchart LR
 
 - dEclat é melhor para bases densas; para esparsos Eclat ganha.
 
+
+## Slide 4 - FP-Growth
+
+- Usa divisão e conquista
+- Não gera candidatos desnecessários
+- DFS
+- Mais eficiente que os anteriores. [Em complexidade e armazenamento?]
+
+- Similaridades com Eclat:
+    - DFS
+    - Projeções dos dados para reduzir memória e custo
+- Diferença
+    - Usa FP-Tree (uma árvore de prefixos que armazena o suporte)
+
+### Geração da FP-Tree
+
+- Computa suporte dos itens
+- Descarta itens infrequentes (das transações)
+- Ordena os itens das transações do mais frequente pro menos frequente
+- As transações são inseridas na árvore sequencialmente
+- Sempre que uma transação é inserida na árvore, uma estrutura auxiliar armazena uma lista encadeada para poder percorrer cada um dos itens.
+
+### Mineração de Padrões
+
+- Agora, criaremos os padrões frequentes crescendo em valor de suporte
+- Para cada novo prefixo, criaremos uma nova árvore
+- Na nova árvore, itens infrequentes serão descartados
+- Os padrões dessa árvore incluem o prefixo que as gerou.
+- Segue recursivamente até que um só ramo seja obtido.
+- Os padrões obteníveis são todas as combinações dos nós.
+
+### Implementação
+
+- Se não couber na memória: partir a base de dados
+- Como construir de forma eficiente?
+    - Dados: Lista de vetores de inteiros
+    - Primeiro ordena as transações, depois, recursivamente agrupa elas pelo prefixo inicial (Similar ao Eclat), Isso até que não haja mais sufixo ou caiba na memória
+- Originalmente:
+    - Nós de tamanho variável que desperdiçam memória
+    - Melhora gerenciamento de memória (?)
+    - Ponteiros aos pais são mais úteis que ponteiros aos filhos
+- Projeções ocorrem em dois laços:
+    - O primeiro percorre as folhas
+    - A segunda vai das folhas à raiz
+- A frequência de um nó é pelo menos tão grande quanto a soma das frequências de seus filhos.
+- Nós infrequentes são removidos e nós com mesmo rótulo são mesclados
+
+### Entendimento do Algoritmo
+
+- Gera árvore
+    - Calcula suporte dos itens
+    - Remove infrequentes
+    - Ordena os itens nas transações do maior pro menor suporte (removendo os itens infrequentes)
+    - Insere os itens na árvore
+        - A raiz é o $\emptyset$ e cada pai é prefixo dos seus filhos
+- Minera Padrões
+    - Itera entre os itens com suporte mínimo do menor suporte pro maior suporte
+    - Para cada item Percorre a lista encadeada desses itens
+        - Para cada nó da lista:
+            - Percorre até a raiz
+            - Partindo da raiz, mescla todos os filhos de mesmo rótulo
+            - Projeta essa nova árvore.
+            - Se a árvore é um ramo, para e gera todas as combinações entre os nós
+            - Senão: Executa novamente "Minera Padrões"
+
 ## Slide 5 - Representações compactas
 
 ###
