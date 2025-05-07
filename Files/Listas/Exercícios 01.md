@@ -62,9 +62,9 @@ Revisitando: Intensão é o conjunto de itens que são comuns a todos os TIDs do
 
 - **Cobertura das transações:**
 
-  - $c(3) = \{B, C\}$
-  - $c(6) = \{B, C\}$
-  - $c(8) = \{A, B, C, E\}$
+  - $c(\{3\}) = \{B, C\}$
+  - $c(\{6\}) = \{B, C\}$
+  - $c(\{8\}) = \{A, B, C, E\}$
 
 - **Resposta:** $i(\{3, 6, 8\}) = c(3) \cap c(6) \cap c(8) = \{B, C\}$.
 
@@ -72,7 +72,7 @@ Revisitando: Intensão é o conjunto de itens que são comuns a todos os TIDs do
 
 Considerando as coberturas dos itens encontrados pela intensão:
 
-- $c(i(\{3, 6, 8\})) = c(\{B, C\}) = c(B) \cap c(C) = \{3, 6, 8, 9\}$.
+- $c(i(\{3, 6, 8\})) = c(\{B, C\}) = c(\{B\}) \cap c(\{C\}) = \{3, 6, 8, 9\}$.
 
 ### 3. Quantos candidatos de tamanho 2 são avaliados pelo Apriori considerando os dados do exercício 01 e um suporte mínimo de 20%?
 
@@ -89,13 +89,13 @@ Resposta:
 
 Número de transações: 9
 
-| $Itens^1$ | Suporte | Suporte Relativo ($sup(i)/ \mid TID \mid )$ | Frequente? |
-| --------- | ------- | ------------------------------------------- | ---------- |
-| A         | 6       | $6/9 = 0.\bar{6}$                           | Sim        |
-| B         | 7       | $7/9 = 0.\bar{7}$                           | Sim        |
-| C         | 6       | $6/9 = 0.\bar{6}$                           | Sim        |
-| D         | 2       | $2/9 = 0.\bar{2}$                           | Sim        |
-| E         | 2       | $2/9 = 0.\bar{2}$                           | Sim        |
+| $Itens^{(1)}$ | Suporte | Suporte Relativo ($sup(i)/ \mid TID \mid )$ | Frequente? |
+| ------------- | ------- | ------------------------------------------- | ---------- |
+| A             | 6       | $6/9 = 0.\bar{6}$                           | Sim        |
+| B             | 7       | $7/9 = 0.\bar{7}$                           | Sim        |
+| C             | 6       | $6/9 = 0.\bar{6}$                           | Sim        |
+| D             | 2       | $2/9 = 0.\bar{2}$                           | Sim        |
+| E             | 2       | $2/9 = 0.\bar{2}$                           | Sim        |
 
 - Geração de candidatos de tamanho 2:
   - Item $A: \{B, C, D, E\} = \{AB, AC, AD, AE\}$
@@ -104,18 +104,18 @@ Número de transações: 9
   - Item $D: \{E\} = \{DE\}$
   - Item $E: \{\}$
 
-| $Itens^2$ | Suporte | Suporte Relativo $(suprel(i) = sup(i)/ \mid TID \mid )$ | Frequente? $(suprel(i) \geq 0.2)$ |
-| --------- | ------- | ------------------------------------------------------- | --------------------------------- |
-| AB        | 4       | $4/9 = 0.\bar{4}$                                       | Sim                               |
-| AC        | 3       | $3/9 = 0.\bar{3}$                                       | Sim                               |
-| AD        | 1       | $1/9 = 0.\bar{1}$                                       | Não                               |
-| AE        | 2       | $2/9 = 0.\bar{2}$                                       | Sim                               |
-| BC        | 4       | $4/9 = 0.\bar{4}$                                       | Sim                               |
-| BD        | 2       | $2/9 = 0.\bar{2}$                                       | Sim                               |
-| BE        | 2       | $2/9 = 0.\bar{2}$                                       | Sim                               |
-| CD        | 0       | $0/9 = 0.\bar{0}$                                       | Não                               |
-| CE        | 1       | $1/9 = 0.\bar{1}$                                       | Não                               |
-| DE        | 0       | $0/9 = 0.\bar{0}$                                       | Não                               |
+| $Itens^2$ | Suporte | Suporte Relativo $(sup\_rel(i) = sup(i)/ \mid TID \mid )$ | Frequente? $(sup\_rel(i) \geq 0.2)$ |
+| --------- | ------- | --------------------------------------------------------- | ----------------------------------- |
+| AB        | 4       | $4/9 = 0.\bar{4}$                                         | Sim                                 |
+| AC        | 3       | $3/9 = 0.\bar{3}$                                         | Sim                                 |
+| AD        | 1       | $1/9 = 0.\bar{1}$                                         | Não                                 |
+| AE        | 2       | $2/9 = 0.\bar{2}$                                         | Sim                                 |
+| BC        | 4       | $4/9 = 0.\bar{4}$                                         | Sim                                 |
+| BD        | 2       | $2/9 = 0.\bar{2}$                                         | Sim                                 |
+| BE        | 2       | $2/9 = 0.\bar{2}$                                         | Sim                                 |
+| CD        | 0       | $0/9 = 0.\bar{0}$                                         | Não                                 |
+| CE        | 1       | $1/9 = 0.\bar{1}$                                         | Não                                 |
+| DE        | 0       | $0/9 = 0.\bar{0}$                                         | Não                                 |
 
 - Candidatos de tamanho 2: 10
 - **Candidatos frequentes de tamanho 2: 6**
@@ -138,13 +138,13 @@ Número de transações: 9
 
 - Ordenando por suporte decrescente:
 
-| $Itens^1$ | Suporte |
-| --------- | ------- |
-| B         | 7       |
-| A         | 6       |
-| C         | 6       |
-| D         | 2       |
-| E         | 2       |
+| $Itens^{(1)}$ | Suporte |
+| ------------- | ------- |
+| B             | 7       |
+| A             | 6       |
+| C             | 6       |
+| D             | 2       |
+| E             | 2       |
 
 - Reordenando os itens da transação por suporte:
 
