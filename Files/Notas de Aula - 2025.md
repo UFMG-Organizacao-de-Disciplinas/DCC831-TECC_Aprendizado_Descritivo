@@ -1589,24 +1589,23 @@ Os azuis e verdes são classes de equivalência.
 ---
 
 - **procedure** $DCI\_Closed_d$ (CLOSED_SET, PRE_SET, POST_SET)
-  - **while** POST_SET $neq \emptyset$ **do**
+  - **while** POST_SET $\neq \emptyset$ **do**
     - $i \gets min_{\prec}$ (POST_SET)
-    - POST_SET $gets$ POST_SET \ $i$
+    - POST_SET $\gets$ POST_SET \ $i$
     - $new\_gen \gets$ CLOSED_SET $\cup i$ \\\\ Build a new generator
-    - **if** $supp(new\_gen) \geq minsupp$ **then**
-      - $\neg$ is_dup (new_gen, PRE_SET) **then** \\\\ if $new\_gen$ is both frequent and order preserving
-      - CLOSED*SET $*{New} \gets new_gen$
-      - POST*SET $*{New} \gets \emptyset$
-      - **for all** $j \in$ POST_SET **do** \\\\ Compute closure of $new\_gen$
+    - **if** $supp(new\_gen) \geq minsupp$ **and** $\neg$ is_dup (new_gen, PRE_SET) **then** `\\ if new_gen is both frequent and order preserving`
+      - CLOSED_SET$_{New} \gets new\_gen$
+      - POST_SET$_{New} \gets \emptyset$
+      - **for all** $j \in$ POST_SET **do** `\\ Compute closure of new_gen`
         - **if** $g(new\_gen) \subseteq g(j)$ **then**
-          - CLOSED*SET $*{New} \gets$ CLOSED*SET $*{New} \cup j$
+          - CLOSED_SET$_{New} \gets$ CLOSED_SET$\_{New} \cup j$
         - **else**
-          - POST*SET $*{New} \gets$ POST*SET$*{New} \cup j$
+          - POST_SET$_{New} \gets$ POST_SET$_{New} \cup j$
         - **end if**
       - **end for**
-      - **Write Out** CLOSED*SET $*{New}$ _and its support_
-      - DCI*Closed $_d$ CLOSED_SET $*{New}$, PRE_SET, POST_SET $_{New}$
-      - PRE_SET $gets$ PRE_SET $\cup i$
+      - **Write Out** CLOSED_SET$_{New}$ and its support
+      - DCI_Closed$_d$ (CLOSED_SET$_{New}$, PRE_SET, POST_SET$_{New}$)
+      - PRE_SET $\gets$ PRE_SET $\cup i$
     - **end if**
   - **end while**
 - **end procedure**
@@ -1624,7 +1623,7 @@ Os azuis e verdes são classes de equivalência.
 
 ---
 
-- Exemplo: minsup = 2
+- Exemplo: $minsup = 2$
 
 | **TID** | **Muesli (a)** | **Oats (b)** | **Milk (c)** | **Yoghurt (d)** | **Biscuits (e)** | **Tea (f)** |
 | :------ | :------------: | :----------: | :----------: | :-------------: | :--------------: | :---------: |
@@ -2209,7 +2208,7 @@ Os azuis e verdes são classes de equivalência.
   - O caso P(xy) é análogo a esse
 - Juntar duas sequências (Px) e Py: resulta em (Px)y
 
-  - $\mathcal{L}((Px)y) = \left{ \left( i, \left{ v \in pos(Py) | \exists u \in pos((Px)) u < v \wedge \left( i, pos(Py) \right) \in \mathcal{L}(Py) \wedge \left( i, pos((Px)) \right) \in \mathcal{L}((PX)) \right} \right) \right}$;
+  - $\mathcal{L}((Px)y) = \lbrace \left( i, \lbrace v \in pos(Py) | \exists u \in pos((Px)) u < v \wedge ( i, pos(Py) ) \in \mathcal{L}(Py) \wedge ( i, pos((Px)) ) \in \mathcal{L}((PX)) \rbrace \right) \rbrace$
   - Ou seja, são todas as sequências em que ambas acontecem, porém agora somente as posições em que $y$ ocorre temporalmente após $x$ são mantidas
   - O caso é equivalente a Pxy e Pyx
 
@@ -2230,16 +2229,16 @@ Os azuis e verdes são classes de equivalência.
 ---
 
 - **ALGORITHM 10.2. Algorithm SPADE**
-  - `// Initial Call:` $\mathcal{F} \gets \emptyset, k \gets 0, P \gets \left{ \langle s, \mathcal{L}(s) \rangle | s \in \sum, sup(s) \geq minsup \right}$
+  - `// Initial Call:` $\mathcal{F} \gets \emptyset, k \gets 0, P \gets \lbrace \langle s, \mathcal{L}(s) \rangle | s \in \sum, sup(s) \geq minsup \rbrace$
   - **SPADE** $(P, minsup, \mathcal{F}, k)$
     - **foreach** $r_a \in P$ **do**
-      - $\mathcal{F} \gets \mathcal{F} \cup \left{ (r_a, sup(r_a)) \right}$
+      - $\mathcal{F} \gets \mathcal{F} \cup \lbrace (r_a, sup(r_a)) \rbrace$
       - $P_a \gets \emptyset$
       - **foreach** $r_b \in P$ **do**
         - $r_{ab} = r_a + r_b$
         - $\mathcal{L}(r_{ab}) = \mathcal{L}(r_a) \cap \mathcal{L}(r_b)$
         - **if** $sup(r_{ab}) \geq minsup$ **then**
-          - $P_a \gets P_a \cup \left{ \langle r_{ab}, \mathcal{L}(r_{ab}) \rangle \right}$
+          - $P_a \gets P_a \cup \lbrace \langle r_{ab}, \mathcal{L}(r_{ab}) \rangle \rbrace$
       - **if** $P_a \neq \emptyset$ **then** SPADE $(P, minsup, \mathcal{F}, k+1)$
 
 #### Leitura (Aula 10)
