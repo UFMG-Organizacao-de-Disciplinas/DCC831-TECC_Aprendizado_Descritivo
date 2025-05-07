@@ -122,7 +122,6 @@ flowchart LR
 
 - Busca em largura (level-wise approach): os conjuntos de tamanho k são explorados antes dos de tamanho k+1
 
-  - Identifica os itens frequentes
   - Calcula suporte
   - Elimina infrequentes
   - Gera candidatos de tamanho k+1 a partir dos conjuntos frequentes que compartilham prefixo de tamanho k-1.
@@ -130,7 +129,7 @@ flowchart LR
 - Duas maiores influências no desempenho:
   1. minsup baixo
   2. Transações largas/BD denso
-
+  
 ### Eclat (Equivalence Class Transformation)
 
 - Visa o uso da Representação Vertical $(x, c(x))$ dos dados
