@@ -2,7 +2,7 @@
 
 ## B
 
-### Slide: aula10-SDMap
+### Slide: aula10-SDMap (15/05/2025)
 
 #### Introdução
 
@@ -18,6 +18,7 @@
 - O algoritmo SD-Map foi proposto por Atzmueller e Puppe em 2006.
 - O SD-Map é um método exaustivo baseado no FP-Growth
 - Ao contrário de outras abordagens anteriores baseadas em algoritmos de mineração de itemsets frequentes, esse é um dos poucos que ainda possui implementações em ferramentas atuais para descoberta de subgrupos (PySubgroup)
+    - [JV] Um dos poucos que tem implementação em Python.
 - Em sua versão inicial, o algoritmo foi desenvolvido especificamente para o caso de rótulos binários
   - Posteriormente, foi estendido para acomodar outros atributos alvo
 - A modificação inicial proposta pelos autores é bastante simples, porém, antes de apresentá-la, vamos discutir a formalização da tarefa adotada por eles
@@ -28,6 +29,7 @@
   - Atributos numéricos precisam ser discretizados na etapa de pré-processamento
 - Assim, eles definem que a base possui um conjunto de $n$ atributos $\mathscr{A}$
 - Cada atributo $a \in \mathcal{A}$ possui um domínio de valores possíveis $dom(a)$
+    - [JV] dom = domínios.
 - Um objeto na base é descrito por valores associados a cada um dos $n$ atributos
   - Um objeto $o = (a_1 = v_1, a_2 = v_2, \dots, a_n = v_n)$, em que $v_i \in dom(a_i)$ para todo $a_i$
 
@@ -35,8 +37,11 @@
 
 - Como dito, no caso específico do SD-Map, os autores consideram a variável alvo como um rótulo binário (classe positiva e negativa)
 - Assim, a função $t: O \to \{+, -\}$ indica o rótulo (o valor da variável alvo) para um objeto $o$
-- A linguagem de descrição dos subgrupos no SD-Map é composta por conjunto de predicados construídos com os atributos de $\mathcal{A}$
-  - Uma descrição $d = \{e_1, e_2, \dots, e_k\}$, em que $e_i = (a_i, V_i), a_i \in \mathcal{A}, V_i \subseteq dom(a_i)$ e para todo $i \neq j, e_i = (a_i, V_i), e_j = (a_j, V_j), a_i \neq a_j$
+- A linguagem de descrição dos subgrupos no SD-Map é composta por conjunto de predicados construídos com os atributos de $\mathscr{A}$
+  - Uma descrição $d = \{e_1, e_2, \dots, e_k\}$, em que $e_i = (a_i, V_i), a_i \in \mathscr{A}, V_i \subseteq dom(a_i)$ e para todo $i \neq j, e_i = (a_i, V_i), e_j = (a_j, V_j), a_i \neq a_j$
+      - [JV]
+          - Uma descrição é uma conjunção de predicados, ou seja, tem que ter todos.
+          - Não pode haver mais do que uma avaliação de $e_i$. Pode-se, ao invés disso, aumentar os itens presentes em $V_i$.
   - Os predicados são seletores de valor para os diferentes atributos
   - Uma descrição deve impor uma única restrição de valores, no máximo, para cada atributo
 
