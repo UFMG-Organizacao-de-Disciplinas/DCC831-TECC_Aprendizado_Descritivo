@@ -18,13 +18,13 @@
 
 - Para ilustrar essa diferença entre aprendizado descritivo supervisionado e algoritmos de classificação, consideremos o seguinte conjunto de dados rotulado
 
-[Imagem]
+[Imagem: itens distribuídos aleatoriamente (os azuis mais na diagonal secundária, o vermelho mais na diagonal principal) e alguns mais frequentemente agrupados. Dois rótulos: quadrado azul e bola vermelha.]
 
 ---
 
 - Árvores de decisão
 
-[Imagem]
+[Imagem: árvore de decisão em si]
 
 [Imagem]
 
@@ -33,6 +33,9 @@
 - Padrões descritivos supervisionados
 
 [Imagem]
+
+- $\sigma_1 \equiv \in \lbrack 0.3, 0.7 ) \land x_2 \geq 0.9$
+- $\sigma_2 \equiv \in \lbrack 0.275, 0.7 ) \land x_2 \leq 0.1$
 
 #### Aprendizado descritivo supervisionado
 
@@ -45,7 +48,7 @@
 - Alguns autores referenciam essas técnicas como "descoberta de regras descritivas supervisionadas"
   - Ou Mineração supervisionada de padrões descritivos
 
-#### Contrast set mining
+##### Contrast set mining
 
 - Padrões contrastantes foram propostos por Bay e Pazzani (2001) como uma forma de encontrar padrões interessantes em dados rotulados
 - Para eles, os objetos continuam sendo caracterizados por atributos categóricos/nominais, porém, agora, divididos em grupos
@@ -96,7 +99,7 @@ $$
   - $\beta = \alpha \times \rho$
   - O interesse é que esse ponto seja o mais próximo da origem possível
 
-[Imagem]
+[Imagem] $\mathbb{R}^2: \sup_2(X) \times \sup_1(X)$
 
 ---
 

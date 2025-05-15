@@ -26,7 +26,7 @@
 
 - Os autores assumem que a base de dados de entrada é composta somente por atributos categóricos
   - Atributos numéricos precisam ser discretizados na etapa de pré-processamento
-- Assim, eles definem que a base possui um conjunto de $n$ atributos $\mathcal{A}$
+- Assim, eles definem que a base possui um conjunto de $n$ atributos $\mathscr{A}$
 - Cada atributo $a \in \mathcal{A}$ possui um domínio de valores possíveis $dom(a)$
 - Um objeto na base é descrito por valores associados a cada um dos $n$ atributos
   - Um objeto $o = (a_1 = v_1, a_2 = v_2, \dots, a_n = v_n)$, em que $v_i \in dom(a_i)$ para todo $a_i$
@@ -57,7 +57,7 @@
 - Cada seletor/predicado atua como uma função indicadora que, para todo objeto o, informa se o satisfaz ou não a função
   - Um objeto satisfaz um seletor $e_1 = (a_1, V_1)$ se o valor do atributo $a_i$ para o objeto o pertence ao conjunto $V_i$
 - Uma descrição, portanto, deve ser lida como a conjunção dos seus seletores
-  - Um objeto o é descrito por d \in $\Sigma$ se ele satisfaz cada um dos $e_i \in d$
+  - Um objeto o é descrito por $d \in \Sigma$ se ele satisfaz cada um dos $e_i \in d$
   - $d \equiv e_1 \land e_2 \land \dots \land e_k$
 - Em outras palavras, cada seletor é visto como um item, e a descrição um itemset na mineração de padrões frequentes
 
