@@ -4,64 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "23dff5bdab4a423b",
+        "id": "044a9237e169d6e3",
         "type": "tabs",
-        "dimension": 36.930294906166225,
         "children": [
           {
-            "id": "5cb8da224e64c910",
+            "id": "4d5d9683aecddbab",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Files/Notas de Aula - 2025.md",
+                "file": "Files/Slides/aula10-SDMap.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Notas de Aula - 2025"
-            }
-          }
-        ]
-      },
-      {
-        "id": "6f4b9d5d51b1449b",
-        "type": "tabs",
-        "dimension": 37.66756032171582,
-        "children": [
-          {
-            "id": "f98923f38d29bba6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Files/Listas/Exercícios 01.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Exercícios 01"
-            }
-          }
-        ]
-      },
-      {
-        "id": "c2b6674db0612c26",
-        "type": "tabs",
-        "dimension": 25.402144772117964,
-        "children": [
-          {
-            "id": "2e00d970d9f4c665",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Files/Estudo P1.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Estudo P1"
+              "title": "aula10-SDMap"
             }
           }
         ]
@@ -121,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 324.5,
+    "collapsed": true
   },
   "right": {
     "id": "5833d2f2bcbbaa58",
@@ -211,11 +169,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5cb8da224e64c910",
+  "active": "4d5d9683aecddbab",
   "lastOpenFiles": [
+    "Files/Slides/aula09-SD.md",
+    "Files/Slides/aula09-SD.pdf",
+    "Files/Notas de Aula - 2025.md",
+    "Files/2025_1-Aprendizado-Descritivo.pdf",
+    "Files/Slides/aula08-regras-de-associacao-resumo.md",
+    "Files/Slides/aula08-regras-de-associacao.pdf",
+    "Files/Slides/aula08-regras-de-associacao.md",
+    "Untitled.md",
     "Files/Listas/Exercícios 01.md",
     "Files/Estudo P1.md",
-    "Files/Notas de Aula - 2025.md",
     "Files/Aula 5 - Explicação DCI_Closed/IMG-20250506-WA0042.jpg",
     "Files/Aula 5 - Explicação DCI_Closed/IMG-20250506-WA0040.jpg",
     "Files/Aula 5 - Explicação DCI_Closed/IMG-20250506-WA0041.jpg",
@@ -231,7 +196,6 @@
     "Files/Nova pasta",
     "Files/Slides/aula07-grafos.pdf",
     "Files/Aula 7.md",
-    "Untitled",
-    "Files/2025_1-Aprendizado-Descritivo.pdf"
+    "Untitled"
   ]
 }
