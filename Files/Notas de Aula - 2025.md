@@ -1594,17 +1594,17 @@ Os azuis e verdes são classes de equivalência.
     - POST_SET $\gets$ POST_SET \ $i$
     - $new\_gen \gets$ CLOSED_SET $\cup i$ \\\\ Build a new generator
     - **if** $supp(new\_gen) \geq minsupp$ **and** $\neg$ is_dup (new_gen, PRE_SET) **then** `\\ if new_gen is both frequent and order preserving`
-      - CLOSED_SET$_{New} \gets new\_gen$
-      - POST_SET$_{New} \gets \emptyset$
+      - CLOSED*SET$*{New} \gets new_gen$
+      - POST*SET$*{New} \gets \emptyset$
       - **for all** $j \in$ POST_SET **do** `\\ Compute closure of new_gen`
         - **if** $g(new\_gen) \subseteq g(j)$ **then**
-          - CLOSED_SET$_{New} \gets$ CLOSED_SET$\_{New} \cup j$
+          - CLOSED*SET$*{New} \gets$ CLOSED_SET$\_{New} \cup j$
         - **else**
-          - POST_SET$_{New} \gets$ POST_SET$_{New} \cup j$
+          - POST*SET$*{New} \gets$ POST*SET$*{New} \cup j$
         - **end if**
       - **end for**
-      - **Write Out** CLOSED_SET$_{New}$ and its support
-      - DCI_Closed$_d$ (CLOSED_SET$_{New}$, PRE_SET, POST_SET$_{New}$)
+      - **Write Out** CLOSED*SET$*{New}$ and its support
+      - DCI*Closed$_d$ (CLOSED_SET$*{New}$, PRE_SET, POST_SET$\_{New}$)
       - PRE_SET $\gets$ PRE_SET $\cup i$
     - **end if**
   - **end while**
@@ -2665,7 +2665,7 @@ flowchart LR
 
 ## Aula 14 | 06/05/2025 | Descoberta de subgrupos
 
-### Slide: aula08-regras-de-associação
+### Slide: aula08-regras-de-associação (2)
 
 #### Introdução (Aula 14)
 
@@ -2683,7 +2683,7 @@ flowchart LR
 - O interesse (representatividade) de uma regra é definida por:
   - Suporte: $sup(X \to Y) = \frac{sup(X \cup Y)}{|D|}$
   - Confiança: $conf(X \to Y) = \frac{sup(X \cup Y)}{sup(X)}$
-- Uma regra é interessante se o suporte é maior que um limiar de suporte mínimo (minsup), e a confiança maior que uma confiança mínima (minconf)
+- Uma regra é interessante se o suporte é maior que um limiar de suporte mínimo (minsup), e a confiança maior que uma confiança mínima $(minconf)$
 - Enquanto o suporte mostra quão aplicável (frequente) a regra é na base de dados, a confiança mostra a força da associação entre os itemsets (quão provável é se observar os itens de $Y$ nas transações da cobertura de $X$)
 
 ---
@@ -2746,7 +2746,7 @@ Retirado de Algoritmo 6.3 de Tan et al.
 ---
 
 - O problema anterior nos leva a conclusão de que padrões envolvendo itens mutuamente independentes ou que cubram poucas transações são desinteressantes
-- Assim, outras medidas de interesse podem ser utilizadas para complementar a informação trazida pelo arcabouço suporte- confiança
+- Assim, outras medidas de interesse podem ser utilizadas para complementar a informação trazida pelo arcabouço suporte-confiança
 - O mais comum na literatura é usar métricas de correlação como medidas de interesse
 
 #### Lift
@@ -2782,7 +2782,7 @@ Retirado de Algoritmo 6.3 de Tan et al.
 | $\bar{s}$ |  50 |       880 |  930 |
 | XX        |  70 |       930 | 1000 |
 
-#### Mathews' Correlation Coefficient
+#### Mathews' Correlation Coefficient (MCC)
 
 - A correlação de Pearson é amplamente usada para variáveis contínuas, porém ela não se aplica a dados categóricos
 - A correlação de dados categóricos é medida pelo coeficiente phi ou Mathews' Correlation Coefficient (MCC)
@@ -2856,7 +2856,7 @@ Retirado de Algoritmo 6.3 de Tan et al.
 - A similaridade de cosseno é amplamente usada em aprendizado de máquina, sobretudo em aplicações envolvendo texto
 - A medida pode ser adaptada para itemsets se visualizarmos suas coberturas como vetores binários
 - Ela é formalmente definida por:
-  - $Cosseno(X, Y) = \frac{X \cup Y}{\sqrt{X} \times \sqrt{Y}}$
+  - $Cosseno(X, Y) = \frac{X \cup Y}{\sqrt{\sup(X) \cdot \sup(Y)}}$
   - Ela também pode ser vista como a média geométrica das confianças das regras $X \to Y$ e $Y \to X$
 - Os valores do cosseno variam entre 0 e 1, e indicam maior relação entre os itemsets quando estiver mais próximo de 1
 - A vantagem é que ela depende somente das proporções das ocorrências de $X$, $Y$ e $X \cup Y$ (a ausência não é levada em conta como no MCC)
@@ -2877,12 +2877,6 @@ Retirado de Algoritmo 6.3 de Tan et al.
 - Seção 6.7 Tan et al.
 - Seção 6.4 Han et al.
 - Capítulo 12 Zaki e Meira
-
-## Aula 15 | 08/05/2025 | Descoberta de subgrupos
-
-### Slide: aula09-SD
-
-#### Introdução (Aula 15)
 
 ## Aula 16 | 13/05/2025 | Mineração de modelos excepcionais
 
