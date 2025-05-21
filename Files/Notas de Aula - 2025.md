@@ -2995,7 +2995,7 @@ Retirado de Algoritmo 6.3 de Tan et al.
     - $\chi^2$ e Lift mostram que...
   - $D_4$
     - Realmente independentes
-- $D_5$
+  - $D_5$
     - "Analisem depois, é interessante o resultado."
 - "Subjetividade do unusualness"
   - Será necessário avaliar todas as métricas para poder confirmar se é relevante ou não.
