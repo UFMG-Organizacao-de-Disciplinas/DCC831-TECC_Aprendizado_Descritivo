@@ -22,6 +22,11 @@
   - O parâmetro beam width limita o algoritmo a explorar, no máximo, esse número de soluções candidatas
   - A cada iteração, os $k$ melhores candidatos são mantidos para serem refinados na próxima iteração
 
+- [JV]
+    - DFS: pilha; BFS: fila; Best-First: fila de prioridade
+    - A ideia é sempre manter $k$ soluções o tempo inteiro.
+    - Serve com IA como $A^{*}$
+
 ---
 
 - Antes de aprofundarmos a discussão em relação ao algoritmo em si, precisamos definir a linguagem de descrição que determina o espaço de busca do SD
@@ -29,12 +34,21 @@
 - As descrições continuam sendo conjuntos (conjunções) de seletores
 - Os seletores, no entanto, são definidos especificamente para o caso de atributos numéricos (reais), discretos (inteiros), e categóricos
 
+- [JV]
+    - Usa uma linguagem de descrição muito trivial.
+    - Segue considerando uma conjunção de seletores
+
 ---
 
 - Em relação ao atributo alvo, o SD foi desenvolvido especificamente para dados categóricos (binário).
+    - [JV] No geral buscam-se dados categóricos
   - Podendo também ser adaptado para outros tipos
 - Os autores assumem que o usuário definirá um valor (classe) específico para o atributo alvo
 - Assim, eles computam $dom_p(a_i) = \{v_1, v_2, \dots, v_{ip} \}$ e $dom_n(a_i) = \{w_1, w_2, \dots, w_{in} \}$,
+    - [JV]
+        - $v$ são os valores na classe positiva e $w$ são os valores na classe negativa
+        - O domínio representa os valores possíveis para cada um dos atributos.
+        - O p subscrito representa positivo. O n subscrito representa os negativos
   - O domínio de valores dos atributos nos objetos da classe positiva e da classe negativa
   - No caso de atributos numéricos, eles assumem ainda que $v_i \leq v_{i+1}$ e $w_i \leq w_{i+1}$ (os valores estão ordenados)
 
@@ -43,10 +57,13 @@
 - Seguindo a lógica de discretização por entropia de Fayyad-Irani, os seletores dos atributos contínuos são gerados da seguinte forma:
   - $a_i \leq (v_{ix} + w_{iy})/2$ para todo par $(v_{ix}, w_{iy})$ em que eles são vizinhos imediatos
   - $a_i > (v_{ix} + w_{iy})/2$ para todo par $(w_{iy}, v_{ix})$ vizinhos imediatos
+      - [JV]
+          - Esses seletores servem para criar umas barreiras que subdividem os conjuntos ordenados entre grupos de positivos e negativos.
 - Para atributos inteiros (discretos), são gerados os mesmos seletores de atributos contínuos e mais:
   - $a_i = v_{ix}$ e $a_i \neq w_{iy}$
 - Finalmente, os atributos categóricos são tratados da mesma forma que o segundo tipo de seletor de inteiros
   - Note que não são considerados conjuntos de valores como no caso do SD-Map, embora estejamos considerando negações
+      - [JV] Apenas considera igualdades e desigualdades, e não pertencimento em conjunto
 
 ---
 
@@ -58,7 +75,9 @@
 - A partir de cada candidato do beam, novas soluções candidatas são geradas considerando a inserção de novos seletores à descrição
 - O novo beam é formado com os $k$ melhores candidatos considerando as descrições atuais e as novas candidatas que satisfizerem um limiar de suporte mínimo na classe positiva (similar ao SD-Map)
 - Soluções **irrelevantes** são descartadas do beam
+    - [JV] Os irrelevantes são aqueles conjuntos de descritores que têm grande similaridade entre si.
 - O loop é interrompido se não houver mudança de uma iteração para a outra, ou se uma profundidade máxima for alcançada (limite no número de seletores na descrição)
+    - [JV] Outra possibilidade é usar um parâmetro de profundidade, que representa a quantidade de seletores que você colocar.
 - A solução final é o último beam obtido
 
 ---
@@ -66,6 +85,9 @@
 - Sejam $C^{+}(X)$ e $C^{-}(X)$ as coberturas de um subgrupo $X$ na classe positiva e negativa, respectivamente
 - Um subgrupo $X$ é dito irrelevante se existir um outro subgrupo $X'$ tal que
   - $C^{+}(X) \subset C^{+}(X')$ e $C^{-}(X) \supset C^{-}(X')$
+      - [JV]
+          - Busca-se maior pureza, seja lá o que isso signifique.
+          - Apesar de não ter um $minsup$ pra poder, usa-se o tal do $Qg$ que define as prioridades no beam-search
   - O teste de relevância tenta manter um conjunto diverso de subgrupos interessantes
 - Como um subgrupo anteriormente relevante pode ser tornar irrelevante após a inclusão de uma nova descrição, a inclusão das soluções no novo beam deve ser sequencial e em ordem
 
@@ -77,7 +99,12 @@
 
 ---
 
+- [JV] Teremos dois hiper-parâmetros: a largura do beam e a quantidade de itens retornados, retornando apenas os mais diversos e mais específicos.
+    - Espera-se evitar redundância de seletores durante um pós-processamento através de um esquema de pesos
+        - Ele passa a punir subgrupos que cubram os mesmos itens
+
 - Seja $s(o)$ o peso do objeto o para a cobertura de um subconjunto
+    - [JV] $s(o)$ retorna a quantidade de subgrupos que cobre esse item $o$, é tipo um contador de cobertores do item $o$.
   - Inicialmente, $s(o) = 1$ para todo objeto
 - A cobertura de um subgrupo $X$ pode ser redefinida por $c(X) = \sum 1/s(o)$
 - Se um objeto ainda não foi coberto, ele contribui integralmente para a cobertura do subgrupo
@@ -90,6 +117,11 @@
 
 #### Algoritmo CN2-SD
 
+- [JV]
+    - CN2 inicialmente é um algoritmo de classificação
+    - Gera uma lista de decisão
+    - Termina quanto todos os positivos foram cobertos.
+
 - Em 2004, Lavrac et al. investigaram como adaptar algoritmo para aprendizado de regras de classificação para o contexto de descoberta de subgrupos
 - Eles mostraram como o algoritmo CN2 poderia ser adaptado caso a medida de qualidade fosse trocada para o contexto de descoberta de subgrupos
 - O algoritmo CN2 é um algoritmo baseado em cobertura de exemplos
@@ -97,12 +129,17 @@
 
 ---
 
+- [JV] Usa dois pesos:
+    - Um peso aditivo toda vez que um item já tiver sido coberto antes.
+    - Uma função multiplicativa: quanto mais o item já tiver sido coberto, menos relevante será.
+
 - Como o interesse no caso de SD não é obter um modelo global, a ideia da cobertura foi adaptada para incluir um esquema de pesos como foi feito no algoritmo de seleção do SD
 - Eles discutiram dois tipos de funções de peso para a cobertura dos objetos
   - **Função aditiva**: $s(X, i) = 1/(i + 1)$, em que $i$ denota o número de vezes que $X$ foi coberto
   - **Função multiplicativa**: $s(X, i) = \gamma^i$ em que $\gamma \in [0,1]$ é um parâmetro definido pelo usuário
     - $\gamma = 1$ faz com que o algoritmo sempre retorne a mesma regra
     - $\gamma = 0$ faz com que o algoritmo se comporte como o original, descartando objetos já cobertos
+        - [JV] O original seria o CN2
 
 ---
 
@@ -112,6 +149,7 @@
   - $c(X) = \sum_{o \in X} s(o)$
   - $c^{+}(X) = \sum_{o \in X \land t(o) = 1} s(o)$
   - $N' = \sum_{o \in O} s(o)$
+      - [JV] Antes era o total da base
   - $P' = \sum_{o \in O \land t(o) = 1} s(o)$
 
 ---
