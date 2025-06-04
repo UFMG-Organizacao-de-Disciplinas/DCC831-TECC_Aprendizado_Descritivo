@@ -27,8 +27,8 @@
 - Percebemos que, já no segundo nível, o beam é dominado por combinações dos melhores seletores
 
 - $fatalities$: positive integer
-- $nature$: $\{ fatal, injured, damage\ only \}$
-- $time$: $\{ day, night \}$
+- $nature: \{ fatal, injured, damage\ only \}$
+- $time: \{ day, night \}$
 - $cost$: positive real
 
 ===
@@ -42,7 +42,7 @@
 
 ===
 
-1. $fatalities \geq 1 \land nature = fatal$
+1. $fatalities \geq 1 \land nature = fatal$ [JV] Esse daqui acaba sendo redundante, isso porque um determinado descritor é bom demais, assim aparecendo recorrentemente.
 2. $fatalities \geq 1 \land nature  \neq damage\ only$
 3. $fatalities \geq 1 \land fatalities \geq 2$
 4. $nature = fatal /land cost \geq 123.4$
@@ -66,10 +66,13 @@
 ---
 
 - O primeiro passo na construção de um algoritmo genético é definir a representação dos cromossomos dos indivíduos
+    - [JV] a definição de início é definida pela implementação, não tem um específica em especial
   - O mais comum é a representação binária, em que cada bit (gene) representa a inclusão ou exclusão de um valor
   - Outras representações mais complexas também podem ser usadas
 - O segundo passo é definir uma função de aptidão (fitness), que corresponde à função objetivo que queremos otimizar
+    - [JV] Ou "função objetivo"
 - Em seguida, o algoritmo entra em um ciclo onde a população evolui até que um critério de parada seja alcançado
+    - [JV] O Renato gosta de investigar e tem dado bons resultados
 
 ---
 
@@ -81,7 +84,9 @@
     - **Avaliar** a população $P(t)$
     - **Enquanto** não atingir critério de parada:
       - **Selecionar** indivíduos para reprodução em $P(t)$
+          - [JV] Exemplo: competições aleatórias por valor de função objetivo e mantém o maior.
       - **Aplicar** operadores genéticos para produzir população $P(t+1)$
+          - [JV] No geral sempre é cruzamento e mutação
       - **Avaliar** $P(t+1)$
       - $t \gets t + 1$
     - Fim **Enquanto**
@@ -100,18 +105,20 @@
   - Esse operador também é desenhado conforme a aplicação em questão
 - Após a geração dos novos indivíduos, a próxima geração é selecionada para continuar a evolução
 
-#### SSDP
+#### SSDP (Simple Search Discriminative Patterns)
 
 - O algoritmo Simple Search Discriminative Patterns (SSDP) foi proposto por Pontes, Vimieiro e Ludermir em 2016
 - O SSDP é uma heurística evolucionária para encontrar top-k subgrupos em bases de dados de alta dimensionalidade
 - O algoritmo foi desenhado especificamente para encontrar padrões em bases com essa característica, onde, os outros métodos do estado da arte falhavam
 - Dado o grande número de atributos, os autores optaram por simplificar a linguagem de descrição, considerando apenas seletores da forma atributo=valor
+    - [JV] Não serão menores e maiores, apenas igualdades.
   - São aceitos somente dados categóricos
 
 ---
 
 - Quanto ao atributo alvo, inicialmente foi previsto somente dados categóricos. Contudo, não há restrições caso a função de fitness seja ajustada para medidas de qualidade numéricas
 - Como a ideia do algoritmo era ser simples de usar, vários parâmetros comuns a algoritmos genéticos foram ajustados automaticamente
+    - [JV] Um problema de algoritmo genético é a grande quantidade de hiperparâmetros.
   - A taxa de mutação e cruzamento são adaptativas e determinadas pelo algoritmo
   - O tamanho da população é fixo, determinado pelo número de seletores da base
   - O usuário tem que determinar o valor de $k$, e a função de qualidade desejada
@@ -125,9 +132,11 @@
   - Isso permite que mais soluções candidatas sejam exploradas pelo algoritmo, uma vez que o espaço de busca é muito grande
 - Como os primeiros indivíduos são seletores únicos, houve a necessidade de se criar um operador de cruzamento específico para a primeira geração
   - Esse operador é equivalente ao gerador de candidatos do Apriori
+      - [JV] Simplesmente concatena os dois na primeira iteração.
 - A partir da segunda geração, foi utilizado cruzamento uniforme
 - O operador de mutação consiste em 3 ações distintas equiprováveis
   - Troca de um seletor por outro
+      - [JV] Aleatoriamente
   - Remoção de um seletor
   - Inclusão de um seletor
 - O operador de seleção é torneio binário
@@ -138,6 +147,7 @@
 - Caso não haja melhoria, a taxa de cruzamento é decrementada e mutação aumenta em 0.2
   - As taxas de mutação e cruzamento devem sempre somar a 1
 - Se a mutação chegar em 1 e não houver melhora por 3 gerações, a população é reinicializada
+    - [JV] Isso porque já estagnou, então não tem porque continuar.
   - 10% aleatória com os seletores dos $k$ melhores subgrupos
   - 90% aleatória contendo de 1 à média de seletores por indivíduo na população atual
 - Se a população for reinicializada por 3 vezes, a busca é interrompida
@@ -168,6 +178,8 @@
 - **Return** $P_k$
 
 ---
+
+- [JV] Atributos sem discretizar. Discretizaram por faixas de mesma largura
 
 | **Name**    | **$\mid D\mid$** | **$\mid D^{+}\mid$** | **$\mid D^{-}\mid$** | **Attributes** |
 | :---------- | ---------------: | -------------------: | -------------------: | -------------: |
@@ -224,6 +236,7 @@ WRAcc, k, time, number of tests and patterns obtained by SSDP and NMEEF-1k-1M al
 - Embora as medidas implantadas garantiam certo nível de eliminação de redundância, o que foi observado na prática é que a cobertura global ainda poderia ser melhorada caso outras medidas fossem implementadas
 - Essas medidas, além de controlar a redundância, permitiam que padrões alternativos fossem encontrados e apresentados ao usuário. Esses padrões, por sua vez, podem ser mais úteis ao usuário
 - Assim, Lucas, Vimieiro e Ludermir (2018) apresentaram uma extensão do SSDP para incluir outras formas de controle de redundância
+    - [JV] Um dos problemas encontrados foi que às vezes a cobertura de um novo subgrupo era muito similar a outro já existente. Com isso, foi criado um cache de um conjunto de subgrupos que representam esse mesmo subgrupo similar.
 
 ---
 
@@ -239,7 +252,8 @@ WRAcc, k, time, number of tests and patterns obtained by SSDP and NMEEF-1k-1M al
 
 - $item_{dom} = \max \{ count(i) / k \}$
   - $count(i) = | \{ X \in P_k | i \in X \} |$
-- $SUPP^{+} = \bigcup_{X \in P_k} c^{+} (X) | / N$
+    - [JV] Quantas vezes um descritor foi usado pra um elemento do top-$k$?
+- $SUPP^{+} = |\bigcup_{X \in P_k} c^{+} (X) | / N$
 
 [Tabelas]
 

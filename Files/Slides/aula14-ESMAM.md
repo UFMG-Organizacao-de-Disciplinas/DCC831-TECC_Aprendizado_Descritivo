@@ -9,11 +9,16 @@
 - Imagine uma situação em que queremos identificar possíveis fatores de risco para uma doença
   - Identificar variáveis que possam afetar o prognóstico de pacientes
 - Exemplificando, Milioli et al. (2017) investigaram a influência de fatores genéticos em subtipos de câncer de mama e como esses afetam o prognóstico (sobrevivência) das pacientes
+    - [JV] Existem diferentes tipos de câncer de mama. Conseguindo identificar o tipo de doença, dá para gerar um tratamento personalizado.
 - A intenção era identificar a existência de marcadores que subdividissem as pacientes em grupos mais homogêneos com prognósticos mais similares
 
 ---
 
 - Eles descobriram uma assinatura de 80 genes que subdividiam o tipo mais agressivo de câncer de mama em dois
+    - [JV] Fazer a leitura de genes é barata
+        - Na curva de sobrevivência, quão mais drástica for a curva de sobrevivência, pior o prognóstico.
+        - A curva cinza e laranja fazem parte do grupo basal, mas foram subdivididos.
+        - Essas 3 divisões relacionam os genes e as pessoas.
 - A figura ao lado mostra as curvas de sobrevivência para o tipo Basal (em cinza) como era considerado antes, e os novos grupos após a descoberta da assinatura
 - O tipo representado pela linha em laranja (mais abaixo) é mais agressivo. A probabilidade de sobrevivência após 5 anos é de cerca de 60%
 
@@ -22,10 +27,16 @@
 ---
 
 - Nessa aplicação, os autores propuseram uma abordagem para seleção desses 80 genes de forma semi-automatizada
+    - [JV] Selecionou os 80 genes que a literatura dizia ser relevante.
   - Uma pré-seleção foi feita com base no conhecimento sobre o domínio do problema
   - Depois, uma análise univariada dos genes pré-selecionados foi feita para filtrar o conjunto final com base na diferença de sobrevivência de grupos induzidos entre baixa e alta expressão (valores menores que 1º ou maiores que 3º quartis)
+      - [JV]
+          - Nessa univariada, é vendo a diferença da expressão gênica e a criação ou não de subgrupos.
+          - Nesse caso eles não avaliam a possibilidade de variação e aumento da intensidade que dois genes poderiam gerar.
+          - O mid seriam os quartis 2 e 3.
 - Note que a metodologia proposta por eles tenta responder à seguinte pergunta:
   - Existe algum subconjunto de genes associado a um grupo cuja curva de sobrevivência seja distinta (excepcional) em relação à população?
+      - [JV] Resumo da ópera: parece muito com descoberta de subgrupos, tem como fazer um algoritmo para resolver isso?
 
 ---
 
@@ -38,6 +49,9 @@
   - Um conjunto de atributos que descreve as amostras/objetos da base. No caso particular, os genes das pacientes estudadas.
   - Um atributo especial 'tempo de sobrevivência' que indicava o tempo total que a paciente sobreviveu desde o início do estudo
   - E um rótulo (atributo categórico), indicando se a paciente morreu em decorrência da doença ou não
+      - [JV] Esse rótulo é o "evento", e ele é qualquer coisa que estivermos olhando. Nesse caso é a morte, mas não precisa sempre ser.
+          - Esse é um problema preditivo.
+          - Dúvida de outro aluno: E por que registramos casos em que o evento não aconteceu?
 
 ---
 
@@ -78,6 +92,8 @@
   - Se uma paciente não faleceu em decorrência do câncer durante cinco anos de estudo, e depois tiver abandonado o estudo ou morrido por outras causas, ela deveria ser levada em consideração para ajustar a probabilidade de sobrevivência por até 5 anos
   - Seus dados deveriam ser desprezados somente após esse tempo
 
+- [JV] Precisaremos adaptar a métrica de qualidade.
+
 ---
 
 - Dessa forma, o tempo de sobrevivência deve ser interpretado como o tempo sobrevivido enquanto tínhamos informação sobre o indivíduo
@@ -88,10 +104,12 @@
 
 - O modelo mais simples e amplamente usado na literatura médica é o modelo de Kaplan-Meier
 - Eles definem que a probabilidade de sobrevivência até um tempo ti é dado por:
-  - $\hat{S}(t*i) = \hat{S}(t*{i-1}) (1 - \frac{d_i}{r_i})$
+  - $\hat{S}(t_i) = \hat{S}(t_{i-1}) (1 - \frac{d_i}{r_i})$
+      - [JV] A chance de sobrevivência em $i$ é igual a chance de sobrevivência em $i-1$ vezes 1 menos a divisão entre os que morreram até o tempo $i$ pelos que estavam em risco até o tempo $i$.
   - $\hat{S}(0) = 1$
   - onde:
     - $d_i$ é o número de indivíduos que experienciaram o evento até o tempo $t_i$
+        - [JV] Na verdade são os indivíduos que experienciaram o evento entre o tempo $t_{i}$ e $t_{i-1}$
     - $r_i$ é o número de indivíduos que estavam em risco até o tempo $t_i$ (não censurados e não experienciaram o evento)
 - Em palavras, a estimativa de sobrevivência até o tempo $t_i$ é a estimativa de sobreviver até o tempo anterior multiplicada pela probabilidade de não experienciar o evento no momento
 
@@ -135,11 +153,11 @@
 
 | ID  | EXO1 | CENPF | NAT1 | EGFR | FOXA1 | Evento | $t_i$ | $\hat{S}(t_i)$ |
 | :-: | ---- | ----- | ---- | ---- | ----- | -----: | ----: | -------------: |
-|  -  | -    | -     | -    | -    | -     |      - |     0 |     1,00000000 |
-|  6  | low  | low   | med  | low  | high  |      0 |    25 |     1,00000000 |
-|  5  | low  | low   | med  | med  | med   |      1 |   181 |     0,66666667 |
-|  4  | low  | low   | med  | low  | high  |      0 |   188 |     0,66666667 |
-|  7  | low  | low   | low  | high | low   |      0 |   202 |     0,66666667 |
+|  -  | -    | -     | -    | -    | -     |      - |     0 |          $1,0$ |
+|  6  | low  | low   | med  | low  | high  |      0 |    25 |          $1,0$ |
+|  5  | low  | low   | med  | med  | med   |      1 |   181 |    $0,\bar{6}$ |
+|  4  | low  | low   | med  | low  | high  |      0 |   188 |    $0,\bar{6}$ |
+|  7  | low  | low   | low  | high | low   |      0 |   202 |    $0,\bar{6}$ |
 
 [Gráfico: Eixo X indo de 0 a 200, e Eixo Y indo de 0 a 1. A curva azul começa em 1 e vai decaindo até chegar em torno de 0.4; A curva laranja começa em 1 e demora bem mais pra decair, só decaindo em torno de 170]
 
@@ -150,10 +168,17 @@
 - Contudo, validar estatisticamente essa diferença, podemos usar o teste de hipótese log-rank que verifica a hipótese nula de que não existe diferença nas distribuições em qualquer ponto no tempo
 - Dessa forma, podemos usar o arcabouço de análise de sobrevivência para buscar e descrever subgrupos de amostras com um comportamento excepcional em relação à população/complemento
 
+- [JV] O log-rank visa avaliar a hipótese estatística.
+
 #### Exceptional Survival Model Mining (ESMAM)
 
 - Mattos et al. (2020) apresentaram um algoritmo baseado em Otimização por Colônia de Formigas (ACO) para encontrar padrões em dados de sobrevivência
   - Exceptional Survival Model Ant Miner
+      - [JV] Indivíduos ao detectar rotas promissoras, quanto mais promissora for a rota, mais indivíduos acham essa rota.
+          - Algoritmos de busca
+              - Voo de morcegos
+              - Enxame de partículas
+              - Enxame de abelhas
 - O objetivo central é fornecer uma ferramenta capaz de encontrar padrões relacionados a subgrupos com curvas de sobrevivência excepcionais
   - A ideia era fornecer aos especialistas do domínio uma alternativa mais automática para a proposta de Milioli et al. (2017)
 
@@ -161,8 +186,9 @@
 
 - O ESMAM assume uma linguagem de descrição similar à do SD-Map
 - São esperados somente dados categóricos
-- Dados numéricos devem ser discretizados na etapa de pré- processamento
+- Dados numéricos devem ser discretizados na etapa de pré-processamento
 - Seletores são do tipo $a_i = V_i$
+    - [JV] V é o conjunto de valores.
 - Mas cada para $a_i = v_{ij}$ é tratado isoladamente
 
 ---
