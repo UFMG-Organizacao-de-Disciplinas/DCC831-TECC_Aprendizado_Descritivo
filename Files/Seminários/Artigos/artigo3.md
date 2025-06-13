@@ -1,9 +1,11 @@
 # Apresentação do [Artigo 3][Link_artigo]
 
-- **Título:**
-  - Finding Interpretable Class-Specific Patterns through Efficient Neural Search
+- **Título:** Finding Interpretable Class-Specific Patterns through Efficient Neural Search
+- [Artigo][Link_artigo]
+- [Apresentação][Slide_art3]
 
 [Link_artigo]: https://doi.org/10.1609/aaai.v38i8.28756
+[Slide_art3]: https://ufmgbr-my.sharepoint.com/:p:/g/personal/rvimieiro_ufmg_br/EW8h3xu3PZVAiPK7gVoI98YBNdUZGMz9aQORBipu-AqjbQ
 
 ## Apresentações
 

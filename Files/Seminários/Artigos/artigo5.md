@@ -1,9 +1,11 @@
 # Apresentação do [Artigo 5][Link_artigo]
 
-- **Título:**
-  - Modeling Match Performance in Elite Volleyball Players: Importance of Jump Load and Strength Training Characteristics
+- **Título:** Modeling Match Performance in Elite Volleyball Players: Importance of Jump Load and Strength Training Characteristics
+- [Artigo][Link_artigo]
+- [Apresentação][Slide_art5]
 
 [Link_artigo]: https://doi.org/10.3390/s22207996
+[Slide_art5]: https://ufmgbr-my.sharepoint.com/:p:/g/personal/rvimieiro_ufmg_br/EQlMXoDU67NJgy7N3rJy_tUBlESMKSnWfhPJnaIiK0Qh6A
 
 ## Apresentações
 

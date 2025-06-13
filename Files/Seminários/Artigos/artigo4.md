@@ -1,9 +1,11 @@
 # Apresentação do [Artigo 4][Link_artigo]
 
-- **Título:**
-  - Local Subgroup Discovery on Attributed Network Graphs
+- **Título:** Local Subgroup Discovery on Attributed Network Graphs
+- [Artigo][Link_artigo]
+- [Apresentação][Slide_art4]
 
 [Link_artigo]: https://doi.org/10.1145/3139241
+[Slide_art4]: https://ufmgbr-my.sharepoint.com/:p:/g/personal/rvimieiro_ufmg_br/ERX4HakirnJGp_yI-zXr1y8BOeb7BaOrkpmXc1l3Mf9bBQ
 
 ## Apresentações
 

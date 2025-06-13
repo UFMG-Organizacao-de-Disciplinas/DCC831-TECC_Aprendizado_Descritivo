@@ -1,9 +1,13 @@
 # Apresentação do [Artigo 2][Link_artigo]
 
-- **Título:**
-  - Discovering frequent parallel episodes in complex event sequences by counting distinct occurrences
+- **Título:** Discovering frequent parallel episodes in complex event sequences by counting distinct occurrences
+- [Artigo][Link_artigo]
+- [Apresentação][Slide_art2]
+  - [PDF][Slide_art2_pdf]
 
 [Link_artigo]: https://doi.org/10.1007/s10489-023-05187-y
+[Slide_art2]: https://ufmgbr-my.sharepoint.com/:p:/g/personal/rvimieiro_ufmg_br/EYt2TQOTPK5ApawDjIJPeWkBBhr17IAhtIfCUs4koh_WKQ
+[Slide_art2_pdf]: <Files\Seminários\Apresentações\artigo2 - Apresentação.pdf>
 
 ## Apresentações
 
