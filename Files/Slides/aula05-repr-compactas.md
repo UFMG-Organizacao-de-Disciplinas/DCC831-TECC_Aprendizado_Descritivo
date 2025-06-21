@@ -1,10 +1,8 @@
-# Slides
+# Slide: aula05-repr-compactadas (Aula 6, 7, 8)
 
 ## Aula 06 | 03/04/2025 | Mineração de conjuntos de itens
 
-### Slide: aula05-repr-compactadas (Aula 06)
-
-#### Introdução (Aula 06)
+### Introdução (Aula 06)
 
 - Nessa aula, vamos discutir representações compactas para o conjunto de todos os conjuntos de itens frequentes de uma base de dados
 - Representações compactas são subconjuntos a partir dos quais é possível derivar todos os conjuntos de itens frequentes
@@ -41,7 +39,7 @@
   - Conjuntos frequentes **máximos**
   - Conjuntos frequentes **fechados**
 
-#### Representações compactas
+### Representações compactas
 
 - O particionamento dos itemsets no exemplo anterior se deu pelos tidsets que compunham suas extensões
   - [JV]: Extensão é a mesma coisa que cobertura, ou seja, o conjunto de itens que determinado TID contém, ou a quantidade de TIDs em que um itemset aparece.
@@ -210,7 +208,7 @@ flowchart LR
     - > GPT: **Fechados:** não existe superconjunto com o mesmo suporte (representam completamente uma classe de objetos).
   - Então, o conjunto vazio também deveria ser Fechado.
 
-#### Algoritmos para encontrar representações compactas
+### Algoritmos para encontrar representações compactas
 
 - Os exemplos mostram que as representações compactas apresentam vantagens sobre o conjunto de todos os itemsets frequentes
 - No entanto, se usarmos os algoritmos vistos anteriormente para encontrar essas representações, não temos ganho computacional algum em relação ao problema anterior
@@ -220,15 +218,13 @@ flowchart LR
 
 "Você consegue encontrar todos ..."
 
-##### DCI_Closed - Próxima aula
+#### DCI_Closed - Próxima aula
 
 ## Aula 07 | 08/04/2025 | Mineração de sequências - Faltei pq tava passando mal
 
-### Slide: aula05-repr-compactadas (Aula 07)
+### Algoritmos para encontrar representações compactas (Aula 07)
 
-#### Algoritmos para encontrar representações compactas (Aula 07)
-
-##### DCI_Closed (Aula 07)
+#### DCI_Closed (Aula 07)
 
 - O algoritmo DCI_Closed foi proposto em 2004 por C. Lucchese, S. Orlando e R. Perego
 - Ele também adota uma representação vertical da base de dados para facilitar a verificação dos conjuntos fechados
@@ -317,15 +313,13 @@ flowchart LR
 | 5       |       0        |      1       |      1       |        0        |        0         |      1      |
 | 6       |       1        |      0       |      1       |        0        |        0         |      1      |
 
-##### MAFIA: Maximal Frequent Itemset Algorithm - Próxima aula
+#### MAFIA: Maximal Frequent Itemset Algorithm - Próxima aula
 
 ## Aula 08 | 10/04/2025 | Mineração de sequências
 
-### Slide: aula05-repr-compactadas (Aula 08)
+### Algoritmos para encontrar representações compactas (Aula 08)
 
-#### Algoritmos para encontrar representações compactas (Aula 08)
-
-##### MAFIA: Maximal Frequent Itemset Algorithm
+#### MAFIA: Maximal Frequent Itemset Algorithm
 
 - O algoritmo MAFIA foi proposto em 2001 por D. Burdick, M. Calimlim e J. Gehrke
 - A ideia geral do algoritmo é a de explorar o reticulado de itemsets com uma abordagem best-first/branch-and-bound
@@ -458,7 +452,7 @@ Na notação vertical, a primeira coluna são os itens, e a segunda é a lista d
 |       5 |              0 |            1 |            1 |               0 |                0 |           1 |
 |       6 |              1 |            0 |            1 |               0 |                0 |           1 |
 
-##### Leitura (Aula 08)
+#### Leitura (Aula 08)
 
 - Seção 9.1 Zaki e Meira
 - Seção 6.2.6 Han et al.
