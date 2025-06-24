@@ -79,3 +79,4 @@
 - Se você entende onde seu método falha, você entende ainda melhor do que se soubesse só de onde dá certo.
 - E a complexidade? Não falam sobre?
     - Foi um artigo mais simples, aparentemente inicial.
+- Até que tem bastante aplicação pro algoritmo
