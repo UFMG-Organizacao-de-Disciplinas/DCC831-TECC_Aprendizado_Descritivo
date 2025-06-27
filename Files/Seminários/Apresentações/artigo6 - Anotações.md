@@ -2,9 +2,11 @@
 
 - **Título:** Exceptional Subitizing Patterns: Exploring Mathematical Abilities of Finnish Primary School Children with Piecewise Linear Regression
 - [Artigo][Link_artigo]
+  - [No GitHub][Link_artigo_github]
 - [Apresentação][Slide_art6]
 
 [Link_artigo]: https://doi.org/10.1007/978-3-031-70381-2_5
+[Link_artigo_github]: https://github.com/RianneSchouten/FUNA_EMM/blob/main/Schoutenetal_FUNA_ECMLPKDD24.pdf
 [Slide_art6]: https://ufmgbr-my.sharepoint.com/:p:/g/personal/rvimieiro_ufmg_br/EQy9ZRqdKuNGhM1XWMDYWAcByiQh59aNlMbBd3-UpRNjqw
 
 ## Apresentações
@@ -39,14 +41,7 @@
 - OLUWATOYIN JOY OMOLE
 - SAMUEL KFURI FERRAZ MARCUSSI
 
-### Assessor social: Grupo 5 (561234) - Representante
-
-- CAIO JORGE CARVALHO LARA
-- JUAN MARCOS BRAGA FARIA
-- LUISA VASCONCELOS DE CASTRO TOLEDO
-- LUIZA SODRE SALGADO
-- MATEUS REIS EVANGELISTA
-- SAMUEL HENRIQUE MIRANDA ALVES
+### Assessor social: Grupo 5 (561234) - Representante: SAMUEL HENRIQUE MIRANDA ALVES
 
 ### Hacker: Grupo 6 (612345) - Representante: JOÃO VÍTOR FERNANDES DIAS
 
