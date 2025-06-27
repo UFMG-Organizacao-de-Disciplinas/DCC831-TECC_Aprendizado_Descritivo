@@ -2,11 +2,12 @@
 
 - **Título:** Differentiable Pattern Set Mining
 - [Artigo][Link_artigo]
-- [Apresentação][Slide_art1]
+- [Apresentação][Slide_art1] [V2][Slide_Backup_art1]
   - [PDF][Slide_art1_pdf]
 
 [Link_artigo]: https://doi.org/10.1145/3447548.3467348
 [Slide_art1]: https://ufmgbr-my.sharepoint.com/:p:/g/personal/rvimieiro_ufmg_br/ESSM0mBDMNZFj7vzopqACYIBKOi3ChX9tsyje_2RroiT4Q
+[Slide_Backup_art1]: https://ufmgbr-my.sharepoint.com/:p:/g/personal/eacoelho_ufmg_br/EXHFOZU6fj9CtlAsehb3bNMBQQ4l8c0LAlmLxAUk0WbUMg?e=WWlGeR
 [Slide_art1_pdf]: <Files\Seminários\Apresentações\artigo1 - Apresentação.pdf>
 
 ## Apresentações
