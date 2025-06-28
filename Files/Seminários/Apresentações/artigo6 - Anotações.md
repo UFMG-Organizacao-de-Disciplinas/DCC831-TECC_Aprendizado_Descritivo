@@ -50,7 +50,7 @@
 - [Link Repositório GitHub](https://github.com/RianneSchouten/FUNA_EMM)
 
 - **Rianne M. Schouten**
-  - <r.m.schouten@tue.nl> (Eindhoven University of Technology, the Netherlands)
+  - Email: <r.m.schouten@tue.nl> (Eindhoven University of Technology, the Netherlands)
   - [LinkedIn](https://www.linkedin.com/in/rianne-schouten-phd-5bb29491)
   - [Site Pessoal](https://rianneschouten.github.io/)
   - [Scholar](https://scholar.google.com/citations?user=xC56bhMAAAAJ)
@@ -59,16 +59,34 @@
   - [LinkedIn](https://www.linkedin.com/in/wouter-duivesteijn-5303b456)
   - [Site Pessoal Morto](https://liacs.leidenuniv.nl/~wouterd/)
 - **Pekka Räsänen**
-  - <pekka.j.rasanen@utu.fi> (Turku Research Institute for Learning Analytics, Faculty of Science, University of Turku, Finland)
+  - Emails
+    - <pekka.j.rasanen@utu.fi> (Turku Research Institute for Learning Analytics, Faculty of Science, University of Turku, Finland)
+    - <pekras@utu.fi>
+    - <pekka.rasanen@oii.ox.ac.uk>
+  - Telefone
+    - +358 29 450 2686
+    - +358 50 567 2230
+  - Site
+    - [utu.fi](https://www.utu.fi/fi/ihmiset/pekka-rasanen)
+    - [utu.fi (2)](https://www.utu.fi/en/people/pekka-rasanen)
+    - [Oxford](https://www.oii.ox.ac.uk/people/profiles/pekka-rasanen/)
+  - [Scholar](https://scholar.google.com/citations?user=7WCkTq8AAAAJ&hl=da)
+  - [Scopus](https://www.scopus.com/authid/detail.uri?authorId=58157173100)
+  - [ORCId](https://orcid.org/0000-0001-7472-6355)
+  - [ResearchGate](https://www.researchgate.net/profile/Pekka-Raesaenen-2)
 - **Jacob M. Paul**
-  - <jacob.paul@unimelb.edu.au> (School of Psychological Sciences, University of Melbourne, Australia)
+  - Email: <jacob.paul@unimelb.edu.au> (School of Psychological Sciences, University of Melbourne, Australia)
+  - [Scholar](https://scholar.google.com/citations?user=ZIOR3Y4AAAAJ)
+  - [GitHub io](https://jacobmpaul.github.io/cv)
+  - [GitHub](https://github.com/jacobmpaul)
+  - [Twitter](https://x.com/jacob_m_paul)
 - **Mykola Pechenizkiy**
-  - <m.pechenizkiy@tue.nl> (Eindhoven University of Technology, the Netherlands)
-  - [LinkedIn](https://www.linkedin.com/in/mpechen)
-  - [Site Pessoal](http://www.win.tue.nl/~mpechen)
-    - [Site Pessoal 2](https://mpechen.win.tue.nl/)
+  - Email: <m.pechenizkiy@tue.nl> (Eindhoven University of Technology, the Netherlands)
   - Fax: +31(0)40 246 3992
   - Tel: +31 40 247 2733 (secretary)
+  - [Site Pessoal](http://www.win.tue.nl/~mpechen)
+    - [Site Pessoal 2](https://mpechen.win.tue.nl/)
+  - [LinkedIn](https://www.linkedin.com/in/mpechen)
   - [Mapa](https://maps.google.nl/maps/ms?msa=0&msid=203269509970576131669.0004c90e242f574471ee2&gl=NL&hl=en&ie=UTF8&ll=51.447174,5.483186&spn=0.005276,0.013937&t=m&z=17&vpsrc=6&iwloc=A&q=MetaForum+%4051.446805955906264,5.487391948699951)
   - [Zenfolio](https://mykola.zenfolio.com/)
   - [CV](https://mpechen.win.tue.nl/CV/CV_MP_short.pdf)
