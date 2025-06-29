@@ -261,10 +261,10 @@
 - Isso é consistente com a ideia de que, inicialmente, as formigas executam buscas 'aleatórias' por comida, já que a escolha de um seletor para compor uma descrição segue a distribuição definida pelo feromônio
 - À medida que descrições são encontradas, o feromônio dos seletores é atualizado para refletir a qualidade das escolhas
   - $\tau_{ij}^{q+1} = (1 - \varphi (d)) \cdot \tau_{ij}^q$
-      - [JV] (1 - a qualidade do descritor) vezes a quantidade de feromônio.
+    - [JV] (1 - a qualidade do descritor) vezes a quantidade de feromônio.
 - Uma etapa de normalização é feita para ajustar o valor do feromônio para o intervalo desejado
-    - [JV] divide tudo pela soma (ou seria média) dos feromônios dispersos.
-        - Porém, os seletores individuais não são averiguados
+  - [JV] divide tudo pela soma (ou seria média) dos feromônios dispersos.
+    - Porém, os seletores individuais não são averiguados
 
 ---
 
@@ -310,8 +310,8 @@
 
 - [JV] Calcular a entropia para ver quem tem um tempo de sobrevivência acima da média.
 - $H(t \geq 101 | EXO1 = low) = - \left( \frac{1}{4} \cdot \log \frac{1}{4} + \frac{3}{4} \cdot \log \frac{3}{4} \right) = 0,81$
-    - [JV] Probabilidade de ter o seletor + a probabilidade de não ter o seletor.
-    - [JV] $\eta(I_{ij}) = \frac{1 - H(t \geq \mu | I_{ij})}{1 - \sum_{S \in I} H(t \geq \mu | S)}$
+  - [JV] Probabilidade de ter o seletor + a probabilidade de não ter o seletor.
+  - [JV] $\eta(I_{ij}) = \frac{1 - H(t \geq \mu | I_{ij})}{1 - \sum_{S \in I} H(t \geq \mu | S)}$
 
 ---
 
@@ -319,9 +319,9 @@
 - Ele é definido por:
 - $\eta_{L}(I_{ij}) = 1 - \frac{1}{ 1 + e^{ - \left( s(I_{ij}) - L \right)}}$
 - O parâmetro L determina o número de vezes em que o uso do seletor é penalizado em 50%
-    - [JV] $(s(I_{ij}) - L)$ Quantas vezes o descritor foi usado menos...?
-        - Mudando o L, faz-se o shift da curva pra um lado e pro outro.
-        - Um hiperparâmetro que indica a partir de quantas vezes o seletor precisa ter sido repetido até que ele 
+  - [JV] $(s(I_{ij}) - L)$ Quantas vezes o descritor foi usado menos...?
+    - Mudando o L, faz-se o shift da curva pra um lado e pro outro.
+    - Um hiperparâmetro que indica a partir de quantas vezes o seletor precisa ter sido repetido até que ele
 
 [Gráfico: 3 distribuições acumuladas, azul, vermelho e verde. A azul cresce mais rápido, depois a vermelha e por último a verde (Funções sigmoides)]
 
@@ -339,7 +339,7 @@
 - Dessa forma, as formigas escolhem os seletores com a seguinte probabilidade
   - $P(I_{ij}) = \frac{\iota (a_i) \cdot \eta_{ij} \cdot \tau(I_{ij})}{ \sum \iota (a_i) \cdot \eta_{ij} \cdot \tau(I_{ij}) }$
 - A função $\iota (a_i)$ é uma função indicadora se o atributo já foi usado em algum seletor da descrição
-    - [JV] Se já foi, é 0, senão, é 1.
+  - [JV] Se já foi, é 0, senão, é 1.
 - Somente os seletores que cobrem os mesmos objetos que a descrição atual cobre são considerados
 
 ---
@@ -366,8 +366,8 @@
   - $\textbf{return: } G^{best}$
 
 - [JV] E como são escolhidos os hiperparâmetros?
-    - 🤷 No final das contas, é chute e vai vendo se rodou bem.
-    - 
+  - 🤷 No final das contas, é chute e vai vendo se rodou bem.
+  -
 
 #### Aplicação em um conjunto de câncer de mama
 
@@ -400,6 +400,7 @@
 ---
 
 - Gráfico
+
   - $\mathbb{R}^2$ onde o X é contado em meses e vai de 0 a 350, enquanto que o eixo Y é a probabilidade de taxa de sobrevivência e vai de 0 a 1.
   - Tem 4 curvas:
     - **População**: cinza
@@ -428,11 +429,10 @@
 
 #### Leitura
 
-- [[Link]][2017_Milioli] Milioli, H.H., Tishchenko, I., Riveros, C. et al. Basal-like breast cancer: molecular profiles, clinical features and survival outcomes. BMC Med Genomics 10, 19 (2017).
-- [[Link]][2020_Vimieir] Mattos, J.B., Silva, E.G., de Mattos Neto, P.S.G., Vimieiro, R. (2020). Exceptional Survival Model Mining. In: Cerri, R., Prati, R.C. (eds) Intelligent Systems. BRACIS 2020. Lecture Notes in Computer Science(), vol 12320. Springer, Cham.
-- [[Link]][2024_Vimieir] Vimieiro, R., Mattos, J.B, de Mattos Neto, P.S.G. (2024). EsmamDS: A more diverse exceptional model mining approach. In: Information Sciences (under review).
+- [2017_Milioli][2017_Milioli] Milioli, H.H., Tishchenko, I., Riveros, C. et al. Basal-like breast cancer: molecular profiles, clinical features and survival outcomes. BMC Med Genomics 10, 19 (2017).
+- [2020_Vimieir][2020_Vimieir] Mattos, J.B., Silva, E.G., de Mattos Neto, P.S.G., Vimieiro, R. (2020). Exceptional Survival Model Mining. In: Cerri, R., Prati, R.C. (eds) Intelligent Systems. BRACIS 2020. Lecture Notes in Computer Science(), vol 12320. Springer, Cham.
+- [2024_Vimieir][2024_Vimieir] Vimieiro, R., Mattos, J.B, de Mattos Neto, P.S.G. (2024). EsmamDS: A more diverse exceptional model mining approach. In: Information Sciences (under review).
 
 [2017_Milioli]: https://doi.org/10.1186/s12920-017-0250-9
 [2020_Vimieir]: https://doi.org/10.1007/978-3-030-61380-8_21
-
-[2024_Vimieir]: <>
+[2024_Vimieir]: https://arxiv.org/pdf/2109.02610
