@@ -11,35 +11,11 @@
 
 ## Apresentações
 
-### Historiador: Grupo 2 (234561) - Representante
+### Historiador: Grupo 2 (234561) - Representante: IASMIN CORREA ARAUJO
 
-- ENILDA ALVES COELHO
-- FABIO CESAR MARRA FILHO
-- GABRIEL TONIONI DUARTE
-- IASMIN CORREA ARAUJO
-- JOSE VINICIUS DE LIMA MASSARICO
-- LARISSA DUARTE SANTANA
-- MARCELO LOMMEZ RODRIGUES DE JESUS
+### Formalizador: Grupo 3 (345612) - Representante: DANIEL SCHLICKMANN BASTOS
 
-### Formalizador: Grupo 3 (345612) - Representante
-
-- DANIEL SCHLICKMANN BASTOS
-- GABRIEL CASTELO BRANCO ROCHA ALENCAR PINTO
-- GUILHERME BUXBAUM MARINHO GUERRA
-- JOSE EDUARDO DUARTE MASSUCATO
-- LEONARDO CAETANO GOMIDE
-- LUCAS MESQUITA ANDRADE
-- VINICIUS LEITE CENSI FARIA
-
-### Metodologista: Grupo 4 (456123) - Representante
-
-- BERNNARDO SERAPHIM BAPTISTA DE OLIVEIRA
-- DINÁ BEATRIZ XAVIER
-- GABRIEL ARCANJO CAMPELO FADOUL
-- KÊNIA CAROLINA GONÇALVES
-- LUCAS VITOR DA SILVA RAMOS
-- OLUWATOYIN JOY OMOLE
-- SAMUEL KFURI FERRAZ MARCUSSI
+### Metodologista: Grupo 4 (456123) - Representante: BERNNARDO SERAPHIM BAPTISTA DE OLIVEIRA
 
 ### Assessor social: Grupo 5 (561234) - Representante: SAMUEL HENRIQUE MIRANDA ALVES
 
@@ -115,3 +91,18 @@ Regarding FUNA: A proportion of 0.05 has been made available in data_input/funa/
 - HENRIQUE ROTSEN SANTOS FERREIRA
 - VICTOR GABRIEL MOURA OLIVEIRA
 - WESLEY MARQUES DANIEL CHAVES
+
+## Comentários do professor
+
+- Os modelos precisam ser alterados para se adaptar aos tipos
+
+## Comentários gerais sobre os seminários
+
+- O objetivo geral é para termos contatos com os artigos novos da área.
+- É importante que desde já consigamos consumir esse tipo de conteúdo e também conseguir passar adiante.
+- Conseguir converter o que a academia gera para a ponta das empresas. Quanto melhor conseguirmos fazer isso, melhor a qualidade técnica.
+- Jussara: métodos quantitativos
+- Engenharia de features tende a ser manual
+- Bons trabalhos vêm de: produção dos seus dados; geração de um novo algoritmo; e uma análise profunda dos dados utilizados.
+- Dúvida: É melhor apresentar o resultado falho que foi encontrado ou voltar e reformular o problema original?
+  - Metodologia CRISP-DM: retroalimentação readequando o objetivo
