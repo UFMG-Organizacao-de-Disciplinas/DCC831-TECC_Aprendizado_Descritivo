@@ -177,8 +177,8 @@
 
 #### Leitura
 
-- [Link][2004_Nada] Nada Lavrač, Branko Kavšek, Peter Flach, and Ljupčo Todorovski. 2004. Subgroup Discovery with CN2-SD. J. Mach. Learn. Res. 5 (12/1/2004), 153–188.
-- [Link][2002_Drag] Dragan Gamberger and Nada Lavrac. 2002. Expert-guided subgroup discovery: methodology and application. J. Artif. Int. Res. 17, 1 (July 2002), 501–527.
+- [Link: 2004_Nada][2004_Nada] Nada Lavrač, Branko Kavšek, Peter Flach, and Ljupčo Todorovski. 2004. Subgroup Discovery with CN2-SD. J. Mach. Learn. Res. 5 (12/1/2004), 153–188.
+- [Link: 2002_Drag][2002_Drag] Dragan Gamberger and Nada Lavrac. 2002. Expert-guided subgroup discovery: methodology and application. J. Artif. Int. Res. 17, 1 (July 2002), 501–527.
 
 [2004_Nada]: https://dl.acm.org/doi/10.5555/1005332.1005338
 [2002_Drag]: https://dl.acm.org/doi/10.5555/1622810.1622825

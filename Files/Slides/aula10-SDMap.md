@@ -194,11 +194,11 @@
 
 #### Leitura
 
-- [Link][2006_Atzmuelle] Atzmueller, M., Puppe, F. (2006). SD-Map – A Fast Algorithm for Exhaustive Subgroup Discovery. In: Fürnkranz, J., Scheffer, T., Spiliopoulou, M. (eds) Knowledge Discovery in Databases: PKDD 2006. PKDD 2006. Lecture Notes in Computer Science(), vol 4213. Springer, Berlin, Heidelberg.
-- [Link][2009_Atzmuelle] Atzmueller, M., Lemmerich, F. (2009). Fast Subgroup Discovery for Continuous Target Concepts. In: Rauch, J., Raś, Z.W., Berka, P., Elomaa, T. (eds) Foundations of Intelligent Systems. ISMIS 2009. Lecture Notes in Computer Science(), vol 5722. Springer, Berlin, Heidelberg.
+- [Link: 2006_Atzmuelle][2006_Atzmuelle] Atzmueller, M., Puppe, F. (2006). SD-Map – A Fast Algorithm for Exhaustive Subgroup Discovery. In: Fürnkranz, J., Scheffer, T., Spiliopoulou, M. (eds) Knowledge Discovery in Databases: PKDD 2006. PKDD 2006. Lecture Notes in Computer Science(), vol 4213. Springer, Berlin, Heidelberg.
+- [Link: 2009_Atzmuelle][2009_Atzmuelle] Atzmueller, M., Lemmerich, F. (2009). Fast Subgroup Discovery for Continuous Target Concepts. In: Rauch, J., Raś, Z.W., Berka, P., Elomaa, T. (eds) Foundations of Intelligent Systems. ISMIS 2009. Lecture Notes in Computer Science(), vol 5722. Springer, Berlin, Heidelberg.
   - [JV] Esses dois são mais tranquilos. A partir daqui já não temos livro-texto. Serão só os artigos mesmo.
-- [Link][2008_Grosskreu] Grosskreutz, H., Rüping, S., Wrobel, S. (2008). Tight Optimistic Estimates for Fast Subgroup Discovery. In: Daelemans, W., Goethals, B., Morik, K. (eds) Machine Learning and Knowledge Discovery in Databases. ECML PKDD 2008. Lecture Notes in Computer Science(), vol 5211. Springer, Berlin, Heidelberg.
-- [Link][2016_Lemmerich] Lemmerich, F., Atzmueller, M. & Puppe, F. Fast exhaustive subgroup discovery with numerical target concepts. Data Min Knowl Disc 30, 711–762 (2016).
+- [Link: 2008_Grosskreu][2008_Grosskreu] Grosskreutz, H., Rüping, S., Wrobel, S. (2008). Tight Optimistic Estimates for Fast Subgroup Discovery. In: Daelemans, W., Goethals, B., Morik, K. (eds) Machine Learning and Knowledge Discovery in Databases. ECML PKDD 2008. Lecture Notes in Computer Science(), vol 5211. Springer, Berlin, Heidelberg.
+- [Link: 2016_Lemmerich][2016_Lemmerich] Lemmerich, F., Atzmueller, M. & Puppe, F. Fast exhaustive subgroup discovery with numerical target concepts. Data Min Knowl Disc 30, 711–762 (2016).
 
 [2006_Atzmuelle]: https://doi.org/10.1007/11871637_6
 [2009_Atzmuelle]: https://doi.org/10.1007/978-3-642-04125-9_7

@@ -259,9 +259,9 @@ WRAcc, k, time, number of tests and patterns obtained by SSDP and NMEEF-1k-1M al
 
 #### Leitura
 
-- [Link][Vimieiro_2018] T. Lucas, R. Vimieiro and T. Ludermir, "SSDP+: A Diverse and More Informative Subgroup Discovery Approach for High Dimensional Data," 2018 IEEE Congress on Evolutionary Computation (CEC), Rio de Janeiro, Brazil, 2018, pp. 1-8.
-- [Link][Vimieiro_2017] Tarcísio Lucas, Túlio C.P.B. Silva, Renato Vimieiro, and Teresa B. Ludermir. 2017. A new evolutionary algorithm for mining top-k discriminative patterns in high dimensional data. Appl. Soft Comput. 59, C (October 2017), 487–499.
-- [Link][Vimieiro_2016] T. Pontes, R. Vimieiro and T. B. Ludermir, "SSDP: A Simple Evolutionary Approach for Top-K Discriminative Patterns in High Dimensional Databases," 2016 5th Brazilian Conference on Intelligent Systems (BRACIS), Recife, Brazil, 2016, pp. 361-366.
+- [Link: Vimieiro_2018][Vimieiro_2018] T. Lucas, R. Vimieiro and T. Ludermir, "SSDP+: A Diverse and More Informative Subgroup Discovery Approach for High Dimensional Data," 2018 IEEE Congress on Evolutionary Computation (CEC), Rio de Janeiro, Brazil, 2018, pp. 1-8.
+- [Link: Vimieiro_2017][Vimieiro_2017] Tarcísio Lucas, Túlio C.P.B. Silva, Renato Vimieiro, and Teresa B. Ludermir. 2017. A new evolutionary algorithm for mining top-k discriminative patterns in high dimensional data. Appl. Soft Comput. 59, C (October 2017), 487–499.
+- [Link: Vimieiro_2016][Vimieiro_2016] T. Pontes, R. Vimieiro and T. B. Ludermir, "SSDP: A Simple Evolutionary Approach for Top-K Discriminative Patterns in High Dimensional Databases," 2016 5th Brazilian Conference on Intelligent Systems (BRACIS), Recife, Brazil, 2016, pp. 361-366.
 
 [Vimieiro_2018]: https://doi.org/10.1109/CEC.2018.8477855
 [Vimieiro_2017]: https://doi.org/10.1016/j.asoc.2017.05.048
