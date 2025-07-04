@@ -39,3 +39,48 @@
 | 10/07/2025           |  11 | Gabriel Tonioni Duarte            |
 | 10/07/2025           |  11 | João Vítor Fernandes Dias         |
 | 10/07/2025           |  11 | Larissa Duarte Santana            |
+
+## 03/07/2025
+
+### ID 1
+
+### ID 7
+
+- Kaggle
+- Filtragem
+- Execução dupla do Beam Search
+- WRAcc
+- Mineração de Padrões Frequentes
+- Países envolvidos e desenvolvidosz
+
+### ID 8
+
+- Estudo de caso de ITBI em BH
+- Encontrar os grupos de imóveis que apresentaram valorizações atípicas
+
+### ID 9
+
+- Aluguel nos EUA
+- 100k anúncios de apartamentos
+- Mineração de itemsets nas amenidades
+- Remoção de outliers por estado
+- Itemsets de maior suporte
+- Regras de associação
+- Usaram Pysubgroup
+  1. BeamSearch
+  2. Pre-processamento das variáveis alvo
+     - Análise de desvio padrão
+  3. Modificação do algoritmo de Beam Search
+     - Similaridade de Jaccard
+     - Métrica de qualidade
+- Aluguel, aluguel. Não é AirBnB
+
+## 08/07/2025
+
+### ID 2
+
+### ID 3
+
+### ID 6
+
+##
