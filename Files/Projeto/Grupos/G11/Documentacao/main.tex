@@ -55,11 +55,11 @@
 \end{center}
 
 \begin{abstract}
-This study applies concepts of Descriptive Learning using the Beam Search algorithm to discover interpretable subgroups in a dataset containing behavioral variables of credit card customers. The dataset includes anonymized information from approximately 9,000 users over a six-month period. The analysis enabled the identification of distinct customer profiles based on usage frequency, purchasing patterns, and financial behavior, demonstrating the effectiveness of Beam Search in identifying relevant patterns sensitive to search and evaluation parameters.
+    This study applies concepts of Descriptive Learning using the Beam Search algorithm to discover interpretable subgroups in a dataset containing behavioral variables of credit card customers. The dataset includes anonymized information from approximately 9,000 users over a six-month period. The analysis enabled the identification of distinct customer profiles based on usage frequency, purchasing patterns, and financial behavior, demonstrating the effectiveness of Beam Search in identifying relevant patterns sensitive to search and evaluation parameters.
 \end{abstract}
 
-\begin{resumo} 
-Este artigo aplica conceitos de Aprendizado Descritivo utilizando o algoritmo Beam Search para descoberta de subgrupos interpretáveis em um dataset com variáveis comportamentais de clientes de cartão de crédito. O conjunto de dados contém informações anonimizadas de cerca de 9000 usuários em um período de 6 meses. A análise permitiu a identificação de perfis distintos de clientes com base na frequência de uso, padrão de compras e comportamento financeiro, demonstrando a eficácia do Beam Search na identificação de padrões relevantes sensíveis aos parâmetros de busca e avaliação.
+\begin{resumo}
+    Este artigo aplica conceitos de Aprendizado Descritivo utilizando o algoritmo Beam Search para descoberta de subgrupos interpretáveis em um dataset com variáveis comportamentais de clientes de cartão de crédito. O conjunto de dados contém informações anonimizadas de cerca de 9000 usuários em um período de 6 meses. A análise permitiu a identificação de perfis distintos de clientes com base na frequência de uso, padrão de compras e comportamento financeiro, demonstrando a eficácia do Beam Search na identificação de padrões relevantes sensíveis aos parâmetros de busca e avaliação.
 \end{resumo}
 
 \section{Introdução}
@@ -160,7 +160,7 @@ Neste trabalho, utilizou-se uma base de dados financeira em conjunto com o algor
 \hspace{1.2cm}A discretização é uma etapa importante no processo de descoberta de subgrupos, pois seletores categóricos geralmente tornam as regras mais interpretáveis para os analistas. Neste trabalho, foi utilizada a discretização por quartis (\texttt{qcut}) para transformar variáveis numéricas em categorias qualitativas. No entanto, nem todas as variáveis apresentaram uma distribuição apropriada para esse tipo de transformação. Para priorizar resultados mais imediatos e consistentes, apenas as colunas com número suficiente de valores distintos foram discretizadas. As demais foram mantidas em sua forma contínua, garantindo a preservação de suas propriedades numéricas para análise posterior. Esse processo está exemplificado no código do  \autoref{lst:discretizacao}.
 
 \begin{center}
-\begin{lstlisting}[language=Python, caption={Discretização automática com quartis para variáveis numéricas.}, label={lst:discretizacao}]
+    \begin{lstlisting}[language=Python, caption={Discretização automática com quartis para variáveis numéricas.}, label={lst:discretizacao}]
 df_binned = df.drop(columns=['CUST_ID'], errors='ignore')
 df_binned = df.fillna(df.median(numeric_only=True))
 
@@ -191,7 +191,7 @@ Durante o processo, as seguintes variáveis foram identificadas como inadequadas
 %     \item \texttt{TENURE}
 % \end{itemize}
 % }
-        
+
 \subsection{Descoberta de Subgrupos com Beam Search}
 
 \hspace{1.2cm}A descoberta de subgrupos é uma tarefa descritiva voltada à identificação de subconjuntos de dados que se destacam em relação a uma variável-alvo, sendo especialmente útil em contextos que exigem interpretabilidade e personalização das regras extraídas. Nesse cenário, a biblioteca \textit{pysubgroup} se destaca por oferecer uma estrutura flexível e eficiente para a definição de funções de qualidade, configuração das condições de descoberta e avaliação sistemática dos padrões gerados, apresentando compatibilidade com diferentes tipos de dados e objetivos analíticos \cite{lemmerich:18}. Entre os algoritmos disponíveis, o \textit{Beam Search} configura-se como uma estratégia heurística e controlada que visa encontrar subgrupos descritivos por meio de um processo composto por cinco etapas principais: \textbf{inicialização}, \textbf{expansão}, \textbf{avaliação}, \textbf{otimização (feixe)} e \textbf{iteração}.
@@ -207,7 +207,7 @@ Portanto, no \textit{Beam Search}, os subgrupos gerados competem entre si por po
 O espaço de busca foi explorado de duas maneiras: de forma completa, abrangendo todos os descritores disponíveis, e de forma segmentada, com restrições específicas para diferentes categorias de análise. Para a avaliação dos subgrupos gerados, foram empregadas distintas funções de qualidade, incluindo as medidas \texttt{stdQF} e \texttt{stdQFTscore}, bem como a métrica \texttt{WRAcc} (\textit{Weighted Relative Accuracy}), definidas conforme exemplificado no código da \autoref{lst:qualityfunc}. Esta última considera simultaneamente a precisão relativa do subgrupo e seu tamanho em relação ao conjunto total, o que permite equilibrar relevância estatística e representatividade \cite{vimieiro:24}.
 
 \begin{center}
-\begin{lstlisting}[language=Python, caption={Função auxiliar para seleção da métrica de qualidade utilizada em cada experimento.}, label={lst:qualityfunc}]
+    \begin{lstlisting}[language=Python, caption={Função auxiliar para seleção da métrica de qualidade utilizada em cada experimento.}, label={lst:qualityfunc}]
 def get_quality_function(name='stdQF', a=0.5, centroid='mean'):
     gen_quality_func = {
         'stdQF': ps.StandardQFNumeric(a, centroid=centroid),
@@ -218,10 +218,10 @@ def get_quality_function(name='stdQF', a=0.5, centroid='mean'):
 \end{lstlisting}
 \end{center}
 
-Adicionalmente, a criação das tarefas de busca foi realizada segundo o código ilustrado na \autoref{lst:task} e o parâmetro de recompensa por tamanho do subgrupo foi variado entre os valores 0.0, 0.3, 0.5 e 1.0, a fim de investigar o impacto do tamanho das regras na qualidade das descobertas. Também foram adotados valores fixos para as demais configurações experimentais, sendo definido o tamanho mínimo dos subgrupos como 10 instâncias, e o número máximo de descritores por subgrupo variando entre 3 e 8. Tais parâmetros impactam diretamente a complexidade das regras geradas, bem como a interpretabilidade dos padrões descobertos, especialmente em um contexto de análise comportamental com múltiplas variáveis interdependentes. 
+Adicionalmente, a criação das tarefas de busca foi realizada segundo o código ilustrado na \autoref{lst:task} e o parâmetro de recompensa por tamanho do subgrupo foi variado entre os valores 0.0, 0.3, 0.5 e 1.0, a fim de investigar o impacto do tamanho das regras na qualidade das descobertas. Também foram adotados valores fixos para as demais configurações experimentais, sendo definido o tamanho mínimo dos subgrupos como 10 instâncias, e o número máximo de descritores por subgrupo variando entre 3 e 8. Tais parâmetros impactam diretamente a complexidade das regras geradas, bem como a interpretabilidade dos padrões descobertos, especialmente em um contexto de análise comportamental com múltiplas variáveis interdependentes.
 
 \begin{center}
-\begin{lstlisting}[language=Python, caption={Criação da tarefa de descoberta de subgrupos}, label={lst:task}]
+    \begin{lstlisting}[language=Python, caption={Criação da tarefa de descoberta de subgrupos}, label={lst:task}]
 def get_task(df, target, qf='stdQF', a=0.5, subgroup_size=10, desc_size=3):
     task = ps.SubgroupDiscoveryTask(
         df,
@@ -240,7 +240,7 @@ def get_task(df, target, qf='stdQF', a=0.5, subgroup_size=10, desc_size=3):
 \hspace{1.2cm}Nos experimentos envolvendo a variável-alvo \texttt{PURCHASES\_TRX}, buscou-se responder à pergunta: \textit{"quem utiliza muito o cartão de crédito?"}. Para isso, foi empregada uma função de avaliação baseada na diferença da média ponderada, definida conforme a seguinte equação:
 
 \begin{equation}
-\text{score} = \alpha \times \text{instances}_{\text{subgroup}} \times (\text{mean}_{\text{sg}} - \text{mean}_{\text{dataset}})
+    \text{score} = \alpha \times \text{instances}_{\text{subgroup}} \times (\text{mean}_{\text{sg}} - \text{mean}_{\text{dataset}})
 \end{equation}
 
 Nessa fórmula, o parâmetro $\alpha$ atua como um parâmetro de ajuste fino, permitindo controlar o equilíbrio entre a representatividade e a distinção dos subgrupos. Valores menores de $\alpha$ tendem a favorecer subgrupos mais compactos e diferenciados da média global, enquanto valores maiores priorizam a generalização e o tamanho dos grupos descobertos.
@@ -271,10 +271,10 @@ Para os experimentos com a variável-alvo \texttt{BALANCE}, a mesma função foi
 
 % \begin{itemize}
 %     \item \texttt{PURCHASES\_FREQUENCY} $\geq$ 1
-    \begin{itemize}
-        \item Tamanho do subgrupo: 2.190 clientes
-        \item Média de transações: 68.96
-    \end{itemize}
+\begin{itemize}
+    \item Tamanho do subgrupo: 2.190 clientes
+    \item Média de transações: 68.96
+\end{itemize}
 % \end{itemize}
 
 \textbf{Insight:} A frequência de compras demonstrou ser a regra mais simples e, ao mesmo tempo, a mais preditiva para caracterizar clientes com elevado número de transações. Essa configuração se mostrou adequada para identificar os principais \textit{drivers} de comportamento presentes na base de dados.
@@ -304,10 +304,10 @@ Para os experimentos com a variável-alvo \texttt{BALANCE}, a mesma função foi
 %     \texttt{ONEOFF\_PURCHASES} $\geq$ 834.8 \\
 %     \texttt{ONEOFF\_PURCHASE\_FREQUENCY} $\geq$ 0.42 \\
 %     \texttt{PAYMENTS} $\geq$ 2373.9
-    \begin{itemize}
-        \item Tamanho do subgrupo: 632 clientes
-        \item Média de transações: 107.03
-    \end{itemize}
+\begin{itemize}
+    \item Tamanho do subgrupo: 632 clientes
+    \item Média de transações: 107.03
+\end{itemize}
 % \end{itemize}
 
 \textbf{Insight:} Essa configuração revelou um perfil mais exclusivo de clientes que, além de apresentarem alta frequência de uso, também realizam transações de valores significativamente mais altos. O uso de $\alpha$ reduzido permitiu capturar nuances comportamentais mais específicas e distantes da média global, destacando subgrupos de maior valor transacional.
@@ -319,7 +319,7 @@ Para os experimentos com a variável-alvo \texttt{BALANCE}, a mesma função foi
     \label{fig:experimento21}
 \end{figure}
 
-\begin{figure}[h] \centering 
+\begin{figure}[h] \centering
     \includegraphics[width=1\textwidth]{imagens/experimento2.2.png}
     % \caption{Distribuição dos subgrupos gerados com $\alpha = 0.3$, profundidade máxima igual a 8 e top-10 com competição restrita a seletores financeiros. A redução do valor de $\alpha$ favorece a formação de subgrupos extremamente específicos, alguns contendo apenas um único usuário.}
     \caption{Distribuição dos subgrupos gerados com $\alpha = 0.3$, profundidade máxima igual a 8 e top-10 com competição restrita a seletores financeiros.}
@@ -342,7 +342,7 @@ Valores mais baixos de $\alpha$ (como 0.3) reduzem a qualidade dos subgrupos, ma
     \centering
     \includegraphics[width=1\textwidth]{imagens/experimento3.png}
     \caption{Distribuição do saldo devedor (\texttt{BALANCE}) para os subgrupos identificados com maior nível de endividamento, com destaque para os descritores \texttt{MINIMUM\_PAYMENTS}, \texttt{CREDIT\_LIMIT},
-    \label{fig:experimento4}\texttt{PRC\_FULL\_PAYMENT} e \texttt{CASH\_ADVANCE}.}
+        \label{fig:experimento4}\texttt{PRC\_FULL\_PAYMENT} e \texttt{CASH\_ADVANCE}.}
 \end{figure}
 
 De acordo com os resultados dos experimentos, observados na Figura \ref{fig:experimento4} , as características que mais se repetem e definem os grupos com saldo devedor mais alto são descritas a seguir:
@@ -369,7 +369,7 @@ Em resumo, a análise identificou com sucesso o perfil do cliente \textit{``endi
 
 \section{Análise} \label{sec:analise}
 
-\hspace{1.2cm}Além dos experimentos, este estudo também realizou uma análise mais completa acerca de uma questão, descrever clientes com dificuldade de pagar a fatura. A análise utilizou uma mistura de variáveis categóricas e contínuas, como detalhado na na Tabela~\ref{tab:variaveis_tipo}. As variáveis categóricas foram criadas a partir de uma discretização dos dados, como descrito na seção \ref{sec:discretizacao}. 
+\hspace{1.2cm}Além dos experimentos, este estudo também realizou uma análise mais completa acerca de uma questão, descrever clientes com dificuldade de pagar a fatura. A análise utilizou uma mistura de variáveis categóricas e contínuas, como detalhado na na Tabela~\ref{tab:variaveis_tipo}. As variáveis categóricas foram criadas a partir de uma discretização dos dados, como descrito na seção \ref{sec:discretizacao}.
 
 % As variáveis discretizadas utilizadas na análise foram:
 
@@ -401,26 +401,26 @@ Em resumo, a análise identificou com sucesso o perfil do cliente \textit{``endi
 % }
 
 \begin{table}[h]
-\centering
-\caption{Variáveis utilizadas na análise, separadas por tipo de representação}
-\resizebox{\textwidth}{!}
-{\tiny
-\begin{tabular}{|p{4cm}|p{4cm}|}
-\hline
-\textbf{Variáveis Discretizadas} & \textbf{Variáveis Contínuas} \\
-\hline
-\texttt{BALANCE\_BIN} & \texttt{BALANCE\_FREQUENCY} \\
-\texttt{PURCHASES\_BIN} & \texttt{ONEOFF\_PURCHASES} \\
-\texttt{PURCHASES\_FREQUENCY\_BIN} & \texttt{INSTALLMENTS\_PURCHASES} \\
-\texttt{PURCHASES\_TRX\_BIN} & \texttt{CASH\_ADVANCE} \\
-\texttt{CREDIT\_LIMIT\_BIN} & \texttt{ONEOFF\_PURCHASES\_FREQUENCY} \\
-\texttt{TENURE}\footnotemark & \texttt{PURCHASES\_INSTALLMENTS\_FREQUENCY} \\
- & \texttt{CASH\_ADVANCE\_FREQUENCY} \\
- & \texttt{CASH\_ADVANCE\_TRX} \\
-\hline
-\end{tabular}
-}
-\label{tab:variaveis_tipo}
+    \centering
+    \caption{Variáveis utilizadas na análise, separadas por tipo de representação}
+    \resizebox{\textwidth}{!}
+    {\tiny
+        \begin{tabular}{|p{4cm}|p{4cm}|}
+            \hline
+            \textbf{Variáveis Discretizadas}   & \textbf{Variáveis Contínuas}                \\
+            \hline
+            \texttt{BALANCE\_BIN}              & \texttt{BALANCE\_FREQUENCY}                 \\
+            \texttt{PURCHASES\_BIN}            & \texttt{ONEOFF\_PURCHASES}                  \\
+            \texttt{PURCHASES\_FREQUENCY\_BIN} & \texttt{INSTALLMENTS\_PURCHASES}            \\
+            \texttt{PURCHASES\_TRX\_BIN}       & \texttt{CASH\_ADVANCE}                      \\
+            \texttt{CREDIT\_LIMIT\_BIN}        & \texttt{ONEOFF\_PURCHASES\_FREQUENCY}       \\
+            \texttt{TENURE}\footnotemark       & \texttt{PURCHASES\_INSTALLMENTS\_FREQUENCY} \\
+                                               & \texttt{CASH\_ADVANCE\_FREQUENCY}           \\
+                                               & \texttt{CASH\_ADVANCE\_TRX}                 \\
+            \hline
+        \end{tabular}
+    }
+    \label{tab:variaveis_tipo}
 \end{table}
 
 \footnotetext{A variável \texttt{TENURE} não foi discretizada, mas é considerada categórica por natureza.}
@@ -454,51 +454,51 @@ Para executar a tarefa de descoberta de subgrupos o algoritmo Beam Search foi ut
 % \end{table}
 
 \begin{table}
-\caption{Resultado da análise por descoberta de subgrupos de clientes com dificuldade de pagar a fatura.}
-\label{tab:res-analise}
-\resizebox{\textwidth}{!}
-{
-\begin{tabular}{lrlrrrrrrrrrrrrr}
-\toprule
- & quality & subgroup \\
-\midrule
-0 & 0.053724 & BALANCE\_BIN=='high' \\
-1 & 0.050012 & BALANCE\_BIN=='high' AND BALANCE\_FREQUENCY$>=$1.0 \\
-2 & 0.045886 & BALANCE\_FREQUENCY$>=$1.0 AND INSTALLMENTS\_PURCHASES: [0.0:1.95[ \\
-3 & 0.045813 & BALANCE\_FREQUENCY$>=$1.0 AND PURCHASES\_INSTALLMENTS\_FREQUENCY: [0.0:0.08[ \\
-4 & 0.045813 & BALANCE\_FREQUENCY$>=$1.0 AND INSTALLMENTS\_PURCHASES: [0.0:1.95[ AND PURCHASES\_INSTALLMENTS\_FREQUENCY: [0.0:0.08[ \\
-5 & 0.044880 & BALANCE\_BIN=='high' AND BALANCE\_FREQUENCY$>=$1.0 AND TENURE$>=$12  \\
-6 & 0.043976 & BALANCE\_BIN=='high' AND TENURE$>=$12 \\
-7 & 0.042736 & BALANCE\_FREQUENCY$>=$1.0 AND ONEOFF\_PURCHASES\_FREQUENCY: [0.0:0.08[ \\
-8 & 0.042736 & BALANCE\_FREQUENCY$>=$1.0 AND ONEOFF\_PURCHASES: [0.0:0.01[ \\
-9 & 0.042736 & BALANCE\_FREQUENCY$>=$1.0 AND ONEOFF\_PURCHASES: [0.0:0.01[ AND ONEOFF\_PURCHASES\_FREQUENCY: [0.0:0.08[ \\
-\bottomrule
-\end{tabular}
-}
+    \caption{Resultado da análise por descoberta de subgrupos de clientes com dificuldade de pagar a fatura.}
+    \label{tab:res-analise}
+    \resizebox{\textwidth}{!}
+    {
+        \begin{tabular}{lrlrrrrrrrrrrrrr}
+            \toprule
+              & quality  & subgroup                                                                                                             \\
+            \midrule
+            0 & 0.053724 & BALANCE\_BIN=='high'                                                                                                 \\
+            1 & 0.050012 & BALANCE\_BIN=='high' AND BALANCE\_FREQUENCY$>=$1.0                                                                   \\
+            2 & 0.045886 & BALANCE\_FREQUENCY$>=$1.0 AND INSTALLMENTS\_PURCHASES: [0.0:1.95[                                                    \\
+            3 & 0.045813 & BALANCE\_FREQUENCY$>=$1.0 AND PURCHASES\_INSTALLMENTS\_FREQUENCY: [0.0:0.08[                                         \\
+            4 & 0.045813 & BALANCE\_FREQUENCY$>=$1.0 AND INSTALLMENTS\_PURCHASES: [0.0:1.95[ AND PURCHASES\_INSTALLMENTS\_FREQUENCY: [0.0:0.08[ \\
+            5 & 0.044880 & BALANCE\_BIN=='high' AND BALANCE\_FREQUENCY$>=$1.0 AND TENURE$>=$12                                                  \\
+            6 & 0.043976 & BALANCE\_BIN=='high' AND TENURE$>=$12                                                                                \\
+            7 & 0.042736 & BALANCE\_FREQUENCY$>=$1.0 AND ONEOFF\_PURCHASES\_FREQUENCY: [0.0:0.08[                                               \\
+            8 & 0.042736 & BALANCE\_FREQUENCY$>=$1.0 AND ONEOFF\_PURCHASES: [0.0:0.01[                                                          \\
+            9 & 0.042736 & BALANCE\_FREQUENCY$>=$1.0 AND ONEOFF\_PURCHASES: [0.0:0.01[ AND ONEOFF\_PURCHASES\_FREQUENCY: [0.0:0.08[             \\
+            \bottomrule
+        \end{tabular}
+    }
 \end{table}
 
 \begin{table}
-\caption{Detalhamento do resultado da análise por descoberta de subgrupos de clientes com dificuldade de pagar a fatura.}
-\label{tab:res-analise2}
-\resizebox{\textwidth}{!}
-{
-\begin{tabular}{lrlrrrrrrrrrrrrr}
-\toprule
- size\_sg & size\_dataset & positives\_sg & positives\_dataset & size\_complement & relative\_size\_sg & relative\_size\_complement & coverage\_sg & coverage\_complement & target\_share\_sg & target\_share\_complement & target\_share\_dataset & lift \\
-\midrule
-0 & 2238 & 8950 & 1252 & 3084 & 6712 & 0.250056 & 0.749944 & 0.405966 & 0.594034 & 0.559428 & 0.272944 & 0.344581 & 1.623502 \\
-1 & 2050 & 8950 & 1154 & 3084 & 6900 & 0.229050 & 0.770950 & 0.374189 & 0.625811 & 0.562927 & 0.279710 & 0.344581 & 1.633656 \\
-2 & 2607 & 8950 & 1309 & 3084 & 6343 & 0.291285 & 0.708715 & 0.424449 & 0.575551 & 0.502110 & 0.279836 & 0.344581 & 1.457160 \\
-3 & 2606 & 8950 & 1308 & 3084 & 6344 & 0.291173 & 0.708827 & 0.424125 & 0.575875 & 0.501919 & 0.279950 & 0.344581 & 1.456606 \\
-4 & 2606 & 8950 & 1308 & 3084 & 6344 & 0.291173 & 0.708827 & 0.424125 & 0.575875 & 0.501919 & 0.279950 & 0.344581 & 1.456606 \\
-5 & 1896 & 8950 & 1055 & 3084 & 7054 & 0.211844 & 0.788156 & 0.342088 & 0.657912 & 0.556435 & 0.287638 & 0.344581 & 1.614815 \\
-6 & 1963 & 8950 & 1070 & 3084 & 6987 & 0.219330 & 0.780670 & 0.346952 & 0.653048 & 0.545084 & 0.288250 & 0.344581 & 1.581875 \\
-7 & 2802 & 8950 & 1348 & 3084 & 6148 & 0.313073 & 0.686927 & 0.437095 & 0.562905 & 0.481085 & 0.282368 & 0.344581 & 1.396145 \\
-8 & 2802 & 8950 & 1348 & 3084 & 6148 & 0.313073 & 0.686927 & 0.437095 & 0.562905 & 0.481085 & 0.282368 & 0.344581 & 1.396145 \\
-9 & 2802 & 8950 & 1348 & 3084 & 6148 & 0.313073 & 0.686927 & 0.437095 & 0.562905 & 0.481085 & 0.282368 & 0.344581 & 1.396145 \\
-\bottomrule
-\end{tabular}
-}
+    \caption{Detalhamento do resultado da análise por descoberta de subgrupos de clientes com dificuldade de pagar a fatura.}
+    \label{tab:res-analise2}
+    \resizebox{\textwidth}{!}
+    {
+        \begin{tabular}{lrlrrrrrrrrrrrrr}
+            \toprule
+            size\_sg & size\_dataset & positives\_sg & positives\_dataset & size\_complement & relative\_size\_sg & relative\_size\_complement & coverage\_sg & coverage\_complement & target\_share\_sg & target\_share\_complement & target\_share\_dataset & lift                \\
+            \midrule
+            0        & 2238          & 8950          & 1252               & 3084             & 6712               & 0.250056                   & 0.749944     & 0.405966             & 0.594034          & 0.559428                  & 0.272944               & 0.344581 & 1.623502 \\
+            1        & 2050          & 8950          & 1154               & 3084             & 6900               & 0.229050                   & 0.770950     & 0.374189             & 0.625811          & 0.562927                  & 0.279710               & 0.344581 & 1.633656 \\
+            2        & 2607          & 8950          & 1309               & 3084             & 6343               & 0.291285                   & 0.708715     & 0.424449             & 0.575551          & 0.502110                  & 0.279836               & 0.344581 & 1.457160 \\
+            3        & 2606          & 8950          & 1308               & 3084             & 6344               & 0.291173                   & 0.708827     & 0.424125             & 0.575875          & 0.501919                  & 0.279950               & 0.344581 & 1.456606 \\
+            4        & 2606          & 8950          & 1308               & 3084             & 6344               & 0.291173                   & 0.708827     & 0.424125             & 0.575875          & 0.501919                  & 0.279950               & 0.344581 & 1.456606 \\
+            5        & 1896          & 8950          & 1055               & 3084             & 7054               & 0.211844                   & 0.788156     & 0.342088             & 0.657912          & 0.556435                  & 0.287638               & 0.344581 & 1.614815 \\
+            6        & 1963          & 8950          & 1070               & 3084             & 6987               & 0.219330                   & 0.780670     & 0.346952             & 0.653048          & 0.545084                  & 0.288250               & 0.344581 & 1.581875 \\
+            7        & 2802          & 8950          & 1348               & 3084             & 6148               & 0.313073                   & 0.686927     & 0.437095             & 0.562905          & 0.481085                  & 0.282368               & 0.344581 & 1.396145 \\
+            8        & 2802          & 8950          & 1348               & 3084             & 6148               & 0.313073                   & 0.686927     & 0.437095             & 0.562905          & 0.481085                  & 0.282368               & 0.344581 & 1.396145 \\
+            9        & 2802          & 8950          & 1348               & 3084             & 6148               & 0.313073                   & 0.686927     & 0.437095             & 0.562905          & 0.481085                  & 0.282368               & 0.344581 & 1.396145 \\
+            \bottomrule
+        \end{tabular}
+    }
 \end{table}
 
 \section{Conclusão}
