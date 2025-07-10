@@ -2,34 +2,34 @@
 
 | Data de Apresentação |  ID | Integrantes                       |
 | :------------------- | --: | --------------------------------- |
-| 03/07/2025           |   1 | Daniel Schlickmann Bastos         |
-| 03/07/2025           |   1 | Leonardo Caetano Gomide           |
-| 03/07/2025           |   1 | Lucas Mesquita Andrade            |
-| 03/07/2025           |   7 | Caio Jorge Carvalho Lara          |
-| 03/07/2025           |   7 | José Eduardo Duarte Massucato     |
-| 03/07/2025           |   7 | Vinícius Leite Censi Faria        |
-| 03/07/2025           |   8 | Samuel Henrique Miranda Alves     |
-| 03/07/2025           |   9 | Alexis Duarte                     |
-| 03/07/2025           |   9 | Bernnardo Seraphim                |
-| 03/07/2025           |   9 | Gabriel Castelo                   |
-| 03/07/2025           |   9 | Henrique Rotsen                   |
-| 03/07/2025           |   9 | Luisa Toledo                      |
-| 08/07/2025           |   2 | Arthur Codama                     |
-| 08/07/2025           |   2 | Caíque Fortunato                  |
-| 08/07/2025           |   2 | Fabio Marra                       |
-| 08/07/2025           |   2 | Victor Gabriel                    |
-| 08/07/2025           |   2 | Wesley Marques                    |
-| 08/07/2025           |   3 | Alexandre Cassimiro Silva Araújo  |
-| 08/07/2025           |   3 | Diná Beatriz Xavier               |
-| 08/07/2025           |   3 | Enilda Alves Coelho               |
-| 08/07/2025           |   3 | Kael Soares Augusto               |
-| 08/07/2025           |   3 | Mateus Reis Evangelista           |
-| 08/07/2025           |   6 | Kênia Carolina Gonçalves          |
-| 10/07/2025           |   4 | Gabriel Arcanjo Campelo Fadoul    |
-| 10/07/2025           |   4 | Iasmin Correa Araujo              |
-| 10/07/2025           |   4 | José Vinicius de Lima Massarico   |
-| 10/07/2025           |   4 | Juan Marcos Braga Faria           |
-| 10/07/2025           |   4 | Luiza Sodre Salgado               |
+| 03/07/2025           |  01 | Daniel Schlickmann Bastos         |
+| 03/07/2025           |  01 | Leonardo Caetano Gomide           |
+| 03/07/2025           |  01 | Lucas Mesquita Andrade            |
+| 03/07/2025           |  07 | Caio Jorge Carvalho Lara          |
+| 03/07/2025           |  07 | José Eduardo Duarte Massucato     |
+| 03/07/2025           |  07 | Vinícius Leite Censi Faria        |
+| 03/07/2025           |  08 | Samuel Henrique Miranda Alves     |
+| 03/07/2025           |  09 | Alexis Duarte                     |
+| 03/07/2025           |  09 | Bernnardo Seraphim                |
+| 03/07/2025           |  09 | Gabriel Castelo                   |
+| 03/07/2025           |  09 | Henrique Rotsen                   |
+| 03/07/2025           |  09 | Luisa Toledo                      |
+| 08/07/2025           |  02 | Arthur Codama                     |
+| 08/07/2025           |  02 | Caíque Fortunato                  |
+| 08/07/2025           |  02 | Fabio Marra                       |
+| 08/07/2025           |  02 | Victor Gabriel                    |
+| 08/07/2025           |  02 | Wesley Marques                    |
+| 08/07/2025           |  03 | Alexandre Cassimiro Silva Araújo  |
+| 08/07/2025           |  03 | Diná Beatriz Xavier               |
+| 08/07/2025           |  03 | Enilda Alves Coelho               |
+| 08/07/2025           |  03 | Kael Soares Augusto               |
+| 08/07/2025           |  03 | Mateus Reis Evangelista           |
+| 08/07/2025           |  06 | Kênia Carolina Gonçalves          |
+| 10/07/2025           |  04 | Gabriel Arcanjo Campelo Fadoul    |
+| 10/07/2025           |  04 | Iasmin Correa Araujo              |
+| 10/07/2025           |  04 | José Vinicius de Lima Massarico   |
+| 10/07/2025           |  04 | Juan Marcos Braga Faria           |
+| 10/07/2025           |  04 | Luiza Sodre Salgado               |
 | 10/07/2025           |  10 | Guilherme Buxbaum Marinho Guerra  |
 | 10/07/2025           |  10 | Lucas Xavier Veneroso             |
 | 10/07/2025           |  10 | Marcelo Lommez Rodrigues de Jesus |
@@ -42,9 +42,9 @@
 
 ## 03/07/2025
 
-### ID 1
+### ID 01
 
-### ID 7
+### ID 07
 
 - Kaggle
 - Filtragem
@@ -53,12 +53,12 @@
 - Mineração de Padrões Frequentes
 - Países envolvidos e desenvolvidosz
 
-### ID 8
+### ID 08
 
 - Estudo de caso de ITBI em BH
 - Encontrar os grupos de imóveis que apresentaram valorizações atípicas
 
-### ID 9
+### ID 09
 
 - Aluguel nos EUA
 - 100k anúncios de apartamentos
@@ -77,7 +77,7 @@
 
 ## 08/07/2025
 
-### ID 6 - Kênia
+### ID 06 - Kênia
 
 - Twitch: entender de que forma as crianças e adolescentes se inserem no contexto da Twitch
 - Content Classification Labels (CCLs) e Branded Content
@@ -129,7 +129,7 @@ Pretende mudar para poder reanalisar verificando o jogo buscado.
 - Analisar re-runs, verificar os canais.
 - Fazer one-hot encoding para distribuir as tags em colunas+
 
-### ID 2 - Arthur Codama; Caíque Fortunato; Fabio Marra; Victor Gabriel; Wesley Marques
+### ID 02 - Arthur Codama; Caíque Fortunato; Fabio Marra; Victor Gabriel; Wesley Marques
 
 #### Introdução
 
@@ -188,7 +188,7 @@ Maior reincidência
 - Se é Contagem, sempre é região metropolitana. Então acabam gerando regras triviais
   - Isso é o que ocorre quando há correlação forte entre as variáveis
 
-### ID 3 - Alexandre Cassimiro Silva Araújo; Diná Beatriz Xavier; Enilda Alves Coelho; Kael Soares Augusto; Mateus Reis Evangelista
+### ID 03 - Alexandre Cassimiro Silva Araújo; Diná Beatriz Xavier; Enilda Alves Coelho; Kael Soares Augusto; Mateus Reis Evangelista
 
 - Título: Análise categórica não supervisionada de gases do efeito estufa
 - Our world in data
@@ -261,3 +261,9 @@ Maior reincidência
 - Renato perguntou sobre o que eles tentaram com EMM
 
 ## 10/07/2025
+
+### ID 04 - Gabriel Arcanjo Campelo Fadoul; Iasmin Correa Araujo; José Vinicius de Lima Massarico; Juan Marcos Braga Faria; Luiza Sodre Salgado
+
+### ID 10 - Guilherme Buxbaum Marinho Guerra; Lucas Xavier Veneroso; Marcelo Lommez Rodrigues de Jesus; Oluwatoyin Joy Omole; Samuel Kfuri Ferraz Marcussi
+
+### ID 11 - Amanda Mendes Pinho; Gabriel Tonioni Duarte; João Vítor Fernandes Dias; Larissa Duarte Santana
