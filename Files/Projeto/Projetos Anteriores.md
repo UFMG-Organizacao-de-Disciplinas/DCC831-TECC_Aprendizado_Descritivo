@@ -1,5 +1,7 @@
 # Projetos Anteriores - Tabelona
 
+## 2024.1
+
 | Relatório            | GitHub            | Título                                                                                                                                                                | Autores                                                                                                                                                           |
 | -------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [PDF][Relatório_G01] | [URL][GitHub_G01] | Mineração de Dados Urbanos                                                                                                                                            | Guilherme Namen Pimenta                                                                                                                                           |
@@ -42,3 +44,39 @@
 [Relatório_G11]: https://github.com/DCC831-Aprendizado-Descritivo/2024.1/tree/main/projetos/g11.pdf
 [Relatório_G12]: https://github.com/DCC831-Aprendizado-Descritivo/2024.1/tree/main/projetos/g12.pdf
 [Relatório_G13]: https://github.com/DCC831-Aprendizado-Descritivo/2024.1/tree/main/projetos/g13.pdf
+
+## 2025.1
+
+| Relatório                   | GitHub                   | Título | Autores                                                                                                                                        |
+| --------------------------- | ------------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| [PDF][Relatório_2025.2_G01] | [URL][GitHub_2025.2_G01] |        | Daniel Schlickmann Bastos, Leonardo Caetano Gomide, Lucas Mesquita Andrade                                                                     |
+| [PDF][Relatório_2025.2_G02] | [URL][GitHub_2025.2_G02] |        | Arthur Codama, Caíque Fortunato, Fabio Marra, Victor Gabriel, Wesley Marques                                                                   |
+| [PDF][Relatório_2025.2_G03] | [URL][GitHub_2025.2_G03] |        | Alexandre Cassimiro Silva Araújo, Diná Beatriz Xavier, Enilda Alves Coelho, Kael Soares Augusto, Mateus Reis Evangelista                       |
+| [PDF][Relatório_2025.2_G04] | [URL][GitHub_2025.2_G04] |        | Gabriel Arcanjo Campelo Fadoul, Iasmin Correa Araujo, José Vinicius de Lima Massarico, Juan Marcos Braga Faria, Luiza Sodre Salgado            |
+| [PDF][Relatório_2025.2_G06] | [URL][GitHub_2025.2_G06] |        | Kênia Carolina Gonçalves                                                                                                                       |
+| [PDF][Relatório_2025.2_G07] | [URL][GitHub_2025.2_G07] |        | Caio Jorge Carvalho Lara, José Eduardo Duarte Massucato, Vinícius Leite Censi Faria                                                            |
+| [PDF][Relatório_2025.2_G08] | [URL][GitHub_2025.2_G08] |        | Samuel Henrique Miranda Alves                                                                                                                  |
+| [PDF][Relatório_2025.2_G09] | [URL][GitHub_2025.2_G09] |        | Alexis Duarte, Bernnardo Seraphim, Gabriel Castelo, Henrique Rotsen, Luisa Toledo                                                              |
+| [PDF][Relatório_2025.2_G10] | [URL][GitHub_2025.2_G10] |        | Guilherme Buxbaum Marinho Guerra, Lucas Xavier Veneroso, Marcelo Lommez Rodrigues de Jesus, Oluwatoyin Joy Omole, Samuel Kfuri Ferraz Marcussi |
+| [PDF][Relatório_2025.2_G11] | [URL][GitHub_2025.2_G11] |        | Amanda Mendes Pinho, Gabriel Tonioni Duarte, João Vítor Fernandes Dias, Larissa Duarte Santana                                                 |
+
+[GitHub_2025.2_G01]: https://github.com/
+[GitHub_2025.2_G02]: https://github.com/
+[GitHub_2025.2_G03]: https://github.com/
+[GitHub_2025.2_G04]: https://github.com/
+[GitHub_2025.2_G06]: https://github.com/
+[GitHub_2025.2_G07]: https://github.com/
+[GitHub_2025.2_G08]: https://github.com/
+[GitHub_2025.2_G09]: https://github.com/
+[GitHub_2025.2_G10]: https://github.com/
+[GitHub_2025.2_G11]: https://github.com/larissantana27/AprendizadoDescritivo
+[Relatório_2025.2_G01]: https://github.com/DCC831-Aprendizado-Descritivo/2025.1/tree/master/projetos/g01.pdf
+[Relatório_2025.2_G02]: https://github.com/DCC831-Aprendizado-Descritivo/2025.1/tree/master/projetos/g02.pdf
+[Relatório_2025.2_G03]: https://github.com/DCC831-Aprendizado-Descritivo/2025.1/tree/master/projetos/g03.pdf
+[Relatório_2025.2_G04]: https://github.com/DCC831-Aprendizado-Descritivo/2025.1/tree/master/projetos/g04.pdf
+[Relatório_2025.2_G06]: https://github.com/DCC831-Aprendizado-Descritivo/2025.1/tree/master/projetos/g06.pdf
+[Relatório_2025.2_G07]: https://github.com/DCC831-Aprendizado-Descritivo/2025.1/tree/master/projetos/g07.pdf
+[Relatório_2025.2_G08]: https://github.com/DCC831-Aprendizado-Descritivo/2025.1/tree/master/projetos/g08.pdf
+[Relatório_2025.2_G09]: https://github.com/DCC831-Aprendizado-Descritivo/2025.1/tree/master/projetos/g09.pdf
+[Relatório_2025.2_G10]: https://github.com/DCC831-Aprendizado-Descritivo/2025.1/tree/master/projetos/g10.pdf
+[Relatório_2025.2_G11]: https://github.com/DCC831-Aprendizado-Descritivo/2025.1/tree/master/projetos/g11.pdf
