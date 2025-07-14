@@ -262,8 +262,17 @@ Maior reincidência
 
 ## 10/07/2025
 
-### ID 04 - Gabriel Arcanjo Campelo Fadoul; Iasmin Correa Araujo; José Vinicius de Lima Massarico; Juan Marcos Braga Faria; Luiza Sodre Salgado
-
 ### ID 10 - Guilherme Buxbaum Marinho Guerra; Lucas Xavier Veneroso; Marcelo Lommez Rodrigues de Jesus; Oluwatoyin Joy Omole; Samuel Kfuri Ferraz Marcussi
 
+- Mortalidade em hospitais
+
+### ID 04 - Gabriel Arcanjo Campelo Fadoul; Iasmin Correa Araujo; José Vinicius de Lima Massarico; Juan Marcos Braga Faria; Luiza Sodre Salgado
+
+- Análise de subgrupos do ensino superior do Brasil
+- 6,8% para 18,4% de concluintes no ensino superior
+
 ### ID 11 - Amanda Mendes Pinho; Gabriel Tonioni Duarte; João Vítor Fernandes Dias; Larissa Duarte Santana
+
+- Credit Card Customer: Descoberta de subgrupos utilizando Beam-Search
+
+Information Dashboard Design
